@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	
+	<link rel="stylesheet" href="/stylesheets/style.css" />
+
+
+	<!-- JQuery hosted by google -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css" />
+
+	<!-- SAML metaJS -->
+	<script type="text/javascript" src="/javascripts/samlmeta.info-certs-saml2sp.min.js"></script>
+	<link rel="stylesheet" href="/samlmetajs/css/samlmetajs.css" />
+ 	
+	<!-- spine -->
+	
+
+	<!-- Federation Lab -->
+
+
+
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+
+	<!-- <script type="text/javascript" src="/javascripts/script.js"></script> -->
+	
+	<!-- <script src="/socket.io/socket.io.js"></script>  -->
+	
+	<script type="text/javascript">
+	    $(document).ready(function(){
+		
+	    });
+	</script>
+	
+</head>
+
+<body>
+
+	<img src="/images/favicon.png" type="image/png" style="float: right" />
+	<img src="/images/gn3.png" style="position:absolute; bottom: 0px; right: 10px" />
+
+	<h1><%= title %></h1>
+
+	<p>Welcome to <%= title %></p>
+
+	<ul>
+		<li><a href="/saml-sp">Test a SAML 2.0 Service Provider</a></li>
+		<li><!-- <a href="/saml-idp"> -->Test a SAML 2.0 Identity Provider<!-- </a> --></li>
+		<li><a href="/connect-provider">Test an OpenID Connect Provider</a></li>
+		<li><!-- <a href="/connect-consumer"> -->Test an OpenID Connect Consumer<!-- </a> --></li>
+		<li><!-- <a href="/oauth-provider"> -->Test an OAuth Provider<!-- </a> --></li>
+		<li><!-- <a href="/oauth-consumer"> -->Test an OAuth Consumer<!-- </a> --></li>	
+	
+		<li><!-- <a href="/oauth-consumer"> -->Validate SAML 2.0 Metadata<!-- </a> --></li>
+		<li><!-- <a href="/oauth-consumer"> -->Debug SAML 2.0 message flows<!-- </a> --></li>
+	</ul>
+
+	<p>GÉANT, NorduNet, UNINETT &copy; 2011</p>
+
+</body>
+</html>

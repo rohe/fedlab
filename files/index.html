@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Federation Lab</title>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/script.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	
+</head>
+<body>
+
+<div id="content">
+
+<img src="/icons/openid.png" style="float: right" />
+
+<h1>Testing OpenID Connect Provider</h1>
+
+<form action="get">
+
+	<div class="metadata">
+
+		<p>
+			<label for="name">Descriptive name of test server</label>
+			<input id="name" name="name" value="" class="username" />
+		</p>
+
+		<fieldset><legend>Client Credentials</legend>
+			<p>
+				<label for="client">Client identifier</label>
+				<input id="client" name="client" value="client" class="username" />
+			</p>
+			<p>
+				<label for="secret">Client secret</label>
+				<input id="secret" name="secret" value="secret" class="username" />
+			</p>
+			
+			<p>
+				Callback URL
+				<code>https://localhost/callback</code>
+				<span style="font-size: x-small; color: #666">Please configure to trust this callback URL on your provider</span>
+			</p>
+
+
+		</fieldset>
+		
+		
+		<fieldset><legend>Pricipal Authentication</legend>
+			<p>
+				<label for="username">Username</label>
+				<input id="username" name="username" value="user" class="username" />
+			</p>
+			<p>
+				<label for="password">Password</label>
+				<input id="password" name="password" value="passwd" class="username" />
+			</p>
+
+		</fieldset>
+
+		<fieldset><legend>Setup service endpoints</legend>
+			<p>
+				<label for="authorization">OAuth Authorization Endpoint:</label>
+				<input id="authorization" name="authorization" value="https://example.org/oauth/authorization" class="endpoint" />
+			</p>
+
+			<p>
+				<label for="token">OAuth Token Endpoint:</label>
+				<input id="token" name="token" value="https://example.org/oauth/token" class="endpoint" />
+			</p>
+
+			<p>
+				<label for="checksession">OpenID Connect Check Session Endpoint:</label>
+				<input id="checksession" name="checksession" value="https://example.org/connect/checksession" class="endpoint" />
+			</p>
+
+			<p>
+				<label for="userinfo">OpenID Connect User Info Endpoint:</label>
+				<input id="userinfo" name="token" value="https://example.org/connect/userinfo" class="endpoint" />
+			</p>
+		</fieldset>
+
+	</div>
+
+	<input type="submit" value="Start test" />
+	<input type="submit" value="Save configuration" />
+
+
+</form>
+
+
+<div class="data">
+	
+	<div class="testrun">
+		<p>Performing a basic test run with authorization code flow and client password authentication.</p>
+		<div class="debug">
+			
+		</div>
+	</div>
+	
+	<div class="testrun">
+		<p>Performing a basic test run with implicit flow and client password authentication.</p>
+		<div class="debug">
+			
+		</div>
+	</div>
+	
+</div>
+
+
+</div>
+
+</body>
+</html>

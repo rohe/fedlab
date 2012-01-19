@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	
+	<link rel="stylesheet" href="/stylesheets/style.css" />
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+
+	<script type="text/javascript" src="/javascripts/storage.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script>
+
+
+	<!-- <script type="text/javascript" src="http://samlmetajs.simplesamlphp.org/res/demo/samlmetajs/mdreader.js"></script> -->
+	<script type="text/javascript" src="/javascripts/samlmeta.info-certs-saml2sp-fedlab.min.js"></script>
+
+	
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css" />
+	<link rel="stylesheet" href="/samlmetajs/css/samlmetajs.css" />
+
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+
+
+	<!-- <script type="text/javascript" src="/javascripts/script.js"></script> -->
+	
+	<script src="/socket.io/socket.io.js"></script> 
+	
+	<script type="text/javascript">
+	    $(document).ready(function(){
+				
+			var flows = null;
+			var socket = io.connect('http://bridge.uninett.no');
+			var storage = fedlabstorage('saml-sp');
+		
+			var options = {
+				showValidation: false,
+				showValidationLevel: {
+					info: false,
+					ok: false,
+					warning: true,
+					error: true
+				}
+			};
+			$("textarea#metadatafield").SAMLmetaJS(options);
+	
+			$("input#save").click(function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+				
+				saveConfig();
+				loadConfigList();
+			});
+			
+			$("input#loadConfigSmt").click(function (event) {
+				var id ;
+				event.preventDefault();
+				event.stopPropagation();
+				
+				id = $("select#loadConfig").val();				
+				console.log('Loading ' + id);
+				loadConfig(id);
+			});
+	
+			function loadConfig(id) {
+
+				var metadata = storage.getItem(id);
+				if (!metadata) return;
+			
+				console.log('Loaded config');
+				console.log(metadata);
+			
+				$("input#loadedEntity").val(id);
+				$("textarea#metadatafield").val(metadata);
+			}
+
+		
+			function loadConfigList() {
+			
+				var list = storage.getList();
+				var key, c = 0;
+			
+				console.log('Loading config');
+				console.log(list);
+			
+				$("select#loadConfig").empty();
+				for (key in list) {
+					c++;
+					$("select#loadConfig").append('<option value="' + key + '">' + list[key] + '</option>');
+				}
+				if (c > 0) {
+					$("fieldset#fsLoad").show();
+				} else {
+					$("fieldset#fsLoad").hide();
+				}
+			}
+		
+			function randomString() {
+				var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+				var string_length = 8;
+				var randomstring = '';
+				for (var i=0; i<string_length; i++) {
+					var rnum = Math.floor(Math.random() * chars.length);
+					randomstring += chars.substring(rnum,rnum+1);
+				}
+				return randomstring;
+			}
+
+		
+			function saveConfig() {
+				var id = $("input#loadedEntity").val();
+			
+				if (!id) {
+					id = randomString();
+				}
+			
+				var metadata = $("textarea#metadatafield").val();
+				var name = $("input#name").val();
+			
+				console.log('Storing id: ' + id);
+				console.log('Storing name: ' + name);
+				console.log(metadata);
+			
+				storage.setItem(id, name, metadata);
+			
+			}
+		
+			loadConfigList();
+
+			
+			socket.on('showListResult', function (list, stderr) {
+				var key,flowelement;
+				console.log('showListResult:');
+				console.log(list);
+				$("div#loadingTestFlows").hide();
+				
+				flows = list;
+				
+				for (key in list) {
+					if (list.hasOwnProperty(key)) {
+						flowelement = 
+							'<div id="flow__' + key + '" class="testflow notcompleted">' +
+								'<input type="submit" class="reTest" style="float: right" value="Run test again" />' +
+								'<input type="submit" class="details_Hide" style="display: none; float: right" value="Hide details" />' +
+								'<input type="submit" class="details_Show" style="float: right" value="Show details" />' +
+								'<div class="flowname">' + list[key].name + '</div>' + 
+							'</div>';
+						flowelement = $(flowelement);
+						$(flowelement).find('input.details_Hide').click(
+							function (event) {
+								var thiskey = key;
+								return function(event) {
+									$('div#flow__' + thiskey + ' div.testcase').hide();
+									$('div#flow__' + thiskey + ' input.details_Hide').hide();
+									$('div#flow__' + thiskey + ' input.details_Show').show();
+								};
+							}()
+						);
+							
+						$(flowelement).find('input.details_Show').click(
+							function (event) {
+								var thiskey = key;
+								return function(event) {
+									$('div#flow__' + thiskey + ' div.testcase').show();
+									$('div#flow__' + thiskey + ' input.details_Hide').show();
+									$('div#flow__' + thiskey + ' input.details_Show').hide();
+								};
+							}()
+						);
+						
+						$("div#testResultContainer").append($(flowelement));
+					}
+				}
+				
+			});
+			
+		
+			socket.on('runTestStart', function (flowid) {
+				console.log('runTestStart(' + (flowid) + ')');
+				$("div#flow__" + flowid + '.notcompleted').
+					removeClass('notcompleted').
+					addClass('inprogress');
+			});
+			
+			socket.on('runTestResult', function (results, stderr) {
+				var key, newTestHTML, testflowHTMLid, testcaseHTMLid, status = 2;
+
+				console.log('runTestResult(' + (results && results['flowid'] ? results['flowid'] : 'na' ) + ')');
+				console.log(results);
+
+				if (!results['status'] || results['status'] !== 'ok') return;
+				testflowHTMLid = "flow__" + results['flowid'];
+			
+				for (key in results['results']) {
+					if (results['results'].hasOwnProperty(key)) {
+						testcaseHTMLid = testflowHTMLid + '__' + key;
+						
+						if (results['results'][key]['status'] == 1 && status == 2) status = 1;
+						if (results['results'][key]['status'] == 0 && status == 2) status = 0;
+						if (results['results'][key]['status'] == 3 && status == 2) status = 3;
+
+						if (results['results'][key]['status'] == 1 && status == 3) status = 1;
+						if (results['results'][key]['status'] == 0 && status == 3) status = 0;
+
+						if (results['results'][key]['status'] == 0 && status == 1) status = 0;
+						
+						newTestHTML = '<div id="' + testcaseHTMLid + '" class="testcase status_' + results['results'][key]['status'] + '">' +
+							'<div class="flowname">' + results['results'][key]['descr'] + '</div>' +
+							(results['results'][key]['result'] ? results['results'][key]['result'] : '') +
+							'</div>';	
+					}
+					$("div#" + testflowHTMLid).append(newTestHTML);
+				}
+				/*
+					const STATUS_OK = 2;
+					const STATUS_ERROR = 1;
+					const STATUS_FATAL = 0;
+					const STATUS_INFO = 3;
+				*/
+				
+				$("div#" + testflowHTMLid).removeClass('notcompleted').
+					removeClass('inprogress').
+					addClass('completed').
+					addClass('status_' + status);
+				
+				if (stderr) {
+					$("div#flow__" + results['id']).append('<div class="debuglog"><p>Log output:</p>' +
+						'<pre class="debugbox"><code>' + stderr + '</code></pre></div>');	
+				}
+
+			});
+			
+			socket.on('checkResult', function (result, stderr) {
+				
+				var metadata = $("textarea#metadatafield").val();
+				
+				console.log('CheckResult:');
+				console.log(result);
+				if (result['status'] && result['status'] === 'success') {
+					$("form#configurationForm").hide();
+					$("div#testPage").show();
+					socket.emit('showList', {"metadata": metadata});
+				}
+			});
+			
+			$("input#verifyConnectivity").click(function (event) {
+				
+				console.log('Start Verify Connectivity...');
+
+				var metadata = $("textarea#metadatafield").val();
+				
+				event.preventDefault();
+				event.stopPropagation();
+				
+				socket.emit('check', {"metadata": metadata});
+			});
+			
+			$("input#startAllTests").click(function (event) {
+				var key, flowList = [];
+				
+				for (key in flows) {
+					if (flows.hasOwnProperty(key)) {
+						flowList.push(key);						
+					}
+
+				}
+				
+				console.log('Start all tests...');
+
+				var metadata = $("textarea#metadatafield").val();
+				
+				event.preventDefault();
+				event.stopPropagation();
+				
+				socket.emit('runTests', {"flows": flowList, "metadata": metadata});
+			});
+	
+			
+			$("input#reconfigure").click(function (event) {
+				$("div#testPage").hide();
+				$("div#testResultContainer").empty();
+				$("form#configurationForm").show();
+			});
+	
+	
+	    });
+	
+	
+	
+	</script>
+	
+</head>
+
+<body>
+
+
+
+<p><a href="/">« Back to frontpage</a></p>
+
+<h1>Testing SAML 2.0 Service Provider</h1>
+
+
+
+
+<form id="configurationForm" action="?" method="get">
+
+	<p>To test your SAML 2.0 Service Provider, please register the metadata of your provider here:</p>
+	
+	<input type="hidden" id="loadedEntity" name="loadedEntity" value="" />
+	
+	<fieldset id="fsLoad">
+		<legend>Load configuration</legend>
+		
+		<p>
+			When loading a stored configuration you will loose your current configuration (unless you saved it).
+		</p>
+		<p>
+			<select id="loadConfig" name="loadConfig">
+				<option value=""></option>
+			</select>
+			<input type="submit" id="loadConfigSmt" name="loadConfigSmt" value="Load configuration" />	
+		</p>
+
+	</fieldset>
+	
+	<textarea id="metadatafield" class="metadata" ></textarea>
+
+	<fieldset  id="fsSave">
+		<legend>Store configuration</legend>		
+		<p>
+			<label for="name">Descriptive name of this provider</label>
+			<input id="name" name="name" value="" class="endpoint" />
+			<input type="submit" id="save" name="save" value="Save provider configuration" />	
+		</p>
+	</fieldset>
+
+	<input type="submit" id="verifyConnectivity" value="Verify connectivity" />
+	
+	<div  style="display: none" id="verifyErrorDiv"><pre id="verifyError"></pre></div>
+	
+</form>
+
+<div id="testPage" style="display: none">
+
+	<p><img src="/images/accept.png" /> We've successfully verified connectivity to your Service Provider, you may now proceed to run the tests.</p>
+
+	<p>
+	<input type="submit" id="reconfigure" value="« Reconfigure" />
+	<input type="submit" id="startAllTests" value="Start all tests" />
+	<input type="submit" id="startIndTests" value="Start individual tests" />
+	<input type="submit" id="reset" value="Reset" disabled="disabled" />
+	</p>
+
+	<div id="loadingTestFlows"><img src="/images/spinning.gif" /> Loading test flow defintions...</div>
+
+	<div id="testResultContainer"></div>
+
+</div>
+
+<p>GÉANT, NorduNet, UNINETT &copy; 2011</p>
+
+</body>
+</html>

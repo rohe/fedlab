@@ -1,0 +1,274 @@
+
+
+textarea.metadata {
+	width: 100%;
+	height: 500px;
+	font-family: "Monaco", monospace;
+}
+
+
+
+.ui-tabs-nav a, .ui-tabs-nav a:hover {
+	border: none;
+}
+
+
+div.testcase, div.testflow {
+	border: 1px solid #e0e0e0;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	margin: 2px 4px;
+	padding: 2px 6px 2px 32px;
+	
+}
+
+div.testflow.inprogress {
+	background:url("/images/spinning.gif") top left no-repeat;
+}
+div.testcase.status_2, div.testflow.completed.status_2 {
+	/* OK: SUCCESS */
+	background:url("/images/accept.png") top left no-repeat;
+	background-color: #7c7;
+	border: 1px solid #595;
+}
+div.testcase.status_1, div.testflow.completed.status_1 {
+	/* WARNING ERROR */
+	background:url("/images/error.png") top left no-repeat;
+	background-color: #FFFBD0;
+	border: 1px solid #595;
+}
+div.testcase.status_0, div.testflow.completed.status_0 code{
+	color: black;
+}
+div.testcase.status_0, div.testflow.completed.status_0 {
+	/* FATAL ERROR */
+	background:url("/images/exclamation.png") top left no-repeat;
+	background-color: #733;
+	border: 1px solid #400;
+	color: #fafafa;
+}
+div.testcase.status_3, div.testflow.completed.status_3 {
+	/* INFO STATEMENT */
+	background:url("/images/information.png") top left no-repeat;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+
+div.testcase {
+	display: none;
+}
+div.testflow.notcompleted {
+	background-color: #f8f8f8;
+}
+
+
+div.testflow div.debugoutput {
+	font-size: 90%;
+	margin-left: 2em;
+}
+div.testflow div.debugoutput pre.debugbox {
+	background: #eee;
+	border: 1px solid #aaa;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+
+
+}
+code {
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	display: block;
+	margin: 2px;
+	border: 1px solid #ddd;
+	background: #e5e5e5;
+	padding: 5px;
+	font-size: 105%;
+	font-family: Monaco, monospace;
+	
+	overflow: scroll;
+}
+
+/*
+const STATUS_OK = 2;
+const STATUS_ERROR = 1;
+const STATUS_FATAL = 0;
+const STATUS_INFO = 3;
+*/
+
+
+body {
+	margin: 50px 100px;
+	padding: 10px 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background: #f6f6f6;
+	border: 1px solid #999;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(245,245,245)),
+		color-stop(0.84, rgb(255,255,255))
+	);
+	
+}
+html {
+	background: #aaa;
+}
+
+a {
+	color: #555;
+	text-decoration: none;
+	border-bottom: 1px dotted #ccc;	
+}
+a:hover {
+	border-bottom: 1px solid #555;
+}
+
+
+body div#content {
+	margin: 3em;
+	border: 1px solid #aaa;
+	background: white;
+	padding: 1em;
+}
+
+
+span.item-description {
+	font-size: 95%;
+	color: #666;
+}
+
+input.username {
+
+	width: 340px;
+	font-family: Monaco, monospace;
+	
+}
+input.endpoint {
+	display: block;
+	width: 400px;
+	font-family: Monaco, monospace;
+}
+fieldset legend {
+	color: #333;
+	font-size: large;
+	padding: 3px;
+	border-bottom: 1px solid #888;
+}
+fieldset {
+	margin-bottom: 1em;
+	border: 1px solid #eee;
+}
+
+
+
+fieldset.storeconfiguration legend {
+	background: #fff;
+}
+fieldset.storeconfiguration {
+	background: #ecfc71;
+	color: black;
+	border: 1px solid #373;
+}
+
+fieldset.storeconfiguration li.active a.entityOpen {
+	font-weight: bold;
+}
+fieldset.storeconfiguration li.autosave span.autosave {
+	display: inline;
+}
+fieldset.storeconfiguration li span.autosave {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 7px;
+/*	font-weight: bold;*/
+	display: none;
+	color: #ecfc71;
+	background: #373;
+	font-size: 80%;
+	padding: 1px 7px;
+}
+
+
+
+div.data {
+	padding: 3px .4em; margin: 4px 2em;
+}
+
+div.data div.testrun {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #888;
+	margin: 5px 2px;
+	padding: 3px;
+}
+
+div.data div.testrun p {
+	font-size: 90%;
+	margin: 0px;
+}
+
+
+
+
+
+div.controller {
+	margin: 3px 1em;
+	width: 400px;
+
+	border: 1px solid #ccc;
+	background: #f4f4f4;
+	padding: 3px;
+
+	font-size: 90%;
+}
+div.controller p {
+	margin: 2px;
+}
+
+img.totalstatus {
+	float: left;
+}
+
+div.entry h2 {
+	margin: 3px 3px;
+}
+div.entry p.descr {
+	margin: 3px 5px;
+}
+div.entry {
+	cleaR: both;
+	border: 1px solid #ccc;
+	margin: 3px 1em;
+	padding: 3px 1em;
+}
+pre.entityid {
+	float: right;
+}
+pre.debug {
+	display: none;
+}
+
+div.statusentry {
+	clear: left;
+	border-top: 1px solid #eee;
+	margin: 0px;
+	font-size: 85%;
+}
+div.statusentry img {
+	margin-right: 4px;
+}

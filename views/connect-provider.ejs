@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	
+	<link rel="stylesheet" href="/stylesheets/style.css" />
+
+	<!-- JQuery hosted by google -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css" />
+
+	<!-- SAML metaJS -->
+	<script type="text/javascript" src="/javascripts/samlmeta.info-certs-saml2sp.min.js"></script>
+	<link rel="stylesheet" href="/samlmetajs/css/samlmetajs.css" />
+ 	
+	<!-- spine.js -->
+	<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
+	<script type="text/javascript" src="/javascripts/spine/local.js"></script>
+
+	<!-- Federation Lab -->
+	<script type="text/javascript" src="/javascripts/models.js"></script>
+	
+	<script type="text/javascript" src="/javascripts/storage.js"></script>
+	<script type="text/javascript" src="/javascripts/connect-ui.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script>
+
+	
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+
+	<!-- <script src="/socket.io/socket.io.js"></script>  -->
+
+
+	<!-- <script type="text/javascript" src="/javascripts/script.js"></script> -->
+	
+
+	
+	<script type="text/javascript">
+	    $(document).ready(function(){
+		
+
+			var storage = fedlabstorage('connect-provider');
+			
+			$("input#usewellknown").change(function() {
+				if ($("input#usewellknown").attr('checked')) {
+					$("div#metadatabasic").hide();					
+					$("input#discover").removeAttr('disabled');
+					$("input#wellknown").removeAttr('disabled');
+				} else {
+					$("div#metadatabasic").show();
+					$("input#discover").attr('disabled', 'disabled');
+					$("input#wellknown").attr('disabled', 'disabled');
+
+				}
+			});
+			
+			$("input#setclientcredentials").change(function() {
+				if ($("input#setclientcredentials").attr('checked')) {
+					$("div#clientcredentialsdetails").hide();					
+				} else {
+					$("div#clientcredentialsdetails").show();
+
+				}
+			});
+			
+			$("input#startTest").click(function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+				
+				console.log(getMetadataFromUI());
+			});
+			
+			$("input#save").click(function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+				
+				saveConfig();
+				loadConfigList();
+			});
+			
+			$("input#loadConfigSmt").click(function (event) {
+				var id ;
+				event.preventDefault();
+				event.stopPropagation();
+				
+				id = $("select#loadConfig").val();				
+				console.log('Loading ' + id);
+				loadConfig(id);
+			});
+
+			function loadConfig(id) {
+
+				var 
+					endpoints = ['issuer', 'authorization_endpoint', 'token_endpoint', 'user_info_endpoint', 'check_id_endpoint', 'refresh_session_endpoint', 'end_session_endpoint', 'check_session_endpoint', 'registration_endpoint'];				
+				var metadata = storage.getItem(id);
+				if (!metadata) return;
+				
+				console.log('Loaded config');
+				console.log(metadata);
+				
+				$("input#loadedEntity").val(id);
+				$("input#name").val(metadata['name']);
+				
+				
+				if (metadata['discovery']) {					
+					$("div#metadatabasic").hide();		
+					$("input#usewellknown").attr('checked', 'checked')			
+					$("input#discover").removeAttr('disabled');
+					$("input#wellknown").removeAttr('disabled');
+					$("input#wellknown").val(metadata['discovery']);		
+					
+				} else {
+
+					$("div#metadatabasic").show();
+					$("input#discover").attr('disabled', 'disabled');
+					$("input#wellknown").attr('disabled', 'disabled');
+					$("input#wellknown").val('');
+					$("input#usewellknown").removeAttr('checked');
+
+										
+					if (metadata['metadata']) {
+
+						for (i = 0; i < endpoints.length; i++) {
+							if (metadata['metadata'][endpoints[i]]) {
+								$("input#" + endpoints[i]).val(metadata['metadata'][endpoints[i]]);
+							}
+						}						
+					}
+				}
+				
+				if (metadata['clientCredentials']) {
+					$("div#clientcredentialsdetails").show();
+					$("input#setclientcredentials").removeAttr('checked');
+					
+					$("input#client").val(metadata['clientCredentials']['client']);
+					$("input#secret").val(metadata['clientCredentials']['secret']);
+					
+				} else {
+					$("input#setclientcredentials").attr('checked', 'checked');
+					$("div#clientcredentialsdetails").hide();		
+					
+				}
+				
+				if (! $("input#setclientcredentials").attr('checked')) {
+					clientCred = {
+						'client': $("input#client").val(),
+						'secret': $("input#secret").val()
+					};
+					metadata['clientCredentials'] = clientCred;
+				}
+				
+				// $("select#loadConfig").empty();
+				// for (key in list) {
+				// 	$("select#loadConfig").append('<option value="' + key + '">' + list[key] + '</option>');
+				// }	
+			}
+
+			
+			function loadConfigList() {
+				
+				var list = storage.getList();
+				var key, c = 0;
+				
+				console.log('Loading config');
+				console.log(list);
+				
+				$("select#loadConfig").empty();
+				for (key in list) {
+					c++;
+					$("select#loadConfig").append('<option value="' + key + '">' + list[key] + '</option>');
+				}
+				if (c > 0) {
+					$("fieldset#fsLoad").show();
+				} else {
+					$("fieldset#fsLoad").hide();
+				}
+			}
+			
+			function randomString() {
+				var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+				var string_length = 8;
+				var randomstring = '';
+				for (var i=0; i<string_length; i++) {
+					var rnum = Math.floor(Math.random() * chars.length);
+					randomstring += chars.substring(rnum,rnum+1);
+				}
+				return randomstring;
+			}
+
+			
+			function saveConfig() {
+				var id = $("input#loadedEntity").val();
+				
+				if (!id) {
+					id = randomString();
+				}
+				
+				var metadata = getMetadataFromUI();
+				var name = $("input#name").val();
+				
+				console.log('Storing id: ' + id);
+				console.log('Storing name: ' + name);
+				console.log(metadata);
+				
+				storage.setItem(id, name, metadata);
+				
+			}
+			
+			loadConfigList();
+			
+			function getMetadataFromUI () {
+				
+				var 
+					endpoints = ['issuer', 'authorization_endpoint', 'token_endpoint', 'user_info_endpoint', 'check_id_endpoint', 'refresh_session_endpoint', 'end_session_endpoint', 'check_session_endpoint', 'registration_endpoint'],
+					metadata = {},
+					basicMetadata = null,
+					i,
+					clientCred;
+				
+				if ($("input#usewellknown").attr('checked')) {
+					metadata['discovery'] = $("input#wellknown").val();
+				} else {
+					
+					basicMetadata = {};
+					for (i = 0; i < endpoints.length; i++) {
+						if ($("input#" + endpoints[i]).val()) {
+							basicMetadata[endpoints[i]] = $("input#" + endpoints[i]).val();
+						}
+						
+					}
+					metadata['metadata'] = basicMetadata;
+				}
+				
+				if (! $("input#setclientcredentials").attr('checked')) {
+					clientCred = {
+						'client': $("input#client").val(),
+						'secret': $("input#secret").val()
+					};
+					metadata['clientCredentials'] = clientCred;
+				}
+				
+				return metadata;
+			}
+			
+
+			
+         
+	    });
+	</script>
+	
+</head>
+
+<body>
+
+
+
+<p><a href="/">« Back to frontpage</a></p>
+
+
+
+<img src="/images/openid.png" style="float: right" />
+
+
+<h1>Testing OpenID Connect Provider</h1>
+
+<form action="get">
+
+	<input type="hidden" id="loadedEntity" name="loadedEntity" value="" />
+
+	<div class="metadata">
+
+
+		<fieldset id="fsLoad">
+			<legend>Load configuration</legend>
+			
+			<p>
+				When loading a stored configuration you will loose your current configuration (unless you saved it).
+			</p>
+			<p>
+				<select id="loadConfig" name="loadConfig">
+					<option value=""></option>
+				</select>
+				<input type="submit" id="loadConfigSmt" name="loadConfigSmt" value="Load configuration" />	
+			</p>
+
+		</fieldset>
+		
+		
+		<fieldset><legend>Setup service endpoints</legend>
+			
+			<p>
+				<input type="checkbox" checked="checked" id="usewellknown" name="usewellknown" />
+				<label for="usewellknown">Load metadata using OpenID Connect Discovery</label>
+				<input style="" id="wellknown" name="wellknownhost" value="https://openidconnect.info" class="endpoint" />
+				<input id="discover" type="submit" value="Discover provider metadata" />
+			</p>
+			
+			<div id="metadatabasic" style="display: none" class="basic">
+	
+				<p>
+					<label for="issuer">Issuer:</label>
+					<input id="issuer" name="issuer" value="https://example.org" class="endpoint" />
+				</p>
+			
+				<p>
+					<label for="authorization_endpoint">OAuth Authorization Endpoint:</label>
+					<input id="authorization_endpoint" name="authorization_endpoint" value="https://example.org/oauth/authorization" class="endpoint" />
+				</p>
+
+				<p>
+					<label for="token_endpoint">OAuth Token Endpoint:</label>
+					<input id="token_endpoint" name="token_endpoint" value="https://example.org/oauth/token" class="endpoint" />
+				</p>
+
+				<p>
+					<label for="user_info_endpoint">OpenID Connect User Info Endpoint:</label>
+					<input id="user_info_endpoint" name="user_info_endpoint" value="https://example.org/connect/userinfo" class="endpoint" />
+				</p>
+
+				<p>
+					<label for="check_id_endpoint">OpenID Connect Check ID Endpoint:</label>
+					<input id="check_id_endpoint" name="check_id_endpoint" value="https://example.org/connect/checkid" class="endpoint" />
+				</p>
+				
+				<p>
+					<label for="refresh_session_endpoint">OpenID Connect Refresh Session Endpoint:</label>
+					<input id="refresh_session_endpoint" name="refresh_session_endpoint" value="https://example.org/connect/refreshsession" class="endpoint" />
+				</p>
+				
+				<p>
+					<label for="end_session_endpoint">OpenID Connect End Session Endpoint:</label>
+					<input id="end_session_endpoint" name="end_session_endpoint" value="https://example.org/connect/endsession" class="endpoint" />
+				</p>
+
+				<p>
+					<label for="check_session_endpoint">OpenID Connect Check Session Endpoint:</label>
+					<input id="check_session_endpoint" name="check_session_endpoint" value="https://example.org/connect/checksession" class="endpoint" />
+				</p>
+
+				<p>
+					<label for="registration_endpoint">OpenID Connect Dynamic Client Registration Endpoint:</label>
+					<input id="registration_endpoint" name="registration_endpoint" value="https://example.org/connect/registration" class="endpoint" />
+				</p>
+
+
+			</div>
+			
+		</fieldset>
+
+
+		<fieldset>
+			<legend>Client Credentials</legend>
+			
+			<p>
+				<input type="checkbox" checked="checked" id="setclientcredentials" name="setclientcredentials" />
+				<label for="setclientcredentials">Obtain client credentials using the Dynamic Registration service</label>
+				<!-- <input style="" id="wellknown" name="authorization" value="https://example.org/oauth/authorization" class="endpoint" />
+				<input id="discover" type="submit" value="Discover metadata" /> -->
+			</p>
+			
+			<div id="clientcredentialsdetails" style="display: none">
+			
+				<p>
+					<label for="client">Client identifier</label>
+					<input id="client" name="client" value="client" class="username" />
+				</p>
+				<p>
+					<label for="secret">Client secret</label>
+					<input id="secret" name="secret" value="secret" class="username" />
+				</p>
+			
+				<p>
+					Callback URL
+					<code>https://localhost/callback</code>
+					<span style="font-size: x-small; color: #666">Please configure to trust this callback URL on your provider</span>
+				</p>
+			
+			</div>
+
+		</fieldset>
+		
+		
+		<!-- <fieldset><legend>Pricipal Authentication</legend>
+			<p>
+				<label for="username">Username</label>
+				<input id="username" name="username" value="user" class="username" />
+			</p>
+			<p>
+				<label for="password">Password</label>
+				<input id="password" name="password" value="passwd" class="username" />
+			</p>
+
+		</fieldset> -->
+
+
+
+	</div>
+	
+	<fieldset  id="fsSave">
+		<legend>Store configuration</legend>
+		
+		<p>
+			<label for="name">Descriptive name of this provider</label>
+			<input id="name" name="name" value="" class="endpoint" />
+			<input type="submit" id="save" name="save" value="Save provider configuration" />	
+		</p>
+		
+		
+	</fieldset>
+	
+
+	<input type="submit" id="startTest" value="Start test" />
+	<input type="submit" value="Save configuration" />
+
+</form>
+
+
+<!-- <div class="data">
+	
+	<div class="testrun">
+		<p>Performing a basic test run with authorization code flow and client password authentication.</p>
+		<div class="debug">
+			
+		</div>
+	</div>
+	
+	<div class="testrun">
+		<p>Performing a basic test run with implicit flow and client password authentication.</p>
+		<div class="debug">
+			
+		</div>
+	</div>
+	
+</div> -->
+
+</body>
+</html>
