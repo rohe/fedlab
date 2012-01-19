@@ -8,31 +8,43 @@
 	
 	var EntityEditor = Spine.Controller.sub({
 		init: function() {
-			// console.log('init() EntityEditor')
+			if (typeof this.type !== 'function') {
+				throw 'Missing required property on Editor: type';
+			}			
+			this.item.bind("destroy", this.proxy(this.remove));
+			this.render();
+		},
+		render: function() {
+			var template = $("#" + this.templateID).tmpl( this.item );
+			$(this.el).html( template );
+		},
+		remove: function() {
+			this.release();
+		},
+		setEntry: function(item) {
+			this.item = item;
 		}
 	});
 	
 	
 	var OAuthEditor = EntityEditor.sub({
+		modelType: OAuthEntity,
+		templateID: "oauthprovider",
 		events: {
 	      "change input[type=checkbox]": "updateModel",
 	      "change input[type=select]": "updateModel",
 	      "click": "updateModel",
 	      "blur input[type=text]": "updateModel"
 	    },
-		// destroy: function() {
-		// 	this.unbind();
-		// 	this.el.empty();
-		// },
+		init: function() {
+			
+			this.constructor.__super__.init.apply(this, arguments);
+
+		},
 		updateModel: function() {
 			var cur = this;
 			
-			console.log("Autosaving...");
-			// console.log($(this.el));
-			
 			var title = $(this.el).find("input#title").val();
-			
-			// if (title === "") return;
 			
 			if (!this.item.metadata) this.item.metadata = {};
 			if (!this.item.metadata.client) this.item.metadata.client = {};
@@ -42,7 +54,6 @@
 			this.item.metadata.issuer = $(this.el).find("input#issuer").val();
 			
 			$.each(this.item._endpoints, function(key, ep) {
-				// console.log("processing endpoiont " + key);
 				var found  = $(cur.el).find("input#" + key + "_endpoint").val();
 				if (found !== '') {
 					cur.item.metadata.endpoints[key] = found;
@@ -56,7 +67,6 @@
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
 			this.item.metadata.client.client_type = $(this.el).find("select#client_type").val();
 			
-			
 			console.log("Saving item:");
 			console.log(this.item);
 			try {
@@ -66,41 +76,9 @@
 				console.log(e);
 				console.trace();
 			}
-
 			
-			// this.render();
-			
-		},
-		init: function() {
-			
-			this.constructor.__super__.init.apply(this, arguments);
-			
-			if (typeof this.type !== 'function') {
-				throw 'Missing required property on Editor: type';
-			}
-			
-			this.item.bind("destroy", this.proxy(this.remove));
-			
-			// console.log('init() OAuthEditor');
-			
-			this.render();
-
-		},
-		render: function() {
-			// console.log("Rendering oauthprovider");
-			// console.log(this.item);
-			// console.log(this.el);
-			var template = $("#oauthprovider").tmpl( this.item );
-			// console.log(template);
-			$(this.el).html( template );
-		},
-		remove: function() {
-			// console.log("Removing editor because entry was removed..");
-			this.release();
-		},
-		setEntry: function(item) {
-			this.item = item;
 		}
+
 	});
 	
 	var OICEditor = EntityEditor.sub({
@@ -171,11 +149,7 @@
 			// // console.log(item);
 			$(this.el).addClass('active');
 		},
-		// photodeactivated: function(item) {
-		// 	// console.log(item);
-		// 	this.el.removeClass('active');
-		// },
-
+		
 		remove: function() {
 			// console.log("Destroy item detected...");
 			// console.log(this);
@@ -194,11 +168,15 @@
 		},
 		items: [],
 		init: function(){
-						
+			
+			if (!this.modelType || typeof this.modelType !== 'function') {
+				throw "EntityLoader init() must include a modelType.";
+			}
+			
 			// console.log("Initing EntityLoader()")
-			OAuthEntity.bind("create", this.proxy(this.addOne));
-			OAuthEntity.bind("refresh", this.proxy(this.addAll));
-			OAuthEntity.bind("edit", this.proxy(this.clearActive));
+			this.modelType.bind("create", this.proxy(this.addOne));
+			this.modelType.bind("refresh", this.proxy(this.addAll));
+			this.modelType.bind("edit", this.proxy(this.clearActive));
 			
 
 		},	
@@ -209,23 +187,16 @@
 			$(this.el).find("ul li").removeClass("active");
 		},
 		addOne: function(item) {
-			// console.log("Loading an entity item...");
-			// console.log(item);
-			// console.log(this);
-			// console.log($(this.el).find("ul"));
 			var entity = new EntityListItem({item: item});
 			$(this.el).find("ul").append(entity.prepare().el);
 			this.items.push(entity);
 
 		},
 		addAll: function() {
-			// console.log("refresh() addAll...")
 			this.items = [];
-			OAuthEntity.each(this.proxy(this.addOne));
+			this.modelType.each(this.proxy(this.addOne));
 		},
 		ready: function() {
-			// console.log(this.current);
-			// console.log(this.items);
 			this.items[this.current].item.activate();
 		},
 		openentity: function(e) {
@@ -248,12 +219,9 @@
 		},
 		newEntity: function(e) {
 			e.preventDefault();
-			// console.log("newEntity();");
-			var newentry = new OAuthEntity();
+			var newentry = new this.modelType();
 			newentry.save();
-			// console.log("saved1();");
 			newentry.edit();
-			// console.log("saved2();");
 		}
 		
 	});
@@ -265,78 +233,62 @@
 		init: function(args){
 			var c, newentity;
 			
-			if (!args.type) {
+			this.modelType = OAuthEntity;
+			
+			console.log(typeof this.type);
+			if (!this.type || !(typeof this.type === 'function')) {
 				throw ("type parameter of FedLab() MUST be a descendant of the TestEntity model.");
 			}
 			
-			OAuthEntity.bind("edit", this.proxy(this.selectEntity));
+			this.modelType.bind("edit", this.proxy(this.selectEntity));
 			
 			this.entityloader = new EntityLoader({
-				el: this.el.find("fieldset.storeconfiguration")
+				el: this.el.find("fieldset.storeconfiguration"),
+				modelType: this.modelType
 			});
-			// this.entityloader.bind("edit")
-			
 
-//			this.type.fetch();
-			OAuthEntity.fetch();
+			this.modelType.fetch();
 
-			c = OAuthEntity.count();
+			c = this.modelType.count();
 			if (c === 0) {
-				newentity = new OAuthEntity();
+				newentity = new this.modelType();
 				newentity.save();
-//				this.selectEntity(newentity);
 				newentity.edit();
 			} else if (c === 1) {
-				OAuthEntity.first().edit();
+				this.modelType.first().edit();
 			} else {
 				// More than one stored confiuration found, wait for user to select an configuratiom to edit..
 				// (or create a new one)
-				// OAuthEntity.first().edit();
+				// this.modelType.first().edit();
 			}
 
-
-			this.item = OAuthEntity.first();
-			if (!this.item) {
-				this.item = new OAuthEntity({"title": "oauth test 2"}); this.item.save();
-				this.item.save();
-			}
 
 		},
 		selectEntity: function(entity) {
 			
-			// console.log("select entity");
-			// console.log(entity);
-			// console.log(this);
-			
+
 			// Save and clean up currently open 
 			if (this.editor && !this.editor.item.destroyed) {
-				// console.log("Clearning up editor");
-				// console.log(this.editor);
 				this.editor.updateModel();
-				// console.log("Clearning up editor /updateMode()");
 				this.editor.release();
-				// console.log("Clearning up editor /release()");
 				this.editor = null;
 			}
 			if ($(this.el).find("#editorcontainer div#editor").length === 0) {
 				$(this.el).find("#editorcontainer").html("<div id=\"editor\"></div>");				
-				// console.log("Selecting a new entity. Adding element")
 			} else {
-				// console.log("Selecting a new entity. Not adding element")
 			}
 			// Create new editor
-			this.editor = new OAuthEditor({
+			this.editor = new this.type({
 				el: $(this.el).find("#editor"),
-				type: OAuthEntity,
+				type: this.modelType,
 				item: entity
 			});
-			// console.log("/select entity");
 		}
 
 	});
 
 	exports.FedLab = FedLab;
-	exports.OICEditor = OICEditor;
+	// exports.OICEditor = OICEditor;
 	exports.OAuthEditor = OAuthEditor;
 	
 	

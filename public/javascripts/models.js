@@ -6,17 +6,7 @@
 			if (typeof this.metadata !== 'object') {
 				this.metadata = {};
 			};
-			if (!this.metadata.endpoints) {
-				this.metadata.endpoints = {};
-			}
-			if (!this.metadata.client) {
-				this.metadata.client = {
-					"auth_type": "client_secret_basic",
-					"client_type": "confidential",
-					"client_id": FedLabUtils.guid().toLowerCase(),
-					"redirect_uris": ["https://localhost/callback1", "https://localhost/callback2"]
-				};
-			}
+
 		}, 
 		getTitle: function() {
 			if (this.title) return this.title;
@@ -33,6 +23,18 @@
 	var OAuthEntity = TestEntity.sub({
 		init: function() {
 			this.constructor.__super__.init.apply(this, arguments);
+			
+			if (!this.metadata.endpoints) {
+				this.metadata.endpoints = {};
+			}
+			if (!this.metadata.client) {
+				this.metadata.client = {
+					"auth_type": "client_secret_basic",
+					"client_type": "confidential",
+					"client_id": FedLabUtils.guid().toLowerCase(),
+					"redirect_uris": ["https://localhost/callback1", "https://localhost/callback2"]
+				};
+			}
 		}
 	});
 	OAuthEntity.configure("OAuthEntity");
