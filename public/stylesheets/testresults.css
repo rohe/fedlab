@@ -1,0 +1,96 @@
+div.testItem {
+	clear: both;
+	
+	border: 1px solid #ccc;
+	margin: 3px 1em;
+	padding: 3px 1em;
+
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+
+	margin: 0px;
+	font-size: 85%;
+}
+
+div.testItem h3 {
+
+	font-size: 130%;
+
+}
+
+
+div.testItem p.descr {
+	margin: 3px 5px;
+}
+
+div.testItem img {
+	margin-right: 4px;
+}
+
+
+
+div.testItem {
+	border: 1px solid #e0e0e0;
+
+
+	margin: 2px 4px;
+	padding: 2px 6px 2px 32px;
+	
+}
+
+div.testflow.inprogress {
+	background:url("/images/spinning.gif") top left no-repeat;
+}
+div.testcase.status_2, div.testflow.completed.status_2 {
+	/* OK: SUCCESS */
+	background:url("/images/accept.png") top left no-repeat;
+	background-color: #7c7;
+	border: 1px solid #595;
+}
+div.testcase.status_1, div.testflow.completed.status_1 {
+	/* WARNING ERROR */
+	background:url("/images/error.png") top left no-repeat;
+	background-color: #FFFBD0;
+	border: 1px solid #595;
+}
+div.testcase.status_0, div.testflow.completed.status_0 code{
+	color: black;
+}
+div.testcase.status_0, div.testflow.completed.status_0 {
+	/* FATAL ERROR */
+	background:url("/images/exclamation.png") top left no-repeat;
+	background-color: #733;
+	border: 1px solid #400;
+	color: #fafafa;
+}
+div.testcase.status_3, div.testflow.completed.status_3 {
+	/* INFO STATEMENT */
+	background:url("/images/information.png") top left no-repeat;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+
+div.testcase {
+	display: none;
+}
+div.testflow.notcompleted {
+	background-color: #f8f8f8;
+}
+
+
+div.testflow div.debugoutput {
+	font-size: 90%;
+	margin-left: 2em;
+}
+div.testflow div.debugoutput pre.debugbox {
+	background: #eee;
+	border: 1px solid #aaa;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+
+
+}

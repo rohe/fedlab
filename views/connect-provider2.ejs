@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	
 	<link rel="stylesheet" href="/stylesheets/style.css" />
+	<link rel="stylesheet" href="/stylesheets/testresults.css" />
 	
 
 
@@ -41,6 +42,53 @@
 	
 	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 	
+	
+	<script type="text/x-jquery-tmpl" id="testItem">
+	
+		<div class="testItem idle">
+			<h3>${name}</h3>
+			{{if $item.data.descr}}
+				<p>${descr}</p>
+			{{/if}}
+			
+			<div class="testFlow success">
+				<h4>Test that succeeeded.</h4>
+				<p>Some more information about test</p>
+				<pre>
+kdjs flksdj flksdjf lkdsf sdf
+sdffsdflsd fjk sdlkfj sdlkf
+sdfsdfsdflsd fjk sdlkfj sdlkf
+fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
+</pre>
+			</div>
+		
+			<div class="testFlow warning">
+				<h4>Test that failed with warning.</h4>
+				<p>Some more information about test</p>
+				<pre>
+kdjs flksdj flksdjf lkdsf sdf
+sdffsdflsd fjk sdlkfj sdlkf
+sdfsdfsdflsd fjk sdlkfj sdlkf
+fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
+</pre>
+			</div>
+				
+			<div class="testFlow fail">
+				<h4>Test that failed.</h4>
+				<p>Some more information about test</p>
+				<pre>
+kdjs flksdj flksdjf lkdsf sdf
+sdffsdflsd fjk sdlkfj sdlkf
+sdfsdfsdflsd fjk sdlkfj sdlkf
+fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
+</pre>
+			</div>
+			
+			
+		</div>
+		
+	</script>
+
 
 	
 	<script type="text/x-jquery-tmpl" id="providerItem">
@@ -66,7 +114,7 @@
 			
 			<p>
 				<label for="issuer">Issuer</label>
-				<input type="text" id="issuer" name="issuer" value="${metadata.issuer}" class="endpoint" />
+				<input type="text" id="issuer" name="issuer" value="${metadata.provider.issuer}" class="endpoint" />
 				<span class="item-description">The Issuer is the same value as is used in the <tt>iss</tt> property in the JWT.</span>
 			</p>
 			
@@ -81,7 +129,7 @@
 				{{each(key, endpoint) _endpoints }}
 					<p>
 						<label for="${key}_endpoint">${endpoint.title}</label>
-						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.endpoints[key]}" class="endpoint" />
+						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider.endpoints[key]}" class="endpoint" />
 						<span class="item-description">{{html endpoint.descr}}</span>
 					</p>
 				{{/each}}
@@ -155,154 +203,226 @@
 	
 	
 	
-	
-	
-	<script type="text/x-jquery-tmpl" id="oauthprovider">
+	<script type="text/x-jquery-tmpl" id="oicprovider">
+		
+	<div class="oicprovider">
 		
 		
-		<div class="oicprovider">
-			<h1>${title}</h1>
+		<fieldset><legend>Description</legend>
+		
+			<p style="font-size: 80%; color: #ccc">Stored with ID: ${id}</p>
+
+			<p>
+				<label for="title">Descriptive name of Oauth Provider</label>
+				<input type="text" id="title" name="title" value="${title}" class="endpoint" />
+				<span class="item-description">Your configuration will be stored in your browser, and you&#39;ll be able to find it by looking for this name.</span>
+			</p>
 			
+			<p>
+				<label for="issuer">Issuer</label>
+				<input type="text" id="issuer" name="issuer" value="${metadata.provider.issuer}" class="endpoint" />
+				<span class="item-description">The Issuer is the same value as is used in the <tt>iss</tt> property in the JWT.</span>
+			</p>
 			
-			<fieldset><legend>Setup service endpoints</legend>
+		</fieldset>
+		
+		<fieldset><legend>Features</legend>
+		
+			<p>
+				<input type="checkbox" {{if metadata.provider.features.discovery}} checked="checked" {{/if}} id="usediscovery" name="usediscovery" />
+				<label for="usediscovery">Enable OpenID Connect Discovery</label>
+				<span class="item-description">If you enable OpenID Connect Discovery, Federation Lab will automatically discover some metadata about your provider and you will need to configure less information here. Make sure your provider supports <a target="_blank" href="">OpenID Connect Discovery</a></span>
+			</p>
+
+			<p>
+				<input type="checkbox" {{if metadata.provider.features.registration}} checked="checked" {{/if}} id="useregistration" name="useregistration" />
+				<label for="useregistration">Enable OpenID Connect Dynamic Client Registration</label>
+				<span class="item-description">
+					If you enable <a target="_blank" href="http://openid.net/specs/openid-connect-registration-1_0.html">OpenID Connect Dynamic Client Registration</a>, the Federation Lab will use the registration endpoint to register a client before performing the tests.
+				</span>
+			</p>
+			
+			<p>
+				<input type="checkbox" {{if metadata.provider.features.sessionmanagement}} checked="checked" {{/if}} id="usesessionmanagement" name="usesessionmanagement" />
+				<label for="usesessionmanagement">Enable OpenID Connect Session Management</label>
+				<span class="item-description">
+					See <a target="_blank" href="http://openid.net/specs/openid-connect-session-1_0.html">OpenID Connect Session Management</a> for more details.
+				</span>
+			</p>
+			
+			<p>
+				Supported Algoritms
+				<span style="display: block; padding-right: 8em">
+				{{each(key, alg) _algoritms }}
+					<span style="margin-right: 1em; white-space: nowrap">
+						<input type="checkbox" id="${key}" {{if $item.data.hasAlg(key) }} checked="checked" {{/if}} name="${key}" />
+						<label for="${key}" >
+							<a style="min-width: 200px" title="${alg.descr}">${alg.title}</a>
+						</label>
+					</span>
+				{{/each}}
+				</span>
+				<span class="item-description">
+					Check off the algoritm that is supported by your OpenID Connect Provider.
+				</span>
+			</p>
+
+			<p>
+				Supported Scopes
+				<span style="display: block">
+				
+				<span style="margin-right: 1em">
+					<input type="checkbox" disabled="disabled" checked="checked" id="scope_openid" name="scope_openid" />
+					<label for="scope_openid"><a title="REQUIRED. Informs the Authorization Server that the Client is making an OpenID Connect request. If the openid scope value is not present, the request MUST NOT be treated as an OpenID Connect request. The openid value also requests that the ID Token associated with the authentication session be returned. If the response_type includes token, the ID Token is returned in the Authorization Response along with the Access Token. If the response_type includes code, the ID Token is returned as part of the Token Endpoint response. This scope value requests access to the user_id Claim at the UserInfo Endpoint.">openid</a></label>
+				</span>
+				
+				{{each(key, s) _scopes }}
+					<span style="margin-right: 1em">
+						<input type="checkbox" id="${key}" {{if $item.data.hasScope(key) }} checked="checked" {{/if}} name="${key}" />
+						<label for="${key}"><a title="${s.descr}">${key}</a></label>
+					</span>
+				{{/each}}
+				</span>
+				<span class="item-description">
+					Check off the scopes that is supported by your OpenID Connect Provider. 
+					The federation lab test client should be authorized to retrieve these scopes.
+				</span>
+			</p>
+
+
+			<p>
+				Response types supported
+				<span style="display: block">
+				{{each(key, alg) _response_types }}
+					<span style="margin-right: 1em">
+						<input type="checkbox" id="${key}" {{if $item.data.hasResponseType(alg.title) }} checked="checked" {{/if}} name="${key}" />
+						<label for="${key}">${alg.title}</label>
+					</span>
+				{{/each}}
+				</span>
+				<span class="item-description">
+					Which flows is supported by your OpenID Connect Provider. Ideally all the flows above should be supported.
+				</span>
+			</p>
+
+
+		</fieldset>
+		
+
+
+		<fieldset><legend>Setup endpoints</legend>
+		
+			<div id="endpoints" style="display: inline" class="basic">
+
+				{{each(key, endpoint) _endpoints }}
+					<p class="p_endpoint" id="p_${key}_endpoint">
+						<label for="${key}_endpoint">${endpoint.title}</label>
+						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider.endpoints[key]}" class="endpoint" />
+						<span class="item-description">{{html endpoint.descr}}</span>
+					</p>
+				{{/each}}
+				
+			</div>
+
+		</fieldset>
+		
+		
+
+		
+		<fieldset><legend>Client Configuration</legend>
+		
+
+		<p>
+			<label for="client">Client identifier</label>
+			<input type="text" id="client_id" name="client_id" value="${$data.metadata.client.client_id}" class="username" />
+		</p>
+
+			<div id="clientconfiguration" style="display: inline; margin: 0px; padding: 0px" class="basic">
+			
+
+
+			
 
 				<p>
-					<input type="checkbox" checked="checked" id="usewellknown" name="usewellknown" />
-					<label for="usewellknown">Load metadata using OpenID Connect Discovery</label>
-					<input style="" id="wellknown" name="wellknownhost" value="https://openidconnect.info" class="endpoint" />
-					<input id="discover" type="submit" value="Discover provider metadata" />
+					<label for="client_type">Type of client</label>
+					<select id="client_type" name="client_type">
+						<option value="confidential">Confidential</option>
+						<option value="public" disabled="disabled">Public</option>
+					</select>
 				</p>
-
-			</fieldset>
-			
-			
-			<fieldset><legend>Setup service endpoints</legend>
 
 				<p>
-					<input type="checkbox" checked="checked" id="usewellknown" name="usewellknown" />
-					<label for="usewellknown">Load metadata using OpenID Connect Discovery</label>
-					<input style="" id="wellknown" name="wellknownhost" value="https://openidconnect.info" class="endpoint" />
-					<input id="discover" type="submit" value="Discover provider metadata" />
+					<label for="auth_type">Type of authentication</label>
+					<select id="auth_type" name="auth_type">					
+						<option value="client_secret_basic" {{if metadata.client.auth_type === "client_secret_basic"}} selected="selected" {{/if}}
+							>HTTP Basic Authentication</option>
+						<option value="client_secret_post" {{if metadata.client.auth_type === "client_secret_post"}} selected="selected" {{/if}}
+							>Including credentials in request body</option>
+						<option value="client_secret_jwt" disabled="disabled" {{if metadata.client.auth_type === "client_secret_jwt"}} selected="selected" {{/if}}
+							>JWT Secret</option>
+						<option value="private_key_jwt" disabled="disabled" {{if metadata.client.auth_type === "private_key_jwt"}} selected="selected" {{/if}}
+							>JWT Private Key</option>
+					</select>
 				</p>
-
-
-				<fieldset><legend>Features</legend>
-
-					<div id="providerfeatures" style="display: inline" class="basic">
-
-
-
-					</div>
-
-				</fieldset>
-
-
-				<div id="metadatabasic" style="display: none" class="basic">
-
-					<p>
-						<label for="issuer">Issuer:</label>
-						<input id="issuer" name="issuer" value="${metadata.issuer}" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="authorization_endpoint">OAuth Authorization Endpoint:</label>
-						<input id="authorization_endpoint" name="authorization_endpoint" value="https://example.org/oauth/authorization" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="token_endpoint">OAuth Token Endpoint:</label>
-						<input id="token_endpoint" name="token_endpoint" value="https://example.org/oauth/token" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="user_info_endpoint">OpenID Connect User Info Endpoint:</label>
-						<input id="user_info_endpoint" name="user_info_endpoint" value="https://example.org/connect/userinfo" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="check_id_endpoint">OpenID Connect Check ID Endpoint:</label>
-						<input id="check_id_endpoint" name="check_id_endpoint" value="https://example.org/connect/checkid" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="refresh_session_endpoint">OpenID Connect Refresh Session Endpoint:</label>
-						<input id="refresh_session_endpoint" name="refresh_session_endpoint" value="https://example.org/connect/refreshsession" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="end_session_endpoint">OpenID Connect End Session Endpoint:</label>
-						<input id="end_session_endpoint" name="end_session_endpoint" value="https://example.org/connect/endsession" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="check_session_endpoint">OpenID Connect Check Session Endpoint:</label>
-						<input id="check_session_endpoint" name="check_session_endpoint" value="https://example.org/connect/checksession" class="endpoint" />
-					</p>
-
-					<p>
-						<label for="registration_endpoint">OpenID Connect Dynamic Client Registration Endpoint:</label>
-						<input id="registration_endpoint" name="registration_endpoint" value="https://example.org/connect/registration" class="endpoint" />
-					</p>
-
-
-				</div>
-
-			</fieldset>
-
-
-			<fieldset>
-				<legend>Client Credentials</legend>
+			
 
 				<p>
-					<input type="checkbox" checked="checked" id="setclientcredentials" name="setclientcredentials" />
-					<label for="setclientcredentials">Obtain client credentials using the Dynamic Registration service</label>
-					<!-- <input style="" id="wellknown" name="authorization" value="https://example.org/oauth/authorization" class="endpoint" />
-					<input id="discover" type="submit" value="Discover metadata" /> -->
+					<label for="client_secret">Client secret</label>
+					<input type="text" id="client_secret" name="client_secret" value="${$data.metadata.client.client_secret}" class="username" />
 				</p>
 
-				<div id="clientcredentialsdetails" style="display: none">
+				<p>
+					Callback URIs
+						<ul>
+							{{each(key, endpoint) $data.metadata.client.redirect_uris }}
+								<li><code>${endpoint}</code></li>
+							{{/each}}
+						</ul>
+					
+					<span class="item-description">Make sure to configure your Provider to trust these callback URLs!</span>
+				</p>
+				
+			</div>
 
-					<p>
-						<label for="client">Client identifier</label>
-						<input id="client" name="client" value="client" class="username" />
-					</p>
-					<p>
-						<label for="secret">Client secret</label>
-						<input id="secret" name="secret" value="secret" class="username" />
-					</p>
+		</fieldset>
 
-					<p>
-						Callback URL
-						<code>https://localhost/callback</code>
-						<span style="font-size: x-small; color: #666">Please configure to trust this callback URL on your provider</span>
-					</p>
 
-				</div>
-
-			</fieldset>
-			
-			
-		</div>
-
+	</div>
+	
+	
+	<fieldset class="readyverify"><legend>Verify Connectivity</legend>
+	
+		<p>When you're done configuring your OpenID Connect Provider above, you may click the button below to perform a simple test, verifying that your most basic features are working. When this test is ran successfully, you'll be able to proceed to the rest of the test cases.</p>
+		
+		<p style="text-align: center"><input  type="submit" id="verifynow" value="Verify Connectivity" /></p>
+		
+	</fieldset>
+		
+		
 	</script>
+
+	
+	
+
+
+
 
 	
 	<script type="text/javascript">
 		jQuery(function($) {
 			return new FedLab({
 				el: $("body"),
-				type: OAuthEditor
+					type: OICProviderEditor,
+					modelType: OICProvider
+				//type: OAuthEditor
 			});
 		});
-		
-		
-		
-	
 	</script>
 	
 </head>
 
 <body>
+	
 
 	<p><a href="/">« Back to frontpage</a></p>
 

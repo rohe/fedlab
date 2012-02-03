@@ -1,8 +1,13 @@
 var 
 
+	// built-in libraries
+	fs = require('fs'),
+
 	// Module dependencies.
 	express = require('express'),
 	io = require('socket.io'), // for npm, otherwise use require('./path/to/socket.io') 
+	
+	
 	
 	// Local libraries.
 	testconnector = require('./lib/testconnector.js'),
@@ -36,8 +41,10 @@ app.configure('production', function(){
 	app.use(express.errorHandler()); 
 });
 
-// Routes
 
+
+
+// Routes
 app.get('/', function(req, res){
 	res.render('index', {
 		title: 'Federation Lab'
@@ -62,6 +69,15 @@ app.get('/connect-provider2', function(req, res){
 	});
 });
 
+
+var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php"});
+
+app.post('/api', function(req, res){
+
+	t.process(req, res);
+	
+});
+
 app.listen(80);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
@@ -69,103 +85,103 @@ console.log("Express server listening on port %d in %s mode", app.address().port
 
 
 
-// Web Sockets
-io = io.listen(app);
-
-var config = {
-	'cmd': '/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php'
-};
-
-function ioConnection (socket) {
-	
-	console.log('Connected client.')
-	
-	socket.on('check', function (data) {
-		console.log('Check request received.');
-		t = testconnector.testconnector({"cmd": config["cmd"], "metadata": data["metadata"]});
-		t.check(function(result, stderr) {
-			console.log(result);
-			console.log('Error:');
-			console.log(stderr);
-			socket.emit('checkResult', result, stderr);
-		});
-	});
-
-	socket.on('showList', function (data) {
-		t = testconnector.testconnector({"cmd": config["cmd"], "metadata": data["metadata"]});
-		t.getFlows(function(list, stderr) {
-			console.log(list);
-			console.log('Error:');
-			console.log(stderr);
-			
-			socket.emit('showListResult', list);
-		});
-	});
-		
-	socket.on('runTests', function (data) {
-		
-		var 
-			i = 0,
-			runNext;
-		
-		console.log("runTests");
-		console.log(data);
-		
-		
-		// TODO: This is not very reliable. Should have a helper function to catch timeout and continue if callback is not used...
-		
-		function processResults(results) {
-			var key;
-			
-			if (!results['status'] !== 'ok') return;
-			if (!results['results']) return;
-			if (!results['flowid']) return;
-			
-			for (key in results['results']) {
-				
-			}
-		}
-		
-		
-		runNext = function runNext() {
-			if (i >= data['flows'].length) return;
-			console.log('Ready to start test ' + data['flows'][i]);
-			
-			socket.emit('runTestStart', data['flows'][i]);
-			
-			t.runTest(data['flows'][i], function(results, stderr) {
-				console.log('Result:');
-				console.log(results);
-//				if (result) {result['id'] = data['flows'][i]; }; // Fix ID if replaced with something else.
-				console.log('Error:');
-				console.log(stderr);
-				socket.emit('runTestResult', results, stderr);
-				// if (i < 3) runNext();
-				runNext();
-			});
-			i++;
-		}
-
-		
-		t = testconnector.testconnector({"cmd": config["cmd"], "metadata": data["metadata"]});
-		
-		runNext();
-		
-		// for (i = 0; i < data['flows'].length; i++) {
-		// 	console.log('Ready to start test ' + data['flows'][i]);
-		// 	// t.runTest(data['flows'][i], function(result, stderr) {
-		// 	// 	console.log(result);
-		// 	// 	console.log('Error:');
-		// 	// 	console.log(stderr);
-		// 	// 	socket.emit('runTestResult', result);
-		// 	// });
-		// }
-
-	});
-}
-
-io.sockets.on('connection', ioConnection);
-
+// // Web Sockets
+// io = io.listen(app);
+// 
+// var config = {
+// 	'cmd': '/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php'
+// };
+// 
+// function ioConnection (socket) {
+// 	
+// 	console.log('Connected client.')
+// 	
+// 	socket.on('check', function (data) {
+// 		console.log('Check request received.');
+// 		t = testconnector.testconnector({"cmd": config["cmd"], "metadata": data["metadata"]});
+// 		t.check(function(result, stderr) {
+// 			console.log(result);
+// 			console.log('Error:');
+// 			console.log(stderr);
+// 			socket.emit('checkResult', result, stderr);
+// 		});
+// 	});
+// 
+// 	socket.on('showList', function (data) {
+// 		t = testconnector.testconnector({"cmd": config["cmd"], "metadata": data["metadata"]});
+// 		t.getFlows(function(list, stderr) {
+// 			console.log(list);
+// 			console.log('Error:');
+// 			console.log(stderr);
+// 			
+// 			socket.emit('showListResult', list);
+// 		});
+// 	});
+// 		
+// 	socket.on('runTests', function (data) {
+// 		
+// 		var 
+// 			i = 0,
+// 			runNext;
+// 		
+// 		console.log("runTests");
+// 		console.log(data);
+// 		
+// 		
+// 		// TODO: This is not very reliable. Should have a helper function to catch timeout and continue if callback is not used...
+// 		
+// 		function processResults(results) {
+// 			var key;
+// 			
+// 			if (!results['status'] !== 'ok') return;
+// 			if (!results['results']) return;
+// 			if (!results['flowid']) return;
+// 			
+// 			for (key in results['results']) {
+// 				
+// 			}
+// 		}
+// 		
+// 		
+// 		runNext = function runNext() {
+// 			if (i >= data['flows'].length) return;
+// 			console.log('Ready to start test ' + data['flows'][i]);
+// 			
+// 			socket.emit('runTestStart', data['flows'][i]);
+// 			
+// 			t.runTest(data['flows'][i], function(results, stderr) {
+// 				console.log('Result:');
+// 				console.log(results);
+// //				if (result) {result['id'] = data['flows'][i]; }; // Fix ID if replaced with something else.
+// 				console.log('Error:');
+// 				console.log(stderr);
+// 				socket.emit('runTestResult', results, stderr);
+// 				// if (i < 3) runNext();
+// 				runNext();
+// 			});
+// 			i++;
+// 		}
+// 
+// 		
+// 		t = testconnector.testconnector({"cmd": config["cmd"], "metadata": data["metadata"]});
+// 		
+// 		runNext();
+// 		
+// 		// for (i = 0; i < data['flows'].length; i++) {
+// 		// 	console.log('Ready to start test ' + data['flows'][i]);
+// 		// 	// t.runTest(data['flows'][i], function(result, stderr) {
+// 		// 	// 	console.log(result);
+// 		// 	// 	console.log('Error:');
+// 		// 	// 	console.log(stderr);
+// 		// 	// 	socket.emit('runTestResult', result);
+// 		// 	// });
+// 		// }
+// 
+// 	});
+// }
+// 
+// io.sockets.on('connection', ioConnection);
+// 
 
 
 
