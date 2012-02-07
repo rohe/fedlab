@@ -72,6 +72,8 @@ app.get('/connect-provider2', function(req, res){
 
 var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php"});
 
+// t.temp("oic-code");
+
 app.post('/api', function(req, res){
 
 	t.process(req, res);

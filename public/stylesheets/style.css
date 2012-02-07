@@ -1,5 +1,24 @@
 
 
+/* FedLab Editor/Test modes
+*/
+
+
+body.modeEdit fieldset.storeconfiguration, 
+body.modeEdit div#editorcontainer,
+body.modeTest div#testcontrollerbar {
+	display: block;
+}
+body.modeTest fieldset.storeconfiguration, 
+body.modeTest div#editorcontainer,
+body.modeEdit div#testcontrollerbar {
+	display: none;
+}
+
+
+
+
+
 textarea.metadata {
 	width: 100%;
 	height: 500px;
@@ -13,22 +32,7 @@ textarea.metadata {
 }
 
 
-code {
-	
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	
-	display: block;
-	margin: 2px;
-	border: 1px solid #ddd;
-	background: #e5e5e5;
-	padding: 5px;
-	font-size: 105%;
-	font-family: Monaco, monospace;
-	
-	overflow: scroll;
-}
+
 
 /*
 const STATUS_OK = 2;
@@ -134,9 +138,6 @@ fieldset.storeconfiguration {
 	border: 1px solid #373;
 }
 
-
-
-
 fieldset.storeconfiguration li.active a.entityOpen {
 	font-weight: bold;
 }
@@ -154,6 +155,8 @@ fieldset.storeconfiguration li span.autosave {
 	font-size: 80%;
 	padding: 1px 7px;
 }
+
+
 
 
 
@@ -198,13 +201,13 @@ img.totalstatus {
 }
 
 
-pre.entityid {
+/*pre.entityid {
 	float: right;
 }
 pre.debug {
 	display: none;
 }
-
+*/
 
 
 

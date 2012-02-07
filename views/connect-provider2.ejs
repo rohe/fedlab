@@ -43,52 +43,39 @@
 	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 	
 	
-	<script type="text/x-jquery-tmpl" id="testItem">
+	<script type="text/x-jquery-tmpl" id="testFlow">
 	
-		<div class="testItem idle">
+		<div class="test testFlow" id="${sid}">
+		
+			<div class="testFlowControllerBar">
+				<input type="submit" class="testFlowRun" name="testFlowRun" value="Run" />
+				<input type="submit" class="testFlowSShow" name="testFlowSShow" value="Show succeeded" />
+				<input type="submit" class="testFlowSHide" name="testFlowSHide" value="Hide succeeded" />
+				<input type="submit" class="testFlowDCShow" name="testFlowDCShow" value="Show debug" />
+				<input type="submit" class="testFlowDCHide" name="testFlowDCHide" value="Hide debug" />
+			</div>
+		
 			<h3>${name}</h3>
 			{{if $item.data.descr}}
 				<p>${descr}</p>
 			{{/if}}
 			
-			<div class="testFlow success">
-				<h4>Test that succeeeded.</h4>
-				<p>Some more information about test</p>
-				<pre>
-kdjs flksdj flksdjf lkdsf sdf
-sdffsdflsd fjk sdlkfj sdlkf
-sdfsdfsdflsd fjk sdlkfj sdlkf
-fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
-</pre>
-			</div>
-		
-			<div class="testFlow warning">
-				<h4>Test that failed with warning.</h4>
-				<p>Some more information about test</p>
-				<pre>
-kdjs flksdj flksdjf lkdsf sdf
-sdffsdflsd fjk sdlkfj sdlkf
-sdfsdfsdflsd fjk sdlkfj sdlkf
-fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
-</pre>
-			</div>
-				
-			<div class="testFlow fail">
-				<h4>Test that failed.</h4>
-				<p>Some more information about test</p>
-				<pre>
-kdjs flksdj flksdjf lkdsf sdf
-sdffsdflsd fjk sdlkfj sdlkf
-sdfsdfsdflsd fjk sdlkfj sdlkf
-fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
-</pre>
-			</div>
+			<div class="testFlowResults"></div>
 			
+
 			
 		</div>
 		
 	</script>
 
+	<script type="text/x-jquery-tmpl" id="testItem">
+
+		<div class="test testItem ${statusClass}">
+			<h4>${name}</h4>
+			<p>${message}</p>
+		</div>
+
+	</script>
 
 	
 	<script type="text/x-jquery-tmpl" id="providerItem">
@@ -450,6 +437,13 @@ fsdflsd fjk sdlkfj sdlkf fsdflsd fjk sdlkfj sdlkf
 	<div id="editorcontainer">
 		<div id="editor">
 		</div>
+	</div>
+
+	<div id="testcontrollerbar">
+		<p>Testing <b>Edmunds provider</b></p>
+		<input type="submit" name="configure" id="configure" value="« Revisit the configuration" />
+		<input type="submit" name="runall" id="runall" value="Re-run all the tests »" />
+
 	</div>
 
 	<div id="results">	

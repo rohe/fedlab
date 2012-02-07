@@ -331,11 +331,96 @@
 	});
 	
 
+	var ResultController = Spine.Controller.sub({
+		events: {
+			"click input.testFlowRun": "run",
+			"click input.testFlowSShow": "sshow",
+			"click input.testFlowSHide": "shide",
+			"click input.testFlowDCShow": "dcshow",
+			"click input.testFlowDCHide": "dchide"
+		},
+		init: function() {
+			
+			
+		},
+		getFlow: function(e) {
+			var el = $(e.target).closest("div.testFlow");
+			// console.log("getFlow()");
+			// console.log(el);
+			return el;
+		},
+		run: function(e) {
+			console.log("Run()");
+		},
+		sshow: function(e) {
+			this.getFlow(e).addClass("successShow");
+		},
+		shide: function(e) {
+			this.getFlow(e).removeClass("successShow");
+		},
+		dcshow: function(e) {
+			this.getFlow(e).addClass("debugShow");
+		},
+		dchide: function(e) {
+			this.getFlow(e).removeClass("debugShow");
+		},
+		
+		escapeHTML: function(str) {
+			return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+		},
+		
+		updateFlowResults: function(testflow, sid, testresults) {
+			console.log("updateFlowResults()");
+			console.log(testresults);
+			
+			var testflowel = $(this.el).find("div#" + sid);
+			
+			console.log("Found testflowel"); console.log(testflowel);
+			
+			testflowel.removeClass("running");
+			testflowel.addClass("completed");
+			
+			var testflowresel = testflowel.find("div.testFlowResults");
+			
+			if (testresults.status === 0) {
+				testflowel.addClass("success");
+			} else {
+				testflowel.addClass("fail");
+			}
+			
+			$.each(testresults.tests, function(i, test) {
+				var status = Math.floor(test.status / 100);
+				test.statusClass = "fail";
+				if (status === 2) test.statusClass = "success";
+				console.log("Appending Test result");
+				console.log(test);
+				testflowresel.append($("#testItem").tmpl(test));
+			});
+			
+			testflowresel.append("<pre class=\"debugConsole\">" + this.escapeHTML(testresults.debug) + "</div>");
+		},
+		startFlow: function(testflow, sid) {
+			
+			$("div#" + sid).addClass("running");
+			// 
+			// var testflowel = $("div#" + testflow);
+			// testflowel.addClass("running");
+
+			// testflowel.find("div.testFlowResults").empty();
+			
+			// console.log("Adding running() for [" + testflow + "]"); console.log(testflowel);
+		}
+		
+		
+		
+	});
 	
 	var FedLab = Spine.Controller.sub({
 		entityloader: null,
 		events: {
-			"click input#verifynow": "verify"
+			"click input#verifynow": "verify",
+			"click input#runall": "runAllFlows",
+			"click input#configure": "verify",
 		},
 		init: function(args){
 			var c, newentity;
@@ -343,6 +428,8 @@
 			// console.log("Type and then type.modeltype");
 			// console.log(this.type);
 			// console.log(this.type.modelType);
+			
+			this.definitions = null;
 			
 			this.modelType = this.type.modelType; // was OAuthEntity
 			
@@ -374,13 +461,36 @@
 				// (or create a new one)
 				// this.modelType.first().edit();
 			}
+			
+			this.stateChange("modeEdit");
+			
+			this.resultcontroller = new ResultController({
+				el: $("div#results")
+			});
+			
 			// console.log("Got some entity:");
 			// console.log(this.modelType.first());
 			// console.log(this.modelType);
 
 
 		},
+		stateChange: function(newState) {
+			
+			var validClasses = ["modeEdit", "modeTest"];
+			console.log("State change to " + newState);
+			console.log($(this.el))	;
+			$.each(validClasses, this.proxy(function(i, tclass) {
+				console.log("Check " + tclass);
+				if (newState === tclass) {
+					$(this.el).addClass(tclass)
+				} else {
+					$(this.el).removeClass(tclass)					
+				}
+			}))
+
+		},
 		getDefinitions: function() {
+			var that = this;
 			var postdata = {
 				operation: "definitions",
 				metadata: this.editor.item.metadata //JSON.parse(JSON.stringify(this.editor.item)),
@@ -393,12 +503,23 @@
 				data: postdata,
 				success: function(response) {
 					console.log("API Response");
-					if (response) {	
+					if (response.status === "ok") {	
 						console.log(response);
 						$("div#results").empty();
-						$("div#results").append($("#testItem").tmpl(response));
-						$("div#results pre").text(response);
-					} 
+						
+						$.each(response.result, function(sid, item) {
+							item.sid = sid;
+							$("div#results").append($("#testFlow").tmpl(item));							
+						});
+						
+						console.log("Got definitions");
+						console.log(that.definitions);
+						
+						that.definitions = response.result;
+						// that.runAllFlows();
+						// $("div#results pre").text(response);
+					}
+
 				},
 				error: function(error) {
 					console.log("Error: " + error);
@@ -406,11 +527,67 @@
 				
 			});
 		},
+		runAllFlows: function() {
+			var that = this;
+			var key;
+			
+			for (sid in this.definitions) {
+				if (!this.definitions[sid].started) {
+					this.definitions[sid].started = true;
+					that.runTestFlow(sid, that.proxy(that.runAllFlows));
+					return;
+				}
+			}
+		},
+		runTestFlow: function(sid, callback) {
+			var that = this;
+
+			if (!this.definitions[sid]) throw {message: "Could not find flow"};
+			var testflow = this.definitions[sid].id;
+
+			console.log("runTestFlow()");
+			console.log(this.editor.item);
+			var postdata = {
+				operation: "runFlow",
+				flow: testflow,
+				metadata: this.editor.item.metadata, //JSON.parse(JSON.stringify(this.editor.item)),
+				type: "openidconnect"
+			};
+			console.log(postdata);
+			
+			that.resultcontroller.startFlow(testflow, sid);
+			
+			$.ajax({
+				url: "/api",
+				dataType: 'json',
+				cache: false,
+				type: "POST",
+				data: postdata,
+				success: function(response) {
+					console.log("API Response");
+					console.log(response.result);
+					if (response.status === "ok") {
+						that.resultcontroller.updateFlowResults(testflow, sid, response.result);
+						
+					}
+					callback();
+				},
+				error: function(error) {
+					console.log("Error");
+					callback();
+				}
+				
+			});
+		},
 		verify: function(e) {
 			var that = this;
 			
-			e.preventDefault();
-			e.stopPropagation();
+			if (e) {
+			
+				e.preventDefault();
+				e.stopPropagation();
+				
+			}
 			
 			console.log("Verify");
 			console.log(this.editor.item);
@@ -438,7 +615,11 @@
 							$("div#results pre").text(response.message);
 						} 
 					} else {
+						that.stateChange("modeTest");
 						that.getDefinitions();
+						
+						// that.runTestFlow("oic-code");
+
 					}
 				},
 				error: function(error) {
@@ -474,6 +655,9 @@
 				type: this.modelType,
 				item: entity
 			});
+			
+			this.verify();
+			
 		}
 
 	});
