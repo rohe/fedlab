@@ -337,7 +337,9 @@
 			"click input.testFlowSShow": "sshow",
 			"click input.testFlowSHide": "shide",
 			"click input.testFlowDCShow": "dcshow",
-			"click input.testFlowDCHide": "dchide"
+			"click input.testFlowDCHide": "dchide",
+			"click input.testFlowOthersShow": "othersshow",
+			"click input.testFlowOthersHide": "othershide"
 		},
 		init: function() {
 			
@@ -351,7 +353,18 @@
 		},
 		run: function(e) {
 			console.log("Run()");
+			var sid = this.getFlow(e).attr("id");
+			this.cleanup(sid);
+			this.trigger("run", sid);
 		},
+		othersshow: function(e) {
+			this.getFlow(e).removeClass("showOnly");	
+			$("div#results").removeClass("hideOthers");	
+		},
+		othershide: function(e) {
+			this.getFlow(e).addClass("showOnly");
+			$("div#results").addClass("hideOthers");	
+		},		
 		sshow: function(e) {
 			this.getFlow(e).addClass("successShow");
 		},
@@ -368,7 +381,29 @@
 		escapeHTML: function(str) {
 			return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 		},
-		
+		cleanup: function(sid) {
+			if (sid) {
+				$("div#" + sid).find("div.testFlowResults").empty();
+				$("div#" + sid).
+					removeClass("completed").
+					removeClass("success").
+					removeClass("fail").
+					removeClass("warning").
+					removeClass("info");
+				
+			} else {
+				$(this.el).find("div.testFlow").each(function(i, item) {
+					$(item).find("div.testFlowResults").empty();
+					$(item).
+						removeClass("completed").
+						removeClass("success").
+						removeClass("fail").
+						removeClass("warning").
+						removeClass("info");
+				});
+			}
+
+		},
 		updateFlowResults: function(testflow, sid, testresults) {
 			console.log("updateFlowResults()");
 			console.log(testresults);
@@ -467,6 +502,10 @@
 			this.resultcontroller = new ResultController({
 				el: $("div#results")
 			});
+			this.resultcontroller.bind("run", this.proxy(function(sid) {
+				console.log("Run test for " + sid);
+				this.runTestFlow(sid);
+			}));
 			
 			// console.log("Got some entity:");
 			// console.log(this.modelType.first());
@@ -527,17 +566,27 @@
 				
 			});
 		},
-		runAllFlows: function() {
+		cleanup: function() {
+			for (sid in this.definitions) {
+				this.definitions[sid].started = false;
+			}
+			this.resultcontroller.cleanup();
+		},
+		runAllFlowsRest: function() {
 			var that = this;
 			var key;
 			
 			for (sid in this.definitions) {
 				if (!this.definitions[sid].started) {
 					this.definitions[sid].started = true;
-					that.runTestFlow(sid, that.proxy(that.runAllFlows));
+					that.runTestFlow(sid, that.proxy(that.runAllFlowsRest));
 					return;
 				}
 			}
+		},
+		runAllFlows: function() {
+			this.cleanup();
+			this.runAllFlowsRest();
 		},
 		runTestFlow: function(sid, callback) {
 			var that = this;
@@ -570,11 +619,11 @@
 						that.resultcontroller.updateFlowResults(testflow, sid, response.result);
 						
 					}
-					callback();
+					if (typeof callback === 'function') callback();
 				},
 				error: function(error) {
 					console.log("Error");
-					callback();
+					if (typeof callback === 'function') callback();
 				}
 				
 			});

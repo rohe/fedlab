@@ -187,3 +187,14 @@ div.testFlow input.testFlowDCHide { display: none; }
 div.testFlow.debugShow input.testFlowDCShow { display: none; }
 div.testFlow.debugShow input.testFlowDCHide { display: inline; }
 
+/* Show and hide others. */
+div#results.hideOthers div.testFlow { display: none; }
+div#results.hideOthers div.testFlow.showOnly { display: block; }
+
+div.testFlow input.testFlowOthersShow { display: none; }
+div.testFlow input.testFlowOthersHide { display: inline; }
+div#results.hideOthers div.testFlow input.testFlowOthersShow { display: inline; }
+div#results.hideOthers div.testFlow input.testFlowOthersHide { display: none; }
+
+
+

@@ -53,9 +53,17 @@
 				<input type="submit" class="testFlowSHide" name="testFlowSHide" value="Hide succeeded" />
 				<input type="submit" class="testFlowDCShow" name="testFlowDCShow" value="Show debug" />
 				<input type="submit" class="testFlowDCHide" name="testFlowDCHide" value="Hide debug" />
+				<input type="submit" class="testFlowOthersShow" name="testFlowOthersShow" value="Show others" />
+				<input type="submit" class="testFlowOthersHide" name="testFlowOthersHide" value="Hide others" />
 			</div>
 		
-			<h3>${name}</h3>
+			<h3>
+				{{if $item.data.name}}
+					${name}
+				{{else}}
+					${id}
+				{{/if}}
+			</h3>
 			{{if $item.data.descr}}
 				<p>${descr}</p>
 			{{/if}}
@@ -71,8 +79,17 @@
 	<script type="text/x-jquery-tmpl" id="testItem">
 
 		<div class="test testItem ${statusClass}">
-			<h4>${name}</h4>
-			<p>${message}</p>
+			<h4>
+				{{if $item.data.name}}
+					${name}
+				{{else}}
+					${id}
+				{{/if}}
+			</h4>
+			{{if $item.data.message && $item.data.message !== "OK"}}
+				<p>${message}</p>
+			{{/if}}
+			
 		</div>
 
 	</script>
@@ -442,7 +459,7 @@
 	<div id="testcontrollerbar">
 		<p>Testing <b>Edmunds provider</b></p>
 		<input type="submit" name="configure" id="configure" value="« Revisit the configuration" />
-		<input type="submit" name="runall" id="runall" value="Re-run all the tests »" />
+		<input type="submit" name="runall" id="runall" value="Run all test flows »" />
 
 	</div>
 
