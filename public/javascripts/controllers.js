@@ -455,7 +455,7 @@
 		events: {
 			"click input#verifynow": "verify",
 			"click input#runall": "runAllFlows",
-			"click input#configure": "verify",
+			"click input#configure": "configure"
 		},
 		init: function(args){
 			var c, newentity;
@@ -570,7 +570,7 @@
 			for (sid in this.definitions) {
 				this.definitions[sid].started = false;
 			}
-			this.resultcontroller.cleanup();
+
 		},
 		runAllFlowsRest: function() {
 			var that = this;
@@ -583,9 +583,22 @@
 					return;
 				}
 			}
+			
+			// Completed with running all flows.
+			this.controllerbarEnable(true);
+		},
+		controllerbarEnable: function(enable) {
+			if (enable) {
+				console.log("Enaling controller");
+				$(this.el).find("div#testcontrollerbar").find("input").removeAttr('disabled');				
+			} else {
+				console.log("Disabling controller");
+				$(this.el).find("div#testcontrollerbar").find("input").attr('disabled', true);
+			}
 		},
 		runAllFlows: function() {
 			this.cleanup();
+			this.controllerbarEnable(false);
 			this.runAllFlowsRest();
 		},
 		runTestFlow: function(sid, callback) {
@@ -627,6 +640,15 @@
 				}
 				
 			});
+		},
+		configure: function(e) {
+			var that = this;
+			if (e) {
+				e.preventDefault();
+				e.stopPropagation();	
+			}
+			$(this.el).find("div#results").empty();
+			that.stateChange("modeEdit");
 		},
 		verify: function(e) {
 			var that = this;
