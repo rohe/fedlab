@@ -19,6 +19,15 @@ div#testcontrollerbar {
 }
 div#testcontrollerbar p { margin: 0px; padding: 0px; }
 
+div#testcontrollerbar div#resultcounter {
+	margin: 5px 0px;
+}
+div#testcontrollerbar div#resultcounter span.resultcountitem {
+	margin: 4px 20px 3px 0px;
+}
+div#testcontrollerbar div#resultcounter span.resultcountitem img {
+	margin-bottom: -1px;
+}
 
 div.testFlow.completed div.testFlowControllerBar {
 	display: block;
@@ -27,6 +36,7 @@ div.testFlowControllerBar {
 	display: none;
 	
 	float: right;
+	text-align: right;
 	
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -105,6 +115,20 @@ div.testFlow > div.testItem {
 /*	display: none;*/
 }
 
+div.testFlow div.dependencies {
+	color: #222;
+	/*font-size: 90%;*/
+	margin: 6px 0px;
+	padding: 0px;
+}
+div.testFlow div.dependencies ul li {
+	font-family: "Monaco", monospace;
+}
+div.testFlow div.dependencies ul {
+	padding: 0px 0px 0px 20px;
+	margin: 0px;
+	/*margin: 0px; padding: 0px;*/
+}
 
 
 /*
@@ -121,6 +145,62 @@ div.testFlow.fail {
 }*/
 
 
+div.test.shaddow {
+	background: #ccc;
+	color: #999;
+}
+
+div.test.testFlow.critical {
+background: url("/images/exclamation.png") top left no-repeat, 
+	-moz-linear-gradient(left,  rgba(255,225,225,1) 0%, rgba(255,233,233,0) 28%, rgba(255,255,255,0) 100%);
+background: url("/images/exclamation.png") top left no-repeat, 
+	-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,225,225,1)), color-stop(28%,rgba(255,233,233,0)), color-stop(100%,rgba(255,255,255,0)));
+background: url("/images/exclamation.png") top left no-repeat, 
+	-webkit-linear-gradient(left,  rgba(255,225,225,1) 0%,rgba(255,233,233,0) 28%,rgba(255,255,255,0) 100%);
+background: url("/images/exclamation.png") top left no-repeat, 
+	-o-linear-gradient(left,  rgba(255,225,225,1) 0%,rgba(255,233,233,0) 28%,rgba(255,255,255,0) 100%);
+background: url("/images/exclamation.png") top left no-repeat,
+	-ms-linear-gradient(left,  rgba(255,225,225,1) 0%,rgba(255,233,233,0) 28%,rgba(255,255,255,0) 100%);
+background: url("/images/exclamation.png") top left no-repeat,
+	linear-gradient(left,  rgba(255,225,225,1) 0%,rgba(255,233,233,0) 28%,rgba(255,255,255,0) 100%), url("/images/error.png") top left no-repeat;
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffe1e1', endColorstr='#00ffffff',GradientType=1 );
+
+
+}
+
+div.test.testFlow.warning {
+	background: ("/images/error.png") top left no-repeat,
+		-moz-linear-gradient(left,  rgba(242,255,0,0.17) 0%, rgba(246,255,71,0) 28%, rgba(255,255,255,0) 100%);
+	background: ("/images/error.png") top left no-repeat,
+		-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(242,255,0,0.17)), color-stop(28%,rgba(246,255,71,0)), color-stop(100%,rgba(255,255,255,0)));
+	background: ("/images/error.png") top left no-repeat,
+		-webkit-linear-gradient(left,  rgba(242,255,0,0.17) 0%,rgba(246,255,71,0) 28%,rgba(255,255,255,0) 100%);
+	background: ("/images/error.png") top left no-repeat,
+		-o-linear-gradient(left,  rgba(242,255,0,0.17) 0%,rgba(246,255,71,0) 28%,rgba(255,255,255,0) 100%);
+	background: ("/images/error.png") top left no-repeat,
+		-ms-linear-gradient(left,  rgba(242,255,0,0.17) 0%,rgba(246,255,71,0) 28%,rgba(255,255,255,0) 100%);
+	background: ("/images/error.png") top left no-repeat,
+		linear-gradient(left,  rgba(242,255,0,0.17) 0%,rgba(246,255,71,0) 28%,rgba(255,255,255,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2bf2ff00', endColorstr='#00ffffff',GradientType=1 );
+
+}
+div.test.testFlow.success {
+	background: url("/images/accept.png") top left no-repeat,
+		-moz-linear-gradient(left,  rgba(0,178,0,0.17) 0%, rgba(71,200,71,0) 28%, rgba(255,255,255,0) 100%);
+	background: url("/images/accept.png") top left no-repeat,
+		-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,178,0,0.17)), color-stop(28%,rgba(71,200,71,0)), color-stop(100%,rgba(255,255,255,0)));
+	background: url("/images/accept.png") top left no-repeat,
+		-webkit-linear-gradient(left,  rgba(0,178,0,0.17) 0%,rgba(71,200,71,0) 28%,rgba(255,255,255,0) 100%);
+	background: url("/images/accept.png") top left no-repeat,
+		-o-linear-gradient(left,  rgba(0,178,0,0.17) 0%,rgba(71,200,71,0) 28%,rgba(255,255,255,0) 100%);
+	background: url("/images/accept.png") top left no-repeat,
+		-ms-linear-gradient(left,  rgba(0,178,0,0.17) 0%,rgba(71,200,71,0) 28%,rgba(255,255,255,0) 100%);
+	background: url("/images/accept.png") top left no-repeat,
+		linear-gradient(left,  rgba(0,178,0,0.17) 0%,rgba(71,200,71,0) 28%,rgba(255,255,255,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b00b200', endColorstr='#00ffffff',GradientType=1 );
+
+}
+
 div.test.running {
 	background:url("/images/spinning.gif") top left no-repeat;
 }
@@ -132,7 +212,11 @@ div.test.warning {
 	background:url("/images/error.png") top left no-repeat;
 	background-color: #fff;
 }
-div.test.fail {
+div.test.error {
+	background:url("/images/exclamation.png") top left no-repeat;
+	background-color: #eedddd;
+}
+div.test.critical {
 	background:url("/images/exclamation.png") top left no-repeat;
 	background-color: #eedddd;
 }
@@ -165,12 +249,48 @@ div.test pre.debugConsole {
 	max-height: 760px;
 
 }
+div.testItem.hasMessage {
+	cursor: pointer;
+	cursor: hand;
+}
+div.testItem.showDebugMessage pre.debugMessage {
+	display: block;
+}
+div.testItem pre.debugMessage {
+	display: none;
 
+	margin: 2px 4px;
+	padding: 3px 1em 3px 3px;
 
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
 
-/* Show and hide succeeded tests */
+	border: 1px solid #aaa;
+
+	background-color: #eee;
+	color: #333;
+	
+	font-size: 105%;
+	font-family: Monaco, monospace;
+
+	overflow: scroll;
+	font-family: monospace;
+	white-space: pre;
+	
+	max-height: 760px;
+}
+div.testItem pre.debugMessage span.key { color: #600;}
+div.testItem pre.debugMessage span.string { color: #060;}
+div.testItem pre.debugMessage span.boolean { color: #222;}
+div.testItem pre.debugMessage span.null { color: #999;}
+
+/* Show and hide succeeded/info tests */
 div.testFlow div.testItem.success { display: none; }
+div.testFlow div.testItem.info { display: none; }
 div.testFlow.successShow div.testItem.success { display: block; }
+div.testFlow.successShow div.testItem.info { display: block; }
+
 
 div.testFlow input.testFlowSShow { display: inline; }
 div.testFlow input.testFlowSHide { display: none; }

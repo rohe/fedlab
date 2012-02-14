@@ -4,11 +4,10 @@
 	<title><%= title %></title>
 	<meta charset="utf-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	
 	<link rel="stylesheet" href="/stylesheets/style.css" />
 	<link rel="stylesheet" href="/stylesheets/testresults.css" />
 	
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 
 
 	<!-- JQuery hosted by google -->
@@ -23,31 +22,32 @@
 	<!-- spine.js -->
 	<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
 	<script type="text/javascript" src="/javascripts/spine/local.js"></script>
+	<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
+
+	<!-- PrettyDate, John Resigs library with a twist. -->
+	<script type="text/javascript" src="/javascripts/prettydate/pretty.js"></script>
 
 	<!-- jquery tmpl() -->
 	<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
 	
+	<!-- Syntax highlighting of JSON -->
+	<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
+
 	<!-- Federation Lab -->
 	<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
 	<script type="text/javascript" src="/javascripts/models.js"></script>
 	<script type="text/javascript" src="/javascripts/controllers.js"></script>
 	
-	<script type="text/javascript" src="/javascripts/test.js"></script>
 	
-	<!-- 
-		<script type="text/javascript" src="/javascripts/connect-ui.js"></script>
-		<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script> 
-	-->
 
-	
-	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
-	
+	<!-- JQuery templates -->
 	
 	<script type="text/x-jquery-tmpl" id="testFlow">
 	
 		<div class="test testFlow" id="${sid}">
 		
 			<div class="testFlowControllerBar">
+				<div class="lastRunInfo"></div>
 				<input type="submit" class="testFlowRun" name="testFlowRun" value="Run" />
 				<input type="submit" class="testFlowSShow" name="testFlowSShow" value="Show succeeded" />
 				<input type="submit" class="testFlowSHide" name="testFlowSHide" value="Hide succeeded" />
@@ -67,10 +67,19 @@
 			{{if $item.data.descr}}
 				<p>${descr}</p>
 			{{/if}}
+
+			{{if $item.data.depends}}
+				<div class="dependencies">Dependencies to other test flows:
+				<ul>
+				{{each $item.data.depends}}
+					<li>${$value}</li>
+				{{/each}}
+				</ul>
+
+				</div>
+			{{/if}}
 			
 			<div class="testFlowResults"></div>
-			
-
 			
 		</div>
 		
@@ -78,7 +87,8 @@
 
 	<script type="text/x-jquery-tmpl" id="testItem">
 
-		<div class="test testItem ${statusClass}">
+		<div class="test testItem {{= $item.data.hasMessageClass()}} {{= $item.data.getStatusTag() }}">
+
 			<h4>
 				{{if $item.data.name}}
 					${name}
@@ -86,8 +96,8 @@
 					${id}
 				{{/if}}
 			</h4>
-			{{if $item.data.message && $item.data.message !== "OK"}}
-				<p>${message}</p>
+			{{if $item.data.message}}
+				<pre style="clear: both" class="testItemMessage debugMessage">{{html syntaxHighlight($item.data.getMessage())  }}</pre>
 			{{/if}}
 			
 		</div>
@@ -104,7 +114,6 @@
 	<script type="text/x-jquery-tmpl" id="oauthprovider">
 		
 	<div class="oauthprovider">
-		
 		
 		<fieldset><legend>Description</legend>
 		
@@ -194,12 +203,8 @@
 			</div>
 
 		</fieldset>
-
-
-
 	</div>
-		
-		
+			
 	</script>
 	
 	
@@ -389,19 +394,14 @@
 			</div>
 
 		</fieldset>
-
-
 	</div>
-	
 	
 	<fieldset class="readyverify"><legend>Verify Connectivity</legend>
 	
 		<p>When you're done configuring your OpenID Connect Provider above, you may click the button below to perform a simple test, verifying that your most basic features are working. When this test is ran successfully, you'll be able to proceed to the rest of the test cases.</p>
 		
-		<p style="text-align: center"><input  type="submit" id="verifynow" value="Verify Connectivity" /></p>
-		
+		<p style="text-align: center"><input  type="submit" id="verifynow" value="Verify Connectivity" /></p>		
 	</fieldset>
-		
 		
 	</script>
 
@@ -420,6 +420,11 @@
 					modelType: OICProvider
 				//type: OAuthEditor
 			});
+		});
+		$(document).ready(function() {
+			setInterval(function() {
+				$("span.lastRunDate").prettyDate();
+			}, 30000);		
 		});
 	</script>
 	
@@ -458,6 +463,9 @@
 
 	<div id="testcontrollerbar">
 		<p>Testing <b>some unnamed provider</b></p>
+
+		<div id="resultcounter"></div>
+
 		<input type="submit" name="configure" id="configure" value="« Revisit the configuration" />
 		<input type="submit" name="runall" id="runall" value="Run all test flows »" />
 

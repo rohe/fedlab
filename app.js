@@ -51,6 +51,7 @@ app.get('/', function(req, res){
 	});
 });
 
+
 app.get('/saml-sp', function(req, res){
 	res.render('saml-sp', {
 		title: 'SAML 2.0 Service Provider Testing'
@@ -69,6 +70,11 @@ app.get('/connect-provider2', function(req, res){
 	});
 });
 
+app.get('/test', function(req, res){
+	res.render('test', {
+		title: 'Test'
+	});
+});
 
 var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php"});
 

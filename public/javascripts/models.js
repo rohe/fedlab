@@ -1,13 +1,214 @@
 (function (exports) {
 	
+	var TestItemResult = Spine.Model.sub({
+		init: function() {
+			// console.log("initing item"); //console.log(this);
+		},
+		getStatusTag: function() {
+
+			// console.log("get statustag on [TestItem] " + this.status);
+			// console.log(this);
+
+			// return "STATUS:" + this.status;
+
+			if (typeof this.status === undefined || this.status === null) return "info";
+			switch(this.status) {
+				case 0: return "info";
+				case 1: return "success";
+				case 2: return "warning";
+				case 3: return "error";
+				case 4: return "critical";
+				default: return "info";
+			}
+		},
+		getMessage: function() {
+			if (!this.message) return '';
+
+			return this.message;
+
+			// try {
+			// 	return JSON.parse(this.message);
+			// } catch(e) {
+			// 	return this.message;
+			// }
+			// return '';
+		},
+		hasMessage: function() {
+			return !!(this.message);
+		},
+		hasMessageClass: function() {
+			return this.hasMessage() ? 'hasMessage' : '';
+		}
+	});
+	TestItemResult.configure("TestItemResult", "tid", "name", "status", "message", "debug");
+	// TestItemResult.belongsTo('testflow', TestFlowResult);
+	
+	var TestFlowResult = Spine.Model.sub({
+		init: function(args) {
+			// console.log("initing flow"); console.log(args);
+		},
+		getSimpleResultObj: function() {
+			var res = {}, i;
+			res.lastRun = Math.round(new Date().getTime());
+			res.results = [];
+			for (i = 0; i < this.tests.length; i++) {
+				// console.log("Adding a new result item: ")
+				// console.log(this.tests[i]);
+				res.results.push(this.tests[i].status);
+			} 
+			res.status = this.status;
+			return res;
+		},
+		getRunInfo: function() {
+			
+			var t;
+
+			t = '<p>Last run <span class="lastRunDate" title="' + this.changes.thisRun + '">' + prettyDate(this.changes.thisRun) + '</span>';
+
+			if (this.changes.lastRun) {
+				t += ', and the previous one ran ' + prettyInterval(this.changes.thisRun - this.changes.lastRun) + ' that';
+			}
+			t += '.</p>';
+
+			if (this.changes.changed) {
+				t += '<p><img src="/images/bell.png" /> The results differ!</p>';
+			} else {
+				// t += '<p>The result was not changed.</p>';
+			}
+
+			return t;
+		},
+		getStatusTag: function() {
+			// console.log("get statustag on [TestFlow] " + this.status);			
+			switch(this.status) {
+				case 0: return "info";
+				case 1: return "success";
+				case 2: return "warning";
+				case 3: return "error";
+				case 4: return "critical";
+				default: return "info";
+			}
+		}
+	});
+	TestFlowResult.extend({
+		// Compares two result arrays
+		compare: function(r1, r2) {
+			var i,
+				a1 = r1.results,
+				a2 = r2.results;
+			
+			if (r1.status !== r2.status) return false;
+			if (a1.length !== a2.length) return false;
+			for(i = 0; i < a1.length; a1++) {
+				if (a1[i] !== a2[i]) return false;
+			}
+			return true;
+		}
+	});
+	TestFlowResult.extend({
+		
+		// Takes an testflow result object and transforms to a model.
+		build: function(obj) {
+			var id, tests;
+			
+			id = obj.id; delete obj.id;
+			tests = obj.tests; delete obj.tests;
+			
+			obj.fid = id;
+			
+			var result = this.create(obj);
+			var testresults = [];
+			
+			if (tests) {
+				for(var i = 0; i < tests.length; i++) {
+					testresults.push(new TestItemResult(tests[i]));
+				}
+				result.tests = testresults;
+			}
+			result.save();
+			return result;			
+		}
+	})
+	TestFlowResult.configure("TestFlowResult", "fid", "status", "tests", "debug", "changes");
+	// TestFlowResult.hasMany('_hasManyTests', TestItemResult);
+	
+	
+	
 	var TestEntity = Spine.Model.sub({
 		init: function() {
 			// this.constructor.__super__.init.apply(this, arguments);
 			if (typeof this.metadata !== 'object') {
 				this.metadata = {};
 			};
-
+			if (typeof this.results !== 'object') {
+				this.results = {};
+			};
 		}, 
+		
+		/*
+		 	Example of this.results
+		
+			{
+				"testflowid": {
+					"lastRun": 982347923,
+					"result": [0, 2, 3, 2, 1, 0]
+				},
+				"testflowid2": {
+					"lastRun": 
+				}
+			}
+		 */
+		updateResults: function(testflow, testresult) {
+			var oldresult, newresult, changes;
+			if (!this.results) this.results = {};
+			oldresult = this.results[testflow];
+			
+			newresult = testresult.getSimpleResultObj();
+			this.results[testflow] = newresult;
+			
+			if (typeof oldresult === "undefined") {
+				changes = {
+					"runBefore": false
+				};
+			} else {
+				// console.log("Run before run now")
+				// console.log(testresult)
+				// console.log(oldresult.results);
+				// console.log(newresult.results);
+				changes = {
+					"runBefore": true,
+					"lastRun": oldresult.lastRun,
+					"changed": !TestFlowResult.compare(oldresult, newresult)
+				}
+				// changes.changed = !!(Math.random() > 0.7);
+			}
+			changes.thisRun = newresult.lastRun;
+			// console.log("Updating results");
+			// console.log(JSON.parse(JSON.stringify(this)));
+			return changes;
+		},
+
+		countResults: function() {
+			var key, i,
+				aggr = [0,0,0,0,0];
+
+			for(key in this.results) {
+				for (i = 0; i < this.results[key].results.length; i++) {
+					aggr[this.results[key].results[i]]++;
+				}
+			}
+			return aggr;
+		},
+
+		dependenciesMet: function(depends) {
+			var i;
+			for(i = 0; i < depends.length; i++) {
+				if (!this.results[depends[i]]) return false;
+				if (this.results[depends[i]].status !== 4) return false;
+			}
+			return true;
+		},
+		
 		getTitle: function() {
 			if (this.title) return this.title;
 			return "Unnamed";
@@ -15,11 +216,11 @@
 		edit: function() {
 			// console.log("Entity selected for editing...")
 			// console.log(this);
-			console.trace()
+			// console.trace()
 			this.trigger("edit");
 		}
 	});
-	TestEntity.configure("TestEntity", "title", "metadata");
+	TestEntity.configure("TestEntity", "title", "metadata", "results");
 	
 	var OAuthEntity = TestEntity.sub({
 		init: function() {
@@ -305,6 +506,9 @@
 	exports.OICProvider = OICProvider;
 	exports.SAMLSPEntity = SAMLSPEntity;
 	exports.OAuthEntity = OAuthEntity;
+	
+	exports.TestItemResult = TestItemResult;
+	exports.TestFlowResult = TestFlowResult;
 	
 	
 })(window);
