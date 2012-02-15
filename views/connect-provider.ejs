@@ -65,7 +65,7 @@
 				{{/if}}
 			</h3>
 			{{if $item.data.descr}}
-				<p>${descr}</p>
+				<p>{{html $item.data.descr.replace(/\n/g, "<br />") }}</p>
 			{{/if}}
 
 			{{if $item.data.depends}}
@@ -424,7 +424,9 @@
 		$(document).ready(function() {
 			setInterval(function() {
 				$("span.lastRunDate").prettyDate();
-			}, 30000);		
+			}, 30000);
+
+
 		});
 	</script>
 	
@@ -432,6 +434,8 @@
 
 <body>
 	
+	<iframe class="userinteraction" sandbox width="500px" height="500px"></iframe>
+
 
 	<p><a href="/">« Back to frontpage</a></p>
 

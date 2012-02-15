@@ -440,10 +440,13 @@
 			testflowel.removeClass("running");
 			testflowel.addClass("completed");
 			testflowel.addClass(testresults.getStatusTag());
-			if (testresults.changes.changed) {
-				testflowel.addClass("changed");
-			} else {
-				testflowel.removeClass("changed");
+
+			if (testresults.changes) {
+				if (testresults.changes.changed) {
+					testflowel.addClass("changed");
+				} else {
+					testflowel.removeClass("changed");
+				}
 			}
 
 
@@ -737,7 +740,10 @@
 			that.stateChange("modeEdit");
 		},
 		verify: function(e) {
-			var that = this;
+			var that = this,
+				testflow = "verify",
+				sid = "openidconnectverifytestflow";
+
 			
 			if (e) {
 			
@@ -754,6 +760,7 @@
 				type: "openidconnect"
 			};
 			// console.log(postdata);
+			that.resultcontroller.startFlow(testflow, sid);
 			
 			$.ajax({
 				url: "/api",
@@ -762,8 +769,8 @@
 				type: "POST",
 				data: postdata,
 				success: function(response) {
-					// console.log("API Response");
-					// 					console.log(response);
+					console.log("API Response /Verify");
+					console.log(response);
 					if (response.status === "ok") {
 						// if (response.message) {	
 						// 	$("div#results").empty();
@@ -777,8 +784,16 @@
 						// that.editor.item.save();
 						that.resultcontroller.updateFlowResults(testflow, sid, testflowresult);
 
-						// that.stateChange("modeTest");
-						// that.getDefinitions();
+						if (testflowresult.status < 4) {
+							that.stateChange("modeTest");
+							that.getDefinitions();
+							return;
+						}
+						var htmlbody = testflowresult.tests[7].message;
+						console.log("HTML: " + htmlbody);
+						console.log(testflowresult.tests);
+						$("iframe").attr('src', "data:text/html," + encodeURI(htmlbody));
+
 
 					} else {
 
@@ -820,6 +835,14 @@
 				type: this.modelType,
 				item: entity
 			});
+
+			var verifydef = {
+				id: "verify",
+				sid: "openidconnectverifytestflow",
+				name: "Basic Connectivity Verification",
+				descr: "Before we continue to the real test cases, we will run a basic conncetivity test given your current metadata entry. If this fails, you will be able to revisit your metadata configuration, or even fix some problems with your Provider, and then run the verification again."
+			};
+			$("div#results").append($("#testFlow").tmpl(verifydef));
 			
 			// this.verify();
 			

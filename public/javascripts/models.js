@@ -63,6 +63,8 @@
 			
 			var t;
 
+			if (!this.changes) return '';
+
 			t = '<p>Last run <span class="lastRunDate" title="' + this.changes.thisRun + '">' + prettyDate(this.changes.thisRun) + '</span>';
 
 			if (this.changes.lastRun) {

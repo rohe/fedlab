@@ -29,6 +29,11 @@ div#testcontrollerbar div#resultcounter span.resultcountitem img {
 	margin-bottom: -1px;
 }
 
+
+div#openidconnectverifytestflow div.testFlowControllerBar {
+	display: none;
+}
+
 div.testFlow.completed div.testFlowControllerBar {
 	display: block;
 }
@@ -291,6 +296,10 @@ div.testFlow div.testItem.info { display: none; }
 div.testFlow.successShow div.testItem.success { display: block; }
 div.testFlow.successShow div.testItem.info { display: block; }
 
+/* Always show for verify */
+div#openidconnectverifytestflow div.testItem.success { display: block; }
+div#openidconnectverifytestflow div.testItem.info { display: block; }
+div#openidconnectverifytestflow pre.debugConsole { display: block; }
 
 div.testFlow input.testFlowSShow { display: inline; }
 div.testFlow input.testFlowSHide { display: none; }
@@ -315,6 +324,17 @@ div.testFlow input.testFlowOthersShow { display: none; }
 div.testFlow input.testFlowOthersHide { display: inline; }
 div#results.hideOthers div.testFlow input.testFlowOthersShow { display: inline; }
 div#results.hideOthers div.testFlow input.testFlowOthersHide { display: none; }
+
+
+
+
+iframe.userinteraction {
+	border: 1px solid #aaa;
+	border-radius: 5px;
+-webkit-box-shadow: 3px 3px 3px 3px rgba(200, 200, 200, 0.5);
+-moz-box-shadow: 3px 3px 3px 3px rgba(200, 200, 200, 0.5);
+box-shadow: 3px 3px 3px 3px rgba(200, 200, 200, 0.5);
+}
 
 
 
