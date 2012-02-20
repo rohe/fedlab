@@ -146,6 +146,14 @@
 				this.results = {};
 			};
 		}, 
+		addUserinteraction: function(msg) {
+			if (!this.metadata.userinteraction) {
+				this.metadata.userinteraction = [];
+			}
+			this.metadata.userinteraction.push(msg);
+			console.log("addUserinteraction() Metadata:");
+			console.log(this.metadata);
+		},
 		
 		/*
 		 	Example of this.results

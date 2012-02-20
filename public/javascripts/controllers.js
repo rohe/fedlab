@@ -449,13 +449,9 @@
 				}
 			}
 
-
 			testflowel.find("div.lastRunInfo").html(testresults.getRunInfo());
 
 			var testflowresel = testflowel.find("div.testFlowResults");
-			
-			
-
 			
 			$.each(testresults.tests, function(i, test) {
 				// var status = Math.floor(test.status / 100);
@@ -549,12 +545,21 @@
 				// console.log("Run test for " + sid);
 				this.runTestFlow(sid);
 			}));
+
+
+			// AUTOMATICALLY START VERIFY? For quicker development.
+			this.verify();
 			
 			// console.log("Got some entity:");
 			// console.log(this.modelType.first());
 			// console.log(this.modelType);
 
 
+		},
+		userinteraction: function(msg) {
+			console.log("User interaction. Current editor item:");
+			console.log(this.editor.item);
+			this.editor.item.addUserinteraction(msg);
 		},
 		updateCounter: function() {
 			var res = this.editor.item.countResults();
@@ -788,11 +793,19 @@
 							that.stateChange("modeTest");
 							that.getDefinitions();
 							return;
+						} else if (testflowresult.status == 5) {
+							
+							var htmlurl = testflowresult.tests[7].url;
+							var htmlbody = testflowresult.tests[7].message;
+							console.log("HTML: " + htmlbody);
+							console.log(testflowresult.tests);
+							// $("iframe").attr('src', "data:text/html," + encodeURI(htmlbody));
+
+							var ia = new UserInteraction(htmlurl, htmlbody);
+							ia.bind("userinteraction", that.proxy(that.userinteraction));
+							$("body").append(ia.el);
 						}
-						var htmlbody = testflowresult.tests[7].message;
-						console.log("HTML: " + htmlbody);
-						console.log(testflowresult.tests);
-						$("iframe").attr('src', "data:text/html," + encodeURI(htmlbody));
+
 
 
 					} else {
@@ -844,7 +857,7 @@
 			};
 			$("div#results").append($("#testFlow").tmpl(verifydef));
 			
-			// this.verify();
+			
 			
 		}
 
