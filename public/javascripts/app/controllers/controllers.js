@@ -15,7 +15,8 @@
 			this.render();
 		},
 		render: function() {
-			// console.log("Render() with template ID " + this.templateID);
+			console.log("Render() with template ID " + this.templateID);
+			console.log(this.item);
 			var template = $("#" + this.templateID).tmpl( this.item );
 			$(this.el).html( template );
 		},
@@ -54,7 +55,7 @@
 			if (!this.item.metadata) this.item.metadata = {};
 			if (!this.item.metadata.client) this.item.metadata.client = {};
 			if (!this.item.metadata.provider) this.item.metadata.provider = {};
-			if (!this.item.metadata.provider.endpoints) this.item.metadata.provider.endpoints = {};
+			// if (!this.item.metadata.provider.endpoints) this.item.metadata.provider.endpoints = {};
 
 
 			
@@ -64,9 +65,9 @@
 			$.each(this.item._endpoints, function(key, ep) {
 				var found  = $(cur.el).find("input#" + key + "_endpoint").val();
 				if (found !== '') {
-					cur.item.metadata.provider.endpoints[key] = found;
+					cur.item.metadata.provider[key] = found;
 				} else {
-					delete cur.item.metadata.provider.endpoints[key];
+					delete cur.item.metadata.provider[key];
 				}
 			});
 
@@ -148,7 +149,7 @@
 			if (!this.item.metadata) this.item.metadata = {};
 			if (!this.item.metadata.client) this.item.metadata.client = {};
 			if (!this.item.metadata.provider) this.item.metadata.provider = {};
-			if (!this.item.metadata.provider.endpoints) this.item.metadata.provider.endpoints = {};
+			// if (!this.item.metadata.provider.endpoints) this.item.metadata.provider.endpoints = {};
 			if (!this.item.metadata.provider.features) this.item.metadata.provider.features = {};
 
 			this.item.title = title;
@@ -157,9 +158,9 @@
 			$.each(this.item._endpoints, function(key, ep) {
 				var found  = $(cur.el).find("input#" + key + "_endpoint").val();
 				if (found !== '') {
-					cur.item.metadata.provider.endpoints[key] = found;
+					cur.item.metadata.provider[key] = found;
 				} else {
-					delete cur.item.metadata.provider.endpoints[key];
+					delete cur.item.metadata.provider[key];
 				}
 			});
 			
@@ -547,8 +548,7 @@
 			}));
 
 
-			// AUTOMATICALLY START VERIFY? For quicker development.
-			this.verify();
+
 			
 			// console.log("Got some entity:");
 			// console.log(this.modelType.first());
@@ -750,6 +750,9 @@
 				sid = "openidconnectverifytestflow";
 
 			
+			console.log("About to do verify() - here is the metadata");
+			console.log(JSON.stringify(this.editor.item.metadata));
+
 			if (e) {
 			
 				e.preventDefault();
@@ -857,7 +860,8 @@
 			};
 			$("div#results").append($("#testFlow").tmpl(verifydef));
 			
-			
+			// AUTOMATICALLY START VERIFY? For quicker development.
+			// this.verify();
 			
 		}
 

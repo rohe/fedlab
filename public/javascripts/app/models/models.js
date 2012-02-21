@@ -245,9 +245,9 @@
 			if (!this.metadata.provider) {
 				this.metadata.provider = {};
 			}
-			if (!this.metadata.provider.endpoints) {
-				this.metadata.provider.endpoints = {};
-			}
+			// if (!this.metadata.provider.endpoints) {
+			// 	this.metadata.provider.endpoints = {};
+			// }
 			if (!this.metadata.client) {
 				this.metadata.client = {
 					"auth_type": "client_secret_basic",
@@ -262,12 +262,12 @@
 	
 	OAuthEntity.include({
 		"_endpoints": {
-			"authorization": {
+			"authorization_endpoint": {
 				"title": "OAuth Authorization endpoint",
 				"descr": "OAuth Provider Authorization endpoint is REQUIRED. Described in " + 
 					"<a href=\"http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-3\">OAuth 2.0 section 3</a>"
 			},
-			"token": {
+			"token_endpoint": {
 				"title": "OAuth Token endpoint",
 				"descr": "OAuth Provider Token endpoint is REQUIRED. Described in " + 
 					"<a href=\"http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-3\">OAuth 2.0 section 3</a>"
@@ -302,9 +302,9 @@
 			this.metadata.provider.supported_scopes = ["openid"];
 			this.metadata.provider.algoritms = ["HS256"];
 			
-			if (!this.metadata.provider.endpoints) {
-				this.metadata.provider.endpoints = {};
-			}
+			// if (!this.metadata.provider.endpoints) {
+			// 	this.metadata.provider.endpoints = {};
+			// }
 			if (!this.metadata.client) {
 				this.metadata.client = {
 					"auth_type": "client_secret_basic",
@@ -344,37 +344,37 @@
 				"descr": "An e-mail address or a URL endpoint for the purpose of OpenID Connect Discovery. See " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-discovery-1_0.html\">OpenID Connect Discovery</a> for more details."
 			},
-			"authorization": {
+			"authorization_endpoint": {
 				"title": "OAuth Authorization endpoint",
 				"descr": "OAuth Provider Authorization endpoint is REQUIRED. Described in " + 
 					"<a target=\"_blank\" href=\"http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-3\">OAuth 2.0 section 3</a>"
 			},
-			"token": {
+			"token_endpoint": {
 				"title": "OAuth Token endpoint",
 				"descr": "OAuth Provider Token endpoint is REQUIRED. Described in " + 
 					"<a target=\"_blank\" href=\"http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-3\">OAuth 2.0 section 3</a>"
 			},
-			"registration": {
+			"registration_endpoint": {
 				"title": "Registration Endpoint",
 				"descr": "The OpenID Connect UserInfo Endpoint is described in " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-registration-1_0.html\">OpenID Connect Dynamic Client Registration</a>"
 			},
-			"userinfo": {
+			"userinfo_endpoint": {
 				"title": "UserInfo Endpoint",
 				"descr": "The OpenID Connect UserInfo Endpoint is described in " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-standard-1_0.html#userinfo_ep\">OpenID Connect Standard - Section 5</a>"
 			},
-			"check_id": {
+			"check_id_endpoint": {
 				"title": "CheckID Endpoint",
 				"descr": "The OpenID Connect CheckID Endpoint is described in " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-standard-1_0.html#check_id_ep\">OpenID Connect Standard - Section 4</a>"
 			},
-			"refresh_session": {
+			"refresh_session_endpoint": {
 				"title": "Refresh Session endpoint",
 				"descr": "The OpenID Connect Refresh Session Endpoint is described in " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-session-1_0.html\">OpenID Connect Session Management</a>"
 			},
-			"end_session": {
+			"end_session_endpoint": {
 				"title": "End Session endpoint",
 				"descr": "The OpenID Connect End Session Endpoint is described in " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-session-1_0.html\">OpenID Connect Session Management</a>"

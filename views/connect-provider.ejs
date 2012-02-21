@@ -30,7 +30,7 @@
 	<!-- jquery tmpl() -->
 	<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
 
-	<script type="text/javascript" src="/javascripts/jquery-postmessage/postmessage.js"></script>
+	<!-- <script type="text/javascript" src="/javascripts/jquery-postmessage/postmessage.js"></script> -->
 	
 	<!-- Syntax highlighting of JSON -->
 	<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
@@ -145,7 +145,7 @@
 				{{each(key, endpoint) _endpoints }}
 					<p>
 						<label for="${key}_endpoint">${endpoint.title}</label>
-						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider.endpoints[key]}" class="endpoint" />
+						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider[key]}" class="endpoint" />
 						<span class="item-description">{{html endpoint.descr}}</span>
 					</p>
 				{{/each}}
@@ -329,7 +329,7 @@
 				{{each(key, endpoint) _endpoints }}
 					<p class="p_endpoint" id="p_${key}_endpoint">
 						<label for="${key}_endpoint">${endpoint.title}</label>
-						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider.endpoints[key]}" class="endpoint" />
+						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider[key]}" class="endpoint" />
 						<span class="item-description">{{html endpoint.descr}}</span>
 					</p>
 				{{/each}}
