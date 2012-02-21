@@ -492,11 +492,20 @@
 			"code": {
 				"title": "code"
 			},
+			"token": {
+				"title": "token"
+			},
+			"code__token": {
+				"title": "code token"
+			},
 			"code__id_token": {
 				"title": "code id_token"
 			},
-			"token__id_token": {
-				"title": "token id_token"
+			"id_token__token": {
+				"title": "id_token token"
+			},
+			"code__id_token__token": {
+				"title": "code id_token token"
 			}
 		}
 	});
