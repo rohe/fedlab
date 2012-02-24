@@ -285,10 +285,10 @@ div.testItem pre.debugMessage {
 	
 	max-height: 760px;
 }
-div.testItem pre.debugMessage span.key { color: #600;}
-div.testItem pre.debugMessage span.string { color: #060;}
-div.testItem pre.debugMessage span.boolean { color: #222;}
-div.testItem pre.debugMessage span.null { color: #999;}
+ pre.debugMessage span.key { color: #600;}
+ pre.debugMessage span.string { color: #060;}
+ pre.debugMessage span.boolean { color: #222;}
+ pre.debugMessage span.null { color: #999;}
 
 /* Show and hide succeeded/info tests */
 div.testFlow div.testItem.success { display: none; }

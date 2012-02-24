@@ -146,11 +146,28 @@
 				this.results = {};
 			};
 		}, 
-		addUserinteraction: function(msg) {
+		addUserinteraction: function(url, msg) {
+			/*
+			 msg looks like this:
+			 	{
+			 		"type": "select_form",
+			 		"_form_nr_": 3,
+			 		"control": {...}
+			 	}
+		 	*/
+
+		 	console.log("Model addUserinteraction(" + url+ ")");
+		 	console.log(msg);
+
+		 	var ia = msg.control;
+		 	if (msg["_form_nr_"]) ia["_form_nr_"] = msg["_form_nr_"];
 			if (!this.metadata.userinteraction) {
-				this.metadata.userinteraction = [];
+				this.metadata.userinteraction = {};
 			}
-			this.metadata.userinteraction.push(msg);
+			
+			this.metadata.userinteraction[url] = [msg.type, ia];
+			
+			
 			console.log("addUserinteraction() Metadata:");
 			console.log(this.metadata);
 		},
@@ -339,7 +356,7 @@
 	OICProvider.configure("OICProvider");
 	OICProvider.include({
 		"_endpoints": {
-			"discovery": {
+			"dynamic": {
 				"title": "OpenID Connect Discovery Endpoint",
 				"descr": "An e-mail address or a URL endpoint for the purpose of OpenID Connect Discovery. See " + 
 					"<a target=\"_blank\" href=\"http://openid.net/specs/openid-connect-discovery-1_0.html\">OpenID Connect Discovery</a> for more details."

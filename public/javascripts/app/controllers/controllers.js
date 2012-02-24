@@ -101,7 +101,8 @@
 	      "change input[type=checkbox]": "updateModel",
 	      "change input[type=select]": "updateModel",
 	      "click": "updateModel",
-	      "blur input[type=text]": "updateModel"
+	      "blur input[type=text]": "updateModel",
+	      "click #userinteraction_reset": "resetInteraction"
 	    },
 		init: function() {
 
@@ -112,6 +113,15 @@
 			this.render();
 			this.adjustUI();
 
+		},
+		resetInteraction: function() {
+			
+			delete this.item.metadata.userinteraction;
+			this.item.save();
+			this.item.edit();
+			
+			
+				
 		},
 		// This function turns off the endpoints, etc that are not relevant depending on the features
 		// turned on.
@@ -128,11 +138,11 @@
 			
 			if (this.item.metadata.provider.features.discovery) {
 				$(this.el).find("p.p_endpoint").hide();
-				$(this.el).find("p#p_discovery_endpoint").show();
+				$(this.el).find("p#p_dynamic_endpoint").show();
 				
 			} else {
 				$(this.el).find("p.p_endpoint").show();
-				$(this.el).find("p#p_discovery_endpoint").hide();
+				$(this.el).find("p#p_dynamic_endpoint").hide();
 				
 				if (!this.item.metadata.provider.features.sessionmanagement) {
 					$(this.el).find("p#p_refresh_session_endpoint").hide();
@@ -556,10 +566,12 @@
 
 
 		},
-		userinteraction: function(msg) {
+		userinteraction: function(url, msg) {
 			console.log("User interaction. Current editor item:");
 			console.log(this.editor.item);
-			this.editor.item.addUserinteraction(msg);
+			this.editor.item.addUserinteraction(url, msg);
+			this.editor.item.save();
+			this.editor.item.edit();
 		},
 		updateCounter: function() {
 			var res = this.editor.item.countResults();
@@ -804,8 +816,12 @@
 							console.log(testflowresult.tests);
 							// $("iframe").attr('src', "data:text/html," + encodeURI(htmlbody));
 
+							var uiawrap = function(msg) {
+								this.userinteraction(htmlurl, msg);
+							};
+
 							var ia = new UserInteraction(htmlurl, htmlbody);
-							ia.bind("userinteraction", that.proxy(that.userinteraction));
+							ia.bind("userinteraction", that.proxy(uiawrap));
 							$("body").append(ia.el);
 						}
 
@@ -858,7 +874,7 @@
 				name: "Basic Connectivity Verification",
 				descr: "Before we continue to the real test cases, we will run a basic conncetivity test given your current metadata entry. If this fails, you will be able to revisit your metadata configuration, or even fix some problems with your Provider, and then run the verification again."
 			};
-			$("div#results").append($("#testFlow").tmpl(verifydef));
+			$("div#results").empty().append($("#testFlow").tmpl(verifydef));
 			
 			// AUTOMATICALLY START VERIFY? For quicker development.
 			// this.verify();
