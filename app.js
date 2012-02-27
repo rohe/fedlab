@@ -65,11 +65,12 @@ app.get('/connect-provider', function(req, res){
 	});
 });
 
-app.get('/connect-provider2', function(req, res){
-	res.render('connect-provider2', {
-		title: 'OpenID Connect Provider Testing'
+app.get('/results', function(req, res){
+	res.render('results', {
+		title: 'OpenID Connect Provider Test Results'
 	});
 });
+
 
 app.get('/test', function(req, res){
 	res.render('test', {
@@ -80,26 +81,21 @@ app.get('/test', function(req, res){
 var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php"});
 
 // t.temp("oic-verify", function (msg) {
-
 // 	var url = msg.tests[7].url;
 // 	var body = msg.tests[7].message;
-	
 // 	var ia = new interaction.InteractiveHTML(body, url);
 // 	console.log("About to getInteractive...")
-// 	var u = ia.getInteractive(function(msg) {
-		
+// 	var u = ia.getInteractive(function(msg) {		
 // 	});
 
-
-
-
-// });
-// return;
-
 app.post('/api', function(req, res){
-
 	t.process(req, res);
-	
+});
+app.get('/api/results', function(req, res) {
+	t.getResults(req, res);
+});
+app.get('/api/definitions', function(req, res) {
+	t.getDefinitions(req, res);
 });
 
 app.listen(80);

@@ -17,6 +17,38 @@ div#testcontrollerbar {
 	border: 1px solid #ccc;
 	
 }
+
+.alltestsdone div#publishbar{
+	display: block;
+}
+div#publishbar {
+	display: none;
+}
+
+div#publishbar p, div#publishbar input { margin: 0px; }
+div#publishbar label { 
+	font-weight: bold;
+	}
+div#publishbar input.pincode { 
+	font-size: 130%; width: 4em;
+}
+div#publishbar {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+/*	font-weight: bold;*/
+	
+
+	margin: 2px 4px;
+	padding: 0px 1em 20px 24px;
+
+
+	background: #ecfc71;
+	color: black;
+	border: 1px solid #ccc;
+}
+
+
 div#testcontrollerbar p { margin: 0px; padding: 0px; }
 
 div#testcontrollerbar div#resultcounter {

@@ -131,7 +131,7 @@
 			return result;			
 		}
 	})
-	TestFlowResult.configure("TestFlowResult", "fid", "status", "tests", "debug", "changes");
+	TestFlowResult.configure("TestFlowResult", "fid", "status", "tests", "debug", "changes", "url", "htmlbody");
 	// TestFlowResult.hasMany('_hasManyTests', TestItemResult);
 	
 	
@@ -157,15 +157,13 @@
 		 	*/
 
 		 	console.log("Model addUserinteraction(" + url+ ")");
-		 	console.log(msg);
+		 	console.log(JSON.stringify(msg));
 
-		 	var ia = msg.control;
-		 	if (msg["_form_nr_"]) ia["_form_nr_"] = msg["_form_nr_"];
-			if (!this.metadata.userinteraction) {
-				this.metadata.userinteraction = {};
+			if (!this.metadata.interaction) {
+				this.metadata.interaction = {};
 			}
-			
-			this.metadata.userinteraction[url] = [msg.type, ia];
+			var type = msg['_type']; delete msg['_type'];
+			this.metadata.interaction[url] = [type, msg];
 			
 			
 			console.log("addUserinteraction() Metadata:");

@@ -116,7 +116,7 @@
 		},
 		resetInteraction: function() {
 			
-			delete this.item.metadata.userinteraction;
+			delete this.item.metadata.interaction;
 			this.item.save();
 			this.item.edit();
 			
@@ -515,9 +515,8 @@
 			// console.log(this.type.modelType);
 			
 			this.definitions = null;
-			
 			this.modelType = this.type.modelType; // was OAuthEntity
-			
+			this.results = {};
 
 			
 			// console.log(typeof this.type);
@@ -557,7 +556,8 @@
 				this.runTestFlow(sid);
 			}));
 
-
+			this.publisher = new PublishController({el: $("div#publishbar")}, this);
+			//$(this.el).append(this.publisher.el);
 
 			
 			// console.log("Got some entity:");
@@ -660,6 +660,7 @@
 			var key;
 			var testflow;
 			
+			// if (Math.random()>0.2)
 			for (sid in this.definitions) {
 				// Do not start on a test flow that has already started..
 				if (!this.definitions[sid].started) {
@@ -684,6 +685,7 @@
 			
 			// Completed with running all flows.
 			this.controllerbarEnable(true);
+			$(this.el).addClass("alltestsdone");
 		},
 		controllerbarEnable: function(enable) {
 			if (enable) {
@@ -696,7 +698,10 @@
 		},
 		runAllFlows: function() {
 			this.cleanup();
+			this.results = {};
+			$(this.el).removeClass("alltestsdone");
 			// this.resultcontroller.cleanup();
+
 			this.controllerbarEnable(false);
 			this.runAllFlowsRest();
 		},
@@ -736,6 +741,8 @@
 						that.editor.item.save();
 						that.resultcontroller.updateFlowResults(testflow, sid, testflowresult);
 						that.updateCounter();
+
+						that.results[testflow] = testflowresult;
 						
 					}
 					if (typeof callback === 'function') callback();
@@ -810,8 +817,8 @@
 							return;
 						} else if (testflowresult.status == 5) {
 							
-							var htmlurl = testflowresult.tests[7].url;
-							var htmlbody = testflowresult.tests[7].message;
+							var htmlurl = testflowresult.url;
+							var htmlbody = testflowresult.htmlbody;
 							console.log("HTML: " + htmlbody);
 							console.log(testflowresult.tests);
 							// $("iframe").attr('src', "data:text/html," + encodeURI(htmlbody));
