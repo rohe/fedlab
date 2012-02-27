@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<meta charset="utf-8" />
+
+	<link rel="stylesheet" href="/stylesheets/style.css" />
+	<link rel="stylesheet" href="/stylesheets/testresults.css" />
+	<link rel="stylesheet" href="/stylesheets/results.css" />
+	
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+
+	<!-- JQuery hosted by google -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
+
+	<!-- SAML metaJS -->
+	<script type="text/javascript" src="/javascripts/samlmetajs/samlmeta.info-certs-saml2sp-fedlab.min.js"></script>
+	<link rel="stylesheet" href="/samlmetajs/css/samlmetajs.css" />
+ 	
+	<!-- spine.js -->
+	<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
+	<script type="text/javascript" src="/javascripts/spine/local.js"></script>
+	<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
+
+	<!-- PrettyDate, John Resigs library with a twist. -->
+	<script type="text/javascript" src="/javascripts/prettydate/pretty.js"></script>
+
+	<!-- jquery tmpl() -->
+	<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
+	
+	<!-- Syntax highlighting of JSON -->
+	<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
+
+	<!-- Federation Lab -->
+	<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
+	<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
+	
+	<script type="text/javascript" src="/javascripts/app/controllers/ctrl.fedlabresults.js"></script>
+	<script type="text/javascript" src="/javascripts/app/controllers/ctrl.publisher.js"></script>
+	<script type="text/javascript" src="/javascripts/app/controllers/userinteraction.js"></script>
+	<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
+	
+	
+	<script type="text/javascript">
+		jQuery(function($) {
+			return new FedLabResults({el: $("body")});
+		});
+		$(document).ready(function() {
+			setInterval(function() {
+				$("span.lastRunDate").prettyDate();
+			}, 30000);
+		});
+	</script>
+	
+</head>
+
+<body>
+
+	<div class="betanote" style="
+		position: fixed; bottom: 10px; right: 10px; font-size: 200%; font-family: Cochin; border: 1px solid #555; color: #ccc; background-color: #777;
+		font-weight: bold;
+		padding: 4px 10px; border-radius: 10px; box-shadow: 2px 2px 2px 2px rgba(100, 100, 100, 0.4);
+	">Beta</div>
+
+
+	<p><a href="/">« Back to frontpage</a></p>
+
+	<img src="/images/openid.png" style="float: right" />
+
+	<h1>Test results</h1>
+
+	<p>Fill inn all required information about your OAuth Provider in order to start testing it using Federation Lab.</p>
+	
+	<p><a href="">Consult the Federation Lab web site</a> for more information about Federation Lab.</p>
+
+	<div id="results">	
+	</div>
+
+</body>
+</html>
