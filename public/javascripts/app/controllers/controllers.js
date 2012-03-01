@@ -130,13 +130,13 @@
 			// console.log("Adjusting UI");
 			// console.log(this.item);
 			
-			if (this.item.metadata.provider.features.registration) {
+			if (this.item.metadata.features.registration) {
 				$(this.el).find("div#clientconfiguration").hide();
 			} else {
 				$(this.el).find("div#clientconfiguration").show();
 			}
 			
-			if (this.item.metadata.provider.features.discovery) {
+			if (this.item.metadata.features.discovery) {
 				$(this.el).find("p.p_endpoint").hide();
 				$(this.el).find("p#p_dynamic_endpoint").show();
 				
@@ -144,7 +144,7 @@
 				$(this.el).find("p.p_endpoint").show();
 				$(this.el).find("p#p_dynamic_endpoint").hide();
 				
-				if (!this.item.metadata.provider.features.sessionmanagement) {
+				if (!this.item.metadata.features.sessionmanagement) {
 					$(this.el).find("p#p_refresh_session_endpoint").hide();
 					$(this.el).find("p#p_end_session_endpoint").hide();
 				}
@@ -160,7 +160,7 @@
 			if (!this.item.metadata.client) this.item.metadata.client = {};
 			if (!this.item.metadata.provider) this.item.metadata.provider = {};
 			// if (!this.item.metadata.provider.endpoints) this.item.metadata.provider.endpoints = {};
-			if (!this.item.metadata.provider.features) this.item.metadata.provider.features = {};
+			if (!this.item.metadata.features) this.item.metadata.features = {};
 
 			this.item.title = title;
 			this.item.metadata.provider.issuer = $(this.el).find("input#issuer").val();
@@ -174,9 +174,9 @@
 				}
 			});
 			
-			this.item.metadata.provider.features.discovery = !!($(cur.el).find("input#usediscovery:checkbox:checked").val());
-			this.item.metadata.provider.features.registration = !!($(cur.el).find("input#useregistration:checkbox:checked").val());
-			this.item.metadata.provider.features.sessionmanagement = !!($(cur.el).find("input#usesessionmanagement:checkbox:checked").val());
+			this.item.metadata.features.discovery = !!($(cur.el).find("input#usediscovery:checkbox:checked").val());
+			this.item.metadata.features.registration = !!($(cur.el).find("input#useregistration:checkbox:checked").val());
+			this.item.metadata.features.sessionmanagement = !!($(cur.el).find("input#usesessionmanagement:checkbox:checked").val());
 			
 			this.item.metadata.provider.supported_response_types = [];
 			$.each(this.item._response_types, function(key, rt) {
@@ -566,10 +566,10 @@
 
 
 		},
-		userinteraction: function(url, msg) {
+		userinteraction: function(msg) {
 			console.log("User interaction. Current editor item:");
 			console.log(this.editor.item);
-			this.editor.item.addUserinteraction(url, msg);
+			this.editor.item.addUserinteraction(msg);
 			this.editor.item.save();
 			this.editor.item.edit();
 		},
@@ -819,16 +819,18 @@
 							
 							var htmlurl = testflowresult.url;
 							var htmlbody = testflowresult.htmlbody;
-							console.log("HTML: " + htmlbody);
-							console.log(testflowresult.tests);
+							var htmltitle = testflowresult.title;
+							// console.log("HTML: " + htmlbody);
+							// console.log("Title: " + title);
+							// console.log(testflowresult.tests);
 							// $("iframe").attr('src', "data:text/html," + encodeURI(htmlbody));
 
-							var uiawrap = function(msg) {
-								this.userinteraction(htmlurl, msg);
-							};
+							// var uiawrap = function(msg) {
+							// 	this.userinteraction(htmlurl, msg);
+							// };
 
-							var ia = new UserInteraction(htmlurl, htmlbody);
-							ia.bind("userinteraction", that.proxy(uiawrap));
+							var ia = new UserInteraction(htmlurl, htmlbody, htmltitle);
+							ia.bind("userinteraction", that.proxy(that.userinteraction));
 							$("body").append(ia.el);
 						}
 

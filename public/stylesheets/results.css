@@ -1,0 +1,58 @@
+table.results {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	width: 100%;	
+
+}
+
+table.results tr.header td, table.results tr.header th {
+	background: #eee;
+
+}
+
+table.results td, table.results th {
+	border: 1px solid #ccc;
+}
+table.results tr.header th {
+	text-align: center;
+	width: 50px;
+}
+table.results tr td.flowname {
+	text-align: right;
+	padding-right: 2em;
+}
+table.results td.resultcode {
+	text-align: center;
+}
+table.results td.resultcode.empty {
+	/*background: #ddd;*/
+}
+
+table.results tr:nth-child(even) td {
+	background: #dec;
+}
+
+
+/*td.resultcode.running {
+	background:url("/images/spinning.gif") top left no-repeat;
+}
+td.resultcode.success {
+	background:url("/images/accept.png") top left no-repeat;
+	background-color: #fff;
+}
+td.resultcode.warning {
+	background:url("/images/error.png") top left no-repeat;
+	background-color: #fff;
+}
+td.resultcode.error {
+	background:url("/images/exclamation.png") top left no-repeat;
+	background-color: #eedddd;
+}
+td.resultcode.critical {
+	background:url("/images/exclamation.png") top left no-repeat;
+	background-color: #eedddd;
+}
+td.resultcode.info {
+	background:url("/images/information.png") top left no-repeat;
+	background-color: #fff;
+}*/

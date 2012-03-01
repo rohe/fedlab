@@ -243,13 +243,13 @@
 		<fieldset><legend>Features</legend>
 		
 			<p>
-				<input type="checkbox" {{if metadata.provider.features.discovery}} checked="checked" {{/if}} id="usediscovery" name="usediscovery" />
+				<input type="checkbox" {{if metadata.features.discovery}} checked="checked" {{/if}} id="usediscovery" name="usediscovery" />
 				<label for="usediscovery">Enable OpenID Connect Discovery</label>
 				<span class="item-description">If you enable OpenID Connect Discovery, Federation Lab will automatically discover some metadata about your provider and you will need to configure less information here. Make sure your provider supports <a target="_blank" href="">OpenID Connect Discovery</a></span>
 			</p>
 
 			<p>
-				<input type="checkbox" {{if metadata.provider.features.registration}} checked="checked" {{/if}} id="useregistration" name="useregistration" />
+				<input type="checkbox" {{if metadata.features.registration}} checked="checked" {{/if}} id="useregistration" name="useregistration" />
 				<label for="useregistration">Enable OpenID Connect Dynamic Client Registration</label>
 				<span class="item-description">
 					If you enable <a target="_blank" href="http://openid.net/specs/openid-connect-registration-1_0.html">OpenID Connect Dynamic Client Registration</a>, the Federation Lab will use the registration endpoint to register a client before performing the tests.
@@ -257,7 +257,7 @@
 			</p>
 			
 			<p>
-				<input type="checkbox" {{if metadata.provider.features.sessionmanagement}} checked="checked" {{/if}} id="usesessionmanagement" name="usesessionmanagement" />
+				<input type="checkbox" {{if metadata.features.sessionmanagement}} checked="checked" {{/if}} id="usesessionmanagement" name="usesessionmanagement" />
 				<label for="usesessionmanagement">Enable OpenID Connect Session Management</label>
 				<span class="item-description">
 					See <a target="_blank" href="http://openid.net/specs/openid-connect-session-1_0.html">OpenID Connect Session Management</a> for more details.
@@ -326,17 +326,36 @@
 		{{if metadata.interaction }}
 		<fieldset><legend>User interaction</legend>
 			
-				{{each(url, interaction) $data.metadata.interaction }}
-				<div id="userinteractions" style="" class="basic">
-					{{if interaction[0] === "chose"}}
-						<p class="p_userinteraction" id="p_${url}_endpoint">When arriving at URL <tt style="color: #600">${url}</tt> follow the link pointing to 
-						<tt style="color: #600">${interaction[1]["path"]}</tt>
 
+
+				{{each(i, interaction) $data.metadata.interaction }}
+				<div id="userinteractions" style="border-bottom: 1px dotted #ccc" class="basic">
+
+					<p class="p_userinteraction" id="p_${url}_endpoint">When arriving at URL matching this:</p>
+
+					{{if interaction.matches.url}}
+						<p>URL is <tt style="color: #600">${interaction.matches.url}</tt></p>
 					{{/if}}
-					{{if interaction[0] === "form_pick"}}
-						<p class="p_userinteraction" id="p_${url}_endpoint">When arriving at URL <pre>${url}</pre> find form #${interaction[1]["_form_nr_"]}, and fill in the following fields:</p>
-						<pre style="clear: both" class="debugMessage">{{html syntaxHighlight(interaction[1])  }}</pre>
+
+					{{if interaction.matches.title}}
+						<p>Title is <tt style="color: #600">${interaction.matches.title}</tt></p>
 					{{/if}}
+
+					{{if interaction.matches.content}}
+						<p>Page contains <tt style="color: #600">${interaction.matches.content}</tt></p>
+					{{/if}}
+
+					<p>then…</p>
+
+					{{if interaction.control.type === "link"}}
+						<p>follow the link pointing to </p>
+						<tt style="color: #600">${interaction.control["path"]}</tt>
+					{{/if}}
+					{{if interaction.control.type === "form"}}
+						<p class="p_userinteraction" id="">Fill in form #${interaction.control.index} with these properties:</p>
+						<pre style="clear: both" class="debugMessage">{{html syntaxHighlight(interaction.control.set)  }}</pre>
+					{{/if}}
+					
 				</div>
 				{{/each}}
 				

@@ -131,7 +131,7 @@
 			return result;			
 		}
 	})
-	TestFlowResult.configure("TestFlowResult", "fid", "status", "tests", "debug", "changes", "url", "htmlbody");
+	TestFlowResult.configure("TestFlowResult", "fid", "status", "tests", "debug", "changes", "url", "htmlbody", "title");
 	// TestFlowResult.hasMany('_hasManyTests', TestItemResult);
 	
 	
@@ -146,24 +146,33 @@
 				this.results = {};
 			};
 		}, 
-		addUserinteraction: function(url, msg) {
+		addUserinteraction: function(msg) {
 			/*
 			 msg looks like this:
-			 	{
-			 		"type": "select_form",
-			 		"_form_nr_": 3,
-			 		"control": {...}
-			 	}
+					"matches": {
+						"url": "askdjf",
+						# gör en 'startswith'
+						match "title": "slkdjnsdkljn",
+						# använder exakt match mot vad somär mellan < title > .. < /title> taggarna
+								   "content": "lskjdf" # försöker hitta strängen någonstans på HTML sidan
+								 },
+								 "page-type": "login"/"user-consent" / ? ? ? ,
+						"control" : {
+							"type": "form" / "link",
+							< typ specifik del >
+						}
+					}
 		 	*/
 
-		 	console.log("Model addUserinteraction(" + url+ ")");
+		 	console.log("Model addUserinteraction()");
 		 	console.log(JSON.stringify(msg));
 
 			if (!this.metadata.interaction) {
-				this.metadata.interaction = {};
+				this.metadata.interaction = [];
 			}
-			var type = msg['_type']; delete msg['_type'];
-			this.metadata.interaction[url] = [type, msg];
+			// var type = msg['_action']; delete msg['_action'];
+			// this.metadata.interaction[url] = [type, msg];
+			this.metadata.interaction.push(msg);
 			
 			
 			console.log("addUserinteraction() Metadata:");
@@ -306,8 +315,8 @@
 				this.metadata.provider = {};
 			}
 			
-			if (!this.metadata.provider.features) {
-				this.metadata.provider.features = {
+			if (!this.metadata.features) {
+				this.metadata.features = {
 					"discovery": false,
 					"registration": false,
 					"sessionmanagement": false
