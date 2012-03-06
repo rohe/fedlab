@@ -119,8 +119,6 @@
 			delete this.item.metadata.interaction;
 			this.item.save();
 			this.item.edit();
-			
-			
 				
 		},
 		// This function turns off the endpoints, etc that are not relevant depending on the features
@@ -201,7 +199,6 @@
 			});
 
 
-
 			this.item.metadata.client.client_id = $(this.el).find("input#client_id").val();
 			this.item.metadata.client.client_secret = $(this.el).find("input#client_secret").val();
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
@@ -279,7 +276,8 @@
 		},
 		items: [],
 		init: function(){
-			
+			var that = this;
+
 			if (!this.modelType || typeof this.modelType !== 'function') {
 				throw "EntityLoader init() must include a modelType.";
 			}
@@ -288,6 +286,84 @@
 			this.modelType.bind("create", this.proxy(this.addOne));
 			this.modelType.bind("refresh", this.proxy(this.addAll));
 			this.modelType.bind("edit", this.proxy(this.clearActive));
+
+			$(this.el).find("#configdrop").bind("dragover", function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				
+			});
+			$(this.el).find("#configdrop").bind("dragleave", function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				
+			});
+
+			$(this.el).find("#configexport").bind("click", function(e) {
+				var i;
+				var obj = [];
+				var href = "data:application/octet-stream;charset=utf-8;base64,";
+
+				for(i = 0; i < that.items.length; i++) {
+					obj.push(that.items[i].item);
+				}
+				href += btoa(JSON.stringify(obj));
+				$(e.target).attr("href", href);
+				console.log("Setting href  " + href);
+				// return false;
+				// window.location.href = href;
+			});
+
+
+
+			$(this.el).find("#configexport").bind("dragstart", function(e) {
+				var dataTransfer = e.originalEvent.dataTransfer;
+				var url = "application/pdf:HTML5CheatSheet.pdf:http://thecssninja.come/demo/gmail_dragout/html5-cheat-sheet.pdf";
+				//url = "https://raw.github.com/andreassolberg/DiscoJuice/master/discojuice/discojuice.control.js";
+
+				$(e.target).attr("data-downloadurl", "application/pdf:HTML5CheatSheet.pdf:http://thecssninja.come/demo/gmail_dragout/html5-cheat-sheet.pdf");
+
+				e.stopPropagation();
+				e.preventDefault();
+				console.log("Drag start...");
+				var r = dataTransfer.setData("DownloadURL", url);
+				console.log('What: ' + (r ? 'YES': 'NO'));
+			});
+			$(this.el).find("#configdrop").bind("drop", function(event) {
+				
+				var dataTransfer = event.originalEvent.dataTransfer;
+				var freader;
+				var obj;
+				event.stopPropagation();
+				event.preventDefault();
+
+				if (dataTransfer.files.length > 0) { 
+					console.log("Drop event");
+					console.log(dataTransfer.files[0]);
+
+					freader = new FileReader();
+					freader.onload = function(evt) {  
+						var i, newentry;
+						try {
+							obj = JSON.parse(evt.target.result); // 
+							
+							for(i = 0; i < obj.length; i++) {
+								newentry = new that.modelType(obj[i]);
+								console.log(obj[i]);
+								console.log(newentry);
+								newentry.save();
+							}
+
+						} catch(e) {
+							alert("Invalid configuration data provided: Cannot import: " + e.message);
+						}
+					};
+					
+					freader.readAsText(dataTransfer.files[0]);
+
+					
+				}
+
+			});
 			
 
 		},	
@@ -572,6 +648,7 @@
 			this.editor.item.addUserinteraction(msg);
 			this.editor.item.save();
 			this.editor.item.edit();
+			this.verify();
 		},
 		updateCounter: function() {
 			var res = this.editor.item.countResults();
@@ -635,6 +712,10 @@
 						});
 						
 						that.definitions = response.result;
+
+						console.log("Test editor eitem");
+						console.log(that.editor.item.title);
+						$(that.el).find("#testcontroller_name").html(that.editor.item.title);
 						
 						// console.log("Got definitions");
 						// 						console.log(that.definitions);
@@ -660,7 +741,7 @@
 			var key;
 			var testflow;
 			
-			// if (Math.random()>0.2)
+			// if (Math.random()>0.4)
 			for (sid in this.definitions) {
 				// Do not start on a test flow that has already started..
 				if (!this.definitions[sid].started) {
@@ -668,11 +749,15 @@
 					testflow = this.definitions[sid].id;
 
 					// Check if all dependencies are met, if not, move on to next flow.
+					console.log(" ======> About to check dependencies for [" + testflow + "] " + sid);
 					if (this.definitions[sid].depends) {
+						console.log(" => Dependencies exists ");
 						if (!this.editor.item.dependenciesMet(this.definitions[sid].depends)) {
+							console.log(" => Dependencies WAS NOT MET ");
 							that.resultcontroller.shaddow(testflow, sid, true);
 							continue;
 						} else {
+							console.log(" => Dependencies WAS MET ");
 							that.resultcontroller.shaddow(testflow, sid, false);
 						}
 					}
@@ -685,7 +770,10 @@
 			
 			// Completed with running all flows.
 			this.controllerbarEnable(true);
+			this.publisher.enable();
 			$(this.el).addClass("alltestsdone");
+
+
 		},
 		controllerbarEnable: function(enable) {
 			if (enable) {
@@ -700,6 +788,8 @@
 			this.cleanup();
 			this.results = {};
 			$(this.el).removeClass("alltestsdone");
+
+
 			// this.resultcontroller.cleanup();
 
 			this.controllerbarEnable(false);
@@ -726,10 +816,11 @@
 			
 			$.ajax({
 				url: "/api",
-				dataType: 'json',
 				cache: false,
 				type: "POST",
-				data: postdata,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(postdata),
 				success: function(response) {
 					console.log("    <======> runTestFlow() API Response ");
 					console.log(JSON.parse(JSON.stringify(response)));
@@ -760,6 +851,11 @@
 				e.preventDefault();
 				e.stopPropagation();	
 			}
+			if (this.publisher) {
+				// this.publisher.release();
+				$("div#publishbar").hide();
+			}
+			
 			$(this.el).find("div#results").empty();
 			that.stateChange("modeEdit");
 		},
@@ -768,6 +864,7 @@
 				testflow = "verify",
 				sid = "openidconnectverifytestflow";
 
+			$("#verifynow").attr("disabled", "disabled");
 			
 			console.log("About to do verify() - here is the metadata");
 			console.log(JSON.stringify(this.editor.item.metadata));
@@ -791,13 +888,15 @@
 			
 			$.ajax({
 				url: "/api",
-				dataType: 'json',
 				cache: false,
 				type: "POST",
-				data: postdata,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(postdata),
 				success: function(response) {
 					console.log("API Response /Verify");
 					console.log(response);
+					$("#verifynow").removeAttr("disabled");
 					if (response.status === "ok") {
 						// if (response.message) {	
 						// 	$("div#results").empty();
@@ -843,6 +942,7 @@
 					}
 				},
 				error: function(error) {
+					$("#verifynow").removeAttr("disabled");
 					console.log("Error");
 					alert("Some serious error occured! should not happen ;-/");
 				}

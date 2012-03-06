@@ -91,6 +91,9 @@ var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/mod
 app.post('/api', function(req, res){
 	t.process(req, res);
 });
+app.post('/api/results/publish', function(req, res) {
+	t.publish(req, res);
+});
 app.get('/api/results', function(req, res) {
 	t.getResults(req, res);
 });

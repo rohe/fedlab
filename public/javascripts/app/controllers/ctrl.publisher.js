@@ -9,6 +9,13 @@
 			this.fedlab = fedlab;
 
 		},
+		enable: function() {
+			$(this.el).show()
+			$(this.el).find("input#dopublish").removeAttr("disabled");
+		},
+		disable: function() {
+			$(this.el).find("input#dopublish").attr("disabled", "disabled");
+		},
 		publish: function() {
 			var post = {}, that = this;
 			if (!this.fedlab.results) return;
@@ -29,14 +36,15 @@
 			console.log(post);
 
 			$.ajax({
-				url: "/api",
-				dataType: 'json',
+				url: "/api/results/publish",
 				cache: false,
 				type: "POST",
-				data: post,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",	
+				data: JSON.stringify(post),
 				success: function(response) {
 					console.log("Success posting results");
-					$(that.el).find("input#dopublish").attr("disabled", "disabled");
+					that.disable();
 					alert("Successfully published testresults");
 				},
 				error: function(error) {

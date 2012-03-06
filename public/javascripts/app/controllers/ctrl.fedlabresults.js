@@ -31,20 +31,26 @@
 			}
 		},
 		render: function() {
+			var thead, tbody;
 
 			console.log("render()   defintions, results");
 			console.log(this.definitions);
 			console.log(this.results);
 			console.log("-------");
-			var table = $('<table class="results"></table>');
+			var table = $('<table class="tablesorter results"></table>');
 			var header = $('<tr class="header"></tr>')
-				.append('<td>Test flows</td>');
+				.append('<th>Test flows</th>');
 			var row, key;
 
 			for(key in this.results) {
 				header.append('<th><attr title="' + this.results[key].name + '">' + this.results[key].short + '</attr></th>');
 			}
-			table.append(header);
+			
+
+			thead = $('<thead></thead>').append(header);
+			table.append(thead);
+
+			tbody = $('<tbody></tbody>');
 
 			for(var testflow in this.definitions) {
 				row = $('<tr></tr>');
@@ -67,12 +73,20 @@
 					}
 					
 				}
-				table.append(row);
+				tbody.append(row);
+				
 
 			}
+			table.append(tbody);
 
+			console.log("Tablesorter()");
+			table.tablesorter({
+				debug: true
+			});
 
 			$(this.el).append(table);
+	
+
 		},
 		loadDefinitions: function() {
 			var that = this;

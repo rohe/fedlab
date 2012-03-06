@@ -160,6 +160,9 @@
 
 		
 		<fieldset><legend>Client Configuration</legend>
+
+
+
 		
 			<div id="clientconfiguration" style="display: inline" class="basic">
 
@@ -503,6 +506,11 @@
 
 	<fieldset class="storeconfiguration"><legend>Stored Configuration</legend>
 	
+		<div id="configdrop" style="width: 120px; float: right; margin: 1em; background: #ffe; border: 1px dotted #775; padding: .4em; font-size: 80%; text-align: center; height: 100px">Drop config here to import.
+
+			<a id="configexport" draggable="true" style="display: block; width: 60px; height: 60px; background: white; border: 1px solid #ccc" href="">export</a>
+		</div>
+
 		<p>Here is a list of stored OAuth Provider configurations:</p>
 		
 		<ul>
@@ -518,7 +526,7 @@
 	</div>
 
 	<div id="testcontrollerbar">
-		<p>Testing <b>some unnamed provider</b></p>
+		<p>Testing <b id="testcontroller_name">some unnamed provider</b></p>
 
 		<div id="resultcounter"></div>
 

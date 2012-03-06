@@ -237,8 +237,11 @@
 		dependenciesMet: function(depends) {
 			var i;
 			for(i = 0; i < depends.length; i++) {
+				// console.log("Checking dependencies " + depends[i]);
+				// console.log(this.results);
 				if (!this.results[depends[i]]) return false;
-				if (this.results[depends[i]].status !== 4) return false;
+				// console.log("Depenncy STATUS WAS "+ this.results[depends[i]].status);
+				if (this.results[depends[i]].status === 4) return false;
 			}
 			return true;
 		},
