@@ -5,7 +5,7 @@ var
 
 	// Module dependencies.
 	express = require('express'),
-	io = require('socket.io'), // for npm, otherwise use require('./path/to/socket.io') 
+	// io = require('socket.io'), // for npm, otherwise use require('./path/to/socket.io') 
 	
 	
 	
