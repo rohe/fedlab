@@ -145,6 +145,7 @@
 			if (typeof this.results !== 'object') {
 				this.results = {};
 			};
+			console.log("TestEntity init();");
 		}, 
 		addUserinteraction: function(msg) {
 			/*
@@ -237,8 +238,8 @@
 		dependenciesMet: function(depends) {
 			var i;
 			for(i = 0; i < depends.length; i++) {
-				// console.log("Checking dependencies " + depends[i]);
-				// console.log(this.results);
+				console.log("Checking dependencies " + depends[i]);
+				console.log(this.results);
 				if (!this.results[depends[i]]) return false;
 				// console.log("Depenncy STATUS WAS "+ this.results[depends[i]].status);
 				if (this.results[depends[i]].status === 4) return false;
@@ -308,6 +309,9 @@
 			if (typeof this.metadata !== 'object') {
 				this.metadata = {};
 			};
+			if (typeof this.results !== 'object') {
+				this.results = {};
+			};
 			
 			this.metadata.versions = {
 				oauth: "2.0",
@@ -340,6 +344,7 @@
 					"redirect_uris": ["https://localhost/callback1", "https://localhost/callback2"]
 				};
 			}
+			console.log("TestEntity init();");
 		},
 		"hasAlg": function(alg) {
 			var has = false;
