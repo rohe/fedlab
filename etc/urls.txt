@@ -1,0 +1,10 @@
+https://www.kodtest.se:8088/
+
+	diana krall
+
+https://connect.openid4.us/
+
+https://connect-op.heroku.com/
+https://openidconnect.info/
+
+
