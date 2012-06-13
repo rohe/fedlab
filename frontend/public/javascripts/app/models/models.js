@@ -281,7 +281,7 @@
 					"auth_type": "client_secret_basic",
 					"client_type": "confidential",
 					"client_id": FedLabUtils.guid().toLowerCase(),
-					"redirect_uris": ["https://localhost/callback1", "https://localhost/callback2"]
+					"redirect_uris": ["https://%s/authz_cb"]
 				};
 			}
 		}
@@ -341,9 +341,10 @@
 					"auth_type": "client_secret_basic",
 					"client_type": "confidential",
 					"client_id": FedLabUtils.guid().toLowerCase(),
-					"redirect_uris": ["https://localhost/callback1", "https://localhost/callback2"]
+					"redirect_uris": ["https://%s/authz_cb"]
 				};
 			}
+			this.metadata.client.redirect_uris = ["https://%s/authz_cb"];
 			console.log("TestEntity init();");
 		},
 		"hasAlg": function(alg) {

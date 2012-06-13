@@ -75,6 +75,7 @@
 			this.item.metadata.client.client_secret = $(this.el).find("input#client_secret").val();
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
 			this.item.metadata.client.client_type = $(this.el).find("select#client_type").val();
+			this.item.metadata.client.redirect_uris = ["https://%s/authz_cb"];
 			
 			// console.log("Saving item:");
 			// 			console.log(this.item);
@@ -205,7 +206,8 @@
 			this.item.metadata.client.client_secret = $(this.el).find("input#client_secret").val();
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
 			this.item.metadata.client.client_type = $(this.el).find("select#client_type").val();
-			this.item.metadata.client.key_export = 'http://%s:8090/export';
+			this.item.metadata.client.key_export_url = 'http://%s:8090/export';
+			this.item.metadata.client.redirect_uris = ["https://%s/authz_cb"];
 			
 			this.adjustUI();
 
