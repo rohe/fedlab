@@ -15,7 +15,7 @@
 		},
 
 		addTab: function (pluginTabs) {
-			pluginTabs.list.push('<li><a href="#attributes">Attributes</a></li>');
+			pluginTabs.list.push('<li><a href="#attributes">User attrs</a></li>');
 			pluginTabs.content.push(
 				'<div id="attributes">' +
 
@@ -95,6 +95,9 @@
 				
 			}
 
+		},
+		validate: function () {
+			return true;  // This plugin does not allow invalid inputs
 		}
 	};
 

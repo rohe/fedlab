@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Federation Lab</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+
+
+
+		<link rel="stylesheet" href="/stylesheets/style2.css" />
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+
+		<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script>
+
+		<!-- SAMLmetaJS -->
+		<script type="text/javascript" src="/samlmetajs/mdreader.js"></script>
+		<script type="text/javascript" src="/samlmetajs/samlmeta.js"></script>
+		<script type="text/javascript" src="/samlmetajs/samlmeta.xml.js"></script>
+		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.info.js"></script>
+		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.saml2sp.js"></script>
+		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.certs.js"></script>
+
+		<link type="text/css" href="/samlmetajs/css/samlmetajs.css" rel="Stylesheet" />
+
+		
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" href="/samlmetajs/css/samlmetajs.css" />
+
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+
+
+
+		<!-- Le styles -->
+		<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<style>
+			body {
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+		</style>
+		<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Le fav and touch icons -->
+		<link rel="shortcut icon" href="/bootstrap/ico/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/bootstrap/ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/bootstrap/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/bootstrap/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="/bootstrap/ico/apple-touch-icon-57-precomposed.png">
+
+		<script type="text/javascript">
+		    $(document).ready(function(){
+				var options = {
+					showValidation: false,
+					showValidationLevel: {
+						info: false,
+						ok: false,
+						warning: true,
+						error: true
+					}
+				};
+				$("textarea#metadatafield").SAMLmetaJS(options);
+				$("input#save").click(function (event) {
+					event.preventDefault();
+					event.stopPropagation();
+					
+					saveConfig();
+					loadConfigList();
+				});
+		    });
+		
+		
+		
+		</script>
+
+	</head>
+
+	<body>
+
+
+
+
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="#">Federation Lab</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+
+		<ul class="breadcrumb">
+			<li>
+				<a href="/">Home</a> <span class="divider">/</span>
+			</li>
+			<li class="active">SAML SP Testing</li>
+		</ul>
+
+
+		<div class="container">
+
+			<form id="configurationForm" action="?" method="get">
+
+				<p>To test your SAML 2.0 Service Provider, please register the metadata of your provider here.</p>
+				
+				<textarea id="metadatafield" class="metadata" ></textarea>
+
+				<input type="submit" id="verifyConnectivity" value="Verify connectivity" />
+				<div  style="display: none" id="verifyErrorDiv"><pre id="verifyError"></pre></div>
+				
+			</form>
+
+		</div> <!-- /container -->
+
+		
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="/bootstrap/js/jquery.js"></script>
+		<script src="/bootstrap/js/bootstrap-transition.js"></script>
+		<script src="/bootstrap/js/bootstrap-alert.js"></script>
+		<script src="/bootstrap/js/bootstrap-modal.js"></script>
+		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+		<script src="/bootstrap/js/bootstrap-scrollspy.js"></script>
+		<script src="/bootstrap/js/bootstrap-tab.js"></script>
+		<script src="/bootstrap/js/bootstrap-tooltip.js"></script>
+		<script src="/bootstrap/js/bootstrap-popover.js"></script>
+		<script src="/bootstrap/js/bootstrap-button.js"></script>
+		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
+		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
+		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
+
+	</body>
+</html>

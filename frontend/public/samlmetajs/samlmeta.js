@@ -1,4 +1,4 @@
-/*jslint rhino: true, browser:true, onevar:false*/
+/*jslint rhino: true, browser: true, onevar: false */
 if (typeof console === "undefined" || typeof console.log === "undefined") {var console = { log: function() {} }}
 
 // Hack to initiatlize a DOMParser in browser that do not support this natively.
@@ -41,19 +41,26 @@ var SAMLmetaJS = {};
 	SAMLmetaJS.plugins = {};
 
 	SAMLmetaJS.pluginEngine = {
-		'execute': function(hook, parameters) {
+		execute: function(hook, parameters) {
 			var plugin;
-			if (!SAMLmetaJS.plugins) {return;}
+			if (!SAMLmetaJS.plugins) {
+				return;
+			}
 			for (plugin in SAMLmetaJS.plugins) {
-				if (SAMLmetaJS.plugins[plugin][hook]) {
-					// console.log('Executing hook [' + hook + '] in plugin [' + plugin + ']');
-					SAMLmetaJS.plugins[plugin][hook].apply(null, parameters);
-				}
+				SAMLmetaJS.pluginEngine.executeOne(plugin, hook, parameters);
+			}
+		},
+		executeOne: function (plugin, hook, parameters) {
+			if (!SAMLmetaJS.plugins) { 
+				return;
+			}
+			if (SAMLmetaJS.plugins[plugin] && SAMLmetaJS.plugins[plugin][hook]) {
+				// console.log('Executing hook [' + hook + '] in plugin [' + plugin + ']');
+				return SAMLmetaJS.plugins[plugin][hook].apply(null, parameters);
 			}
 		}
 	};
 
-	
 
 	SAMLmetaJS.Constants = {
 		'ns' : {
@@ -61,13 +68,39 @@ var SAMLmetaJS = {};
 			'mdui': "urn:oasis:names:tc:SAML:metadata:ui",
 			'mdattr': "urn:oasis:names:tc:SAML:metadata:attribute",
 			'saml': "urn:oasis:names:tc:SAML:2.0:assertion",
+			'init': "urn:oasis:names:tc:SAML:profiles:SSO:request-init",
+			'idpdisc': "urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol",
 			'xsd': "http://www.w3.org/2001/XMLSchema",
-			'ds': "http://www.w3.org/2000/09/xmldsig#"
+			'ds': "http://www.w3.org/2000/09/xmldsig#",
+			'xenc': "http://www.w3.org/2001/04/xmlenc#"
 		},
 		'certusage': {
 			'both': 'Both',
 			'signing': 'Signing',
 			'encryption': 'Encryption'
+		},
+		'algorithms': {
+			'http://www.w3.org/2001/04/xmlenc#tripledes-cbc': 'TRIPLEDES',
+			'http://www.w3.org/2001/04/xmlenc#aes128-cbc': 'AES-128',
+			'http://www.w3.org/2001/04/xmlenc#aes256-cbc': 'AES-256',
+			'http://www.w3.org/2001/04/xmlenc#aes192-cbc': 'AES-192',
+			'http://www.w3.org/2001/04/xmlenc#rsa-1_5': 'RSA-v1.5',
+			'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p': 'RSA-OAEP',
+			'http://www.w3.org/2001/04/xmlenc#dh': 'Diffie-Hellman',
+			'http://www.w3.org/2001/04/xmlenc#kw-tripledes': 'TRIPLEDES KeyWrap',
+			'http://www.w3.org/2001/04/xmlenc#kw-aes128': 'AES-128 KeyWrap',
+			'http://www.w3.org/2001/04/xmlenc#kw-aes256': 'AES-256 KeyWrap',
+			'http://www.w3.org/2001/04/xmlenc#kw-aes192': 'AES-192 KeyWrap',
+			'http://www.w3.org/2000/09/xmldsig#sha1': 'SHA1',
+			'http://www.w3.org/2001/04/xmlenc#sha256': 'SHA256',
+			'http://www.w3.org/2001/04/xmlenc#sha512': 'SHA512',
+			'http://www.w3.org/2001/04/xmlenc#ripemd160': 'RIPEMD-160',
+			'http://www.w3.org/2000/09/xmldsig#': 'XML Digital Signature',
+			'http://www.w3.org/TR/2001/REC-xml-c14n-20010315': 'Canonical XML (omits comments)',
+			'http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments': 'Canonical XML with Comments',
+			'http://www.w3.org/2001/10/xml-exc-c14n#': 'Exclusive XML Canonicalization (omits comments)',
+			'http://www.w3.org/2001/10/xml-exc-c14n#WithComments': 'Exclusive XML Canonicalization with Comments',
+			'http://www.w3.org/2000/09/xmldsig#base64': 'base64'
 		},
 		'languages': {
 			'en': 'English',
@@ -104,17 +137,31 @@ var SAMLmetaJS = {};
 		},
 		'endpointTypes' : {
 			'sp': {
+				'ArtifactResolutionService': 'ArtifactResolutionService',
 				'AssertionConsumerService': 'AssertionConsumerService',
-				'SingleLogoutService': 'SingleLogoutService'
+				'ManageNameIDService': 'ManageNameIDService',
+				'SingleLogoutService': 'SingleLogoutService',
+				// Extensions defined at Service Provider Request Initiation Protocol and Profile Version 1.0
+				'RequestInitiator': 'RequestInitiator',
+				'DiscoveryResponse': 'DiscoveryResponse'
 			},
-			'idp' : {}
+			'idp' : {
+				'ArtifactResolutionService': 'ArtifactResolutionService',
+				'AssertionIDRequestService': 'AssertionIDRequestService',
+				'ManageNameIDService': 'ManageNameIDService',
+				'NameIDMappingService': 'NameIDMappingService',
+				'SingleLogoutService': 'SingleLogoutService',
+				'SingleSignOnService': 'SingleSignOnService'
+			}
 		},
 		'bindings': {
 			'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect': 'HTTP Redirect',
 			'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST': 'HTTP POST',
 			'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact': 'HTTP Artifact',
 			'urn:oasis:names:tc:SAML:2.0:bindings:SOAP': 'SOAP',
-			'urn:oasis:names:tc:SAML:2.0:bindings:PAOS': 'Reverse SOAP (PAOS)'
+			'urn:oasis:names:tc:SAML:2.0:bindings:PAOS': 'Reverse SOAP (PAOS)',
+			'urn:oasis:names:tc:SAML:profiles:SSO:request-init': 'Request Initiator',
+			'urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol': 'Discovery Response'
 		},
 		'attributes' : {
 			'urn:oid:0.9.2342.19200300.100.1.1': 'uid',
@@ -184,28 +231,28 @@ var SAMLmetaJS = {};
 			'urn:oid:2.5.4.9': 'street'
 		}
 	};
-	
+
 	SAMLmetaJS.TestEngine = function(ruleset) {
 		if (
 			(typeof ruleset === 'undefined') ||
 			(ruleset === null)
-		 	){
-			
+			){
+
 			this.ruleset = {}
 		} else {
-			this.ruleset = ruleset;			
+			this.ruleset = ruleset;
 		}
 		this.tests = [];
 	}
-	
+
 	SAMLmetaJS.TestEngine.prototype.addTest = function(test) {
 		if (this.ruleset.hasOwnProperty(test.id)) {
 			console.log('Overriding significance from [' + test.significance + '] to [' + this.ruleset[test.id] + '] for [' + test.id + ']');
-			test.significance = this.ruleset[test.id];			
+			test.significance = this.ruleset[test.id];
 		}
 		this.tests.push(test);
 	}
-	
+
 	SAMLmetaJS.TestEngine.prototype.getResult = function() {
 		return this.tests;
 	}
@@ -214,10 +261,54 @@ var SAMLmetaJS = {};
 		this.tests = [];
 	}
 
+	SAMLmetaJS.validatorManager = function (validationContext) {
+		var
+			hideErrors = function (element) {
+				$(element).find('ul.errors').html('');
+			},
+			showErrors = function (element, errors) {
+				var output = $.map(errors, function (e) {
+					return '<li>' + e + '</li>';
+				});
+				$(element).find('ul.errors').html(output.join(''));
+			};
+
+		return function () {
+			var errors = 0;
+
+			$.each(validationContext, function (selector, validator) {
+				$(selector).each(function (index, element) {
+					var result = validator(element);
+					hideErrors(element);
+					if (result.errors.length > 0) {
+						showErrors(element, result.errors);
+						errors += result.errors.length;
+					}
+				});
+			});
+
+			return errors === 0;
+		};
+	};
+
+	SAMLmetaJS.l10nValidator = function (element, errorMessage) {
+		var value = null, lang = null, errors = [];
+		value = $(element).children('input').attr('value');
+		lang = $(element).children('select').val();
+
+		if (!value) {
+			errors.push(errorMessage);
+		}
+		return {
+			value: value,
+			lang: lang,
+			errors: errors
+		};
+	};
 
 	SAMLmetaJS.sync = function(node, options) {
 
-		var 
+		var
 			currentTab = 'xml',
 			mdreaderSetup = undefined,
 			showValidation = false,
@@ -231,12 +322,12 @@ var SAMLmetaJS = {};
 		var setEntityID = function (entityid) {
 			$("input#entityid").val(entityid);
 		};
-		
+
 		var testEngine;
 
 
 		var showTestResults = function(testEngine, showLevel) {
-			var 
+			var
 				result = testEngine.getResult(),
 				i = 0,
 				testnode;
@@ -244,13 +335,13 @@ var SAMLmetaJS = {};
 			testnode = $(node).parent().parent().find('div#samlmetajs_testresults');
 
 			$(testnode).empty();
-			
+
 			for(i = 0; i < result.length; i ++) {
 				if (showLevel[result[i].getLevel()]) {
-					$(testnode).append(result[i].html() );					
+					$(testnode).append(result[i].html() );
 				}
 			}
-			
+
 		}
 
 
@@ -261,18 +352,17 @@ var SAMLmetaJS = {};
 			currentTab = 'other';
 
 			console.log('fromXML()');
-			
 
 			testEngine.reset();
 			entitydescriptor = mdreader.parseFromString($(node).val());
 			setEntityID(entitydescriptor.entityid);
-			
+
 			console.log(entitydescriptor);
-			
+
 			if (showValidation === true) {
 				showTestResults(testEngine, showValidationLevel);
 			}
-			
+
 			SAMLmetaJS.pluginEngine.execute('fromXML', [entitydescriptor]);
 		};
 
@@ -284,7 +374,7 @@ var SAMLmetaJS = {};
 			currentTab = 'xml';
 			console.log('toXML()');
 
-			var entitydescriptor = {};
+			var entitydescriptor = new MDEntityDescriptor();
 
 			entitydescriptor.entityid = $('input#entityid').val();
 
@@ -302,7 +392,7 @@ var SAMLmetaJS = {};
 			var xmlstring = parser.getXMLasString();
 			xmlstring = SAMLmetaJS.XML.prettifyXML(xmlstring);
 			$(node).val(xmlstring);
-			
+
 			/*
 			 * Then parse the generated XML again, to perform the validation..
 			 */
@@ -310,13 +400,35 @@ var SAMLmetaJS = {};
 				testEngine.reset();
 				entitydescriptor = mdreader.parseFromString($(node).val());
 				setEntityID(entitydescriptor.entityid);
-				showTestResults(testEngine, showValidationLevel);		
-				
-				console.log(entitydescriptor);		
+				showTestResults(testEngine, showValidationLevel);
+
+				console.log(entitydescriptor);
 			}
 			// ---
 
 		};
+
+		var selectTab = function (event, ui) {
+			var 
+				isValid = true,
+				$tabs = $(event.target),
+				selected = $tabs.tabs("option", "selected"),
+				tab = $tabs.find('.ui-tabs-panel').eq(selected).attr('id');
+
+			if (tab !== 'rawmetadata') {
+				isValid = SAMLmetaJS.pluginEngine.executeOne(tab, 'validate', []);
+				if (typeof isValid === 'undefined') {
+				    isValid = true;
+				}
+			}
+
+			if (isValid && ui.index === 0) {  // rawmetadata tab
+				toXML();
+			}
+
+			return isValid;
+		};
+
 
 		// Add content
 		var embrace = function () {
@@ -333,7 +445,7 @@ var SAMLmetaJS = {};
 						   '<button class="prettify">Pretty format</button>' +
 						   '<button class="wipe">Wipe</button>' +
 						   '</div>');
-				
+
 			tabnode.prepend('<ul>' +
 							'<li><a href="#rawmetadata">Metadata</a></li>' +
 							pluginTabs.list.join('') +
@@ -341,34 +453,30 @@ var SAMLmetaJS = {};
 			tabnode.prepend('<div id="samlmetajs_testresults"></div>');
 			tabnode.append(pluginTabs.content.join(''));
 
-			tabnode.tabs();
+			tabnode.tabs({select: selectTab});
 		};
 
+
 		embrace();
-		
+
 		if (options.ruleset) {
 			mdreaderSetup = options.ruleset;
 		}
-		
+
 		if (options.showValidation) {
 			showValidation = options.showValidation;
 		}
 		if (options.showValidationLevel) {
 			showValidationLevel = options.showValidationLevel;
 		}
-		
-		
+
 		testEngine = new SAMLmetaJS.TestEngine(mdreaderSetup);
-		
+
 		mdreader.setup({
 			testProcessor: function(t) {
 				testEngine.addTest(t);
 			}
 		});
-
-		// Initialization of the automatic reflection between UI elements and XML
-
-		$("a[href='#rawmetadata']").click(toXML);
 
 		SAMLmetaJS.pluginEngine.execute('tabClick', [
 			function(node) {

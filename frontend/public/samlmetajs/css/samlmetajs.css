@@ -41,6 +41,35 @@ div#tabs button {
 }
 
 
+div.ui-tabs-panel ul.errors {
+	margin: 1em;
+	padding-left: 2em;
+	list-style-image: url(../icons/exclamation.png);
+}
+
+/* Generic field styles */
+.inlineField {
+	float: left;
+	margin: 2px 10px 5px;
+}
+
+.wideField input {
+	width: 80%;
+}
+
+.radioGroup {
+	margin-top: 10px;
+}
+
+.radioGroup label {
+	display: inline;
+	margin-right: 6px;
+}
+
+.newRow {
+	clear: left;
+}
+
 /* Verification box */
 div#tabs div#samlmetajs_testresults div.samlmetajs_testentry {
 	margin: 2px;
@@ -84,30 +113,33 @@ div#org fieldset.description legend, div#info fieldset.description legend {
 	background-image: url('../icons/note_edit.png');
 }
 
+div#info fieldset.logo legend {
+	background-image: url('../icons/image.png');
+}
+
+div#tabs div#info div.infologodiv select { width: auto; }
+div#tabs div#info div.infologodiv input[type=url] { width: 400px; }
+div#tabs div#info div.infologodiv button { width: auto; }
+
+.logopreview {
+	float: right;
+	margin: 1em;
+}
+
+.logopreview figcaption {
+	text-align: center;
+}
+
+.logopreview img {
+	margin-top: 0.5em;
+}
+
 
 /* SAML SP tab */
 
-div#tabs div#saml2sp fieldset legend {
+div#tabs div#endpoints fieldset legend {
 	background-image: url('../icons/bullet_wrench.png');
 }
-div#tabs div#saml2sp div.endpointfield.endpointfield-location {
-	clear: both;
-}
-div#tabs div#saml2sp div.endpointfield input {
-	width: 400px ! important;
-}
-div#tabs div#saml2sp div.endpointfield label {
-	width: 200px ! important;
-	display: block;
-	color: #999;
-	font-size: small;
-}
-div#tabs div#saml2sp div.endpointfield {
-	float: left;
-	margin: 2px 10px 5px 10px;
-/*	width: 45%;*/
-}
-
 
 
 /* Contacts tab */

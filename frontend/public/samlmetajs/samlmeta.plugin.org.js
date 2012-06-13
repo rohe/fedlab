@@ -14,6 +14,7 @@
 			var typeid = 'orgname';
 			var randID = typeid + Math.floor(Math.random() * 10000 + 1000);
 			var infoHTML = '<div class="' + typeid + 'div">' +
+				'<ul class="errors"></ul>' +
 				'<select name="' + randID + '-lang-name" id="' + randID + '-lang">';
 			var languageFound = false;
 			var language, checked;
@@ -34,7 +35,7 @@
 			}
 
 			infoHTML += '</select>' +
-				'<input type="text" name="' + randID + '-name-name" id="' + randID + '-name" value="' + (name || '') + '" />' +
+				'<input type="text" name="' + randID + '-name-name" id="' + randID + '-name" value="' + (name || '') + '" />' +
 				'<button style="" class="removename">Remove</button>' +
 				'</div>';
 
@@ -47,6 +48,7 @@
 			var typeid = 'orgdisplayname';
 			var randID = typeid + Math.floor(Math.random() * 10000 + 1000);
 			var infoHTML = '<div class="' + typeid + 'div">' +
+				'<ul class="errors"></ul>' +
 				'<select name="' + randID + '-lang-name" id="' + randID + '-lang">';
 			var languageFound = false;
 			var language, checked;
@@ -67,7 +69,7 @@
 			}
 
 			infoHTML += '</select>' +
-				'<input type="text" name="' + randID + '-name-name" id="' + randID + '-name" value="' + (name || '') + '" />' +
+				'<input type="text" name="' + randID + '-name-name" id="' + randID + '-name" value="' + (name || '') + '" />' +
 				'<button style="" class="removename">Remove</button>' +
 				'</div>';
 
@@ -80,6 +82,7 @@
 			var typeid = 'orgurl';
 			var randID = typeid + Math.floor(Math.random() * 10000 + 1000);
 			var infoHTML = '<div class="' + typeid + 'div">' +
+				'<ul class="errors"></ul>' +
 				'<select name="' + randID + '-lang-name" id="' + randID + '-lang">';
 			var languageFound = false;
 			var language, checked;
@@ -100,7 +103,7 @@
 			}
 
 			infoHTML += '</select>' +
-				'<input type="text" name="' + randID + '-name-name" id="' + randID + '-name" value="' + (name || '') + '" />' +
+				'<input type="text" name="' + randID + '-name-name" id="' + randID + '-name" value="' + (name || '') + '" />' +
 				'<button style="" class="removename">Remove</button>' +
 				'</div>';
 
@@ -108,9 +111,16 @@
 				e.preventDefault();
 				$(e.target).closest('div.' + typeid + 'div').remove();
 			});
-		}
-
-
+		},
+		validateName: function (element) {
+			return SAMLmetaJS.l10nValidator(element, "The name is required");
+		},
+		validateDisplayname: function (element) {
+			return SAMLmetaJS.l10nValidator(element, "The display name is required");
+		},
+		validateUrl: function (element) {
+			return SAMLmetaJS.l10nValidator(element, "The URL is required");
+		}		
 	};
 
 	SAMLmetaJS.plugins.org = {
@@ -122,7 +132,7 @@
 			pluginTabs.list.push('<li><a href="#org">Organization</a></li>');
 			pluginTabs.content.push(
 				'<div id="org">' +
-				
+
 					'<fieldset class="name"><legend>Name of organization</legend>' +
 						'<div id="orgname"></div>' +
 						'<div>' +
@@ -136,7 +146,7 @@
 							'<button class="adddisplayname">Add displayname in one more language</button>' +
 						'</div>' +
 					'</fieldset>' +
-					
+
 					'<fieldset class="entityid"><legend>URL to information about organization</legend>' +
 						'<div id="orgurl"></div>' +
 						'<div>' +
@@ -165,11 +175,11 @@
 
 		fromXML: function (entitydescriptor) {
 			var l;
-		
+
 			UI.clearOrgname();
 			UI.clearOrgdisplayname();
-			UI.clearOrgurl();	
-			
+			UI.clearOrgurl();
+
 			if (entitydescriptor.organization) {
 
 				if (entitydescriptor.organization.name) {
@@ -193,48 +203,59 @@
 						}
 					}
 				}
-
-				
 			}
-	
 		},
 
 		toXML: function (entitydescriptor) {
-			var 
+			var
 				include = false,
 				org = {};
-			
+
 			$('div#orgname > div').each(function (index, element) {
-				var value = $(element).children('input').attr('value');
-				if (!value) {
+				var result = UI.validateName(element);
+				if (result.errors.length > 0) {
 					return;
 				}
-				if (!org.name) org.name = {};
-				org.name[$(element).children('select').val()] = value;
+				if (!org.name) {
+					org.name = {};
+				}
+				org.name[result.lang] = result.value;
 				include = true;
 			});
 			$('div#orgdisplayname > div').each(function (index, element) {
-				var value = $(element).children('input').attr('value');
-				if (!value) {
+				var result = UI.validateDisplayname(element);
+				if (result.errors.length > 0) {
 					return;
 				}
-				if (!org.displayname) org.displayname = {};
-				org.displayname[$(element).children('select').val()] = value;
+				if (!org.displayname) {
+					org.displayname = {};
+				}
+				org.displayname[result.lang] = result.value;
 				include = true;
 			});
 			$('div#orgurl > div').each(function (index, element) {
-				var value = $(element).children('input').attr('value');
-				if (!value) {
+				var result = UI.validateUrl(element);
+				if (result.errors.length > 0) {
 					return;
 				}
-				if (!org.url) org.url = {};
-				org.url[$(element).children('select').val()] = value;
+				if (!org.url) {
+					org.url = {};
+				}
+				org.url[result.lang] = result.value;
 				include = true;
 			});
-			
 
-			if (include) entitydescriptor.organization = org;
-			
+			if (include) {
+				entitydescriptor.organization = org;
+			}
+		},
+		validate: function () {
+			var validator = SAMLmetaJS.validatorManager({
+				'div#orgname > div': UI.validateName,
+				'div#orgdisplayname > div': UI.validateDisplayname,
+				'div#orgurl > div': UI.validateUrl
+			});
+			return validator();
 		}
 	};
 

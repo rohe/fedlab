@@ -59,6 +59,12 @@ app.get('/saml-sp', function(req, res){
 	});
 });
 
+app.get('/saml-sp2', function(req, res){
+	res.render('saml-sp2', {
+		title: 'SAML 2.0 Service Provider Testing'
+	});
+});
+
 app.get('/connect-provider', function(req, res){
 
 	res.render('connect-provider', {
