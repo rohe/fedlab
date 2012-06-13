@@ -175,6 +175,7 @@
 			this.item.metadata.features.discovery = !!($(cur.el).find("input#usediscovery:checkbox:checked").val());
 			this.item.metadata.features.registration = !!($(cur.el).find("input#useregistration:checkbox:checked").val());
 			this.item.metadata.features.sessionmanagement = !!($(cur.el).find("input#usesessionmanagement:checkbox:checked").val());
+			this.item.metadata.features.key_export = !!($(cur.el).find("input#usekeyexport:checkbox:checked").val());
 			
 			this.item.metadata.provider.supported_response_types = [];
 			$.each(this.item._response_types, function(key, rt) {
@@ -203,6 +204,7 @@
 			this.item.metadata.client.client_secret = $(this.el).find("input#client_secret").val();
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
 			this.item.metadata.client.client_type = $(this.el).find("select#client_type").val();
+			this.item.metadata.client.key_export = 'http://%s:8090/export';
 			
 			this.adjustUI();
 

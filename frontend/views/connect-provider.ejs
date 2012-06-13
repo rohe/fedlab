@@ -266,6 +266,15 @@
 					See <a target="_blank" href="http://openid.net/specs/openid-connect-session-1_0.html">OpenID Connect Session Management</a> for more details.
 				</span>
 			</p>
+
+
+			<p>
+				<input type="checkbox" {{if metadata.features.discovery}} checked="checked" {{/if}} id="usekeyexport" name="usekeyexport" />
+				<label for="usekeyexport">Enable key export</label>
+				<span class="item-description">If you enable keyexport, Federation Lab will try to make authenticated requests using a key.</span>
+			</p>
+
+
 			
 			<p>
 				Supported Algoritms

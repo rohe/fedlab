@@ -282,6 +282,10 @@ testconnector = function (config) {
 
 	my.process = function (req, res) {
 		var metadata, response; 
+		var hostname = req.headers.host;
+
+		console.log('Hostname is : ' + hostname);
+
 	
 		console.log("Received request on the /api");
 		console.log(JSON.stringify(req.body, null, 4));
@@ -291,7 +295,7 @@ testconnector = function (config) {
 
 
 		if (metadata.interaction && metadata.interaction['https://www.kodtest.se:8088//authorization']) {
-			metadata.interaction['https://www.kodtest.se:8088/authorization'] = metadata.interaction['https://www.kodtest.se:8088//authorization'];
+			// metadata.interaction['https://www.kodtest.se:8088/authorization'] = metadata.interaction['https://www.kodtest.se:8088//authorization'];
 		}
 
 		
@@ -436,7 +440,7 @@ testconnector = function (config) {
 			// TODO : Validate the flow parameter.
 			
 			
-			execute("/usr/local/bin/oicc.py", ["-J", "-", "-v", "-d", req.body.flow], metadata, function(result, stderr, statuscode) {
+			execute("/usr/local/bin/oicc.py", ["-J", "-", "-v", "-H", hostname, "-i", "-d", req.body.flow], metadata, function(result, stderr, statuscode) {
 
 				console.log("Received result.");
 				console.log("stdout");

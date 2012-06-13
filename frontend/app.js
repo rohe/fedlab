@@ -60,6 +60,7 @@ app.get('/saml-sp', function(req, res){
 });
 
 app.get('/connect-provider', function(req, res){
+
 	res.render('connect-provider', {
 		title: 'OpenID Connect Provider Testing'
 	});
@@ -89,6 +90,7 @@ var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/mod
 // 	});
 
 app.post('/api', function(req, res){
+	console.log('Hostname is : ' + req.headers.host);
 	t.process(req, res);
 });
 app.post('/api/results/publish', function(req, res) {
