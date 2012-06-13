@@ -52,6 +52,16 @@ app.get('/', function(req, res){
 	});
 });
 
+app.get('/about', function(req, res){
+	res.render('about', {
+		title: 'About'
+	});
+});
+app.get('/contact', function(req, res){
+	res.render('contact', {
+		title: 'Contact'
+	});
+});
 
 app.get('/saml-sp', function(req, res){
 	res.render('saml-sp', {
@@ -108,10 +118,3 @@ app.get('/api/results', function(req, res) {
 app.get('/api/definitions', function(req, res) {
 	t.getDefinitions(req, res);
 });
-
-app.listen(80);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-
-
-
-

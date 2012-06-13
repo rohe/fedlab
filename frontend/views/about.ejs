@@ -36,6 +36,10 @@
 		</script>
 
 
+
+
+
+
 		<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script>
 
 		<!-- SAMLmetaJS -->
@@ -80,24 +84,27 @@
 
 		<script type="text/javascript">
 				$(document).ready(function(){
-					var options = {
-						showValidation: false,
-						showValidationLevel: {
-							info: false,
-							ok: false,
-							warning: true,
-							error: true
-						}
-					};
-					$("textarea#metadatafield").SAMLmetaJS(options);
-					$("input#save").click(function (event) {
-						event.preventDefault();
-						event.stopPropagation();
-						
-						saveConfig();
-						loadConfigList();
-					});
+				var options = {
+					showValidation: false,
+					showValidationLevel: {
+						info: false,
+						ok: false,
+						warning: true,
+						error: true
+					}
+				};
+				$("textarea#metadatafield").SAMLmetaJS(options);
+				$("input#save").click(function (event) {
+					event.preventDefault();
+					event.stopPropagation();
+					
+					saveConfig();
+					loadConfigList();
 				});
+				});
+		
+		
+		
 		</script>
 
 	</head>
@@ -118,8 +125,9 @@
 					<a class="brand" href="#">Federation Lab</a>
 					<div class="nav-collapse">
 						<ul class="nav">
-							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/about">About</a></li>
+
+							<li><a href="/">Home</a></li>
+							<li class="active"><a href="/about">About</a></li>
 							<li><a href="/contact">Contact</a></li>
 						</ul>
 					</div><!--/.nav-collapse -->
