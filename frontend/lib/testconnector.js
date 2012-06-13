@@ -305,7 +305,7 @@ testconnector = function (config) {
 
 		if (req.body.operation === "verify") {
 			
-			execute("/usr/local/bin/oicc.py", ["-J", "-", "-v", "oic-verify"], metadata, function(result, stderr, statuscode) {
+			execute("/usr/local/bin/oicc.py", ["-J", "-", "-H", hostname, "-i", "oic-verify"], metadata, function(result, stderr, statuscode) {
 
 				response = {
 					status: "ok"
@@ -440,7 +440,7 @@ testconnector = function (config) {
 			// TODO : Validate the flow parameter.
 			
 			
-			execute("/usr/local/bin/oicc.py", ["-J", "-", "-v", "-H", hostname, "-i", "-d", req.body.flow], metadata, function(result, stderr, statuscode) {
+			execute("/usr/local/bin/oicc.py", ["-J", "-", "-H", hostname, "-i", "-d", req.body.flow], metadata, function(result, stderr, statuscode) {
 
 				console.log("Received result.");
 				console.log("stdout");
