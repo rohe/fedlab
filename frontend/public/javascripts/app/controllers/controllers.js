@@ -73,6 +73,9 @@
 
 			this.item.metadata.client.client_id = $(this.el).find("input#client_id").val();
 			this.item.metadata.client.client_secret = $(this.el).find("input#client_secret").val();
+			if (this.item.metadata.client.client_secret === '') {
+				delete this.item.metadata.client.client_secret;
+			}
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
 			this.item.metadata.client.client_type = $(this.el).find("select#client_type").val();
 			this.item.metadata.client.redirect_uris = ["https://%s/authz_cb"];
@@ -204,6 +207,9 @@
 
 			this.item.metadata.client.client_id = $(this.el).find("input#client_id").val();
 			this.item.metadata.client.client_secret = $(this.el).find("input#client_secret").val();
+			if (this.item.metadata.client.client_secret === '') {
+				delete this.item.metadata.client.client_secret;
+			}
 			this.item.metadata.client.auth_type = $(this.el).find("select#auth_type").val();
 			this.item.metadata.client.client_type = $(this.el).find("select#client_type").val();
 			this.item.metadata.client.key_export_url = 'http://%s:8090/export';

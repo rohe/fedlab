@@ -295,7 +295,7 @@ testconnector = function (config) {
 
 
 		if (metadata.interaction && metadata.interaction['https://www.kodtest.se:8088//authorization']) {
-			// metadata.interaction['https://www.kodtest.se:8088/authorization'] = metadata.interaction['https://www.kodtest.se:8088//authorization'];
+			metadata.interaction['https://www.kodtest.se:8088/authorization'] = metadata.interaction['https://www.kodtest.se:8088//authorization'];
 		}
 
 		
