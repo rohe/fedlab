@@ -118,3 +118,7 @@ app.get('/api/results', function(req, res) {
 app.get('/api/definitions', function(req, res) {
 	t.getDefinitions(req, res);
 });
+
+app.listen(80);
+console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+

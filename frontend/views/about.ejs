@@ -76,36 +76,13 @@
 		<![endif]-->
 
 		<!-- Le fav and touch icons -->
-		<link rel="shortcut icon" href="/bootstrap/ico/favicon.ico">
+
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/bootstrap/ico/apple-touch-icon-144-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/bootstrap/ico/apple-touch-icon-114-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/bootstrap/ico/apple-touch-icon-72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="/bootstrap/ico/apple-touch-icon-57-precomposed.png">
 
-		<script type="text/javascript">
-				$(document).ready(function(){
-				var options = {
-					showValidation: false,
-					showValidationLevel: {
-						info: false,
-						ok: false,
-						warning: true,
-						error: true
-					}
-				};
-				$("textarea#metadatafield").SAMLmetaJS(options);
-				$("input#save").click(function (event) {
-					event.preventDefault();
-					event.stopPropagation();
-					
-					saveConfig();
-					loadConfigList();
-				});
-				});
-		
-		
-		
-		</script>
+
 
 	</head>
 
@@ -146,46 +123,21 @@
 
 		<div class="container">
 
-				<!-- Main hero unit for a primary marketing message or call to action -->
-				<div class="hero-unit">
-					<h1>Federation Lab</h1>
-					<p>Federation Lab is a set of tools for testing, verification and debugging of various Identity protocols. Federation Lab is a joint collaboration effort between <a href="http://geant.net">GÉANT</a> and <a href="http://kantara.org">Kantara Initiative</a>.</p>
-					<p>Federation Lab uses sophisticated techniques for performing automated verification of identity protocols. The head developers involved in the Federation Lab is <a href="http://rnd.feide.no">Andreas Åkre Solberg</a>, <a href="http://uninett.no">UNINETT</a> and <a href="http://umu.se">Roland Hedberg</a>, <a href="http://umu.se">University of Umeå</a>.</p>
-					<p><a href="/about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-				</div>
+			<!-- Main hero unit for a primary marketing message or call to action -->
+			<div class="hero-unit">
+				<h1>About › Federation Lab</h1>
+				<p>Federation Lab is a set of tools for testing, verification and debugging of various Identity protocols. Federation Lab is a joint collaboration effort between <a href="http://geant.net">GÉANT</a> and <a href="http://kantara.org">Kantara Initiative</a>.</p>
+				<p>Federation Lab uses sophisticated techniques for performing automated verification of identity protocols. The head developers involved in the Federation Lab is <a href="http://rnd.feide.no">Andreas Åkre Solberg</a>, <a href="http://uninett.no">UNINETT</a> and <a href="http://umu.se">Roland Hedberg</a>, <a href="http://umu.se">University of Umeå</a>.</p>
 
-				<!-- Example row of columns -->
-				<div class="row">
-					<div class="span3">
-						<h2>SAML 2.0</h2>
-						 <p>Security Assertion Markup Language 2.0 (SAML 2.0) is a version of the SAML OASIS standard for exchanging authentication and authorization data between security domains. SAML 2.0 is an XML-based protocol that uses security tokens containing assertions to pass information about a principal (usually an end user) between an identity provider and a web service. SAML 2.0 enables web-based authentication and authorization scenarios including single sign-on (SSO).</p>
-						<p><a class="btn" href="/saml-sp">SAML Testing &raquo;</a></p>
-					</div>
-					<div class="span3">
-						<h2>OpenID Connect</h2>
-						 <p>OpenID Connect is a suite of lightweight specifications that provide a framework for identity interactions via RESTful APIs. The simplest deployment of OpenID Connect allows for clients of all types including browser-based, mobile, and javascript clients, to request and receive information about identities and currently authenticated sessions. The specification suite is extensible, allowing participants to optionally also support encryption of identity data, discovery of the OpenID Provider, and advanced session management, including logout.</p>
-						<p><a class="btn" href="/connect-provider">OpenID Connect testing &raquo;</a></p>
-					</div>
-<!-- 
-				</div>
-				<div class="row"> -->
-					<div class="span3">
-						<h2>Firefox plugin: SAML-tracer</h2>
-						 <p>SAMLtrace is a Firefox plugin that allows you to trace and review all front-channel SAML messages sent as you browse web pages. The tool is intended for SAML developers or deployers for educational, research or debugging purposes.</p>
-						<p><a class="btn" href="https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/">SAMLtracer &raquo;</a></p>
-					</div>
-					<div class="span3">
-						<h2>Webbased SAML debugger</h2>
-						<p>This tool is a webbased encoder and decoder of SAML messages. It is useful for debugging a SAML setup.</p>
-						<p><a class="btn" href="https://rnd.feide.no/simplesaml/module.php/saml2debug/debug.php">SAML debugger &raquo;</a></p>
-				 </div>
+			</div>
 
 
-				<hr>
 
-				<footer>
-					<p>&copy; Company 2012</p>
-				</footer>
+			<hr>
+
+			<footer>
+				<p>&copy; Company 2012</p>
+			</footer>
 
 		</div> <!-- /container -->
 

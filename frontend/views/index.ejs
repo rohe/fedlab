@@ -72,33 +72,12 @@
 		<![endif]-->
 
 		<!-- Le fav and touch icons -->
-		<link rel="shortcut icon" href="/bootstrap/ico/favicon.ico">
+
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/bootstrap/ico/apple-touch-icon-144-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/bootstrap/ico/apple-touch-icon-114-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/bootstrap/ico/apple-touch-icon-72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="/bootstrap/ico/apple-touch-icon-57-precomposed.png">
 
-		<script type="text/javascript">
-				$(document).ready(function(){
-					var options = {
-						showValidation: false,
-						showValidationLevel: {
-							info: false,
-							ok: false,
-							warning: true,
-							error: true
-						}
-					};
-					$("textarea#metadatafield").SAMLmetaJS(options);
-					$("input#save").click(function (event) {
-						event.preventDefault();
-						event.stopPropagation();
-						
-						saveConfig();
-						loadConfigList();
-					});
-				});
-		</script>
 
 	</head>
 
@@ -162,16 +141,16 @@
 				</div>
 				<div class="row"> -->
 					<div class="span3">
-						<h2>Firefox plugin: SAML-tracer</h2>
+						<h2>SAML-tracer<br /><small>Firefox plugin</small></h2>
 						 <p>SAMLtrace is a Firefox plugin that allows you to trace and review all front-channel SAML messages sent as you browse web pages. The tool is intended for SAML developers or deployers for educational, research or debugging purposes.</p>
 						<p><a class="btn" href="https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/">SAMLtracer &raquo;</a></p>
 					</div>
 					<div class="span3">
-						<h2>Webbased SAML debugger</h2>
+						<h2>SAML debugger</h2>
 						<p>This tool is a webbased encoder and decoder of SAML messages. It is useful for debugging a SAML setup.</p>
 						<p><a class="btn" href="https://rnd.feide.no/simplesaml/module.php/saml2debug/debug.php">SAML debugger &raquo;</a></p>
-				 </div>
-
+					</div>
+				</div>
 
 				<hr>
 
@@ -185,7 +164,7 @@
 
 		<!-- Le javascript
 		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
+		<!-- Placed at the end of the document so the pages load faster
 		<script src="/bootstrap/js/jquery.js"></script>
 		<script src="/bootstrap/js/bootstrap-transition.js"></script>
 		<script src="/bootstrap/js/bootstrap-alert.js"></script>
@@ -199,6 +178,6 @@
 		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
 		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
 		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
-
+ -->
 	</body>
 </html>
