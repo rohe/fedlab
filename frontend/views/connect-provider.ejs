@@ -35,10 +35,16 @@
 	<!-- Federation Lab -->
 	<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
 	<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
-	
+
+	<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
+	<script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script>
 	<script type="text/javascript" src="/javascripts/app/controllers/ctrl.publisher.js"></script>
 	<script type="text/javascript" src="/javascripts/app/controllers/userinteraction.js"></script>
-	<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
+
+
+	<script type="text/javascript" src="/javascripts/app/controllers/FedLabConnect.js"></script>
+
+
 	
 	
 
@@ -468,17 +474,13 @@
 
 	
 	
-
-
-
-
-	
 	<script type="text/javascript">
+
 		jQuery(function($) {
-			return new FedLab({
+			return new FedLabConnect({
 				el: $("body"),
-					type: OICProviderEditor,
-					modelType: OICProvider
+				type: OICProviderEditor,
+				modelType: OICProvider
 				//type: OAuthEditor
 			});
 		});
@@ -486,9 +488,8 @@
 			setInterval(function() {
 				$("span.lastRunDate").prettyDate();
 			}, 30000);
-
-
 		});
+
 	</script>
 	
 </head>

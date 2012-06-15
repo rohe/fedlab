@@ -11,6 +11,7 @@ var
 	
 	// Local libraries.
 	testconnector = require('./lib/testconnector.js'),
+	testconnectorsaml = require('./lib/testconnector-samlsp.js'),
 	interaction = require('./lib/interaction.js'),
 	
 	// Variables
@@ -41,8 +42,6 @@ app.configure('development', function(){
 app.configure('production', function(){
 	app.use(express.errorHandler()); 
 });
-
-
 
 
 // Routes
@@ -91,7 +90,8 @@ app.get('/test', function(req, res){
 	});
 });
 
-var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/modules/fedlab/bin/cmd.php"});
+var t = testconnector.testconnector();
+var ts = testconnectorsaml.testconnectorsaml();
 
 // t.temp("oic-verify", function (msg) {
 // 	var url = msg.tests[7].url;
@@ -102,18 +102,29 @@ var t = testconnector.testconnector({"cmd": "/root/fedlab/simplesamlphp-test/mod
 // 	});
 
 app.post('/api', function(req, res){
-	console.log('Hostname is : ' + req.headers.host);
-	t.process(req, res);
+
+	console.log('Accessing API on hostname : ' + req.headers.host);
+	console.log(req.body.type); 
+	if (req.body.type === 'saml') {
+		ts.process(req, res);
+		console.log("Called SAML")
+	} else if (req.body.type === 'connect') {
+		t.process(req, res);
+		console.log("Called Connect");
+	} else {
+		throw {message: 'invalid type at the API'};
+	}
+	
 });
-app.post('/api/results/publish', function(req, res) {
-	t.publish(req, res);
-});
-app.get('/api/results', function(req, res) {
-	t.getResults(req, res);
-});
-app.get('/api/definitions', function(req, res) {
-	t.getDefinitions(req, res);
-});
+// app.post('/api/results/publish', function(req, res) {
+// 	t.publish(req, res);
+// });
+// app.get('/api/results', function(req, res) {
+// 	t.getResults(req, res);
+// });
+// app.get('/api/definitions', function(req, res) {
+// 	t.getDefinitions(req, res);
+// });
 
 app.listen(80);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

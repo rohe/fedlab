@@ -9,11 +9,22 @@
 		init: function(container, metadata) {
 			this.container = container;
 			this.metadata = metadata;
-			
 
+			this.connector = new APIconnector("saml", this.metadata);
+			this.connector.verify($.proxy(this.verifyok, this), this.verifyfailed);
 		},
-		verify: function() {
-			
+		verifyok: function() {
+			this.connector.getDefinitions(this.definitionLoaded, 
+				function(err) {
+					console.log("Error: " + err.message);
+				}
+			);
+		},
+		verifyfailed: function(f) {
+			alert("Failed " + f);
+		},
+		definitionLoaded: function(def) {
+			console.log("Definitions loaded ", def);
 		}
 	});
 
