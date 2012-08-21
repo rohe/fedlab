@@ -10,7 +10,8 @@
 
 
 		<!-- Local stylesheets -->
-		<link rel="stylesheet" href="/stylesheets/style2.css" />
+		<link rel="stylesheet" href="/stylesheets/layout-saml.css" />
+		<link rel="stylesheet" href="/stylesheets/testresults.css" />
 
 		<!-- jQuery + UI -->
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -79,7 +80,10 @@
 		<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<style>
 			body {
-				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+				padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+			ul.breadcrumb {
+				padding-left: 60px;
 			}
 		</style>
 		<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -121,6 +125,15 @@
 					console.info("An attempt was made to fetch old metadata from localStorage, but parsing the stored JSON failed.");
 				}
 
+				$('ul#samlnav a').click(function (e) {
+					e.preventDefault();
+					console.log("Clicked tab", this);
+					$(this).tab('show');
+				});
+				$("button#firstcontinue").click(function(e) {
+					$('ul#samlnav a:last').tab('show');
+					e.preventDefault();
+				});
 
 
 				// $("button#verifynow").on("click", function() {
@@ -243,14 +256,15 @@
 					<a class="brand" href="#">Federation Lab</a>
 					<div class="nav-collapse">
 						<ul class="nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
 						</ul>
-					</div><!--/.nav-collapse -->
+					</div>
 				</div>
 			</div>
 		</div>
+
 
 		<ul class="breadcrumb">
 			<li>
@@ -262,51 +276,88 @@
 
 		<div id="main" class="container">
 
-			<form id="configurationForm" action="?" method="get">
-
-				<h3>Add Federation Lab Metadata to your Service Provider</h3>
-
-				<textarea style="width: 100%; height: 300px">
-<?xml version="1.0"?>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;EntitiesDescriptor xmlns=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot; Name=&quot;fedlab-idps&quot; ID=&quot;pfx5b00c8ca-042d-c206-b841-e5bbc8f08120&quot;&gt;&lt;ds:Signature xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;
-  &lt;ds:SignedInfo&gt;&lt;ds:CanonicalizationMethod Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
-    &lt;ds:SignatureMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;/&gt;
-  &lt;ds:Reference URI=&quot;#pfx5b00c8ca-042d-c206-b841-e5bbc8f08120&quot;&gt;&lt;ds:Transforms&gt;&lt;ds:Transform Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#enveloped-signature&quot;/&gt;&lt;ds:Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;&lt;/ds:Transforms&gt;&lt;ds:DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;&lt;ds:DigestValue&gt;GWRH8zhTx50YsNw3exaaJ3V7y7o=&lt;/ds:DigestValue&gt;&lt;/ds:Reference&gt;&lt;/ds:SignedInfo&gt;&lt;ds:SignatureValue&gt;Ph0/7MtkP6o4JfxGjn7w+Z6DV6zx8fYIiK4vTOxP7vpivcw/oULv3fQPrSi+M2MZF9eoU+0RXU4kHANFwy6pQjx2ENnRNKrPBOAiMmsvS8FN/XeUFv/1UGSqd1DZYYXH3goPqf9wFFHMgeHFedk/s7HzSyiiaIWLG7/T/sZjp54=&lt;/ds:SignatureValue&gt;
-&lt;ds:KeyInfo&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIIDTzCCArigAwIBAgIJAPxczLBcsDq+MA0GCSqGSIb3DQEBBQUAMHkxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEeMBwGA1UEAxMVQW5kcmVhcyBBYWtyZSBTb2xiZXJnMB4XDTExMDExMjExNTMxMFoXDTIxMDExMTExNTMxMFoweTELMAkGA1UEBhMCTk8xEjAQBgNVBAgTCVRyb25kaGVpbTESMBAGA1UEBxMJVHJvbmRoZWltMRAwDgYDVQQKEwdVTklORVRUMRAwDgYDVQQLEwdVTklORVRUMR4wHAYDVQQDExVBbmRyZWFzIEFha3JlIFNvbGJlcmcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAN8m11S091rEePqviGp7G6mDlWG3YEL+62q1wGB1dumVmRRva0BAYFKLFHCUnDbfS/L1Cthw6vHugFr7lSBKESkVSO4oVnyMXvczbPWwSu6riAz0aFDTq/A4KVpkL/3DjZ1Mh/whkhNdlmGlIEfgHPifgy6T/n7sMM/qrS9J5zm1AgMBAAGjgd4wgdswHQYDVR0OBBYEFF2qWob5hyCrlaBc1rFY0TOIiVoYMIGrBgNVHSMEgaMwgaCAFF2qWob5hyCrlaBc1rFY0TOIiVoYoX2kezB5MQswCQYDVQQGEwJOTzESMBAGA1UECBMJVHJvbmRoZWltMRIwEAYDVQQHEwlUcm9uZGhlaW0xEDAOBgNVBAoTB1VOSU5FVFQxEDAOBgNVBAsTB1VOSU5FVFQxHjAcBgNVBAMTFUFuZHJlYXMgQWFrcmUgU29sYmVyZ4IJAPxczLBcsDq+MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAURbNND+C44evL321bvpMALyq5U7Uujpts1NopiPZF5iNW3+han9NsHbHn79xYObinMa9Ue9j5nyw+kYFJXbeiu3sZSa3fX2ig8eUiDTYgDE0KyCf5mW+HW7iNaDk3x2RdIfNL2FZzxbxkV/9UJ6XA9pLP7EFgWqg1sP6wiOOgiI=&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/ds:Signature&gt;&lt;md:EntityDescriptor xmlns:md=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot; entityID=&quot;https://openidp.feide.no&quot; validUntil=&quot;2012-06-20T04:53:50Z&quot; cacheDuration=&quot;PT432000S&quot;&gt;&lt;md:IDPSSODescriptor protocolSupportEnumeration=&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;&gt;&lt;md:SingleLogoutService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://openidp.feide.no/simplesaml/saml2/idp/SingleLogoutService.php&quot;/&gt;&lt;md:SingleSignOnService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php&quot;/&gt;&lt;/md:IDPSSODescriptor&gt;&lt;/md:EntityDescriptor&gt;&lt;md:EntityDescriptor xmlns:md=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot; xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot; entityID=&quot;https://fed-lab.org/simplesaml-test/module.php/fedlab/metadata.php&quot; validUntil=&quot;2012-06-20T04:53:50Z&quot; cacheDuration=&quot;PT432000S&quot;&gt;&lt;md:IDPSSODescriptor protocolSupportEnumeration=&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;&gt;&lt;md:KeyDescriptor use=&quot;signing&quot;&gt;&lt;ds:KeyInfo xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIIDUjCCArugAwIBAgIJAKUTNWcdpKB/MA0GCSqGSIb3DQEBBQUAMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzAeFw0xMDA2MjkxMzE0NThaFw0yMDA2MjgxMzE0NThaMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2D19iQV2KFG1+dz/ORZlIPnEK/EzbVDba6VBvAREmmbl89+Lint7xGcBQCi+vnyg30JCjWS/4OymGGS7i9OweHwLhihFf2lTxE9yIqdVZvX0pbgE5m+ZToHov+OO0PBP/HfYOhpXZQasN1kbWAGNDR0+fX0VqWmBpubU/hZbBdkCAwEAAaOB3zCB3DAdBgNVHQ4EFgQUslvHcZRsJm0QawJd3e6JGgz9V64wgawGA1UdIwSBpDCBoYAUslvHcZRsJm0QawJd3e6JGgz9V66hfqR8MHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ub4IJAKUTNWcdpKB/MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAL6R6W7ZiCZAtIDCAKz0+LMmlB+CFohqsQauD2q1BmRbpGhW9r5HJUq992UR2yrxvCb1mqLo+WbLizwXN/KnQZHa+tOu7NdQA0SgpVLWQtIPiEzShDMJZuKn9xifjHI+mtMK7S7/sI8kkapgzIij69vbbdS82os0CgChFoYpC8Ak=&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/md:KeyDescriptor&gt;&lt;md:KeyDescriptor use=&quot;encryption&quot;&gt;&lt;ds:KeyInfo xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIIDUjCCArugAwIBAgIJAKUTNWcdpKB/MA0GCSqGSIb3DQEBBQUAMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzAeFw0xMDA2MjkxMzE0NThaFw0yMDA2MjgxMzE0NThaMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2D19iQV2KFG1+dz/ORZlIPnEK/EzbVDba6VBvAREmmbl89+Lint7xGcBQCi+vnyg30JCjWS/4OymGGS7i9OweHwLhihFf2lTxE9yIqdVZvX0pbgE5m+ZToHov+OO0PBP/HfYOhpXZQasN1kbWAGNDR0+fX0VqWmBpubU/hZbBdkCAwEAAaOB3zCB3DAdBgNVHQ4EFgQUslvHcZRsJm0QawJd3e6JGgz9V64wgawGA1UdIwSBpDCBoYAUslvHcZRsJm0QawJd3e6JGgz9V66hfqR8MHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ub4IJAKUTNWcdpKB/MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAL6R6W7ZiCZAtIDCAKz0+LMmlB+CFohqsQauD2q1BmRbpGhW9r5HJUq992UR2yrxvCb1mqLo+WbLizwXN/KnQZHa+tOu7NdQA0SgpVLWQtIPiEzShDMJZuKn9xifjHI+mtMK7S7/sI8kkapgzIij69vbbdS82os0CgChFoYpC8Ak=&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/md:KeyDescriptor&gt;&lt;md:SingleLogoutService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://fed-lab.org/simplesaml-test/module.php/fedlab/SingleLogoutService.php&quot;/&gt;&lt;md:SingleSignOnService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://fed-lab.org/simplesaml-test/module.php/fedlab/SingleSignOnService.php&quot;/&gt;&lt;/md:IDPSSODescriptor&gt;&lt;md:ContactPerson contactType=&quot;technical&quot;&gt;&lt;md:GivenName&gt;Andreas&lt;/md:GivenName&gt;&lt;md:SurName&gt;Solberg&lt;/md:SurName&gt;&lt;md:EmailAddress&gt;andreas.solberg@uninett.no&lt;/md:EmailAddress&gt;&lt;/md:ContactPerson&gt;&lt;/md:EntityDescriptor&gt;&lt;/EntitiesDescriptor&gt;
-</textarea>
+			<ul id="samlnav" class="nav nav-tabs">
+				<li class="active">
+				<a href="#fedlabmeta">FedLab Metadata</a>
+				</li>
+				<li><a href="#spmeta">Register SP Metadata</a></li>
+			</ul>
 
 
-				<h3>Register metadata of the SAML 2.0 Serivce Provider</h3>
-
-				<p>To test your SAML 2.0 Service Provider, please register the metadata of your provider here.</p>
-				
-				<textarea style="" id="metadatafield" class="metadata" ></textarea>
-
-				<hr />
-
-				<p>
-					<label for="fedlab_initsso">An <b>URL that initiates login</b> at the service provider. Request to this page should also be automatically directed to the automated SP tester, and not show a discovery service.</label>
-					<input id="fedlab_initsso" name="fedlab_initsso"  type="text" class="input-xxlarge" placeholder="http:// (Init. SSO URL)">
-				</p>
-
-				<p>
-					<label for="fedlab_attributeurl">An URL at the service provider that <b>presents a list of attributes</b> for the currently authenticated user.</label>
-					<input id="fedlab_attributeurl" name="fedlab_attributeurl"  type="text" class="input-xxlarge" placeholder="http:// (Attributes URL)">
-				</p>
-
-				<p>
-					<label for="fedlab_initslo">An <b>URL that initiates SLO</b> at the service provider.</label>
-					<input id="fedlab_initslo" name="fedlab_initslo"  type="text" class="input-xxlarge" placeholder="http:// (Init. SLO URL)">
-				</p>
 
 
-				<button id="verifynow" class="btn btn-primary">Verify connectivity</button>
+			<form id="configurationForm" class="form-inline" action="?" method="get">
 
-				<!-- <input type="submit" id="verifyConnectivity" value="Verify connectivity" /> -->
-				<div  style="display: none" id="verifyErrorDiv"><pre id="verifyError"></pre></div>
+			<div class="tab-content">
+				<div class="tab-pane active" id="fedlabmeta">
 
+					<h3>Add Federation Lab Metadata to your Service Provider</h3>
+
+					<p>Before we continue, you need to configure your Service Provider to trust the Federation Lab as an Identity Provider. From now on, the Federation Lab will behave like a good and bad Identity Provider to test how your Service Provider behaves.</p>
+
+					<textarea style="width: 100%; height: 300px">
+	<?xml version="1.0"?>&lt;?xml version=&quot;1.0&quot;?&gt;
+	&lt;EntitiesDescriptor xmlns=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot; Name=&quot;fedlab-idps&quot; ID=&quot;pfx5b00c8ca-042d-c206-b841-e5bbc8f08120&quot;&gt;&lt;ds:Signature xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;
+	  &lt;ds:SignedInfo&gt;&lt;ds:CanonicalizationMethod Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;
+	    &lt;ds:SignatureMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;/&gt;
+	  &lt;ds:Reference URI=&quot;#pfx5b00c8ca-042d-c206-b841-e5bbc8f08120&quot;&gt;&lt;ds:Transforms&gt;&lt;ds:Transform Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#enveloped-signature&quot;/&gt;&lt;ds:Transform Algorithm=&quot;http://www.w3.org/2001/10/xml-exc-c14n#&quot;/&gt;&lt;/ds:Transforms&gt;&lt;ds:DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;&lt;ds:DigestValue&gt;GWRH8zhTx50YsNw3exaaJ3V7y7o=&lt;/ds:DigestValue&gt;&lt;/ds:Reference&gt;&lt;/ds:SignedInfo&gt;&lt;ds:SignatureValue&gt;Ph0/7MtkP6o4JfxGjn7w+Z6DV6zx8fYIiK4vTOxP7vpivcw/oULv3fQPrSi+M2MZF9eoU+0RXU4kHANFwy6pQjx2ENnRNKrPBOAiMmsvS8FN/XeUFv/1UGSqd1DZYYXH3goPqf9wFFHMgeHFedk/s7HzSyiiaIWLG7/T/sZjp54=&lt;/ds:SignatureValue&gt;
+	&lt;ds:KeyInfo&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIIDTzCCArigAwIBAgIJAPxczLBcsDq+MA0GCSqGSIb3DQEBBQUAMHkxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEeMBwGA1UEAxMVQW5kcmVhcyBBYWtyZSBTb2xiZXJnMB4XDTExMDExMjExNTMxMFoXDTIxMDExMTExNTMxMFoweTELMAkGA1UEBhMCTk8xEjAQBgNVBAgTCVRyb25kaGVpbTESMBAGA1UEBxMJVHJvbmRoZWltMRAwDgYDVQQKEwdVTklORVRUMRAwDgYDVQQLEwdVTklORVRUMR4wHAYDVQQDExVBbmRyZWFzIEFha3JlIFNvbGJlcmcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAN8m11S091rEePqviGp7G6mDlWG3YEL+62q1wGB1dumVmRRva0BAYFKLFHCUnDbfS/L1Cthw6vHugFr7lSBKESkVSO4oVnyMXvczbPWwSu6riAz0aFDTq/A4KVpkL/3DjZ1Mh/whkhNdlmGlIEfgHPifgy6T/n7sMM/qrS9J5zm1AgMBAAGjgd4wgdswHQYDVR0OBBYEFF2qWob5hyCrlaBc1rFY0TOIiVoYMIGrBgNVHSMEgaMwgaCAFF2qWob5hyCrlaBc1rFY0TOIiVoYoX2kezB5MQswCQYDVQQGEwJOTzESMBAGA1UECBMJVHJvbmRoZWltMRIwEAYDVQQHEwlUcm9uZGhlaW0xEDAOBgNVBAoTB1VOSU5FVFQxEDAOBgNVBAsTB1VOSU5FVFQxHjAcBgNVBAMTFUFuZHJlYXMgQWFrcmUgU29sYmVyZ4IJAPxczLBcsDq+MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAURbNND+C44evL321bvpMALyq5U7Uujpts1NopiPZF5iNW3+han9NsHbHn79xYObinMa9Ue9j5nyw+kYFJXbeiu3sZSa3fX2ig8eUiDTYgDE0KyCf5mW+HW7iNaDk3x2RdIfNL2FZzxbxkV/9UJ6XA9pLP7EFgWqg1sP6wiOOgiI=&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/ds:Signature&gt;&lt;md:EntityDescriptor xmlns:md=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot; entityID=&quot;https://openidp.feide.no&quot; validUntil=&quot;2012-06-20T04:53:50Z&quot; cacheDuration=&quot;PT432000S&quot;&gt;&lt;md:IDPSSODescriptor protocolSupportEnumeration=&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;&gt;&lt;md:SingleLogoutService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://openidp.feide.no/simplesaml/saml2/idp/SingleLogoutService.php&quot;/&gt;&lt;md:SingleSignOnService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php&quot;/&gt;&lt;/md:IDPSSODescriptor&gt;&lt;/md:EntityDescriptor&gt;&lt;md:EntityDescriptor xmlns:md=&quot;urn:oasis:names:tc:SAML:2.0:metadata&quot; xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot; entityID=&quot;https://fed-lab.org/simplesaml-test/module.php/fedlab/metadata.php&quot; validUntil=&quot;2012-06-20T04:53:50Z&quot; cacheDuration=&quot;PT432000S&quot;&gt;&lt;md:IDPSSODescriptor protocolSupportEnumeration=&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;&gt;&lt;md:KeyDescriptor use=&quot;signing&quot;&gt;&lt;ds:KeyInfo xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIIDUjCCArugAwIBAgIJAKUTNWcdpKB/MA0GCSqGSIb3DQEBBQUAMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzAeFw0xMDA2MjkxMzE0NThaFw0yMDA2MjgxMzE0NThaMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2D19iQV2KFG1+dz/ORZlIPnEK/EzbVDba6VBvAREmmbl89+Lint7xGcBQCi+vnyg30JCjWS/4OymGGS7i9OweHwLhihFf2lTxE9yIqdVZvX0pbgE5m+ZToHov+OO0PBP/HfYOhpXZQasN1kbWAGNDR0+fX0VqWmBpubU/hZbBdkCAwEAAaOB3zCB3DAdBgNVHQ4EFgQUslvHcZRsJm0QawJd3e6JGgz9V64wgawGA1UdIwSBpDCBoYAUslvHcZRsJm0QawJd3e6JGgz9V66hfqR8MHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ub4IJAKUTNWcdpKB/MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAL6R6W7ZiCZAtIDCAKz0+LMmlB+CFohqsQauD2q1BmRbpGhW9r5HJUq992UR2yrxvCb1mqLo+WbLizwXN/KnQZHa+tOu7NdQA0SgpVLWQtIPiEzShDMJZuKn9xifjHI+mtMK7S7/sI8kkapgzIij69vbbdS82os0CgChFoYpC8Ak=&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/md:KeyDescriptor&gt;&lt;md:KeyDescriptor use=&quot;encryption&quot;&gt;&lt;ds:KeyInfo xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;&lt;ds:X509Data&gt;&lt;ds:X509Certificate&gt;MIIDUjCCArugAwIBAgIJAKUTNWcdpKB/MA0GCSqGSIb3DQEBBQUAMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzAeFw0xMDA2MjkxMzE0NThaFw0yMDA2MjgxMzE0NThaMHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2D19iQV2KFG1+dz/ORZlIPnEK/EzbVDba6VBvAREmmbl89+Lint7xGcBQCi+vnyg30JCjWS/4OymGGS7i9OweHwLhihFf2lTxE9yIqdVZvX0pbgE5m+ZToHov+OO0PBP/HfYOhpXZQasN1kbWAGNDR0+fX0VqWmBpubU/hZbBdkCAwEAAaOB3zCB3DAdBgNVHQ4EFgQUslvHcZRsJm0QawJd3e6JGgz9V64wgawGA1UdIwSBpDCBoYAUslvHcZRsJm0QawJd3e6JGgz9V66hfqR8MHoxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEjAQBgNVBAcTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEQMA4GA1UECxMHVU5JTkVUVDEfMB0GA1UEAxMWZmVkbGFiLmJyaWRnZS5mZWlkZS5ub4IJAKUTNWcdpKB/MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAL6R6W7ZiCZAtIDCAKz0+LMmlB+CFohqsQauD2q1BmRbpGhW9r5HJUq992UR2yrxvCb1mqLo+WbLizwXN/KnQZHa+tOu7NdQA0SgpVLWQtIPiEzShDMJZuKn9xifjHI+mtMK7S7/sI8kkapgzIij69vbbdS82os0CgChFoYpC8Ak=&lt;/ds:X509Certificate&gt;&lt;/ds:X509Data&gt;&lt;/ds:KeyInfo&gt;&lt;/md:KeyDescriptor&gt;&lt;md:SingleLogoutService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://fed-lab.org/simplesaml-test/module.php/fedlab/SingleLogoutService.php&quot;/&gt;&lt;md:SingleSignOnService Binding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&quot; Location=&quot;https://fed-lab.org/simplesaml-test/module.php/fedlab/SingleSignOnService.php&quot;/&gt;&lt;/md:IDPSSODescriptor&gt;&lt;md:ContactPerson contactType=&quot;technical&quot;&gt;&lt;md:GivenName&gt;Andreas&lt;/md:GivenName&gt;&lt;md:SurName&gt;Solberg&lt;/md:SurName&gt;&lt;md:EmailAddress&gt;andreas.solberg@uninett.no&lt;/md:EmailAddress&gt;&lt;/md:ContactPerson&gt;&lt;/md:EntityDescriptor&gt;&lt;/EntitiesDescriptor&gt;
+	</textarea>
+					<p style="margin-top: 1em">When you're done adding this metadata to your trusted providers, you may move on and register your providers metadata here:
+						<button id="firstcontinue" style="float: right" class="btn btn-success">Next »</button>
+					</p>
+
+				</div>
+				<div class="tab-pane" id="spmeta">
+
+
+					<h3>Register metadata of the SAML 2.0 Serivce Provider</h3>
+
+					<p>To test your SAML 2.0 Service Provider, please register the metadata of your provider here.</p>
+					
+					<textarea style="" id="metadatafield" class="metadata" ></textarea>
+
+					<hr />
+
+					<p>
+						<label for="fedlab_initsso">An <b>URL that initiates login</b> at the service provider. Request to this page should also be automatically directed to the automated SP tester, and not show a discovery service.</label>
+						<br />
+						<input id="fedlab_initsso" name="fedlab_initsso"  type="text" class="input-xxlarge" placeholder="http:// (Init. SSO URL)">
+					</p>
+
+					<p>
+						<label for="fedlab_attributeurl">An URL at the service provider that <b>presents a list of attributes</b> for the currently authenticated user.</label>
+						<br />
+						<input id="fedlab_attributeurl" name="fedlab_attributeurl"  type="text" class="input-xxlarge" placeholder="http:// (Attributes URL)">
+					</p>
+
+					<p>
+						<label for="fedlab_initslo">An <b>URL that initiates SLO</b> at the service provider.</label>
+						<br />
+						<input id="fedlab_initslo" name="fedlab_initslo"  type="text" class="input-xxlarge" placeholder="http:// (Init. SLO URL)">
+					</p>
+
+
+					<button id="verifynow" class="btn btn-primary">Verify connectivity</button>
+
+					<!-- <input type="submit" id="verifyConnectivity" value="Verify connectivity" /> -->
+					<div  style="display: none" id="verifyErrorDiv"><pre id="verifyError"></pre></div>
+
+				</div>
+			</div>
 
 			</form>
+
+			<div id="testcontrollerbar">
+				<p>Testing <b id="testcontroller_name">some unnamed provider</b></p>
+
+				<div id="resultcounter"></div>
+
+				<input type="submit" name="configure" id="configure" value="« Revisit the configuration" />
+				<input type="submit" name="runall" id="runall" value="Run all test flows »" />
+
+			</div>
+
 
 
 			<div id="results">	
@@ -327,7 +378,7 @@
 		<script src="/bootstrap/js/bootstrap-modal.js"></script>
 		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
 		<script src="/bootstrap/js/bootstrap-scrollspy.js"></script>
-		<script src="/bootstrap/js/bootstrap-tab.js"></script>
+
 		<script src="/bootstrap/js/bootstrap-tooltip.js"></script>
 		<script src="/bootstrap/js/bootstrap-popover.js"></script>
 		<script src="/bootstrap/js/bootstrap-button.js"></script>
@@ -335,5 +386,6 @@
 		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
 		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
 		-->
+		<script src="/bootstrap/js/bootstrap-tab.js"></script>
 	</body>
 </html>
