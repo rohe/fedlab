@@ -1,7 +1,6 @@
 (function ($, exports) {
 
-	
-	
+
 	var FedLabSAML = Spine.Controller.sub({
 		entityloader: null,
 		events: {
@@ -26,6 +25,8 @@
 			}));
 
 			this.publisher = new PublishController({el: $("div#publishbar")}, this);
+
+
 
 			console.log("Fedlab SAML initiated...");
 			console.log(this.el);
@@ -111,7 +112,8 @@
 
 
 		updateCounter: function() {
-			var res = this.editor.item.countResults();
+			// var res = this.editor.item.countResults();
+			res = 0;
 			var el = $(this.el).find("div#resultcounter").empty();
 
 			console.log("Update counter: ");
@@ -226,10 +228,11 @@
 					changes;
 					
 				testflowresult = TestFlowResult.build(result);
-				changes = that.editor.item.updateResults(testflow, testflowresult);
-				testflowresult.changes = changes;
+				console.log("Editor", that.editor);
+				// changes = that.editor.item.updateResults(testflow, testflowresult);
+				// testflowresult.changes = changes;
 
-				that.editor.item.save();
+				// that.editor.item.save();
 				that.resultcontroller.updateFlowResults(testflow, sid, testflowresult);
 				that.updateCounter();
 

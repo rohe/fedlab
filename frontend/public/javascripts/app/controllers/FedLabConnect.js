@@ -155,6 +155,8 @@
 			}
 
 		},
+
+		
 		stateChange: function(newState) {
 			
 			var validClasses = ["modeEdit", "modeTest"];

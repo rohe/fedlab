@@ -1,0 +1,11 @@
+body.modeEdit form#configurationForm, 
+body.modeTest div#results,
+body.modeTest div#testcontrollerbar {
+	display: block;
+}
+body.modeTest form#configurationForm, 
+body.modeEdit div#results,
+body.modeEdit div#testcontrollerbar {
+	display: none;
+}
+

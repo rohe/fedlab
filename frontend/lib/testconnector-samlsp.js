@@ -90,162 +90,8 @@ testconnectorsaml = function (config) {
 		}
 		cmd.stdin.end();
 
-		
 	}
 
-	// my.getDefinitions = function (req, res) {
-	// 	var 
-	// 		response;
-
-	// 	execute(samlcmd, null, function(result, stderr, statuscode) {
-
-	// 		response = {
-	// 			status: "ok"
-	// 		};
-			
-	// 		console.log("Received result on stdout");
-	// 		console.log(result);
-
-	// 		if (result !== null && typeof result === "object") {
-
-	// 			if (result === null) {
-	// 				console.log("result is null");
-	// 			}
-	// 			response.result = {};
-				
-	// 			result.forEach(function(item) {
-	// 				var shasum = crypto.createHash('sha1');
-	// 				var sid = null;
-	// 				shasum.update("openid:testItem");
-	// 				shasum.update(item.id);
-	// 				sid = shasum.digest("hex");
-					
-	// 				response.result[sid] = item;
-	// 			});
-
-	// 			res.writeHead(200, { 'Content-Type': 'application/json' });   
-	// 			// response.write(
-	// 			res.end(JSON.stringify(response));
-	// 		} else {
-
-	// 			res.writeHead(200, { 'Content-Type': 'application/json' });   
-	// 			res.end(JSON.stringify({"status": "error", "message": stderr}) );
-
-	// 		}
-
-	// 	});
-
-
-	// }
-	
-	// my.getResults = function (req, res) {
-	// 	var 
-	// 		response,
-	// 		available = [], 
-	// 		metadata = {},
-	// 		fname;
-
-	// 	response = {
-	// 		status: "ok"
-	// 	}; 
-
-	// 	if (!resultsconfig) {
-	// 		res.writeHead(200, { 'Content-Type': 'application/json' });   
-	// 		res.end(JSON.stringify({"status": "error", "message": "Results not found..."}) );
-	// 	}
-
-	// 	response.results = {};
-	// 	for (var key in resultsconfig) {
-	// 		fname = "results/" + resultsconfig[key].id + ".js";
-	// 		if (path.existsSync(fname)) {
-	// 			// console.log("File " + fname + " found");
-	// 			// response.results[resultsconfig[key].id] = 'ok';
-	// 			available.push(resultsconfig[key].id);
-	// 			metadata[resultsconfig[key].id] = resultsconfig[key];
-	// 		} else {
-	// 			// console.log("Could not find file [" + fname + "]");
-	// 		}
-	// 	}
-	// 	console.log(response);
-
-	// 	if (available.length < 1) {
-	// 		res.writeHead(200, { 'Content-Type': 'application/json' });   
-	// 		res.end(JSON.stringify({"status": "error", "message": "No results available"}) );
-	// 	}
-
-
-	// 	(function(req, res) {
-
-	// 		var 
-	// 			resp = {},
-	// 			interrupted = false,
-	// 			completed = false;
-
-	// 		var complete = function() {
-	// 			completed = true;
-	// 			console.log("Results() Completed. Returning results...")
-	// 			res.writeHead(200, { 'Content-Type': 'application/json' });   
-	// 			response.results = resp;
-	// 			res.end(JSON.stringify(response));
-	// 		}
-	// 		var interrupt = function() {
-	// 			interrupted = true;
-	// 			res.writeHead(200, { 'Content-Type': 'application/json' });   
-	// 			res.end(JSON.stringify({"status": "error", "message": "Timeout retrieving results.."}) );
-	// 		}
-	// 		var checkComplete = function() {
-	// 			for (var key in resp) {
-	// 				console.log("Checking [" + key + "]");
-	// 				if (resp[key] === null) return;
-	// 			}
-	// 			if (!interrupted) complete();
-	// 		}
-	// 		setTimeout(function() {
-	// 			if (completed) return;
-	// 			interrupted = true;
-	// 			interrupt();
-	// 			console.log("Timeout reading results....")
-	// 		}, 5000);
-
-	// 		for(var i = 0; i < available.length; i++) {
-	// 			resp[available[i]] = null;
-	// 		}
-
-	// 		for(var i = 0; i < available.length; i++) {
-	// 			file = "results/" + available[i] + ".js";
-	// 			console.log("About to read " + file);
-	// 			fs.readFile(file, "utf8", function (err, data) {
-
-	// 				var lf = file;
-	// 				var lid = available[i];
-	// 				return function(err, data) {
-	// 					if (err) {
-	// 						console.log("Error reading " + file);
-	// 						delete resp[available[i]];
-	// 						return;
-	// 					}
-	// 					try {
-	// 						console.log("=====> DATA")
-	// 						console.log(lf);
-	// 						console.log(lid);
-	// 						console.log(data);
-	// 						resp[lid] = metadata[lid];
-	// 						resp[lid].data = JSON.parse(data);
-	// 						console.log("Success parsing... " + file);
-	// 					} catch(e) {
-	// 						console.log("Error parsing " + file);
-	// 						console.log(e);
-	// 						delete resp[available[i]];
-	// 						return;
-	// 					}
-	// 					checkComplete();
-	// 				}
-	// 			}());
-	// 		}
-
-	// 	})(req, res)
-
-	// }
 
 	my.publish = function (req, res) {
 		var 
@@ -280,6 +126,8 @@ testconnectorsaml = function (config) {
 		});
 
 	}
+
+
 
 	my.process = function (req, res) {
 		var metadata, response; 
@@ -434,9 +282,7 @@ testconnectorsaml = function (config) {
 			}
 			
 			// TODO : Validate the flow parameter.
-			
-			
-			execute(samlcmd, ["-J", "-", "-H", hostname, "-i", "-d", req.body.flow], metadata, function(result, stderr, statuscode) {
+			execute(samlcmd, ["runTest", req.body.flow], metadata, function(result, stderr, statuscode) {
 
 				console.log("Received result.");
 				console.log("stdout");
@@ -455,9 +301,7 @@ testconnectorsaml = function (config) {
 
 					res.writeHead(200, { 'Content-Type': 'application/json' });   
 					result["debug"] = stderr;
-					// response.write(
 					res.end(JSON.stringify(response));
-					
 					
 				} else {
 

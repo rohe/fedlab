@@ -62,7 +62,7 @@
 		 * @return {undefined}              Returns void
 		 */
 		runTestRaw: function(operation, testflow, callback, errorcallback) {
-			console.log("About to do API connector verify() - here is the metadata");
+			console.log("About to do API connector (" + this.type + " " + operation + " " + testflow + ") - here is the metadata");
 			console.log(this.metadata);
 
 			var postdata = {
