@@ -28,6 +28,17 @@
 
 
 
+			$('ul#samlnav a').click(function (e) {
+				e.preventDefault();
+				console.log("Clicked tab", this);
+				$(this).tab('show');
+			});
+			$("button#firstcontinue").click(function(e) {
+				$('ul#samlnav a:last').tab('show');
+				e.preventDefault();
+			});
+
+
 			console.log("Fedlab SAML initiated...");
 			console.log(this.el);
 
@@ -50,6 +61,7 @@
 			};
 			localStorage.setItem('samlspMetadata', JSON.stringify(this.metadata));
 
+			console.log("Start verify...");
 
 			this.resultcontroller.startFlow("verify", "samlverifyflow");
 			
@@ -71,6 +83,7 @@
 			// testflowresult.changes = changes;
 			// that.editor.item.save();
 			this.resultcontroller.updateFlowResults("verify", "samlverifyflow", testflowresult);
+			$("#verifyError").empty();
 
 			if (result.verifyOK()) {
 				this.stateChange("modeTest");
@@ -81,12 +94,16 @@
 				return;
 
 			} else if (result.status == 5) {
-
+				alert('NOT SUPPORTED User interactions yet.');
 				// NOT SUPPORTED User interactions yet.
 				// 
 				// var ia = new UserInteraction(result.url, result.htmlbody, result.title);
 				// ia.bind("userinteraction", this.proxy(this.userinteraction));
 				// $("body").append(ia.el);
+			} else {
+				console.log("Result object", result.debug);
+				$("#verifyError").append(result.debug);
+
 			}
 		},
 
@@ -233,6 +250,8 @@
 				// testflowresult.changes = changes;
 
 				// that.editor.item.save();
+				// 
+				console.log("Updating resultcontroller", that.resultcontroller, testflow, sid, testflowresult);
 				that.resultcontroller.updateFlowResults(testflow, sid, testflowresult);
 				that.updateCounter();
 

@@ -1,9 +1,33 @@
 # Test results
+# Format for result output from test CLI scripts
 
 
-OpenID Connect
 
-Result of verify.
+
+## Result codes
+
+
+Test flow:
+
+  * (1) Succeeded
+  * (2) Warning (less significant errors)
+  * (3) Error
+  * (4) Critical
+  * (5) User interaction needed
+  	* With html body + url
+
+
+
+Test item:
+
+  * (0) Informational
+  * (1) Succeed
+  * (2) Warning (less significant errors)
+  * (3) Error
+  * (4) Critical
+
+
+## Result of verify.
 
 	{ status: 1,
 	  tests: 

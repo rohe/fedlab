@@ -284,7 +284,9 @@ testconnectorsaml = function (config) {
 			// TODO : Validate the flow parameter.
 			execute(samlcmd, ["runTest", req.body.flow], metadata, function(result, stderr, statuscode) {
 
-				console.log("Received result.");
+				console.log("Received result from " + samlcmd
+
+					);
 				console.log("stdout");
 				console.log(result);
 				console.log("stderr");

@@ -133,8 +133,12 @@ div.test:nth-child(even) {
 
 div.test > h3 {
 	font-size: 130%;
-	margin: 0px;
+	margin: 0px !important;
+	padding: 0px !important;
+	line-height: 100%;
+	font-weight: normal;
 }
+
 div.test > h4 {
 	font-size: 110%;
 	margin: 0px;

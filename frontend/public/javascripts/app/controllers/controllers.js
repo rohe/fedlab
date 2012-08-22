@@ -565,6 +565,8 @@
 					// syntaxHighlight($item.data.message)  
 					// testel.addClass(test.getStatusTag());
 				});
+			} else {
+				
 			}
 
 			testflowel.append("<pre class=\"debugConsole\">" + this.escapeHTML(testresults.debug) + "</div>");

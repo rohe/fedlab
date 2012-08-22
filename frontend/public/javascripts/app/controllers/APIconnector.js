@@ -8,6 +8,7 @@
 			if (typeof obj.status === 'undefined') throw {message: "Missing ID in result object."};
 			this.status = obj.status;
 
+			if (obj.message) this.message = obj.message;
 			if (obj.debug) this.debug = obj.debug;
 			if (obj.tests) this.tests = obj.tests;
 
