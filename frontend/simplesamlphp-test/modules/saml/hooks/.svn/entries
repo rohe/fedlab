@@ -1,0 +1,40 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/saml/hooks
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-02-10T11:32:00.075670Z
+2166
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+hook_metadata_hosted.php
+file
+
+
+
+
+2010-06-25T05:22:48.000000Z
+42bee0d9d9b5ae75e6a74f2746057150
+2010-02-10T11:32:00.075670Z
+2166
+olavmrk
+

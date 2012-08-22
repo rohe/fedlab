@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2656/trunk/modules/saml/lib/IdP
+END
+SAML1.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2283/trunk/modules/saml/lib/IdP/SAML1.php
+END
+SAML2.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2656/trunk/modules/saml/lib/IdP/SAML2.php
+END

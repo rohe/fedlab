@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2615/trunk/metadata-templates
+END
+adfs-idp-hosted.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2179/trunk/metadata-templates/adfs-idp-hosted.php
+END
+wsfed-idp-remote.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1835/trunk/metadata-templates/wsfed-idp-remote.php
+END
+saml20-idp-hosted.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2569/trunk/metadata-templates/saml20-idp-hosted.php
+END
+wsfed-sp-hosted.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1835/trunk/metadata-templates/wsfed-sp-hosted.php
+END
+shib13-idp-remote.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1885/trunk/metadata-templates/shib13-idp-remote.php
+END
+shib13-sp-hosted.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1835/trunk/metadata-templates/shib13-sp-hosted.php
+END
+saml20-idp-remote.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2615/trunk/metadata-templates/saml20-idp-remote.php
+END
+shib13-sp-remote.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1835/trunk/metadata-templates/shib13-sp-remote.php
+END
+adfs-sp-remote.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2179/trunk/metadata-templates/adfs-sp-remote.php
+END
+shib13-idp-hosted.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1835/trunk/metadata-templates/shib13-idp-hosted.php
+END
+saml20-sp-remote.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2280/trunk/metadata-templates/saml20-sp-remote.php
+END

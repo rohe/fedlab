@@ -1,0 +1,55 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/lib/SAML2/XML
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-09-20T08:39:23.290268Z
+2551
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+md
+dir
+
+shibmd
+dir
+
+ds
+dir
+
+mdattr
+dir
+
+saml
+dir
+
+Chunk.php
+file
+
+
+
+
+2010-06-25T05:22:44.000000Z
+6dcb4eb269e7586f50c1ea955c739e16
+2010-04-21T12:56:08.654997Z
+2261
+olavmrk
+

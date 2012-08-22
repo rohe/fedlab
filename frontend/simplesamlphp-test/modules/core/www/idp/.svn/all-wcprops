@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2658/trunk/modules/core/www/idp
+END
+resumelogout.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2270/trunk/modules/core/www/idp/resumelogout.php
+END
+logout-iframe.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2658/trunk/modules/core/www/idp/logout-iframe.php
+END
+logout-iframe-done.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2658/trunk/modules/core/www/idp/logout-iframe-done.php
+END
+logout-iframe.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2658/trunk/modules/core/www/idp/logout-iframe.js
+END
+resumeauth.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2649/trunk/modules/core/www/idp/resumeauth.php
+END

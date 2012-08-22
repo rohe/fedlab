@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2658/trunk/modules/core/templates
+END
+logout-iframe.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2658/trunk/modules/core/templates/logout-iframe.php
+END
+no_metadata.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2516/trunk/modules/core/templates/no_metadata.tpl.php
+END
+no_state.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2472/trunk/modules/core/templates/no_state.tpl.php
+END
+authsource_list.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/1726/trunk/modules/core/templates/authsource_list.tpl.php
+END
+frontpage_welcome.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2248/trunk/modules/core/templates/frontpage_welcome.tpl.php
+END
+show_metadata.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2302/trunk/modules/core/templates/show_metadata.tpl.php
+END
+loginuserpass.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2228/trunk/modules/core/templates/loginuserpass.php
+END
+frontpage_federation.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2547/trunk/modules/core/templates/frontpage_federation.tpl.php
+END
+no_cookie.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2015/trunk/modules/core/templates/no_cookie.tpl.php
+END
+frontpage_auth.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2248/trunk/modules/core/templates/frontpage_auth.tpl.php
+END
+short_sso_interval.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1421/trunk/modules/core/templates/short_sso_interval.php
+END
+logout-iframe-wrapper.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2139/trunk/modules/core/templates/logout-iframe-wrapper.php
+END
+frontpage_config.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2248/trunk/modules/core/templates/frontpage_config.tpl.php
+END

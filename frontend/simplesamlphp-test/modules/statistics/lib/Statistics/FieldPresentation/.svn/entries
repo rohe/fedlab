@@ -1,0 +1,52 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/statistics/lib/Statistics/FieldPresentation
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-05-15T11:27:33.559162Z
+1506
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Base.php
+file
+
+
+
+
+2010-06-25T05:22:47.000000Z
+ff04a035b391fd89896b1a4937f6a978
+2009-03-05T12:39:09.900646Z
+1374
+andreassolberg
+
+Entity.php
+file
+
+
+
+
+2010-06-25T05:22:47.000000Z
+25a7413778d7ff4e018c8f77c5ea0bf4
+2009-05-15T11:27:33.559162Z
+1506
+andreassolberg
+

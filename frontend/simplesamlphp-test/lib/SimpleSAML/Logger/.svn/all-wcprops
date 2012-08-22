@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2251/trunk/lib/SimpleSAML/Logger
+END
+LoggingHandlerErrorLog.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/1665/trunk/lib/SimpleSAML/Logger/LoggingHandlerErrorLog.php
+END
+LoggingHandlerFile.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2251/trunk/lib/SimpleSAML/Logger/LoggingHandlerFile.php
+END
+LoggingHandlerSyslog.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/1665/trunk/lib/SimpleSAML/Logger/LoggingHandlerSyslog.php
+END

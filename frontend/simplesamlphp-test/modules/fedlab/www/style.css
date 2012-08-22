@@ -1,0 +1,75 @@
+div#register p {
+	margin: 5px 2px 1px 2px;
+}
+div#register input, div#register textarea  {
+	margin: 1px 2px 5px 2px;
+}
+
+div.animated div.ui-progressbar-value { background-image: url(res/images/pbar-ani.gif); }
+div.ui-progressbar {height: 20px;}
+
+div#error-message {
+	font-size: 90%;
+}
+
+
+div.resultSelection {
+	margin-top: 5px;
+}
+
+
+
+div.testresult {
+	border: 1px solid #999;
+	padding: 2px;
+	margin-top: 5px;
+	font-size: 90%;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+}
+div.testresult.status2 {
+	background: #9c3;
+	border: 1px solid #690;
+}
+
+/* Error */
+div.testresult.status1 {
+	background: #FFCC11; /* Yellowish */
+	border: 1px solid #c90;
+}
+/* Fatal */
+div.testresult.status0 {
+	background: #CD2626;
+	border: 1px solid #a00;
+	color: white;
+}
+div.testresult.status0 div.result {
+	color: black;
+}
+div.testresult div.result {
+	margin: 2px 5px;
+	padding: 1px 3px;
+	border: 1px solid #777;
+	background: #eee;
+}
+div.testresult div.id {
+	float: right;
+	font-family: "Courier New",Courier,monospace;
+}
+.debugbox {
+	background: #ccc; 
+	border: 1px solid #aaa; 
+	padding: .5em; 
+	margin-bottom: 1em;
+
+}
+div.htmlout {
+	max-height: 200px;
+	border: 1px solid #666;
+	overflow:scroll;
+}
+div.debugoutput p {
+	margin: .8em 0px 0px 0px;
+	font-weight: bold;
+}

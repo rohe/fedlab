@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2514/trunk/lib/SimpleSAML/XML
+END
+Errors.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/676/trunk/lib/SimpleSAML/XML/Errors.php
+END
+Parser.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/222/trunk/lib/SimpleSAML/XML/Parser.php
+END
+Validator.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1598/trunk/lib/SimpleSAML/XML/Validator.php
+END
+Signer.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2237/trunk/lib/SimpleSAML/XML/Signer.php
+END

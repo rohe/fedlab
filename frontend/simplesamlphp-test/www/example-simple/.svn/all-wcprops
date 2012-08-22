@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2644/trunk/www/example-simple
+END
+attributequery.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2556/trunk/www/example-simple/attributequery.php
+END
+verysimple.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1762/trunk/www/example-simple/verysimple.php
+END
+wsfed-example.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2644/trunk/www/example-simple/wsfed-example.php
+END
+hostnames.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2392/trunk/www/example-simple/hostnames.php
+END
+shib13-example.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2643/trunk/www/example-simple/shib13-example.php
+END
+saml2-example.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2642/trunk/www/example-simple/saml2-example.php
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2677/trunk/modules/saml/www/sp
+END
+discoresp.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1900/trunk/modules/saml/www/sp/discoresp.php
+END
+metadata.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2617/trunk/modules/saml/www/sp/metadata.php
+END
+saml1-acs.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2568/trunk/modules/saml/www/sp/saml1-acs.php
+END
+saml2-acs.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2677/trunk/modules/saml/www/sp/saml2-acs.php
+END
+saml2-logout.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2672/trunk/modules/saml/www/sp/saml2-logout.php
+END

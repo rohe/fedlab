@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/statistics/bin
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-09-28T11:43:13.438172Z
+1794
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+logcleaner.php
+file
+
+
+
+
+2010-06-25T05:22:47.000000Z
+3ebccd898bc594d3a52360a7127789cc
+2009-03-09T12:57:43.660958Z
+1393
+andreassolberg
+has-props
+
+loganalyzer.php
+file
+
+
+
+
+2010-06-25T05:22:47.000000Z
+3dd90965f3976fa1e50f1361e0f8cc2f
+2009-09-28T11:43:13.438172Z
+1794
+andreassolberg
+has-props
+

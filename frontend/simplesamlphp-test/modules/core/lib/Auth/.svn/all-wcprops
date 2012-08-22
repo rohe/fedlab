@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2599/trunk/modules/core/lib/Auth
+END
+UserPassBase.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2228/trunk/modules/core/lib/Auth/UserPassBase.php
+END
+UserPassOrgBase.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1589/trunk/modules/core/lib/Auth/UserPassOrgBase.php
+END

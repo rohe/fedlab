@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2600/trunk/modules/oauth/www
+END
+requestToken.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/1481/trunk/modules/oauth/www/requestToken.php
+END
+getUserInfo.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1497/trunk/modules/oauth/www/getUserInfo.php
+END
+authorize.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2600/trunk/modules/oauth/www/authorize.php
+END
+registry.edit.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2600/trunk/modules/oauth/www/registry.edit.php
+END
+accessToken.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1792/trunk/modules/oauth/www/accessToken.php
+END
+registry.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2600/trunk/modules/oauth/www/registry.php
+END

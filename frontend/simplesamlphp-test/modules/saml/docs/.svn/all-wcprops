@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2617/trunk/modules/saml/docs
+END
+nameidattribute.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2548/trunk/modules/saml/docs/nameidattribute.txt
+END
+sp.txt
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2550/trunk/modules/saml/docs/sp.txt
+END
+nameid.txt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2376/trunk/modules/saml/docs/nameid.txt
+END
+keyrollover.txt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2617/trunk/modules/saml/docs/keyrollover.txt
+END

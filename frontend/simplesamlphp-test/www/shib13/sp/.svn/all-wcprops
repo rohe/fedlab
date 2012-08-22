@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/2643/trunk/www/shib13/sp
+END
+idpdisco.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2479/trunk/www/shib13/sp/idpdisco.php
+END
+metadata.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2479/trunk/www/shib13/sp/metadata.php
+END
+AssertionConsumerService.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2643/trunk/www/shib13/sp/AssertionConsumerService.php
+END
+initSSO.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2479/trunk/www/shib13/sp/initSSO.php
+END

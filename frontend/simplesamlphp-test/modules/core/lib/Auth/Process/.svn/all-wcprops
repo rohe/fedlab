@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2599/trunk/modules/core/lib/Auth/Process
+END
+GenerateGroups.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2277/trunk/modules/core/lib/Auth/Process/GenerateGroups.php
+END
+StatisticsWithAttribute.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2599/trunk/modules/core/lib/Auth/Process/StatisticsWithAttribute.php
+END
+AttributeAlter.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2244/trunk/modules/core/lib/Auth/Process/AttributeAlter.php
+END
+TargetedID.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/1713/trunk/modules/core/lib/Auth/Process/TargetedID.php
+END
+AttributeAdd.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/1111/trunk/modules/core/lib/Auth/Process/AttributeAdd.php
+END
+ScopeAttribute.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2217/trunk/modules/core/lib/Auth/Process/ScopeAttribute.php
+END
+LanguageAdaptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2411/trunk/modules/core/lib/Auth/Process/LanguageAdaptor.php
+END
+WarnShortSSOInterval.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1545/trunk/modules/core/lib/Auth/Process/WarnShortSSOInterval.php
+END
+ScopeFromAttribute.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2218/trunk/modules/core/lib/Auth/Process/ScopeFromAttribute.php
+END
+AttributeMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2072/trunk/modules/core/lib/Auth/Process/AttributeMap.php
+END
+AttributeLimit.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2370/trunk/modules/core/lib/Auth/Process/AttributeLimit.php
+END
+AttributeRealm.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/1108/trunk/modules/core/lib/Auth/Process/AttributeRealm.php
+END
+PHP.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2051/trunk/modules/core/lib/Auth/Process/PHP.php
+END

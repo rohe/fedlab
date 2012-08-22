@@ -1,0 +1,53 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/aggregator/www
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-10-23T11:36:19.569924Z
+1895
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+arp.php
+file
+
+
+
+
+2010-06-25T05:22:45.000000Z
+774580afa1e0d3b9ba0f71f940517089
+2009-10-23T11:36:19.569924Z
+1895
+andreassolberg
+has-props
+
+index.php
+file
+
+
+
+
+2010-06-25T05:22:45.000000Z
+b4f58873a4631ef3d46a37cbf92eee2e
+2009-10-23T10:47:27.679510Z
+1894
+andreassolberg
+

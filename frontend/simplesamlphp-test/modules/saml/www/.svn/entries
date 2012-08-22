@@ -1,0 +1,43 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/saml/www
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-12-06T07:23:52.894256Z
+2677
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+sp
+dir
+
+disco.php
+file
+
+
+
+
+2010-06-25T05:22:48.000000Z
+8771a31cc23337b8518505a7bb32c38e
+2009-08-19T08:31:19.051544Z
+1695
+olavmrk
+

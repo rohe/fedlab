@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/consentSimpleAdmin/templates
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-02-17T09:33:37.807196Z
+1279
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+consentadmin.php
+file
+
+
+
+
+2010-06-25T05:22:48.000000Z
+c564ce6a96ee69949c73491484635d9f
+2009-02-17T09:33:37.807196Z
+1279
+andreassolberg
+has-props
+
+consentstats.php
+file
+
+
+
+
+2010-06-25T05:22:48.000000Z
+85ed704828e98e2d62af48c15c578df0
+2009-02-17T09:33:37.807196Z
+1279
+andreassolberg
+has-props
+

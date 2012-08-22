@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/1538/trunk/modules/InfoCard/lib/RP
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1041/trunk/modules/InfoCard/lib/RP/LICENSE.txt
+END
+Zend_InfoCard_Xml_Security_Transform_EnvelopedSignature.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/1041/trunk/modules/InfoCard/lib/RP/Zend_InfoCard_Xml_Security_Transform_EnvelopedSignature.php
+END
+Zend_InfoCard_Xml_Security.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1072/trunk/modules/InfoCard/lib/RP/Zend_InfoCard_Xml_Security.php
+END
+Zend_InfoCard_Xml_Security_Transform_XmlExcC14N.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1072/trunk/modules/InfoCard/lib/RP/Zend_InfoCard_Xml_Security_Transform_XmlExcC14N.php
+END
+Zend_InfoCard_Claims.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/1041/trunk/modules/InfoCard/lib/RP/Zend_InfoCard_Claims.php
+END
+InfoCard.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1538/trunk/modules/InfoCard/lib/RP/InfoCard.php
+END
+Zend_InfoCard_Xml_Security_Transform.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/1041/trunk/modules/InfoCard/lib/RP/Zend_InfoCard_Xml_Security_Transform.php
+END
+Zend_InfoCard_Xml_Assertion_Saml.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1041/trunk/modules/InfoCard/lib/RP/Zend_InfoCard_Xml_Assertion_Saml.php
+END

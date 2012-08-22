@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis
+END
+Yadis.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/Yadis.php
+END
+Manager.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/Manager.php
+END
+Misc.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/Misc.php
+END
+XRIRes.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/XRIRes.php
+END
+ParanoidHTTPFetcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/ParanoidHTTPFetcher.php
+END
+ParseHTML.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/ParseHTML.php
+END
+HTTPFetcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/HTTPFetcher.php
+END
+XML.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/XML.php
+END
+XRDS.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/XRDS.php
+END
+XRI.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/XRI.php
+END
+PlainHTTPFetcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2317/trunk/lib/Auth/Yadis/PlainHTTPFetcher.php
+END

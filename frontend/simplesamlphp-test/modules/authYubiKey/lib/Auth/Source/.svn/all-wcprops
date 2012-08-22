@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2307/trunk/modules/authYubiKey/lib/Auth/Source
+END
+YubiKey.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2307/trunk/modules/authYubiKey/lib/Auth/Source/YubiKey.php
+END

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/1506/trunk/modules/statistics/lib/Statistics/FieldPresentation
+END
+Base.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1374/trunk/modules/statistics/lib/Statistics/FieldPresentation/Base.php
+END
+Entity.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1506/trunk/modules/statistics/lib/Statistics/FieldPresentation/Entity.php
+END

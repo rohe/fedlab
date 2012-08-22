@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/cert
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2007-09-14T11:20:59.703264Z
+2
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+server.pem
+file
+
+
+
+
+2010-06-25T05:22:42.000000Z
+28cc02b085be7ed009495a2e02636ec1
+2007-09-14T11:20:59.703264Z
+2
+andreassolberg
+has-props
+
+server.crt
+file
+
+
+
+
+2010-06-25T05:22:42.000000Z
+40437b225d06a680bf0bf17c167b1cfb
+2007-09-14T11:20:59.703264Z
+2
+andreassolberg
+has-props
+

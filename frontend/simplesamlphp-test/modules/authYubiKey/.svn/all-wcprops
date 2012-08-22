@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2629/trunk/modules/authYubiKey
+END
+default-disable
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1869/trunk/modules/authYubiKey/default-disable
+END

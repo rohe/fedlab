@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2464/trunk/modules/InfoCard/www
+END
+mex.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/mex.php
+END
+login-infocard.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2464/trunk/modules/InfoCard/www/login-infocard.php
+END
+STS_card_issuer.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2082/trunk/modules/InfoCard/www/STS_card_issuer.php
+END
+getcardform.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2464/trunk/modules/InfoCard/www/getcardform.php
+END
+prueba.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2082/trunk/modules/InfoCard/www/prueba.php
+END
+tokenservice.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/tokenservice.php
+END
+x509.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/x509.php
+END

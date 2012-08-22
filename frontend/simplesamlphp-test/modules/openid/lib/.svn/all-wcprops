@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2682/trunk/modules/openid/lib
+END
+StateStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1494/trunk/modules/openid/lib/StateStore.php
+END
+SessionStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2559/trunk/modules/openid/lib/SessionStore.php
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2648/trunk/lib/SimpleSAML/Auth
+END
+Simple.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2641/trunk/lib/SimpleSAML/Auth/Simple.php
+END
+BWC.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2648/trunk/lib/SimpleSAML/Auth/BWC.php
+END
+ProcessingChain.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1674/trunk/lib/SimpleSAML/Auth/ProcessingChain.php
+END
+State.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2472/trunk/lib/SimpleSAML/Auth/State.php
+END
+Source.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/1777/trunk/lib/SimpleSAML/Auth/Source.php
+END
+LDAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2473/trunk/lib/SimpleSAML/Auth/LDAP.php
+END
+ProcessingFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/811/trunk/lib/SimpleSAML/Auth/ProcessingFilter.php
+END
+Default.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2638/trunk/lib/SimpleSAML/Auth/Default.php
+END
+TimeLimitedToken.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1665/trunk/lib/SimpleSAML/Auth/TimeLimitedToken.php
+END

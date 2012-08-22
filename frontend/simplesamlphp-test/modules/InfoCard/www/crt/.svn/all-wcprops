@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/crt
+END
+sts.crt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/crt/sts.crt
+END
+idp.crt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/crt/idp.crt
+END
+CA.crt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1533/trunk/modules/InfoCard/www/crt/CA.crt
+END

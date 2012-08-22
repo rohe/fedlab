@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2661/trunk/modules/casserver/www
+END
+validate.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2587/trunk/modules/casserver/www/validate.php
+END
+serviceValidate.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2661/trunk/modules/casserver/www/serviceValidate.php
+END
+proxy.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2587/trunk/modules/casserver/www/proxy.php
+END
+cas.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2587/trunk/modules/casserver/www/cas.php
+END
+tickets.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2587/trunk/modules/casserver/www/tickets.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2604/trunk/modules/casserver/www/login.php
+END

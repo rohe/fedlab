@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2630/trunk/templates/includes
+END
+footer.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2127/trunk/templates/includes/footer.php
+END
+header-embed.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2138/trunk/templates/includes/header-embed.php
+END
+header.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2630/trunk/templates/includes/header.php
+END
+footer-embed.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2138/trunk/templates/includes/footer-embed.php
+END

@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2684/trunk/lib/SimpleSAML
+END
+SessionHandlerPHP.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2497/trunk/lib/SimpleSAML/SessionHandlerPHP.php
+END
+AuthMemCookie.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2381/trunk/lib/SimpleSAML/AuthMemCookie.php
+END
+Utilities.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2684/trunk/lib/SimpleSAML/Utilities.php
+END
+SessionHandlerCookie.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2494/trunk/lib/SimpleSAML/SessionHandlerCookie.php
+END
+IdP.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2649/trunk/lib/SimpleSAML/IdP.php
+END
+Store.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2619/trunk/lib/SimpleSAML/Store.php
+END
+SessionHandlerStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2497/trunk/lib/SimpleSAML/SessionHandlerStore.php
+END
+Logger.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2618/trunk/lib/SimpleSAML/Logger.php
+END
+MemcacheStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2418/trunk/lib/SimpleSAML/MemcacheStore.php
+END
+SessionHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2497/trunk/lib/SimpleSAML/SessionHandler.php
+END
+Memcache.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2489/trunk/lib/SimpleSAML/Memcache.php
+END
+Session.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2636/trunk/lib/SimpleSAML/Session.php
+END
+Module.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2657/trunk/lib/SimpleSAML/Module.php
+END
+Configuration.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2509/trunk/lib/SimpleSAML/Configuration.php
+END

@@ -1,0 +1,40 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/authYubiKey/lib/Auth/Process
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-01-15T13:31:37.101311Z
+1151
+andreassolberg@gmail.com
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+OTP2YubiPrefix.php
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+0f9839da3e42085efccc57612f19bffa
+2009-01-15T13:31:37.101311Z
+1151
+andreassolberg@gmail.com
+

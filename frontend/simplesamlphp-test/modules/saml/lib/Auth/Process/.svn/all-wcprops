@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2679/trunk/modules/saml/lib/Auth/Process
+END
+PersistentNameID.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2610/trunk/modules/saml/lib/Auth/Process/PersistentNameID.php
+END
+AttributeNameID.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2337/trunk/modules/saml/lib/Auth/Process/AttributeNameID.php
+END
+NameIDAttribute.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2679/trunk/modules/saml/lib/Auth/Process/NameIDAttribute.php
+END
+TransientNameID.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2337/trunk/modules/saml/lib/Auth/Process/TransientNameID.php
+END

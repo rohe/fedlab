@@ -1,0 +1,47 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/lib/Auth
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-05-20T11:49:11.442507Z
+2317
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+OpenID.php
+file
+
+
+
+
+2010-06-25T05:22:43.000000Z
+05d93b592e620e9ce63082a1d71f6276
+2010-05-20T11:49:11.442507Z
+2317
+olavmrk
+has-props
+
+Yadis
+dir
+
+OpenID
+dir
+

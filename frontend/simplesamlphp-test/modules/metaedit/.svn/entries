@@ -1,0 +1,55 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/metaedit
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-10-25T12:28:09.955843Z
+2601
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+hooks
+dir
+
+www
+dir
+
+default-disable
+file
+
+
+
+
+2010-06-25T05:22:48.000000Z
+92cfaac456bf0c457c03358886412159
+2009-10-19T11:12:47.353872Z
+1869
+olavmrk
+
+lib
+dir
+
+config-template
+dir
+
+templates
+dir
+

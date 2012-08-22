@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2169/trunk/modules/openidProvider/www
+END
+user.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2169/trunk/modules/openidProvider/www/user.php
+END
+resume.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1862/trunk/modules/openidProvider/www/resume.php
+END
+xrds.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2169/trunk/modules/openidProvider/www/xrds.php
+END
+trust.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1862/trunk/modules/openidProvider/www/trust.php
+END
+server.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1862/trunk/modules/openidProvider/www/server.php
+END

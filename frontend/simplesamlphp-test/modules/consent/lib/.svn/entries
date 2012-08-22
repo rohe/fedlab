@@ -1,0 +1,46 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/consent/lib
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-11-30T10:46:46.250256Z
+2668
+jach@wayf.dk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Auth
+dir
+
+Store.php
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+d44c9e0268723fe25dd2ae194ede8b2a
+2009-02-17T09:31:21.434035Z
+1278
+andreassolberg
+
+Consent
+dir
+

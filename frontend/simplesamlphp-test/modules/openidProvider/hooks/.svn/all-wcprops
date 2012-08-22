@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2102/trunk/modules/openidProvider/hooks
+END
+hook_frontpage.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2102/trunk/modules/openidProvider/hooks/hook_frontpage.php
+END

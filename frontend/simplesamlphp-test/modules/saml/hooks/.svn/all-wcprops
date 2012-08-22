@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2166/trunk/modules/saml/hooks
+END
+hook_metadata_hosted.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2166/trunk/modules/saml/hooks/hook_metadata_hosted.php
+END

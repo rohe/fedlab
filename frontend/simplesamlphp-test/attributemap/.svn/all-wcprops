@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2655/trunk/attributemap
+END
+addurnprefix.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1099/trunk/attributemap/addurnprefix.php
+END
+facebook2name.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2655/trunk/attributemap/facebook2name.php
+END
+name2oid.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1814/trunk/attributemap/name2oid.php
+END
+oid2name.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1814/trunk/attributemap/oid2name.php
+END
+test.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/222/trunk/attributemap/test.php
+END
+removeurnprefix.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1100/trunk/attributemap/removeurnprefix.php
+END
+openid2name.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2625/trunk/attributemap/openid2name.php
+END
+urn2oid.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/1463/trunk/attributemap/urn2oid.php
+END
+oid2urn.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/1463/trunk/attributemap/oid2urn.php
+END
+feide-oid.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1222/trunk/attributemap/feide-oid.php
+END
+oid-feide.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1222/trunk/attributemap/oid-feide.php
+END
+twitter2name.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2654/trunk/attributemap/twitter2name.php
+END
+name2urn.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1463/trunk/attributemap/name2urn.php
+END
+urn2name.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1463/trunk/attributemap/urn2name.php
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2642/trunk/www/saml2/sp
+END
+SingleLogoutService.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2642/trunk/www/saml2/sp/SingleLogoutService.php
+END
+idpdisco.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2479/trunk/www/saml2/sp/idpdisco.php
+END
+metadata.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2479/trunk/www/saml2/sp/metadata.php
+END
+initSLO.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2642/trunk/www/saml2/sp/initSLO.php
+END
+AssertionConsumerService.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2642/trunk/www/saml2/sp/AssertionConsumerService.php
+END
+initSSO.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2542/trunk/www/saml2/sp/initSSO.php
+END

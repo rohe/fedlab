@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID
+END
+Consumer.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Consumer.php
+END
+URINorm.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/URINorm.php
+END
+FileStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/FileStore.php
+END
+CryptUtil.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/CryptUtil.php
+END
+Interface.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Interface.php
+END
+SReg.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/SReg.php
+END
+MDB2Store.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/MDB2Store.php
+END
+Nonce.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Nonce.php
+END
+KVForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/KVForm.php
+END
+DumbStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/DumbStore.php
+END
+Server.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Server.php
+END
+AX.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/AX.php
+END
+HMAC.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/HMAC.php
+END
+Parse.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Parse.php
+END
+BigMath.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/BigMath.php
+END
+Association.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Association.php
+END
+SQLStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/SQLStore.php
+END
+Extension.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Extension.php
+END
+SQLiteStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/SQLiteStore.php
+END
+Discover.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Discover.php
+END
+ServerRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/ServerRequest.php
+END
+PostgreSQLStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/PostgreSQLStore.php
+END
+MySQLStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/MySQLStore.php
+END
+MemcachedStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/MemcachedStore.php
+END
+Message.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/Message.php
+END
+DatabaseConnection.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/DatabaseConnection.php
+END
+PAPE.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/PAPE.php
+END
+TrustRoot.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/TrustRoot.php
+END
+DiffieHellman.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2317/trunk/lib/Auth/OpenID/DiffieHellman.php
+END

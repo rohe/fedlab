@@ -1,0 +1,41 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/oauth/config-template
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-09-28T09:50:24.679113Z
+1792
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+module_oauth.php
+file
+
+
+
+
+2010-06-25T05:22:45.000000Z
+64ec651b8c7a2751d944bb3de101a1fd
+2009-09-28T09:50:24.679113Z
+1792
+andreassolberg
+has-props
+

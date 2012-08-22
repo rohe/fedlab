@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2665/trunk/lib/SimpleSAML/Bindings/Shib13
+END
+Artifact.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2665/trunk/lib/SimpleSAML/Bindings/Shib13/Artifact.php
+END
+HTTPPost.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2542/trunk/lib/SimpleSAML/Bindings/Shib13/HTTPPost.php
+END

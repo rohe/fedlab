@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2629/trunk/dictionaries
+END
+errors.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2629/trunk/dictionaries/errors.translation.json
+END
+status.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2100/trunk/dictionaries/status.definition.json
+END
+attributes.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2584/trunk/dictionaries/attributes.definition.json
+END
+admin.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2394/trunk/dictionaries/admin.definition.json
+END
+status.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2613/trunk/dictionaries/status.translation.json
+END
+attributes.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2629/trunk/dictionaries/attributes.translation.json
+END
+admin.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2629/trunk/dictionaries/admin.translation.json
+END
+disco.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2100/trunk/dictionaries/disco.definition.json
+END
+disco.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2629/trunk/dictionaries/disco.translation.json
+END
+login.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2100/trunk/dictionaries/login.definition.json
+END
+logout.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2144/trunk/dictionaries/logout.definition.json
+END
+errors.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2576/trunk/dictionaries/errors.definition.json
+END
+login.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2629/trunk/dictionaries/login.translation.json
+END
+logout.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2629/trunk/dictionaries/logout.translation.json
+END

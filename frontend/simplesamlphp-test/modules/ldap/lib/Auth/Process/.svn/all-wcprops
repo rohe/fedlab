@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2564/trunk/modules/ldap/lib/Auth/Process
+END
+AttributeAddFromLDAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2564/trunk/modules/ldap/lib/Auth/Process/AttributeAddFromLDAP.php
+END

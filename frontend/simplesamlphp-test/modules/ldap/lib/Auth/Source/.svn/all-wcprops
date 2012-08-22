@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2188/trunk/modules/ldap/lib/Auth/Source
+END
+LDAPMulti.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2188/trunk/modules/ldap/lib/Auth/Source/LDAPMulti.php
+END
+LDAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1870/trunk/modules/ldap/lib/Auth/Source/LDAP.php
+END

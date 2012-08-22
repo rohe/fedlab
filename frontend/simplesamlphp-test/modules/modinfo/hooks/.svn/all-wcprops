@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2118/trunk/modules/modinfo/hooks
+END
+hook_moduleinfo.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/999/trunk/modules/modinfo/hooks/hook_moduleinfo.php
+END
+hook_frontpage.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2118/trunk/modules/modinfo/hooks/hook_frontpage.php
+END

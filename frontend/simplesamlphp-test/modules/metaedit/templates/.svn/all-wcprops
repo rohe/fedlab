@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2442/trunk/modules/metaedit/templates
+END
+xmlimport.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2080/trunk/modules/metaedit/templates/xmlimport.tpl.php
+END
+formedit.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1507/trunk/modules/metaedit/templates/formedit.php
+END
+saved.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1507/trunk/modules/metaedit/templates/saved.php
+END
+metalist.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2442/trunk/modules/metaedit/templates/metalist.php
+END

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2674/trunk/lib/SimpleSAML/Store
+END
+SQL.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2674/trunk/lib/SimpleSAML/Store/SQL.php
+END
+Memcache.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2536/trunk/lib/SimpleSAML/Store/Memcache.php
+END

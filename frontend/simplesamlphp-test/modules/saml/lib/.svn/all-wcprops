@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2679/trunk/modules/saml/lib
+END
+Error.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2374/trunk/modules/saml/lib/Error.php
+END
+BaseNameIDGenerator.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2337/trunk/modules/saml/lib/BaseNameIDGenerator.php
+END
+Message.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2621/trunk/modules/saml/lib/Message.php
+END

@@ -1,0 +1,41 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/core/lib/Storage
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-03-23T05:17:56.360126Z
+2231
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+SQLPermanentStorage.php
+file
+
+
+
+
+2010-06-25T05:22:46.000000Z
+f7492bc13bc34d457e549ef75717dd1c
+2010-03-23T05:17:56.360126Z
+2231
+andreassolberg
+has-props
+

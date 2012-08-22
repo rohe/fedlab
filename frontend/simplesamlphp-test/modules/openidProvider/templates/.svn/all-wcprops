@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2445/trunk/modules/openidProvider/templates
+END
+user.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2169/trunk/modules/openidProvider/templates/user.tpl.php
+END
+trust.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2445/trunk/modules/openidProvider/templates/trust.tpl.php
+END

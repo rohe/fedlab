@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2658/trunk/modules/core/www
+END
+as_login.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1920/trunk/modules/core/www/as_login.php
+END
+as_logout.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/1861/trunk/modules/core/www/as_logout.php
+END
+loginuserpass.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2578/trunk/modules/core/www/loginuserpass.php
+END
+login-admin.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1466/trunk/modules/core/www/login-admin.php
+END
+frontpage_welcome.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2248/trunk/modules/core/www/frontpage_welcome.php
+END
+no_cookie.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2015/trunk/modules/core/www/no_cookie.php
+END
+frontpage_auth.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2248/trunk/modules/core/www/frontpage_auth.php
+END
+loginuserpassorg.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2578/trunk/modules/core/www/loginuserpassorg.php
+END
+cleardiscochoices.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1760/trunk/modules/core/www/cleardiscochoices.php
+END
+postredirect.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1548/trunk/modules/core/www/postredirect.php
+END
+frontpage_config.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2390/trunk/modules/core/www/frontpage_config.php
+END
+bwc_resumeauth.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2648/trunk/modules/core/www/bwc_resumeauth.php
+END
+authenticate.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2609/trunk/modules/core/www/authenticate.php
+END
+show_metadata.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/1765/trunk/modules/core/www/show_metadata.php
+END
+frontpage_federation.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2397/trunk/modules/core/www/frontpage_federation.php
+END
+short_sso_interval.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1421/trunk/modules/core/www/short_sso_interval.php
+END

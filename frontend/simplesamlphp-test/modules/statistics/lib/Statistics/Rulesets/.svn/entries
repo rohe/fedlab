@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/statistics/lib/Statistics/Rulesets
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-06-23T08:15:13.770966Z
+1535
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Ratio.php
+file
+
+
+
+
+2010-06-25T05:22:47.000000Z
+5db857e4bc7f9c35c0d9da8db36893b0
+2009-06-23T08:15:13.770966Z
+1535
+andreassolberg
+has-props
+
+BaseRule.php
+file
+
+
+
+
+2010-06-25T05:22:47.000000Z
+2c6027707006fb0b65ab501d4e2ba28c
+2009-06-23T08:15:13.770966Z
+1535
+andreassolberg
+has-props
+

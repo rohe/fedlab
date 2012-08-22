@@ -1,0 +1,52 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/ldap/lib/Auth/Source
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-02-22T13:02:01.694242Z
+2188
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+LDAPMulti.php
+file
+
+
+
+
+2010-06-25T05:22:44.000000Z
+a1072114e6ab39da99f8416bb244c4ac
+2010-02-22T13:02:01.694242Z
+2188
+olavmrk
+
+LDAP.php
+file
+
+
+
+
+2010-06-25T05:22:44.000000Z
+a983b4db13a54bb47eac902e1ec381b7
+2009-10-19T11:13:01.224340Z
+1870
+olavmrk
+

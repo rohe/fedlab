@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/authYubiKey/www/resources
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-01-17T12:40:05.810952Z
+1155
+andreassolberg@gmail.com
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+logo.jpg
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+1b2c0204700a93dbb83f7245d2a120d7
+2009-01-17T12:40:05.810952Z
+1155
+andreassolberg@gmail.com
+has-props
+
+yubikey.jpg
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+6780c7b99ef3a87977b742ef1bda1f94
+2009-01-17T12:40:05.810952Z
+1155
+andreassolberg@gmail.com
+has-props
+

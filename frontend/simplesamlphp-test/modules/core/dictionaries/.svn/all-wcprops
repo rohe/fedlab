@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2629/trunk/modules/core/dictionaries
+END
+no_metadata.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2629/trunk/modules/core/dictionaries/no_metadata.translation.json
+END
+no_state.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2629/trunk/modules/core/dictionaries/no_state.translation.json
+END
+frontpage.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2397/trunk/modules/core/dictionaries/frontpage.definition.json
+END
+no_cookie.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2149/trunk/modules/core/dictionaries/no_cookie.definition.json
+END
+short_sso_interval.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/2329/trunk/modules/core/dictionaries/short_sso_interval.definition.json
+END
+no_cookie.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2629/trunk/modules/core/dictionaries/no_cookie.translation.json
+END
+frontpage.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2629/trunk/modules/core/dictionaries/frontpage.translation.json
+END
+no_metadata.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2516/trunk/modules/core/dictionaries/no_metadata.definition.json
+END
+no_state.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2472/trunk/modules/core/dictionaries/no_state.definition.json
+END
+short_sso_interval.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2629/trunk/modules/core/dictionaries/short_sso_interval.translation.json
+END

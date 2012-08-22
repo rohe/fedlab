@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md
+END
+Extensions.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/Extensions.php
+END
+RoleDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/RoleDescriptor.php
+END
+IDPSSODescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/IDPSSODescriptor.php
+END
+AdditionalMetadataLocation.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/AdditionalMetadataLocation.php
+END
+Organization.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/Organization.php
+END
+SSODescriptorType.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/SSODescriptorType.php
+END
+SPSSODescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/SPSSODescriptor.php
+END
+AttributeConsumingService.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/AttributeConsumingService.php
+END
+EntityDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/EntityDescriptor.php
+END
+AttributeAuthorityDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/AttributeAuthorityDescriptor.php
+END
+UnknownRoleDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/UnknownRoleDescriptor.php
+END
+PDPDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/PDPDescriptor.php
+END
+EndpointType.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/EndpointType.php
+END
+ContactPerson.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/ContactPerson.php
+END
+IndexedEndpointType.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/IndexedEndpointType.php
+END
+EntitiesDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/EntitiesDescriptor.php
+END
+AffiliationDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/AffiliationDescriptor.php
+END
+RequestedAttribute.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/RequestedAttribute.php
+END
+AuthnAuthorityDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/AuthnAuthorityDescriptor.php
+END
+KeyDescriptor.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2261/trunk/lib/SAML2/XML/md/KeyDescriptor.php
+END

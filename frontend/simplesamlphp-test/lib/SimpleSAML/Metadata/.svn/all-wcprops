@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2675/trunk/lib/SimpleSAML/Metadata
+END
+MetaDataStorageHandlerDynamicXML.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/870/trunk/lib/SimpleSAML/Metadata/MetaDataStorageHandlerDynamicXML.php
+END
+SAMLParser.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2675/trunk/lib/SimpleSAML/Metadata/SAMLParser.php
+END
+MetaDataStorageHandlerFlatFile.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/2389/trunk/lib/SimpleSAML/Metadata/MetaDataStorageHandlerFlatFile.php
+END
+MetaDataStorageHandlerSerialize.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1552/trunk/lib/SimpleSAML/Metadata/MetaDataStorageHandlerSerialize.php
+END
+MetaDataStorageHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2516/trunk/lib/SimpleSAML/Metadata/MetaDataStorageHandler.php
+END
+SAMLBuilder.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2517/trunk/lib/SimpleSAML/Metadata/SAMLBuilder.php
+END
+MetaDataStorageHandlerXML.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/1962/trunk/lib/SimpleSAML/Metadata/MetaDataStorageHandlerXML.php
+END
+MetaDataStorageSource.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/1454/trunk/lib/SimpleSAML/Metadata/MetaDataStorageSource.php
+END
+Signer.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2237/trunk/lib/SimpleSAML/Metadata/Signer.php
+END

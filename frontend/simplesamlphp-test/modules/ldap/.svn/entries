@@ -1,0 +1,46 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/ldap
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-10-08T09:01:37.736309Z
+2570
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+lib
+dir
+
+docs
+dir
+
+default-enable
+file
+
+
+
+
+2010-06-25T05:22:44.000000Z
+bba7d339eb6e98e572e45f1e755639b0
+2009-10-19T11:12:47.353872Z
+1869
+olavmrk
+

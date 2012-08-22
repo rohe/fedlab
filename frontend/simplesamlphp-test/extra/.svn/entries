@@ -1,0 +1,40 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/extra
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-01-09T08:40:59.120364Z
+1113
+andreassolberg@gmail.com
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+auth_memcookie.conf
+file
+
+
+
+
+2010-06-25T05:22:39.000000Z
+91839036ab134319e72f806c7f147d6a
+2008-03-27T15:37:53.029719Z
+453
+olavmrk
+

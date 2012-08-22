@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/core/hooks
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-08-27T14:05:39.372918Z
+1722
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+hook_frontpage.php
+file
+
+
+
+
+2010-06-25T05:22:45.000000Z
+123e7f57e35730a7442067fbc73f39f0
+2009-08-27T14:05:39.372918Z
+1722
+andreassolberg
+has-props
+
+hook_sanitycheck.php
+file
+
+
+
+
+2010-06-25T05:22:45.000000Z
+508343024252f78063b9b1fa0c458746
+2009-08-14T11:07:44.066849Z
+1665
+olavmrk
+has-props
+

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2443/trunk/modules/oauth/templates
+END
+registry.saved.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1792/trunk/modules/oauth/templates/registry.saved.php
+END
+registry.edit.tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1792/trunk/modules/oauth/templates/registry.edit.tpl.php
+END
+authorized.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1481/trunk/modules/oauth/templates/authorized.php
+END
+registry.list.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2443/trunk/modules/oauth/templates/registry.list.php
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2658/trunk/lib/SimpleSAML/IdP
+END
+LogoutIFrame.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2658/trunk/lib/SimpleSAML/IdP/LogoutIFrame.php
+END
+LogoutTraditional.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2186/trunk/lib/SimpleSAML/IdP/LogoutTraditional.php
+END
+LogoutHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2139/trunk/lib/SimpleSAML/IdP/LogoutHandler.php
+END

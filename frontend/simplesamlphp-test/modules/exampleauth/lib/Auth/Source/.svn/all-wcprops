@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2460/trunk/modules/exampleauth/lib/Auth/Source
+END
+External.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2460/trunk/modules/exampleauth/lib/Auth/Source/External.php
+END
+UserPass.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/810/trunk/modules/exampleauth/lib/Auth/Source/UserPass.php
+END
+Static.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/945/trunk/modules/exampleauth/lib/Auth/Source/Static.php
+END

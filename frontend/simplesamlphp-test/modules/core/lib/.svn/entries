@@ -1,0 +1,72 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/core/lib
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-10-25T11:45:04.332039Z
+2599
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Auth
+dir
+
+Storage
+dir
+
+ModuleDefinition.php
+file
+
+
+
+
+2010-06-25T05:22:46.000000Z
+292098fc06d01885d7b195c28e38173e
+2010-03-23T06:04:09.985466Z
+2232
+andreassolberg
+has-props
+
+ACL.php
+file
+
+
+
+
+2010-06-25T05:22:46.000000Z
+fa96262694acf561375a29d7d80f68f9
+2009-08-27T13:45:37.642756Z
+1721
+olavmrk
+
+ModuleInstaller.php
+file
+
+
+
+
+2010-06-25T05:22:46.000000Z
+3acd9e6c4ec0d6c9fb506d9a66628ac8
+2010-03-23T06:04:09.985466Z
+2232
+andreassolberg
+has-props
+

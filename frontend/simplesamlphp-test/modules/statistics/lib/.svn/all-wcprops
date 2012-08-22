@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2670/trunk/modules/statistics/lib
+END
+LogCleaner.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2083/trunk/modules/statistics/lib/LogCleaner.php
+END
+DateHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1514/trunk/modules/statistics/lib/DateHandler.php
+END
+LogParser.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2049/trunk/modules/statistics/lib/LogParser.php
+END
+AccessCheck.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2598/trunk/modules/statistics/lib/AccessCheck.php
+END
+StatDataset.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2171/trunk/modules/statistics/lib/StatDataset.php
+END
+DateHandlerMonth.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1514/trunk/modules/statistics/lib/DateHandlerMonth.php
+END
+Aggregator.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1535/trunk/modules/statistics/lib/Aggregator.php
+END
+Ruleset.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/1535/trunk/modules/statistics/lib/Ruleset.php
+END
+RatioDataset.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1535/trunk/modules/statistics/lib/RatioDataset.php
+END

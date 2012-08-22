@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2011/trunk/modules/cron/templates
+END
+croninfo-result.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2011/trunk/modules/cron/templates/croninfo-result.php
+END
+croninfo-tpl.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2011/trunk/modules/cron/templates/croninfo-tpl.php
+END

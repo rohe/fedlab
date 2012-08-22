@@ -1,0 +1,81 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/lib/SimpleSAML/XML
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-08-10T11:27:15.702733Z
+2514
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Errors.php
+file
+
+
+
+
+2010-06-25T05:22:43.000000Z
+672dbab7214a21e1043c0373701de8d3
+2008-06-20T10:37:29.852613Z
+676
+olavmrk
+
+Parser.php
+file
+
+
+
+
+2010-06-25T05:22:43.000000Z
+20c019ae3115e51dfe2349a1e1d9cd92
+2008-01-30T11:10:10.661423Z
+222
+andreassolberg
+has-props
+
+Shib13
+dir
+
+Validator.php
+file
+
+
+
+
+2010-06-25T05:22:43.000000Z
+20ea1b2c1bae37fb374bacf7c26d615b
+2009-08-03T12:44:42.183054Z
+1598
+olavmrk
+has-props
+
+Signer.php
+file
+
+
+
+
+2010-06-25T05:22:43.000000Z
+564678c52c1d84ba5326a487ef9ccdbe
+2010-03-26T10:14:37.265474Z
+2237
+olavmrk
+

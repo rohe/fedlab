@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2563/trunk/lib/SimpleSAML/Error
+END
+Error.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2563/trunk/lib/SimpleSAML/Error/Error.php
+END
+UserNotFound.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1551/trunk/lib/SimpleSAML/Error/UserNotFound.php
+END
+NotFound.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/793/trunk/lib/SimpleSAML/Error/NotFound.php
+END
+MetadataNotFound.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2516/trunk/lib/SimpleSAML/Error/MetadataNotFound.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2487/trunk/lib/SimpleSAML/Error/Exception.php
+END
+BadRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/802/trunk/lib/SimpleSAML/Error/BadRequest.php
+END
+Assertion.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2027/trunk/lib/SimpleSAML/Error/Assertion.php
+END
+NoPassive.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/1567/trunk/lib/SimpleSAML/Error/NoPassive.php
+END
+NoState.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2482/trunk/lib/SimpleSAML/Error/NoState.php
+END
+User.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1551/trunk/lib/SimpleSAML/Error/User.php
+END
+ProxyCountExceeded.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2282/trunk/lib/SimpleSAML/Error/ProxyCountExceeded.php
+END
+InvalidCredential.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1551/trunk/lib/SimpleSAML/Error/InvalidCredential.php
+END
+AuthSource.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1551/trunk/lib/SimpleSAML/Error/AuthSource.php
+END
+BadUserInnput.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1551/trunk/lib/SimpleSAML/Error/BadUserInnput.php
+END
+UnserializableException.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2487/trunk/lib/SimpleSAML/Error/UnserializableException.php
+END

@@ -1,0 +1,40 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/sqlauth/lib/Auth/Source
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-05-04T11:11:13.768920Z
+2279
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+SQL.php
+file
+
+
+
+
+2010-06-25T05:22:45.000000Z
+c9737d56d124677bb646e7998c8df1d3
+2010-05-04T11:11:13.768920Z
+2279
+olavmrk
+

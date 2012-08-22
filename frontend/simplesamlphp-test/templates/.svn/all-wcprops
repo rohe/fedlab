@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/2630/trunk/templates
+END
+error.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2462/trunk/templates/error.php
+END
+attributequery.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2401/trunk/templates/attributequery.php
+END
+selectidp-links.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2166/trunk/templates/selectidp-links.php
+END
+login-ldapmulti.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2328/trunk/templates/login-ldapmulti.php
+END
+selectidp-dropdown.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2166/trunk/templates/selectidp-dropdown.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2165/trunk/templates/login.php
+END
+logout.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1186/trunk/templates/logout.php
+END
+metadata.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2394/trunk/templates/metadata.php
+END
+status.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2594/trunk/templates/status.php
+END
+post.php
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/1546/trunk/templates/post.php
+END
+errorreport.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2112/trunk/templates/errorreport.php
+END
+metadata-converter.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1396/trunk/templates/metadata-converter.php
+END

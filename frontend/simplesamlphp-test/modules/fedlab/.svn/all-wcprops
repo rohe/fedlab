@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/39/trunk/modules/fedlab
+END
+enable
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/39/trunk/modules/fedlab/enable
+END
+default-enable
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/39/trunk/modules/fedlab/default-enable
+END

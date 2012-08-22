@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1151/trunk/modules/authYubiKey/lib/Auth/Process
+END
+OTP2YubiPrefix.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/1151/trunk/modules/authYubiKey/lib/Auth/Process/OTP2YubiPrefix.php
+END

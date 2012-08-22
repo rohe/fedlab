@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/2667/trunk/www/auth
+END
+login-wayf-ldap.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2479/trunk/www/auth/login-wayf-ldap.php
+END
+login-cas-ldap.php
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2667/trunk/www/auth/login-cas-ldap.php
+END
+login-radius.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2479/trunk/www/auth/login-radius.php
+END
+login-admin.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2479/trunk/www/auth/login-admin.php
+END
+login-ldapmulti.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2479/trunk/www/auth/login-ldapmulti.php
+END
+login-tlsclient.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2479/trunk/www/auth/login-tlsclient.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2479/trunk/www/auth/login.php
+END

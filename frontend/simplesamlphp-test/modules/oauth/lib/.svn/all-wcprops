@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2666/trunk/modules/oauth/lib
+END
+Consumer.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2666/trunk/modules/oauth/lib/Consumer.php
+END
+OAuthStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1792/trunk/modules/oauth/lib/OAuthStore.php
+END
+OAuthServer.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1481/trunk/modules/oauth/lib/OAuthServer.php
+END
+Registry.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/1792/trunk/modules/oauth/lib/Registry.php
+END

@@ -1,0 +1,58 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/core/lib/Auth
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-10-25T11:45:04.332039Z
+2599
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Source
+dir
+
+UserPassBase.php
+file
+
+
+
+
+2010-06-25T05:22:46.000000Z
+ce310bef4cfef97e1cf10dc68e3b18fc
+2010-03-22T10:11:27.220472Z
+2228
+andreassolberg
+
+Process
+dir
+
+UserPassOrgBase.php
+file
+
+
+
+
+2010-06-25T05:22:46.000000Z
+536eee03018f89de3bf04cc9d4a6c1ce
+2009-07-16T09:43:33.487958Z
+1589
+olavmrk
+

@@ -1,0 +1,52 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/consent/lib/Consent/Store
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-02-25T12:21:39.327744Z
+1327
+andreassolberg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+Cookie.php
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+8b52c63704a7ef39753f8ba13726c932
+2009-02-17T09:31:21.434035Z
+1278
+andreassolberg
+
+Database.php
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+3ca56b515d145bdaf4b3392d054e27bc
+2009-02-25T12:21:39.327744Z
+1327
+andreassolberg
+

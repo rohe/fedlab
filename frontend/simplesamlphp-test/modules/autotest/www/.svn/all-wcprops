@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1827/trunk/modules/autotest/www
+END
+logout.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1827/trunk/modules/autotest/www/logout.php
+END
+attributes.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1827/trunk/modules/autotest/www/attributes.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/1827/trunk/modules/autotest/www/login.php
+END

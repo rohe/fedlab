@@ -1,0 +1,215 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/622/trunk/schemas
+END
+oasis-sstc-saml-schema-assertion-1.1.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/622/trunk/schemas/oasis-sstc-saml-schema-assertion-1.1.xsd
+END
+saml-schema-protocol-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/534/trunk/schemas/saml-schema-protocol-2.0.xsd
+END
+saml-schema-authn-context-ppt-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-ppt-2.0.xsd
+END
+saml-schema-authn-context-srp-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-srp-2.0.xsd
+END
+saml-schema-xacml-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/534/trunk/schemas/saml-schema-xacml-2.0.xsd
+END
+saml-schema-authn-context-auth-telephony-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-auth-telephony-2.0.xsd
+END
+saml-schema-authn-context-spki-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-spki-2.0.xsd
+END
+saml-schema-authn-context-telephony-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-telephony-2.0.xsd
+END
+saml-schema-authn-context-ip-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-ip-2.0.xsd
+END
+saml-schema-ecp-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/534/trunk/schemas/saml-schema-ecp-2.0.xsd
+END
+saml-schema-authn-context-kerberos-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-kerberos-2.0.xsd
+END
+saml-schema-authn-context-mobiletwofactor-unreg-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-mobiletwofactor-unreg-2.0.xsd
+END
+saml-schema-metadata-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/534/trunk/schemas/saml-schema-metadata-2.0.xsd
+END
+saml-schema-authn-context-session-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-session-2.0.xsd
+END
+saml-schema-authn-context-smartcardpki-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-smartcardpki-2.0.xsd
+END
+saml-schema-authn-context-ippword-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-ippword-2.0.xsd
+END
+saml-schema-authn-context-pgp-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-pgp-2.0.xsd
+END
+saml-schema-authn-context-mobileonefactor-unreg-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-mobileonefactor-unreg-2.0.xsd
+END
+oasis-sstc-saml-schema-protocol-1.1.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/622/trunk/schemas/oasis-sstc-saml-schema-protocol-1.1.xsd
+END
+saml-schema-authn-context-personal-telephony-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-personal-telephony-2.0.xsd
+END
+saml-schema-authn-context-softwarepki-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-softwarepki-2.0.xsd
+END
+saml-schema-authn-context-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-2.0.xsd
+END
+saml-schema-authn-context-nomad-telephony-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-nomad-telephony-2.0.xsd
+END
+saml-schema-authn-context-types-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-types-2.0.xsd
+END
+saml-schema-authn-context-x509-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-x509-2.0.xsd
+END
+saml-schema-authn-context-xmldsig-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-xmldsig-2.0.xsd
+END
+saml-schema-assertion-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/534/trunk/schemas/saml-schema-assertion-2.0.xsd
+END
+saml-schema-authn-context-mobiletwofactor-reg-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-mobiletwofactor-reg-2.0.xsd
+END
+saml-schema-authn-context-sslcert-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-sslcert-2.0.xsd
+END
+saml-schema-authn-context-smartcard-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-smartcard-2.0.xsd
+END
+saml-schema-authn-context-mobileonefactor-reg-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-mobileonefactor-reg-2.0.xsd
+END
+saml-schema-authn-context-pword-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-pword-2.0.xsd
+END
+saml-schema-authn-context-timesync-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/534/trunk/schemas/saml-schema-authn-context-timesync-2.0.xsd
+END
+saml-schema-dce-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/534/trunk/schemas/saml-schema-dce-2.0.xsd
+END
+saml-schema-x500-2.0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/534/trunk/schemas/saml-schema-x500-2.0.xsd
+END

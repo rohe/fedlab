@@ -1,0 +1,54 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/cron/www
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2009-12-16T14:09:00.546621Z
+2055
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+croninfo.php
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+71d9b6cd1482bad1a0b73bcbf9eb3af0
+2009-12-16T14:09:00.546621Z
+2055
+olavmrk
+has-props
+
+cron.php
+file
+
+
+
+
+2010-06-25T05:22:49.000000Z
+3ec7a89ff05efc1fdfefd70f41c8e90e
+2009-11-30T09:25:58.812115Z
+2011
+olavmrk
+has-props
+

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2629/trunk/modules/authYubiKey/dictionaries
+END
+yubikey.definition.json
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2100/trunk/modules/authYubiKey/dictionaries/yubikey.definition.json
+END
+yubikey.translation.json
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2629/trunk/modules/authYubiKey/dictionaries/yubikey.translation.json
+END

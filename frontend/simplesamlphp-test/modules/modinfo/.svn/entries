@@ -1,0 +1,52 @@
+9
+
+dir
+2685
+https://simplesamlphp.googlecode.com/svn/trunk/modules/modinfo
+https://simplesamlphp.googlecode.com/svn
+
+
+
+2010-11-16T14:29:00.487139Z
+2629
+olavmrk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+44740490-163a-0410-bde0-09ae8108e29a
+
+hooks
+dir
+
+www
+dir
+
+default-enable
+file
+
+
+
+
+2010-06-25T05:22:48.000000Z
+bba7d339eb6e98e572e45f1e755639b0
+2008-08-20T09:14:16.439693Z
+824
+olavmrk
+
+dictionaries
+dir
+
+templates
+dir
+
