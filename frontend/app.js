@@ -90,7 +90,7 @@ app.get('/test', function(req, res){
 	});
 });
 
-fs.readFile('etc/config.js', function (err, data) {
+fs.readFile(__dirname + '/etc/config.js', function (err, data) {
 	if (err) {
 		console.log("Error reading config results");
 		return null;
