@@ -16,13 +16,15 @@ testconnector = function (config) {
 	var 
 		my = {},
 		execute,
-		resultsconfig = null;
+		resultsconfig = null,
+
+		resultconfigfile = config.path + 'frontend/etc/config.results.js';
 
 
 
-	fs.readFile(config.path + 'frontend/etc/config.results.js', function (err, data) {
+	fs.readFile(resultconfigfile, function (err, data) {
 		if (err) {
-			console.log("Error reading config results");
+			console.log("Error reading config results from " + resultconfigfile);
 			return null;
 		}
 		resultsconfig = JSON.parse(data);
