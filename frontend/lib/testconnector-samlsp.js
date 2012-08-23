@@ -21,7 +21,7 @@ testconnectorsaml = function (config) {
 
 
 
-	fs.readFile('etc/config.results.js', function (err, data) {
+	fs.readFile(config.path + 'frontend/etc/config.results.js', function (err, data) {
 		if (err) {
 			console.log("Error reading config results");
 			return null;
