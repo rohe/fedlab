@@ -17,7 +17,7 @@ var
 	// Variables
 	io,
 	app,
-	t;
+	t, ts;
 
 // Configuration
 
@@ -90,8 +90,20 @@ app.get('/test', function(req, res){
 	});
 });
 
-var t = testconnector.testconnector();
-var ts = testconnectorsaml.testconnectorsaml();
+fs.readFile('etc/config.js', function (err, data) {
+	if (err) {
+		console.log("Error reading config results");
+		return null;
+	}
+	config = JSON.parse(data);
+	console.log("Successfully read configuration.");
+	console.log(config);
+
+	t = testconnector.testconnector(config);
+	ts = testconnectorsaml.testconnectorsaml(config);
+
+});
+
 
 // t.temp("oic-verify", function (msg) {
 // 	var url = msg.tests[7].url;

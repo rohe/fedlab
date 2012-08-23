@@ -17,7 +17,7 @@ testconnectorsaml = function (config) {
 		my = {},
 		execute,
 		resultsconfig = null,
-		samlcmd = '/root/fedlab/frontend/simplesamlphp-test/modules/fedlab/bin/cmd.php';
+		samlcmd = config['path'] + 'frontend/simplesamlphp-test/modules/fedlab/bin/cmd.php';
 
 
 
