@@ -71,11 +71,11 @@ app.get('/saml-sp', function(req, res){
 
 
 app.get('/connect-provider', function(req, res){
-
 	res.render('connect-provider', {
 		title: 'OpenID Connect Provider Testing'
 	});
 });
+
 
 app.get('/results', function(req, res){
 	res.render('results', {

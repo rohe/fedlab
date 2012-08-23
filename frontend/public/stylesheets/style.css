@@ -5,12 +5,12 @@
 
 
 body.modeEdit fieldset.storeconfiguration, 
-body.modeEdit div#editorcontainer,
+body.modeEdit div.editorcontainer,
 body.modeTest div#testcontrollerbar {
 	display: block;
 }
 body.modeTest fieldset.storeconfiguration, 
-body.modeTest div#editorcontainer,
+body.modeTest div.editorcontainer,
 body.modeEdit div#testcontrollerbar {
 	display: none;
 }
@@ -119,23 +119,30 @@ fieldset {
 	border: 1px solid #eee;
 }
 
+fieldset.readyverify {
+	display: none;
+}
+body.editorOpen fieldset.readyverify {
+	display: block;
+}
+
 fieldset.readyverify legend {
-	background: #fff;
+	/*background: #fff;*/
 }
 fieldset.readyverify  {
-	background: #ecfc71;
+/*	background: #ecfc71;
 	color: black;
-	border: 1px solid #373;
+	border: 1px solid #373;*/
 }
 
 
 fieldset.storeconfiguration legend {
-	background: #fff;
+	/*background: #fff;*/
 }
 fieldset.storeconfiguration {
-	background: #ecfc71;
+/*	background: #ecfc71;
 	color: black;
-	border: 1px solid #373;
+	border: 1px solid #373;*/
 }
 
 fieldset.storeconfiguration li.active a.entityOpen {

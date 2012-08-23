@@ -1,52 +1,85 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title><%= title %></title>
-	<meta charset="utf-8" />
-
-	<link rel="stylesheet" href="/stylesheets/style.css" />
-	<link rel="stylesheet" href="/stylesheets/testresults.css" />
-	
-	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Federation Lab</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
 
 
-	<!-- JQuery hosted by google -->
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<link rel="stylesheet" href="/stylesheets/testresults.css" />
+		
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 
- 	
-	<!-- spine.js -->
-	<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
-	<script type="text/javascript" src="/javascripts/spine/local.js"></script>
-	<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
-
-	<!-- PrettyDate, John Resigs library with a twist. -->
-	<script type="text/javascript" src="/javascripts/prettydate/pretty.js"></script>
-
-	<!-- jquery tmpl() -->
-	<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
-
-	<!-- <script type="text/javascript" src="/javascripts/jquery-postmessage/postmessage.js"></script> -->
-	
-	<!-- Syntax highlighting of JSON -->
-	<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
-
-	<!-- Federation Lab -->
-	<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
-	<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
-
-	<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
-	<script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script>
-	<script type="text/javascript" src="/javascripts/app/controllers/ctrl.publisher.js"></script>
-	<script type="text/javascript" src="/javascripts/app/controllers/userinteraction.js"></script>
+		<!-- Local stylesheets -->
+		<!-- <link rel="stylesheet" href="/stylesheets/layout-saml.css" /> -->
+		<link rel="stylesheet" href="/stylesheets/testresults.css" />
 
 
-	<script type="text/javascript" src="/javascripts/app/controllers/FedLabConnect.js"></script>
+		<!-- JQuery hosted by google -->
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" />
+
+	 	
+		<!-- spine.js -->
+		<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
+		<script type="text/javascript" src="/javascripts/spine/local.js"></script>
+		<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
+
+		<!-- PrettyDate, John Resigs library with a twist. -->
+		<script type="text/javascript" src="/javascripts/prettydate/pretty.js"></script>
+
+		<!-- jquery tmpl() -->
+		<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
+
+		<!-- <script type="text/javascript" src="/javascripts/jquery-postmessage/postmessage.js"></script> -->
+		
+		<!-- Syntax highlighting of JSON -->
+		<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
+
+		<!-- Federation Lab -->
+		<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
+		<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
+
+		<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
+		<script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script>
+		<script type="text/javascript" src="/javascripts/app/controllers/ctrl.publisher.js"></script>
+		<script type="text/javascript" src="/javascripts/app/controllers/userinteraction.js"></script>
 
 
-	
-	
+		<script type="text/javascript" src="/javascripts/app/controllers/FedLabConnect.js"></script>
+
+
+		<!-- JSON plugin -->
+		<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script>
+
+
+
+		
+
+
+		<!-- Le styles -->
+		<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<style>
+			body {
+				padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+			ul.breadcrumb {
+				padding-left: 60px;
+			}
+		</style>
+		<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+
+
 
 	<!-- JQuery templates -->
 	
@@ -56,13 +89,17 @@
 		
 			<div class="testFlowControllerBar">
 				<div class="lastRunInfo"></div>
-				<input type="submit" class="testFlowRun" name="testFlowRun" value="Run" />
-				<input type="submit" class="testFlowSShow" name="testFlowSShow" value="Show succeeded" />
-				<input type="submit" class="testFlowSHide" name="testFlowSHide" value="Hide succeeded" />
-				<input type="submit" class="testFlowDCShow" name="testFlowDCShow" value="Show debug" />
-				<input type="submit" class="testFlowDCHide" name="testFlowDCHide" value="Hide debug" />
-				<input type="submit" class="testFlowOthersShow" name="testFlowOthersShow" value="Show others" />
-				<input type="submit" class="testFlowOthersHide" name="testFlowOthersHide" value="Hide others" />
+
+				<input type="submit" class="btn btn-small btn-primary testFlowRun" name="testFlowRun" value="Run" />
+				<div style="display: inline; padding: 0px 5px" class="btn-group">
+					<input type="submit" class="btn btn-small testFlowSShow" name="testFlowSShow" value="Show succeeded" />
+					<input type="submit" class="btn btn-small testFlowSHide" name="testFlowSHide" value="Hide succeeded" />
+					<input type="submit" class="btn btn-small testFlowDCShow" name="testFlowDCShow" value="Show debug" />
+					<input type="submit" class="btn btn-small testFlowDCHide" name="testFlowDCHide" value="Hide debug" />
+				</div>
+				<input type="submit" class="btn btn-small testFlowOthersShow" name="testFlowOthersShow" value="Show others" />
+				<input type="submit" class="btn btn-small testFlowOthersHide" name="testFlowOthersHide" value="Hide others" />
+
 			</div>
 		
 			<h3>
@@ -114,8 +151,10 @@
 
 	
 	<script type="text/x-jquery-tmpl" id="providerItem">
-		<a class="entityOpen" href="">{{html $data.getTitle() }}</a> ( <a class="entityDup" href="">duplicate</a> | <a class="entityDel" href="">delete</a> )
-			<span class="autosave">Autosave</span>
+		<a class="entityOpen" href="">{{html $data.getTitle() }}</a><br />
+			<a class="btn btn-mini entityDup" href="">duplicate</a> 
+			<a class="btn btn-mini entityDel" href="">delete</a>
+		<span class="autosave">Autosave</span>
 	</script>
 	
 	
@@ -463,12 +502,7 @@
 		</fieldset>
 	</div>
 	
-	<fieldset class="readyverify"><legend>Verify Connectivity</legend>
-	
-		<p>When you're done configuring your OpenID Connect Provider above, you may click the button below to perform a simple test, verifying that your most basic features are working. When this test is ran successfully, you'll be able to proceed to the rest of the test cases.</p>
-		
-		<p style="text-align: center"><input  type="submit" id="verifynow" value="Verify Connectivity" /></p>		
-	</fieldset>
+
 		
 	</script>
 
@@ -491,80 +525,165 @@
 		});
 
 	</script>
-	
-</head>
 
-<body>
-	
-<!-- 	<iframe class="userinteraction" width="500px" height="500px"></iframe> -->
+	</head>
 
-	<div class="betanote" style="
-		position: fixed; bottom: 10px; right: 10px; font-size: 200%; font-family: Cochin; border: 1px solid #555; color: #ccc; background-color: #777;
-		font-weight: bold;
-		padding: 4px 10px; border-radius: 10px; box-shadow: 2px 2px 2px 2px rgba(100, 100, 100, 0.4);
-	">Beta</div>
+	<body>
 
 
-	<p><a href="/">« Back to frontpage</a></p>
-
-	<img src="/images/openid.png" style="float: right" />
-
-	<h1>Testing OpenID Connect Provider</h1>
-
-	<p>Fill inn all required information about your OAuth Provider in order to start testing it using Federation Lab.</p>
-	
-	<p><a href="">Consult the Federation Lab web site</a> for more information about Federation Lab.</p>
 
 
-	<fieldset class="storeconfiguration"><legend>Stored Configuration</legend>
-	
-		<div id="configdrop" style="width: 120px; float: right; margin: 1em; background: #ffe; border: 1px dotted #775; padding: .4em; font-size: 80%; text-align: center; height: 100px">Drop config here to import.
-
-			<a id="configexport" draggable="true" style="display: block; width: 60px; height: 60px; background: white; border: 1px solid #ccc" href="">export</a>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="#">Federation Lab</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li><a href="/">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<p>Here is a list of stored OAuth Provider configurations:</p>
-		
-		<ul>
+
+		<ul class="breadcrumb">
+			<li>
+				<a href="/">Home</a> <span class="divider">/</span>
+			</li>
+			<li class="active">OpenID Connect Provider Testing</li>
 		</ul>
+
+
+
+
+		<div id="main" class="container">
+
+			<p>This is a test suite to perform a set of automated test scenarios towards your OpenID Connect Provider. Federation Lab will behave like an OpenID Consumer. Before starting the tests you would need to configure your provider here.</p>
+
+
+			<div id="testcontrollerbar">
+				<p>Testing <b id="testcontroller_name">some unnamed provider</b></p>
+
+				<div id="resultcounter"></div>
+
+				<input type="submit" class="btn" name="configure" id="configure" value="« Revisit the configuration" />
+				<input type="submit" class="btn btn-primary" name="runall" id="runall" value="Run all test flows »" />
+
+
+			</div>
+
+			<div id="publishbar">
+				<h3>Publish your testresults</h3>
+				<p>Enter your PIN code to publish your test results to the server, for comparison with other implementations</p>
+				
+				<label for="pincode">PIN code</label>
+				<input id="pincode" type="text" class="pincode" name="pincode"  />
+				<input id="dopublish" class="btn" type="submit" name="subm" value="Publish results" />
+
+			</div>
+
+			<div id="results">	
+			</div>
+
+			<form class="form-inline">
+			<div class="row editorcontainer">
+				<div class="span3">
+
+					<fieldset class="storeconfiguration"><legend>Stored Configuration</legend>
+
+						<p>Here is a list of stored OAuth Provider configurations:</p>
+						
+						<ul>
+						</ul>
+						
+						<a id="createnewitem" class="btn" href="#"><i class="icon-file"></i> Create new configuration</a>
+
+						<!-- <input type="submit" id="createnewitem" class="btn" value="Create new configuration" /> -->
+						
+					</fieldset>
+
+
+<!--
+
+	TODO: Add support for export and import. Disabled August 2012.
+
+					<fieldset class="storeconfiguration"><legend>Export and import</legend>
+						<p>
+							<a id="configexport" draggable="true" style="margin-top: 1em; display: block" href="">Export configuration. Drag this file.</a>
+						</p>
+
+						<div id="configdrop" style="margin-top: 1em; background: #ffe; border: 1px dashed #775; padding: .4em; font-size: 80%; text-align: center; height: 40px">Drop config file here to import.</div>
+					</fieldset>
+
+-->
+
+				</div>
+				<div class="span6">
+
+
+					<div id="editorcontainer">
+						<div id="editor">
+						</div>
+					</div>
+
+				</div>
+
+				<div class="span3">
+
+					<fieldset class="readyverify"><legend>Verify Connectivity</legend>
+					
+						<p>When you're done configuring your OpenID Connect Provider above, you may click the button below to perform a simple test, verifying that your most basic features are working. When this test is ran successfully, you'll be able to proceed to the rest of the test cases.</p>
+						
+						<p style="">
+							<a href="#" class="btn btn-primary" id="verifynow"><i class="icon-play icon-white"></i> Verify Connectivity</a>
+							<!-- <input class="btn btn-primary" type="submit" id="verifynow" value="Verify Connectivity" /> -->
+						</p>		
+					</fieldset>
+
+
+				</div>
+
+			</div>
+			</form>
+
+			<!-- <img src="/images/openid.png" style="float: right" /> -->
+
+			
+
+
+
+
+			
+
+		</div> <!-- /container -->
+
 		
-		<input type="submit" id="createnewitem" value="Create new configuration" />
-		
-	</fieldset>
-	
-	<div id="editorcontainer">
-		<div id="editor">
-		</div>
-	</div>
 
-	<div id="testcontrollerbar">
-		<p>Testing <b id="testcontroller_name">some unnamed provider</b></p>
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster 
 
-		<div id="resultcounter"></div>
+		<script src="/bootstrap/js/bootstrap-transition.js"></script>
+		<script src="/bootstrap/js/bootstrap-alert.js"></script>
+		<script src="/bootstrap/js/bootstrap-modal.js"></script>
+		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+		<script src="/bootstrap/js/bootstrap-scrollspy.js"></script>
 
-		<input type="submit" name="configure" id="configure" value="« Revisit the configuration" />
-		<input type="submit" name="runall" id="runall" value="Run all test flows »" />
-
-	</div>
-
-	<div id="publishbar">
-		<h3>Publish your testresults</h3>
-		<p>Enter your PIN code to publish your test results to the server, for comparison with other implementations</p>
-		
-		<label for="pincode">PIN code</label>
-		<input id="pincode" type="text" class="pincode" name="pincode"  />
-		<input id="dopublish" type="submit" name="subm" value="Publish results" />
-
-	
-<!-- 
-
-		<input type="submit" name="configure" id="configure" value="« Revisit the configuration" />
-		<input type="submit" name="runall" id="runall" value="Run all test flows »" />
- -->
-	</div>
-
-	<div id="results">	
-	</div>
-
-</body>
+		<script src="/bootstrap/js/bootstrap-tooltip.js"></script>
+		<script src="/bootstrap/js/bootstrap-popover.js"></script>
+		<script src="/bootstrap/js/bootstrap-button.js"></script>
+		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
+		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
+		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
+		-->
+		<script src="/bootstrap/js/bootstrap-tab.js"></script>
+	</body>
 </html>

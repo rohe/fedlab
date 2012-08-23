@@ -283,7 +283,7 @@
 			"click li a.entityOpen": "openentity",
 			"click li a.entityDel": "delEntity",
 			"click li a.entityDup": "dupEntity",
-			"click input[type=submit]": "newEntity"
+			"click #createnewitem": "newEntity"
 		},
 		items: [],
 		init: function(){
@@ -569,7 +569,7 @@
 				
 			}
 
-			testflowel.append("<pre class=\"debugConsole\">" + this.escapeHTML(testresults.debug) + "</div>");
+			testflowel.append("<pre style=\"clear: both\" class=\"clearfix debugConsole\">" + this.escapeHTML(testresults.debug) + "</div>");
 
 		},
 		

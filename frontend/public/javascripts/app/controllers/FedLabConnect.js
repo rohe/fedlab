@@ -5,9 +5,9 @@
 	var FedLabConnect = Spine.Controller.sub({
 		entityloader: null,
 		events: {
-			"click input#verifynow": "startVerify",
-			"click input#runall": "runAllFlows",
-			"click input#configure": "configure"
+			"click #verifynow": "startVerify",
+			"click #runall": "runAllFlows",
+			"click #configure": "configure"
 		},
 		init: function(args){
 			var c, newentity;
@@ -42,6 +42,7 @@
 			} else {
 				// More than one stored confiuration found, wait for user to select an configuratiom to edit..
 				// (or create a new one)
+				
 			}
 			
 			this.stateChange("modeEdit");
@@ -287,6 +288,7 @@
 		},
 		selectEntity: function(entity) {
 			
+			$(this.el).addClass("editorOpen");
 
 			// Save and clean up currently open 
 			if (this.editor && !this.editor.item.destroyed) {
