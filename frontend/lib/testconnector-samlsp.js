@@ -21,15 +21,15 @@ testconnectorsaml = function (config) {
 
 
 
-	fs.readFile(config.path + 'frontend/etc/config.results.js', function (err, data) {
-		if (err) {
-			console.log("Error reading config results");
-			return null;
-		}
-		resultsconfig = JSON.parse(data);
-		console.log("Successfully read resultsconfig...");
-		console.log(resultsconfig);
-	});
+	// fs.readFile(config.path + 'frontend/etc/config.results.js', function (err, data) {
+	// 	if (err) {
+	// 		console.log("Error reading config results: " + err);
+	// 		return null;
+	// 	}
+	// 	resultsconfig = JSON.parse(data);
+	// 	console.log("Successfully read resultsconfig...");
+	// 	console.log(resultsconfig);
+	// });
 	
 	
 	/*
