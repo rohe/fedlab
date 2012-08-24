@@ -68,15 +68,17 @@
 
 
 		<script type="text/javascript">
-		    $(document).ready(function(){
+				$(document).ready(function(){
 				
-				var jt = new JWTToolApp($("body"));
-				console.log("Loaded...");
-
-				window.jwtlog = function(args) {
-					jt.log(args);
-				}
-		    });
+					var jt = new JWTToolApp($("body"));
+					console.log("Loaded...");
+					window.jwtdebug = function(args) {
+						jt.debug(args);
+					}
+					window.jwtlog = function(args) {
+						jt.log(args);
+					}
+				});
 
 		</script>
 
@@ -132,26 +134,32 @@
 				<div class="span4">
 					<h3>Encoded JWT</h3>
 					<input type="text" id="encoded" style="width: 100%" value="eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk" />
-					
 				</div>
 
 				<div class="span4" >
 					<div style="background: #eee; padding: 3px 6px; border-radius: 5px">
-						<h3>Signature alg</h3>
+						<h3>Signature</h3>
 
 						<div class="control-group">
-						    <label class="control-label" for="type">Type</label>
-						    <div class="controls">
-						      <select id="type"><option>None</option><option selected="selected">HS256</option></select>
-						    </div>
-						  </div>
+							<label class="control-label" for="type">Algorithm</label>
+							<div class="controls">
+
+								<select id="type">
+									<option disabled="disabled" value="none">None</option>
+									<option value="HS256" selected="selected">HS256</option>
+								</select>
+
+							</div>
+						</div>
 
 						<div class="control-group">
-						    <label class="control-label" for="secret">Secret</label>
-						    <div class="controls">
-						      <input type="text" id="secret" placeholder="secret">
-						    </div>
-						  </div>
+							<label class="control-label" for="secret">Secret</label>
+							<div class="controls">
+								<input type="text" id="secret" placeholder="secret" value="[3, 35, 53, 75, 43, 15, 165, 188, 131, 126, 6, 101, 119, 123, 166, 143, 90, 179, 40, 230, 240, 84, 201, 40, 169, 15, 132, 178, 210, 80, 46, 191, 211, 251, 90, 146, 210, 6, 71, 239, 150, 138, 180, 195, 119, 98, 61, 34, 61, 46, 33, 114, 5, 46, 79, 8, 192, 205, 154, 245, 103, 208, 128, 163]">
+								<p>May be a JSON byte array (decimals) or an ASCII string.</p>
+							</div>
+							<button class="btn btn-mini actionGenSecret">Generate secret</button>
+						</div>
 
 						<button class="btn encode"><i class="icon-chevron-left"></i> Encode</button>
 						<button style="float: right" class="btn decode">Decode <i class="icon-chevron-right"></i></button>
@@ -159,26 +167,49 @@
 				</div>
 
 				<div class="span4">
-					<h3>Decoded JWT</h3>
+					<h3>Unpacked JWT</h3>
 					<textarea id="decoded" style="width: 100%" rows="15"></textarea>
-					
+
+					<div class="btn-toolbar">
+
+
+						<div class="btn-group">
+							<button id="actionBoilerplate" class="btn btn-small">Boilerplate</button>
+							<button id="actionPretty" class="btn btn-small">Pretty print</button>
+						</div>
+
+						<div class="btn-group">
+							<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+								Expire
+								<span class="caret"></span>
+							</a>
+
+							<ul class="dropdown-menu">
+								<li><a class="actionExpire" data-exp="-300" href="#">5 minutes ago</a></li>
+								<li><a class="actionExpire" data-exp="300" href="#">in 5 minutes</a></li>
+								<li><a class="actionExpire" data-exp="157680000" href="#">in five years</a></li>
+							</ul>
+						</div>
+
+					</div>
+
+
 				</div>
 
 			</div>
 
 
 			<div class="row">
-				<h3>Error log</h3>
+				<h3>Console</h3>
 				<div id="log"></div>
-				<div><button class="btn cleanlog">Clear log</button></div>
+				<!-- <div><button class="btn cleanlog">Clear log</button></div> -->
 			</div>
-
-			
-				
 
 		</div> <!-- /container -->
 
 		</form>
+
+
 
 		<!-- Le javascript
 		================================================== -->
@@ -187,16 +218,18 @@
 		<script src="/bootstrap/js/bootstrap-transition.js"></script>
 		<script src="/bootstrap/js/bootstrap-alert.js"></script>
 		<script src="/bootstrap/js/bootstrap-modal.js"></script>
-		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+
 		<script src="/bootstrap/js/bootstrap-scrollspy.js"></script>
 
 		<script src="/bootstrap/js/bootstrap-tooltip.js"></script>
 		<script src="/bootstrap/js/bootstrap-popover.js"></script>
-		<script src="/bootstrap/js/bootstrap-button.js"></script>
+
 		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
 		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
 		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
 		-->
+		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+		<script src="/bootstrap/js/bootstrap-button.js"></script>
 		<script src="/bootstrap/js/bootstrap-tab.js"></script>
 	</body>
 </html>

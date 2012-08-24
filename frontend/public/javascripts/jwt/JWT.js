@@ -101,7 +101,7 @@ if (isNode) {
 		var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
 		var i = 0;
  
-		var keystr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+		var keystr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=";
  
 		while (i < bytearray.length) {
  
@@ -222,7 +222,7 @@ jwt = function(useroptions, additionalReservedClaims) {
 		;
 	
 	
-		console.log("jwt()", useroptions, additionalReservedClaims);
+	console.log("jwt()", useroptions, additionalReservedClaims);
 
 	function mergeOptions(options, toAdd) {
 		var 
@@ -317,7 +317,7 @@ jwt = function(useroptions, additionalReservedClaims) {
 
 
 		decomposedSegments = jwt.split('.');
-		console.log(decomposedSegments)
+		console.log(decomposedSegments);
 		if (!decomposedSegments instanceof Array) jwtlog('Error when trying to decompose the JWT Segments.');
 		if (decomposedSegments.length !== 3) jwtlog('Wrong number of segments in JWT, separated by "." Did expect 3.');
 
@@ -326,13 +326,19 @@ jwt = function(useroptions, additionalReservedClaims) {
 		claims = decodeSegment(decomposedSegments[1]);
 		cryptoSegment = decomposedSegments[2];
 
+		jwtdebug("Header decoded was: <pre>" + JSON.stringify(header, null, 4) + '</pre>' );
+		jwtdebug("claims decoded was: <pre>" + JSON.stringify(claims, null, 4) + '</pre>' );
+		jwtdebug("cryptoSegment decoded was: <pre>" + JSON.stringify(cryptoSegment, null, 4) + '</pre>' );
+
 		cryptoInput = decomposedSegments[0] + '.' + decomposedSegments[1];
 
 		if (!header['alg']) jwtlog('Encoded JWT did not include the [alg] header property, which is required for validating the signature.');
 
 		digest = createSignature(cryptoInput, header['alg']);
 
-	//	if (digest !== cryptoSegment) jwtlog('Invalid HMAC Signature in CryptoSegment of the provided JWT.');
+		if (digest !== cryptoSegment) jwtlog('Invalid HMAC Signature in CryptoSegment of the provided JWT. <br />' +
+				'<tt style="color: black">' + digest + '</tt> (Calculated digest)<br />' + 
+				'<tt style="color: black">' + cryptoSegment + '</tt> (cryptosegment contained this)');
 		if (digest !== cryptoSegment) console.log('Invalid HMAC Signature in CryptoSegment of the provided JWT.');
 
 		my.validateClaims();
@@ -427,7 +433,8 @@ jwt = function(useroptions, additionalReservedClaims) {
 			HMAC_SHA256_init(secret);
 			HMAC_SHA256_write(string);
 			hmac = HMAC_SHA256_finalize();
-			console.log(hmac);
+			console.log("HMAC", hmac);
+			console.log("Secret", secret);
 			digest = stripPadding(binarybase64(hmac));
 		}
 		return digest;
@@ -452,6 +459,10 @@ jwt = function(useroptions, additionalReservedClaims) {
 		console.log(cryptoInput);
 		console.log('Crypto output:');
 		console.log(digest);
+
+		jwtdebug('Crypto input <pre>' + cryptoInput + '</pre>' + 
+			'Crypto ouptut: <pre>' + digest + '</pre>' + 
+			'Secret : <pre>' + JSON.stringify(secret) + '</pre>');
 
 		return digest;	
 	}
