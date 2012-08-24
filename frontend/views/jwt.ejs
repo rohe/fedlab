@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Federation Lab</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+
+
+		<!-- Local stylesheets -->
+		<!-- <link rel="stylesheet" href="/stylesheets/layout-saml.css" /> -->
+
+
+		<!-- jQuery + UI -->
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" />
+
+
+		<script type="text/javascript" src="/javascripts/jwt/jssha256.js"></script>
+		<script type="text/javascript" src="/javascripts/jwt/JWT.js"></script>
+		<script type="text/javascript" src="/javascripts/jwt/app/main.js"></script>
+
+
+
+
+		<!-- PrettyDate, John Resigs library with a twist. -->
+		<script type="text/javascript" src="/javascripts/prettydate/pretty.js"></script>
+
+		<!-- jquery tmpl() -->
+		<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
+
+
+		
+		<!-- Syntax highlighting of JSON -->
+		<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
+
+
+
+		<!-- JSON plugin -->
+		<script type="text/javascript" src="/javascripts/jquery.json-2.3.min.js"></script>
+
+
+	
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+
+
+
+		<!-- Le styles -->
+		<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<style>
+			body {
+				padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+			ul.breadcrumb {
+				padding-left: 60px;
+			}
+		</style>
+		<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+
+		<script type="text/javascript">
+		    $(document).ready(function(){
+				
+				var jt = new JWTToolApp($("body"));
+				console.log("Loaded...");
+
+				window.jwtlog = function(args) {
+					jt.log(args);
+				}
+		    });
+
+		</script>
+
+
+		
+		<script type="text/x-jquery-tmpl" id="providerItem">
+			<a class="entityOpen" href="">{{html $data.getTitle() }}</a> ( <a class="entityDup" href="">duplicate</a> | <a class="entityDel" href="">delete</a> )
+				<span class="autosave">Autosave</span>
+		</script>
+
+
+	</head>
+
+
+
+	<body>
+
+
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="#">Federation Lab</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li><a href="/">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<ul class="breadcrumb">
+			<li>
+				<a href="/">Home</a> <span class="divider">/</span>
+			</li>
+			<li class="active">JWT Tool</li>
+		</ul>
+
+		<form class="form">
+
+		<div id="main" class="container">
+
+			<div class="row">
+
+				<div class="span4">
+					<h3>Encoded JWT</h3>
+					<input type="text" id="encoded" style="width: 100%" value="eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk" />
+					
+				</div>
+
+				<div class="span4" >
+					<div style="background: #eee; padding: 3px 6px; border-radius: 5px">
+						<h3>Signature alg</h3>
+
+						<div class="control-group">
+						    <label class="control-label" for="type">Type</label>
+						    <div class="controls">
+						      <select id="type"><option>None</option><option selected="selected">HS256</option></select>
+						    </div>
+						  </div>
+
+						<div class="control-group">
+						    <label class="control-label" for="secret">Secret</label>
+						    <div class="controls">
+						      <input type="text" id="secret" placeholder="secret">
+						    </div>
+						  </div>
+
+						<button class="btn encode"><i class="icon-chevron-left"></i> Encode</button>
+						<button style="float: right" class="btn decode">Decode <i class="icon-chevron-right"></i></button>
+					</div>
+				</div>
+
+				<div class="span4">
+					<h3>Decoded JWT</h3>
+					<textarea id="decoded" style="width: 100%" rows="15"></textarea>
+					
+				</div>
+
+			</div>
+
+
+			<div class="row">
+				<h3>Error log</h3>
+				<div id="log"></div>
+				<div><button class="btn cleanlog">Clear log</button></div>
+			</div>
+
+			
+				
+
+		</div> <!-- /container -->
+
+		</form>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster 
+		<script src="/bootstrap/js/jquery.js"></script>
+		<script src="/bootstrap/js/bootstrap-transition.js"></script>
+		<script src="/bootstrap/js/bootstrap-alert.js"></script>
+		<script src="/bootstrap/js/bootstrap-modal.js"></script>
+		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
+		<script src="/bootstrap/js/bootstrap-scrollspy.js"></script>
+
+		<script src="/bootstrap/js/bootstrap-tooltip.js"></script>
+		<script src="/bootstrap/js/bootstrap-popover.js"></script>
+		<script src="/bootstrap/js/bootstrap-button.js"></script>
+		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
+		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
+		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
+		-->
+		<script src="/bootstrap/js/bootstrap-tab.js"></script>
+	</body>
+</html>

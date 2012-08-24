@@ -68,6 +68,11 @@ app.get('/saml-sp', function(req, res){
 	});
 });
 
+app.get('/jwt', function(req, res){
+	res.render('jwt', {
+		title: 'JWT Tool'
+	});
+});
 
 
 app.get('/connect-provider', function(req, res){
