@@ -75,7 +75,8 @@
 		});
 
 		$(this.el).on("click", "#actionPretty", $.proxy(this.pretty, this));
-		$(this.el).on("click", "#actionBoilerplate", $.proxy(function() {
+		$(this.el).on("click", "#actionBoilerplate", $.proxy(function(e) {
+			e.preventDefault();
 			this.update(this.boilerplate);
 		}, this));
 
@@ -100,7 +101,8 @@
 		this.update({exp: nv});
 	}
 
-	JWTToolApp.prototype.genSecret = function() {
+	JWTToolApp.prototype.genSecret = function(e) {
+		e.preventDefault();
 		var gen = randomString(64);
 		$(this.el).find("#secret").val(gen);
 	}
