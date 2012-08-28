@@ -62,17 +62,28 @@ app.get('/contact', function(req, res){
 	});
 });
 
-app.get('/saml-sp', function(req, res){
-	res.render('saml-sp', {
-		title: 'SAML 2.0 Service Provider Testing'
-	});
-});
+
 
 app.get('/jwt', function(req, res){
 	res.render('jwt', {
 		title: 'JWT Tool'
 	});
 });
+app.get('/samldebug', function(req, res){
+	res.render('samldebug', {
+		title: 'SAML Debugger'
+	});
+});
+
+
+
+app.get('/saml-sp', function(req, res){
+	res.render('saml-sp', {
+		title: 'SAML 2.0 Service Provider Testing'
+	});
+});
+
+
 
 
 app.get('/connect-provider', function(req, res){
