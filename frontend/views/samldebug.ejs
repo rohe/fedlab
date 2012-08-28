@@ -125,7 +125,7 @@
 				<a class="insertExample btn btn-mini" data-example="xml" href="#">SAML request XML</a> 
 				<a class="insertExample btn btn-mini" data-example="url" href="#">HTTP Redirect URL</a> 
 				<a class="insertExample btn btn-mini" data-example="redirect" href="#">HTTP Redirect encoded request</a> 
-				<a class="insertExample btn btn-mini" data-example="post" href="#">HTTP Body</a>
+				<a class="insertExample btn btn-mini" data-example="post" href="#">HTTP-POST</a>
 			</p>
 
 			<textarea id="samlinput" rows="10" style="width: 100%"></textarea>
@@ -134,13 +134,13 @@
 
 			<p>
 				Destination URL 
-				<input type="text" name="" value="https://idp.example.org/SAML/POST" />
+				<input id="dest" type="text" name="" value="https://idp.example.org/SAML/POST" />
 			</p>
 
 			<p>
-				<input type="checkbox" name="relaystateinclude" />
+				<input type="checkbox" id="relaystateinclude" name="relaystateinclude" />
 				RelayState 
-				<input type="text" name="" value="lsdkjflksdjflksjdf" />
+				<input id="relaystate" type="text" name="" value="lsdkjflksdjflksjdf" />
 			</p>
 
 			
@@ -157,12 +157,16 @@
 						</ul>
 					</div>
 
-					<button id="decode" class="btn">Decode</button>
+					
 				</div>
+				<button id="decode" class="btn">Decode</button>
 			</div>
 			
+			<div style="display: none" id="console">
 			<h3>Console</h3>
 			<div id="log"></div>
+
+		</div>
 			<!-- <div><button class="btn cleanlog">Clear log</button></div> -->
 
 		</div> <!-- /container -->

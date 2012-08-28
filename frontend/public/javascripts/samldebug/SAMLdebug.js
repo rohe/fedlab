@@ -1,231 +1,14 @@
-define(['resig'], function(Class) {
-
-
-	var wrapInflate = function(str) {
-		// var out;
-		// var res = puff(out, str);
-		// console.log("RES", res);
-		// return out;
-		// return JSInflate.inflate(str);
-		return RawDeflate.inflate(str);
-	}
-	var wrapDeflate = function(str) {
-		return RawDeflate.deflate(str, 9);
-	}
-	// function utf8_to_b64( str ) {
-	//     return window.btoa(unescape(encodeURIComponent( str )));
-	// }
-
-	// function b64_to_utf8( str ) {
-	//     return decodeURIComponent(escape(window.atob( str )));
-	// }
-
-	// function stringToBytes ( str ) {
-	//   var ch, st, re = [];
-	//   for (var i = 0; i < str.length; i++ ) {
-	//     ch = str.charCodeAt(i);  // get char 
-	//     st = [];                 // set up "stack"
-	//     do {
-	//       st.push( ch & 0xFF );  // push byte to stack
-	//       ch = ch >> 8;          // shift value down by 1 byte
-	//     }  
-	//     while ( ch );
-	//     // add stack contents to result
-	//     // done because chars have "wrong" endianness
-	//     re = re.concat( st.reverse() );
-	//   }
-	//   // return an array of bytes
-	//   return re;
-	// }
-
-	// var str = "eJxLBAAAYgBi";
-	// var str2 = $.base64.decode(str);
-
-	// console.log("Base 64 encoder string", str);
-	// console.log("Compressed string (decoded from base64)", str2);
-	// console.log("Compressed string (byte array)", stringToBytes(str2));
-	// console.log("Decompressed: ", JSON.stringify(wrapInflate(str2)));
-
-
-	// var t = 'a';
-	// console.log("Encode", t, JSON.stringify(wrapDeflate(t)))
-	// 
-
-	function url_decompose(url){
-		if(url.indexOf('?') == -1){ return {path: url, params: {} }; }
-		path = url.substring(0, url.indexOf('?'));//get the path before the ?
-		qs = url.substring(url.indexOf('?')+1);
-		qsa = qs.split('&');
-		params = new Object();
-		for (var kv in qsa) {
-			var kva = qsa[kv].split('=');
-			var k = kva[0];
-			var v = kva.slice(1, kva.length).join("=");
-			params[k] = params[k] || new Array();
-			params[k].push(v);
-		}
-		return {path: path, params: params};
-	}
-
-	// console.log(url_decompose('https://idp.example.org/SAML2/SSO/Redirect?SAMLRequest=fZFfa8IwFMXfBb9DyXvaJtZ1BqsURRC2Mabbw95ivc5Am3TJrXPffmmLY3%2FA15Pzuyf33On8XJXBCaxTRmeEhTEJQBdmr%2FRbRp63K3pL5rPhYOpkVdYib%2FCon%2BC9AYfDQRB4WDvRvWWksVoY6ZQTWlbgBBZik9%2FfCR7GorYGTWFK8pu6DknnwKL%2FWEetlxmR8sBHbHJDWZqOKGdsRJM0kfQAjCUJ43KX8s78ctnIz%2Blp5xpYa4dSo1fjOKGM03i8jSeCMzGevHa2%2FBK5MNo1FdgN2JMqPLmHc0b6WTmiVbsGoTf5qv66Zq2t60x0wXZ2RKydiCJXh3CWVV1CWJgqanfl0%2Bin8xutxYOvZL18NKUqPlvZR5el%2BVhYkAgZQdsA6fWVsZXE63W2itrTQ2cVaKV2CjSSqL1v9P%2FAXv4C'));
-
+define(
+	[
+		'resig',
+		'plugins/SDPluginPost',
+		'plugins/SDPluginRedirect',
+		'plugins/SDPluginURL'
+	], 
+	function(Class, SDPluginPost, SDPluginRedirect, SDPluginURL) {
 
 	var SAMLdebug;
 
-
-	var SDPlugin = Class.extend({
-		init: function(sd, type) {
-			this.sd = sd;
-			this.type = type;
-		},
-		detect: function() {
-			alert("Not implemented");
-		},
-		getType: function() {
-			return this.type;
-		}
-	});
-	
-
-
-	/*
-	 * This plugin handles URLencoded SAML parameter, as well as a full url including the encoded
-	 * SAML response or request.
-	 */
-	var SDPluginRedirect = SDPlugin.extend({
-		init: function(sd) { 
-			this._super(sd, 'redirect');
-			sd.registerEncoder('HTTP-Redirect', this);
-		},
-		detect: function(input) {
-			var match = /^[A-Za-z0-9+\/=]+$/gi; 
-			if (input.match(match)) {
-				return this.isDeflated(input);
-			}
-			return false;
-		},
-		isDeflated: function(input) {
-			var decoded, inflated;
-			decoded = $.base64.decode(input);
-			inflated = wrapInflate(decoded);
-			console.log("Check if SDPluginRedirect is inflated", JSON.stringify(inflated));
-			return inflated !== '';
-		},
-		decode: function(input) {
-			var inflated, decoded;
-
-			this.sd.debug('About to decode HTTP REDIRECT <pre>' + input.replace(/</g, '&lt;') + '</pre>');
-
-			decoded = $.base64.decode(input);
-			// this.sd.debug('decoded: <pre>' + decoded.replace(/</g, '&lt;') + '</pre>');
-
-			inflated = wrapInflate(decoded);
-			this.sd.debug('result <pre>' + inflated.replace(/</g, '&lt;') + '</pre>');
-
-			return inflated;
-		},
-		encode: function(input) {
-			var deflated, encoded;
-			this.sd.debug('About to encode <pre>' + input.replace(/</g, '&lt;') + '</pre>');
-			deflated = wrapDeflate(input, 9);
-			this.sd.debug('deflated: <pre>' + deflated.replace(/</g, '&lt;') + '</pre>');
-			encoded = $.base64.encode(deflated);
-			this.sd.debug('Base64 encoded <pre>' + encoded.replace(/</g, '&lt;') + '</pre>');
-			return encoded;
-		}
-	});
-
-	/*
-	 * This plugin handles URLencoded SAML parameter, as well as a full url including the encoded
-	 * SAML response or request.
-	 */
-	var SDPluginURL = SDPlugin.extend({
-		init: function(sd) { 
-			this._super(sd, 'url');
-			sd.registerEncoder('HTTP-Redirect URL', this);
-		},
-		detect: function(input) {
-			var urlmatch = /^[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-			var match = /^[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-			return input.match(urlmatch);
-		},
-		decode: function(input) {
-			var encoded, inflated, decoded, decomposed, result = {};
-
-
-			decomposed = url_decompose(input);
-
-			result.dest = decomposed.path;
-			for(var key in decomposed.params) {
-				if (decomposed.params.hasOwnProperty(key)) {
-					if (key === 'SAMLRequest') {
-						encoded = decodeURIComponent(decomposed.params['SAMLRequest'][0]);
-					}
-				}
-			}
-			console.log("Result", decomposed, result, encoded);
-
-			this.sd.debug('About to decode URL <pre>' + encoded.replace(/</g, '&lt;') + '</pre>');
-
-			decoded = $.base64.decode(encoded);
-			this.sd.debug('decoded: <pre>' + decoded.replace(/</g, '&lt;') + '</pre>');
-
-			inflated = wrapInflate(decoded);
-			this.sd.debug('result <pre>' + inflated.replace(/</g, '&lt;') + '</pre>');
-
-			return inflated;
-		},
-		encode: function(input) {
-			var deflated, encoded;
-			this.sd.debug('About to encode <pre>' + input.replace(/</g, '&lt;') + '</pre>');
-			deflated = wrapDeflate(input);
-			this.sd.debug('deflated: <pre>' + deflated.replace(/</g, '&lt;') + '</pre>');
-			encoded = $.base64.encode(deflated);
-			this.sd.debug('Base64 encoded <pre>' + encoded.replace(/</g, '&lt;') + '</pre>');
-			return encoded;
-		}
-	});
-
-	var SDPluginPost = SDPlugin.extend({
-		init: function(sd) { 
-			this._super(sd, 'post');
-			sd.registerEncoder('HTTP-POST', this);
-		},
-		detect: function(input) {
-			var match = /^[A-Za-z0-9+\/=]+$/gi; 
-			if (input.match(match)) {
-				return !this.isDeflated(input);
-			}
-			return false;
-		},
-		isDeflated: function(input) {
-			var decoded, inflated;
-			decoded = $.base64.decode(input);
-			inflated = wrapInflate(decoded);
-			console.log("Check if SDPluginPost is influated", decoded, JSON.stringify(inflated));
-			return inflated !== '';
-		},
-		decode: function(input) {
-			var inflated, decoded;
-
-			this.sd.debug('About to decode  HTTP POST <pre>' + input.replace(/</g, '&lt;') + '</pre>');
-
-			decoded = $.base64.decode(input);
-			this.sd.debug('decoded: <pre>' + decoded.replace(/</g, '&lt;') + '</pre>');
-
-			// inflated = RawDeflate.inflate(decoded);
-			// this.sd.debug('inflated encoded <pre>' + inflated.replace(/</g, '&lt;') + '</pre>');
-
-			return decoded;
-		},
-		encode: function(input) {
-			var encoded;
-			this.sd.debug('About to encode <pre>' + input.replace(/</g, '&lt;') + '</pre>');
-			encoded = $.base64.encode(input);
-			this.sd.debug('Base64 encoded <pre>' + encoded.replace(/</g, '&lt;') + '</pre>');
-			return encoded;
-		}
-	});
 
 
 	SAMLdebug = function(el) {
@@ -249,6 +32,15 @@ define(['resig'], function(Class) {
 		$(this.el).on('click', '.actionbar button', $.proxy(this.action, this));
 
 	};
+
+	SAMLdebug.prototype.wrapInflate = function(str) {
+		return RawDeflate.inflate(str);
+	};
+
+	SAMLdebug.prototype.wrapDeflate = function(str) {
+		return RawDeflate.deflate(str, 9);
+	};
+
 
 	SAMLdebug.prototype.isSAML = function(issaml) {
 		if (issaml === null) {
@@ -306,13 +98,35 @@ define(['resig'], function(Class) {
 	}
 
 	SAMLdebug.prototype.setInput = function(v) {
-		this.el.find("#samlinput").val(v);
+		console.log("Set input to ", v);
+		this.el.find("#samlinput").val(v.message);
+		if (v.dest) {
+			this.el.find("#dest").val(v.dest);
+		}
+		if (v.relaystate) {
+			this.el.find("#includerelaystate").val(true);
+			this.el.find("#relaystate").val(v.relaystate);
+		} else {
+			this.el.find("#includerelaystate").val(false);
+			this.el.find("#relaystate").val('');
+		}
 		this.detect();
 	}
 	SAMLdebug.prototype.getInput = function() {
-		var input = this.el.find("#samlinput").val();
-		input.replace(/\s*/g, "");
-		return input;
+		var xmlinput, relaystate, result = {};
+
+		xmlinput = this.el.find("#samlinput").val();
+		xmlinput.replace(/\s*/g, "");
+
+		result.dest = this.el.find("#dest").val();
+		relaystate = this.el.find("#relaystate").val();
+
+		if (this.el.find("#relaystateinclude").val()) {
+			result.relaystate = relaystate;
+		}
+
+		result.message = xmlinput;
+		return result;
 	}
 
 	SAMLdebug.prototype.cleanlog = function() {
@@ -330,7 +144,7 @@ define(['resig'], function(Class) {
 		for(var i = 0; i < this.plugins.length; i++) {
 			if (this.plugins[i].detect(input)) return this.plugins[i];
 		}
-		if (input.substr(0,1) === '<') {
+		if (input.message.substr(0,1) === '<') {
 			return null;
 		}
 
