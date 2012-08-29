@@ -2,10 +2,11 @@ define(
 	[
 		'resig',
 		'plugins/SDPluginPost',
+		'plugins/SDPluginPostBody',
 		'plugins/SDPluginRedirect',
 		'plugins/SDPluginURL'
 	], 
-	function(Class, SDPluginPost, SDPluginRedirect, SDPluginURL) {
+	function(Class, SDPluginPost, SDPluginPostBody, SDPluginRedirect, SDPluginURL) {
 
 	var SAMLdebug;
 
@@ -20,7 +21,9 @@ define(
 	
 		this.plugins.push(new SDPluginURL(this));
 		this.plugins.push(new SDPluginRedirect(this));
+		this.plugins.push(new SDPluginPostBody(this));
 		this.plugins.push(new SDPluginPost(this));
+
 
 		$(this.el).on('change', '#samlinput', $.proxy(function() {
 			var input = this.el.find("#samlinput").val();
@@ -171,6 +174,7 @@ define(
 			}
 
 		} catch(exception) {
+			console.error("Error detecting content", exception);
 			this.isSAML(null);
 		}
 

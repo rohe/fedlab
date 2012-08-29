@@ -43,6 +43,9 @@ define(['./SDPlugin'], function(SDPlugin) {
 					if (key === 'SAMLRequest') {
 						encoded = decodeURIComponent(decomposed.params['SAMLRequest'][0]);
 					}
+					if (key === 'SAMLResponse') {
+						encoded = decodeURIComponent(decomposed.params['SAMLResponse'][0]);
+					}
 					if (key === 'RelayState') {
 						input.relaystate = decodeURIComponent(decomposed.params['RelayState'][0]);
 					}

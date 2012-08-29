@@ -8,16 +8,22 @@ define(['./SDPlugin'], function(SDPlugin) {
 		detect: function(input) {
 			var match = /^[A-Za-z0-9+\/=]+$/gi; 
 			if (input.message.match(match)) {
+				console.log("Detect matches base64");
 				return !this.isDeflated(input);
 			}
 			return false;
 		},
 		isDeflated: function(input) {
 			var decoded, inflated;
-			decoded = $.base64.decode(input.message);
-			inflated = this.sd.wrapInflate(decoded);
-			console.log("Check if SDPluginPost is influated", decoded, JSON.stringify(inflated));
-			return inflated !== '';
+			try {
+				decoded = $.base64.decode(input.message);
+				inflated = this.sd.wrapInflate(decoded);
+				console.log("Check if SDPluginPost is influated", decoded, JSON.stringify(inflated));
+				return inflated !== '';
+			} catch (e) {
+				return false;
+			}
+
 		},
 		decode: function(input) {
 			var inflated, decoded;

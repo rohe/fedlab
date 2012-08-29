@@ -18,10 +18,15 @@ define(['./SDPlugin'], function(SDPlugin) {
 		},
 		isDeflated: function(input) {
 			var decoded, inflated;
-			decoded = $.base64.decode(input);
-			inflated = this.sd.wrapInflate(decoded);
-			console.log("Check if SDPluginRedirect is inflated", JSON.stringify(inflated));
-			return inflated !== '';
+			try {
+				decoded = $.base64.decode(input.message);
+				inflated = this.sd.wrapInflate(decoded);
+				console.log("Check if SDPluginPost is influated", decoded, JSON.stringify(inflated));
+				return inflated !== '';
+			} catch (e) {
+				return false;
+			}
+
 		},
 		decode: function(input) {
 			var inflated, decoded;
