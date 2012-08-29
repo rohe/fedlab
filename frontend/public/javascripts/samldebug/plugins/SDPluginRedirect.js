@@ -11,8 +11,11 @@ define(['./SDPlugin'], function(SDPlugin) {
 		},
 		detect: function(input) {
 			var match = /^[A-Za-z0-9+\/=]+$/gi; 
+			input.message = decodeURIComponent(input.message);
+			console.log("Checking SDPluginRedirect", input.message, input.message.match(match));
 			if (input.message.match(match)) {
-				return this.isDeflated(input.message);
+				console.log("Matching SDPluginRedirect", this.isDeflated(input));
+				return this.isDeflated(input);
 			}
 			return false;
 		},
@@ -32,6 +35,8 @@ define(['./SDPlugin'], function(SDPlugin) {
 			var inflated, decoded;
 
 			this.sd.debug('About to decode HTTP REDIRECT <pre>' + input.message.replace(/</g, '&lt;') + '</pre>');
+
+			input.message = decodeURIComponent(input.message);
 
 			decoded = $.base64.decode(input.message);
 			// this.sd.debug('decoded: <pre>' + decoded.replace(/</g, '&lt;') + '</pre>');

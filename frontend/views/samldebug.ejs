@@ -19,6 +19,11 @@
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" />
 
 
+		<script type="text/javascript" src="/google-code-prettify/prettify.js"></script>
+		<link rel="stylesheet" href="/google-code-prettify/prettify.css" />
+
+
+
 		<script type="text/javascript" src="/javascripts/inflate/rawinflate.js"></script>
 		<script type="text/javascript" src="/javascripts/inflate/rawdeflate.js"></script>
 
@@ -118,7 +123,7 @@
 		<div id="main" class="container">
 
 
-			<h3>SAML Input</h3>
+			<h3>SAML Debugger</h3>
 			<p>Paste in SAML in any of the accepted formats, encoded or unencoded.</p>
 
 			<p>Examples: 
@@ -128,22 +133,37 @@
 				<a class="insertExample btn btn-mini" data-example="post" href="#">HTTP-POST</a>
 			</p>
 
-			<textarea id="samlinput" rows="10" style="width: 100%"></textarea>
+			<div class="tab">
+				<ul class="nav nav-tabs">
+				  <li class="active"><a id="tablinkeditable" href="#editable" class="" data-toggle="tab">Editable input</a></li>
+				  <li><a id="tablinkpretty"  href="#prettyprint" data-toggle="tab">Pretty print</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="editable">
+						<textarea id="samlinput" rows="10" style="width: 95%; height: 200px;"></textarea>
+					</div>
+					<div class="tab-pane" id="prettyprint">
+						<pre class="prettyprint" id="prettyoutput" style="width: 95%; height: 200px"></pre>
+					</div>
+				</div>
+			</div>
+
+			
+			
 			
 			<div style="float: right"><span id="inputtype" class="label label-inverse"></span></div>
 
 			<p>
-				Destination URL 
-				<input id="dest" type="text" name="" value="https://idp.example.org/SAML/POST" />
+				<label for="dest">Destination URL <span style="color: #aaa">(optional)</label>
+				<input id="dest" style="width: 100%" type="text" name="" value="https://idp.example.org/SAML/POST" />
 			</p>
 
 			<p>
 				<input type="checkbox" id="relaystateinclude" name="relaystateinclude" />
-				RelayState 
-				<input id="relaystate" type="text" name="" value="lsdkjflksdjflksjdf" />
+				<label style="display: inline" for="relaystateinclude">RelayState</label>
+				<input id="relaystate" type="text" name="" value="" />
 			</p>
 
-			
 			<div class="btn-toolbar actionbar">
 				<div class="btn-group">
 
@@ -167,7 +187,7 @@
 			<div id="log"></div>
 
 		</div>
-			<!-- <div><button class="btn cleanlog">Clear log</button></div> -->
+		<!-- <div><button class="btn cleanlog">Clear log</button></div> -->
 
 		</div> <!-- /container -->
 
@@ -188,10 +208,11 @@
 		<script src="/bootstrap/js/bootstrap-tooltip.js"></script>
 		<script src="/bootstrap/js/bootstrap-popover.js"></script>
 
-		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
+		
 		<script src="/bootstrap/js/bootstrap-carousel.js"></script>
 		<script src="/bootstrap/js/bootstrap-typeahead.js"></script>
 		-->
+		<script src="/bootstrap/js/bootstrap-collapse.js"></script>
 		<script src="/bootstrap/js/bootstrap-dropdown.js"></script>
 		<script src="/bootstrap/js/bootstrap-button.js"></script>
 		<script src="/bootstrap/js/bootstrap-tab.js"></script>

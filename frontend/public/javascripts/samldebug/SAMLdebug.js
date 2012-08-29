@@ -10,7 +10,36 @@ define(
 
 	var SAMLdebug;
 
+	var formatXML = function (xml) {
+	    var formatted = '';
+	    var reg = /(>)(<)(\/*)/g;
+	    xml = xml.replace(reg, '$1\r\n$2$3');
+	    var pad = 0;
+	    jQuery.each(xml.split('\r\n'), function(index, node) {
+	        var indent = 0;
+	        if (node.match( /.+<\/\w[^>]*>$/ )) {
+	            indent = 0;
+	        } else if (node.match( /^<\/\w/ )) {
+	            if (pad != 0) {
+	                pad -= 1;
+	            }
+	        } else if (node.match( /^<\w[^>]*[^\/]>.*$/ )) {
+	            indent = 1;
+	        } else {
+	            indent = 0;
+	        }
 
+	        var padding = '';
+	        for (var i = 0; i < pad; i++) {
+	            padding += '  ';
+	        }
+
+	        formatted += padding + node + '\r\n';
+	        pad += indent;
+	    });
+
+	    return formatted;
+	}
 
 	SAMLdebug = function(el) {
 		this.el = el;
@@ -34,6 +63,8 @@ define(
 
 		$(this.el).on('click', '.actionbar button', $.proxy(this.action, this));
 
+		$(this.el).on('click', '#tablinkpretty', $.proxy(this.updatePretty, this));
+
 	};
 
 	SAMLdebug.prototype.wrapInflate = function(str) {
@@ -46,9 +77,16 @@ define(
 
 
 	SAMLdebug.prototype.isSAML = function(issaml) {
+
+			// $(this.el).find('#tablinkeditable').tab('show');
+			// $(this.el).find('#tablinkpretty').addClass('disabled');
+			// $(this.el).find('#tablinkpretty').tab('show');
+
+
 		if (issaml === null) {
 			$(this.el).find('button#decode').addClass("disabled");
 			$(this.el).find('#encoders').addClass("disabled");
+
 		} else if (issaml) {
 			$(this.el).find('button#decode').addClass("disabled");
 			$(this.el).find('#encoders').removeClass("disabled");
@@ -95,7 +133,11 @@ define(
 		e.preventDefault();
 		c = examples[type];
 		console.log("Inserting example", type, c, $(e.currentTarget));
-		$(this.el).find("#samlinput").val(c);
+		// $(this.el).find("#samlinput").val(c);
+
+		var i = this.getInput();
+		i.message = c;
+		this.setInput(i);
 
 		this.detect();
 	}
@@ -103,6 +145,11 @@ define(
 	SAMLdebug.prototype.setInput = function(v) {
 		console.log("Set input to ", v);
 		this.el.find("#samlinput").val(v.message);
+		// this.el.find("#prettyoutput").html(v.message.replace(/</g, '&lt;'));
+
+		this.updatePretty();
+
+		
 		if (v.dest) {
 			this.el.find("#dest").val(v.dest);
 		}
@@ -115,6 +162,14 @@ define(
 		}
 		this.detect();
 	}
+
+	SAMLdebug.prototype.updatePretty = function() {
+		var data = this.el.find("#samlinput").val();
+		data = formatXML(data);
+		this.el.find("#prettyoutput").html(data.replace(/</g, '&lt;'));
+		prettyPrint();
+	}
+
 	SAMLdebug.prototype.getInput = function() {
 		var xmlinput, relaystate, result = {};
 
@@ -124,7 +179,8 @@ define(
 		result.dest = this.el.find("#dest").val();
 		relaystate = this.el.find("#relaystate").val();
 
-		if (this.el.find("#relaystateinclude").val()) {
+		if (this.el.find("#relaystateinclude").is(':checked')) {
+			console.log("Relay state is set!")
 			result.relaystate = relaystate;
 		}
 
