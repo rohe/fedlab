@@ -94,50 +94,50 @@ testconnector = function (config) {
 		
 	}
 
-	my.getDefinitions = function (req, res) {
-		var 
-			response;
+	// my.getDefinitions = function (req, res) {
+	// 	var 
+	// 		response;
 
-		execute("/usr/local/bin/oicc.py", ["-l"], null, function(result, stderr, statuscode) {
+	// 	execute("/usr/local/bin/oicc.py", ["-l"], null, function(result, stderr, statuscode) {
 
-			response = {
-				status: "ok"
-			};
+	// 		response = {
+	// 			status: "ok"
+	// 		};
 			
-			console.log("Received result on stdout");
-			console.log(result);
+	// 		console.log("Received result on stdout");
+	// 		console.log(result);
 
-			if (result !== null && typeof result === "object") {
+	// 		if (result !== null && typeof result === "object") {
 
-				if (result === null) {
-					console.log("result is null");
-				}
-				response.result = {};
+	// 			if (result === null) {
+	// 				console.log("result is null");
+	// 			}
+	// 			response.result = {};
 				
-				result.forEach(function(item) {
-					var shasum = crypto.createHash('sha1');
-					var sid = null;
-					shasum.update("openid:testItem");
-					shasum.update(item.id);
-					sid = shasum.digest("hex");
+	// 			result.forEach(function(item) {
+	// 				var shasum = crypto.createHash('sha1');
+	// 				var sid = null;
+	// 				shasum.update("openid:testItem");
+	// 				shasum.update(item.id);
+	// 				sid = shasum.digest("hex");
 					
-					response.result[sid] = item;
-				});
+	// 				response.result[sid] = item;
+	// 			});
 
-				res.writeHead(200, { 'Content-Type': 'application/json' });   
-				// response.write(
-				res.end(JSON.stringify(response));
-			} else {
+	// 			res.writeHead(200, { 'Content-Type': 'application/json' });   
+	// 			// response.write(
+	// 			res.end(JSON.stringify(response));
+	// 		} else {
 
-				res.writeHead(200, { 'Content-Type': 'application/json' });   
-				res.end(JSON.stringify({"status": "error", "message": stderr}) );
+	// 			res.writeHead(200, { 'Content-Type': 'application/json' });   
+	// 			res.end(JSON.stringify({"status": "error", "message": stderr}) );
 
-			}
+	// 		}
 
-		});
+	// 	});
 
 
-	}
+	// }
 	
 	my.getResults = function (req, res) {
 		var 
@@ -296,9 +296,9 @@ testconnector = function (config) {
 		metadata = req.body.metadata;
 
 
-		if (metadata.interaction && metadata.interaction['https://www.kodtest.se:8088//authorization']) {
-			metadata.interaction['https://www.kodtest.se:8088/authorization'] = metadata.interaction['https://www.kodtest.se:8088//authorization'];
-		}
+		// if (metadata.interaction && metadata.interaction['https://www.kodtest.se:8088//authorization']) {
+		// 	metadata.interaction['https://www.kodtest.se:8088/authorization'] = metadata.interaction['https://www.kodtest.se:8088//authorization'];
+		// }
 
 		
 		console.log("Metadata:");
@@ -473,7 +473,11 @@ testconnector = function (config) {
 				}
 				
 			});
-		
+		} else if (req.body.operation === "results"){
+
+			my.getResults(req, res);
+
+
 		
 		} else  {
 			res.writeHead(200, { 'Content-Type': 'application/json' });   

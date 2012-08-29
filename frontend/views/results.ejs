@@ -16,9 +16,6 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
 
-	<!-- SAML metaJS -->
-	<script type="text/javascript" src="/javascripts/samlmetajs/samlmeta.info-certs-saml2sp-fedlab.min.js"></script>
-	<link rel="stylesheet" href="/samlmetajs/css/samlmetajs.css" />
  	
 	<!-- spine.js -->
 	<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
@@ -31,8 +28,6 @@
 	<!-- jquery tmpl() -->
 	<script type="text/javascript" src="/javascripts/jquery.tmpl.min.js"></script>
 	
-	<!-- Syntax highlighting of JSON -->
-	<script type="text/javascript" src="/javascripts/syntaxhighlight.js"></script>
 
 	<script type="text/javascript" src="/tablesorter/jquery.tablesorter.min.js"></script>
 	<link rel="stylesheet" href="/tablesorter/themes/blue/style.css" />
@@ -46,18 +41,10 @@
 	<script type="text/javascript" src="/javascripts/app/controllers/userinteraction.js"></script>
 	<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
 	
-	
-	<script type="text/javascript">
-		jQuery(function($) {
-			return new FedLabResults({el: $("body")});
-		});
-		$(document).ready(function() {
-			setInterval(function() {
-				$("span.lastRunDate").prettyDate();
-			}, 30000);
-		});
-	</script>
-	
+
+	<script type="text/javascript" data-main="javascripts/results/main" src="/javascripts/require.js"></script>
+
+
 </head>
 
 <body>
