@@ -59,6 +59,15 @@ define(
 			this.detect();
 		}, this));
 
+		$(this.el).find('#samlinput').bind('paste', $.proxy(function() {
+			var that = this;
+			setTimeout(function() {
+				var input = that.el.find("#samlinput").val();
+				that.detect();
+
+			}, 100);
+		}, this));
+
 		$(this.el).on('click', '.insertExample', $.proxy(this.insertExample, this))
 
 		$(this.el).on('click', '.actionbar button', $.proxy(this.action, this));
