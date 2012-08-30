@@ -1,5 +1,4 @@
-define(['../samldebug/resig'], 
-function(Class) {
+define(['../samldebug/resig'], function(Class) {
 
 var ResultController = Class.extend({
 	init: function(el) {
@@ -42,13 +41,13 @@ var ResultController = Class.extend({
 		console.log(this.definitions);
 		console.log(this.results);
 		console.log("-------");
-		var table = $('<table class="results"></table>');
+		var table = $('<table class="results table table-striped table-bordered table-condensed"></table>');
 		var header = $('<tr class="header"></tr>')
 			.append('<th>Test flows</th>');
 		var row, key;
 
 		for(key in this.results) {
-			header.append('<th><attr title="' + this.results[key].name + '">' + this.results[key].short + '</attr></th>');
+			header.append('<th><a href="#" class="tooltipped" rel="tooltip" title="' + this.results[key].name + '">' + this.results[key].short + '</a></th>');
 		}
 		
 
@@ -84,10 +83,9 @@ var ResultController = Class.extend({
 		}
 		table.append(tbody);
 
-		
-
 
 		$(this.el).append(table);
+		$(this.el).find('.tooltipped').tooltip();
 
 
 	},
