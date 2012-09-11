@@ -144,9 +144,9 @@ app.post('/api', function(req, res){
 	}
 	
 });
-// app.post('/api/results/publish', function(req, res) {
-// 	t.publish(req, res);
-// });
+app.post('/api/results/publish', function(req, res) {
+	t.publish(req, res);
+});
 // app.get('/api/results', function(req, res) {
 // 	t.getResults(req, res);
 // });
