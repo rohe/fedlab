@@ -157,7 +157,7 @@ testconnector = function (config) {
 
 		response.results = {};
 		for (var key in resultsconfig) {
-			fname = "results/" + resultsconfig[key].id + ".js";
+			fname = config.path + "frontend/results/" + resultsconfig[key].id + ".js";
 			if (path.existsSync(fname)) {
 				// console.log("File " + fname + " found");
 				// response.results[resultsconfig[key].id] = 'ok';
@@ -213,7 +213,7 @@ testconnector = function (config) {
 			}
 
 			for(var i = 0; i < available.length; i++) {
-				file = "results/" + available[i] + ".js";
+				file = config.path + "frontend/results/" + available[i] + ".js";
 				console.log("About to read " + file);
 				fs.readFile(file, "utf8", function (err, data) {
 
@@ -265,7 +265,7 @@ testconnector = function (config) {
 			return;
 		}
 
-		var filename = 'results/' + resultsconfig[req.body.pincode].id + '.js';
+		var filename = config.path + 'frontend/results/' + resultsconfig[req.body.pincode].id + '.js';
 
 		console.log("about to write to " + filename);
 		fs.writeFile(filename, JSON.stringify(req.body.data), function (err) {
