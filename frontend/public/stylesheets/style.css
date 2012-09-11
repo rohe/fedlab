@@ -239,9 +239,10 @@ div.userinteraction {
 	box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 div.userinteraction div.uisect {
-	font-family: "Cochin", serif;
+/*	font-family: "Cochin", serif;
+
+	font-size: 120%;*/
 	padding: 0.6em 1em;
-	font-size: 120%;
 }
 div.uitypediv label {
 	margin-right: 2em;

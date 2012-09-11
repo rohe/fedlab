@@ -30,28 +30,28 @@
 				.append(matchoptionsdiv)
 				.appendTo(this.el);
 
-			matchoptionsdiv.append('<p><input type="checkbox" id="uiurl" name="uiurl" checked="checked" />' +
-				'<label for="uiurl">The URL starts with </label><input type="text" id="uiurlval" class="matchinput uiurlval" name="uiurlval" value="' + this.url + '" /></p>');
+			matchoptionsdiv.append('<p><label for="uiurl"><input type="checkbox" id="uiurl" name="uiurl" checked="checked" /> ' +
+				'The URL starts with </label><input type="text" id="uiurlval" class="matchinput uiurlval" name="uiurlval" value="' + this.url + '" /></p>');
 
 			if (this.title) {
-				matchoptionsdiv.append('<p><input type="checkbox" id="uititle" name="uititle"  /><label for="uititle">The HTML page title is <tt>' + this.title + '</tt>.</label></p>');	
+				matchoptionsdiv.append('<p><label for="uititle"><input type="checkbox" id="uititle" name="uititle"  /> The HTML page title is <tt>' + this.title + '</tt>.</label></p>');	
 			}			
 
-			matchoptionsdiv.append('<p><input type="checkbox" id="uicontent" name="uicontent" />' +
-				'<label for="uicontent">The page content contains this string </label><input type="text" id="uicontentval" class="matchinput uicontentval" name="uicontentval" value="" /></p>');
+			matchoptionsdiv.append('<p><label for="uicontent"><input type="checkbox" id="uicontent" name="uicontent" /> ' +
+				'The page content contains this string </label><input type="text" id="uicontentval" class="matchinput uicontentval" name="uicontentval" value="" /></p>');
 
 
 			matchoptionsdiv.append('<p>Which type of user interaction is this? ' +
 				'<div class="uitypediv" style="margin: 0px; padding: 0px">' + 
-				'<input type="radio" name="uitype" id="uitype1" value="login"><label for="uitype1">Login page</label>' + 
-				'<input type="radio" name="uitype" id="uitype2" value="user-consent"><label for="uitype2">Authorization, Grant or Consent</label>' + 
-				'<input type="radio" name="uitype" id="uitype3" value="other" checked="checked"><label for="uitype3">Other</label>' + 
+				'<label class="radio" for="uitype1"><input type="radio" name="uitype" id="uitype1" value="login"> Login page</label>' + 
+				'<label class="radio" for="uitype2"><input type="radio" name="uitype" id="uitype2" value="user-consent">Authorization, Grant or Consent</label>' + 
+				'<label class="radio" for="uitype3"><input type="radio" name="uitype" id="uitype3" value="other" checked="checked">Other</label>' + 
 				'</div>' + 
 				'</p>');
 
 
 			$(this.el).append('<div class="uisect userinteractioninstructions" style="">Perform the needed action, and we\'ll learn what user interaction is needed to continue. ' +
-				'<input type="submit" class="iacancel" name="iacancel" value="Cancel user interaction" /></div>');
+				'<input type="submit" class="btn btn-mini btn-inverse iacancel" name="iacancel" value="Cancel user interaction" /></div>');
 
 			$("<iframe></iframe>")
 				.addClass('userinteraction')

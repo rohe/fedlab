@@ -324,9 +324,9 @@
 			
 			if (!this.metadata.features) {
 				this.metadata.features = {
-					"discovery": false,
-					"registration": false,
-					"sessionmanagement": false
+					"discovery": true,
+					"registration": true,
+					"sessionmanagement": true
 				};
 			}
 			this.metadata.provider.supported_response_types = ["code", "code id_token", "token id_token"];

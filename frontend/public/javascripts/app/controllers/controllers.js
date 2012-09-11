@@ -133,9 +133,9 @@
 			// console.log(this.item);
 			
 			if (this.item.metadata.features.registration) {
-				$(this.el).find("div#clientconfiguration").hide();
+				$(this.el).find("#clientconfiguration").hide();
 			} else {
-				$(this.el).find("div#clientconfiguration").show();
+				$(this.el).find("#clientconfiguration").show();
 			}
 			
 			if (this.item.metadata.features.discovery) {

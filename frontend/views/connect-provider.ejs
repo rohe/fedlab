@@ -158,114 +158,13 @@
 	</script>
 	
 	
-	<script type="text/x-jquery-tmpl" id="oauthprovider">
-		
-	<div class="oauthprovider">
-		
-		<fieldset><legend>Description</legend>
-		
-			<p style="font-size: 80%; color: #ccc">Stored with ID: ${id}</p>
-
-			<p>
-				<label for="title">Descriptive name of Oauth Provider</label>
-				<input type="text" id="title" name="title" value="${title}" class="endpoint" />
-				<span class="item-description">Your configuration will be stored in your browser, and you&#39;ll be able to find it by looking for this name.</span>
-			</p>
-			
-			<p>
-				<label for="issuer">Issuer</label>
-				<input type="text" id="issuer" name="issuer" value="${metadata.provider.issuer}" class="endpoint" />
-				<span class="item-description">The Issuer is the same value as is used in the <tt>iss</tt> property in the JWT.</span>
-			</p>
-			
-		</fieldset>
-		
-
-
-		<fieldset><legend>Setup endpoints</legend>
-		
-			<div id="endpoints" style="display: inline" class="basic">
-
-				{{each(key, endpoint) _endpoints }}
-					<p>
-						<label for="${key}_endpoint">${endpoint.title}</label>
-						<input type="text" id="${key}_endpoint" name="${key}_endpoint" value="${$data.metadata.provider[key]}" class="endpoint" />
-						<span class="item-description">{{html endpoint.descr}}</span>
-					</p>
-				{{/each}}
-				
-			</div>
-
-		</fieldset>
-		
-		
-
-		
-		<fieldset><legend>Client Configuration</legend>
-
-
-
-		
-			<div id="clientconfiguration" style="display: inline" class="basic">
-
-				<p>
-					<label for="client_type">Type of client</label>
-					<select id="client_type" name="client_type">
-						<option value="confidential">Confidential</option>
-						<option value="public" disabled="disabled">Public</option>
-					</select>
-				</p>
-
-				<p>
-					<label for="auth_type">Type of authentication</label>
-					<select id="auth_type" name="auth_type">					
-						<option value="client_secret_basic" {{if metadata.client.auth_type === "client_secret_basic"}} selected="selected" {{/if}}
-							>HTTP Basic Authentication</option>
-						<option value="client_secret_post" {{if metadata.client.auth_type === "client_secret_post"}} selected="selected" {{/if}}
-							>Including credentials in request body</option>
-						<option value="client_secret_jwt" disabled="disabled" {{if metadata.client.auth_type === "client_secret_jwt"}} selected="selected" {{/if}}
-							>JWT Secret</option>
-						<option value="private_key_jwt" disabled="disabled" {{if metadata.client.auth_type === "private_key_jwt"}} selected="selected" {{/if}}
-							>JWT Private Key</option>
-					</select>
-				</p>
-			
-				<p>
-					<label for="client">Client identifier</label>
-					<input type="text" id="client_id" name="client_id" value="${$data.metadata.client.client_id}" class="username" />
-				</p>
-				<p>
-					<label for="client_secret">Client secret</label>
-					<input type="text" id="client_secret" name="client_secret" value="${$data.metadata.client.client_secret}" class="username" />
-				</p>
-
-				<p>
-					Callback URIs
-						<ul>
-							{{each(key, endpoint) $data.metadata.client.redirect_uris }}
-								<li><code>${endpoint}</code></li>
-							{{/each}}
-						</ul>
-					
-					<span class="item-description">Make sure to configure your Provider to trust these callback URLs!</span>
-				</p>
-				
-			</div>
-
-		</fieldset>
-	</div>
-			
-	</script>
-	
-	
-	
-	
 	
 	
 	<script type="text/x-jquery-tmpl" id="oicprovider">
 		
 	<div class="oicprovider">
 		
+		<form class="form-horizontal">
 		
 		<fieldset><legend>Description</legend>
 		
@@ -277,7 +176,7 @@
 				<span class="item-description">Your configuration will be stored in your browser, and you&#39;ll be able to find it by looking for this name.</span>
 			</p>
 			
-			<p>
+			<p style="display: none">
 				<label for="issuer">Issuer</label>
 				<input type="text" id="issuer" name="issuer" value="${metadata.provider.issuer}" class="endpoint" />
 				<span class="item-description">The Issuer is the same value as is used in the <tt>iss</tt> property in the JWT.</span>
@@ -285,7 +184,7 @@
 			
 		</fieldset>
 		
-		<fieldset><legend>Features</legend>
+		<fieldset style="display: none"><legend>Features</legend>
 		
 			<p>
 				<input type="checkbox" {{if metadata.features.discovery}} checked="checked" {{/if}} id="usediscovery" name="usediscovery" />
@@ -444,7 +343,7 @@
 		
 
 		
-		<fieldset><legend>Client Configuration</legend>
+		<fieldset id="clientconfiguration"><legend>Client Configuration</legend>
 		
 
 		<p>
@@ -452,12 +351,8 @@
 			<input type="text" id="client_id" name="client_id" value="${$data.metadata.client.client_id}" class="username" />
 		</p>
 
-			<div id="clientconfiguration" style="display: inline; margin: 0px; padding: 0px" class="basic">
+			<div  style="display: inline; margin: 0px; padding: 0px" class="basic">
 			
-
-
-			
-
 				<p>
 					<label for="client_type">Type of client</label>
 					<select id="client_type" name="client_type">
@@ -500,6 +395,7 @@
 			</div>
 
 		</fieldset>
+		</form>
 	</div>
 	
 

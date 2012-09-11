@@ -42,7 +42,6 @@
 			} else {
 				// More than one stored confiuration found, wait for user to select an configuratiom to edit..
 				// (or create a new one)
-				
 			}
 			
 			this.stateChange("modeEdit");
