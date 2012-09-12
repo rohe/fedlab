@@ -131,16 +131,6 @@ if (isNode) {
 }
 
 
-/*
- * Helper Object prototype function to access inherited functions using funtional inheritance.
- * We need this to add functionality to the validate function of the IDToken inherited from JWT.
- */
-Object.prototype.super = function (name) {
-	var that = this, method = that[name];
-	return function() {
-		return method.apply(that, arguments);
-	};
-}
 
 
 
@@ -189,7 +179,16 @@ idtoken = function(useroptions) {
 	
 	return my;
 }
-
+/*
+ * Helper Object prototype function to access inherited functions using funtional inheritance.
+ * We need this to add functionality to the validate function of the IDToken inherited from JWT.
+ */
+idtoken.prototype.super = function (name) {
+	var that = this, method = that[name];
+	return function() {
+		return method.apply(that, arguments);
+	};
+}
 
 
 /*
@@ -532,6 +531,8 @@ jwt = function(useroptions, additionalReservedClaims) {
 	
 	return my;	
 };
+
+
 
 // Exports (if running in Node.js environment)
 if (isNode) {

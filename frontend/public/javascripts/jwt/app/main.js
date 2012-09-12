@@ -23,8 +23,8 @@
 	                byteArray[i] === 0x25 ? "%25" : // %
 	                String.fromCharCode(byteArray[i]) :
 	                "%" + byteArray[i].toString(16).toUpperCase();
-       return str;
-	    return decodeURIComponent(str);
+		return str;
+		// return decodeURIComponent(str);
 	};
 
 	var foo = function(arr) {
@@ -57,6 +57,7 @@
 
 	var JWTToolApp = function(el) {
 		this.el = el;
+
 
 		this.boilerplate = {
 			'iss': 'https://issuer.example.org',

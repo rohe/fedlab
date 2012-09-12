@@ -61,6 +61,11 @@ app.get('/contact', function(req, res){
 		title: 'Contact'
 	});
 });
+app.get('/connect-gettingstarted', function(req, res){
+	res.render('connecthowto', {
+		title: 'Getting started'
+	});
+});
 
 
 

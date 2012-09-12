@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+
+
+		<% include inc/head %>
+
+
+
+	</head>
+
+	<body>
+
+		<% include inc/navbar %>
+
+		<ul class="breadcrumb">
+			<li>
+				<a href="/">Home</a> <span class="divider">/</span>
+			</li>
+			<li class="active">OpenID Connect Testing - How To Get Started</li>
+		</ul>
+
+	<form class="form">
+
+	<div id="main" class="container">
+
+
+		<img src="/images/openid.png" style="float: right" />
+
+		<h1>OpenID Connect Testing - How To Get Started</h1>
+
+		<p>Federation Lab provides a tool for automated testing of your OpenID Connect Provider. With the current version of the tool, the following requirements must be met before you can start using the testing tool:</p>
+
+		<ul>
+			<li>The Provider MUST support OpenID Connect Discovery</li>
+			<li>The Provider MUST support OpenID Connect Dynamic Registration</li>
+			<li>The Provider MUST provide public access to the protocol endpoint, or at least access to the IP address <tt>158.38.153.148</tt> (may change)</li>
+		</ul>
+
+		<p>Our intension is that the tool should work with all modern web browsers, but yet only Chrome is fully tested.</p>
+		
+
+		<h2>Configuring your provider</h2>
+
+		<p>Now, you are ready to configure your Provider. <a href="/connect-provider" target="_blank" class="btn">Configure your provider</a></p>
+
+		<p>The user interface allow you to configure multiple providers that you can easily switch between when testing. All configuration is stored in <i>localStorage</i> in your browser, which means that you do not have to login anywhere to get started.</p>
+
+		<p>Give your provider a descriptive name, and enter the Discovery URL.</p>
+
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ31BDB0CC.jpg" /></p>
+
+		<p>The next step would be to verify basic connectivity with your provider.</p>
+
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ1B18E95A.jpg" /></p>
+
+		<p>If your basic connectivity verification fail, you'll get some debug information available on the top, and you may fix the problem and try again:</p>
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ694F1646.jpg" /></p>
+
+		<h2>Dealing with user interactions</h2>
+
+		<p>An OpenID Connect Provider most likely has some user interface that the test tool would need to bypass in order to complete the tests. You will then see a interaction page like this:</p>
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ3034D513.jpg" /></p>
+
+		<p>First, select the type of page you see, and how that the tool can reckgnoize this interaction, like if the URL or the title of the page is the best option for detecting this specific user interaction.</p>
+
+		<p></p>
+
+		
+
+		<h2>Running the testflows</h2>
+
+		<p>When the user interactions are configured, and basic connectivity testing is verified, you'll enter a page listing all the test flows, and you may now start running them.</p>
+
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ0B8F6DE9.jpg" /></p>
+
+		<p>The tests runs one by one.</p>
+
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ79D17CA1.jpg" /></p>
+
+		<p>And you may view the debug log, a lot of test items, and clicking on them reveal more information about the protocol messages exchanged.</p>
+		
+
+
+
+		<h2>Publishing the results</h2>
+
+		<p>When all the tests are completed, you may publish your results. If you doing interop with a new product, you may contact <a href="mailto:andreas.solberg@uninett.no">Andreas Åkre Solberg</a> to get your provider registered, and you will receive a PIN code. Provide a name and a short description of your implementation.</p>
+
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ2E96806F.jpg" /></p>
+
+
+		<h2>Compare the results</h2>
+
+		<p>You may <a href="/results">view the results of your provider compared to others</a>.</p>
+
+		<p><img class="img-polaroid" src="http://clippings.erlang.no/ZZ33447736.jpg" /></p>
+	</div>
+
+	<% include inc/bottom %>
+
+</body>
+</html>
