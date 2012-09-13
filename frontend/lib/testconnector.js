@@ -301,9 +301,22 @@ testconnector = function (config) {
 		// }
 
 		
+
+		
+
+		metadata.client.preferences = {
+			"user_id_type": ["pairwise", "public"],
+			"require_signed_request_object": ["RS256", "RS384", "RS512", "HS512", "HS384", "HS256"],
+			"token_endpoint_auth_type": ["client_secret_basic","client_secret_post","client_secret_jwt","private_key_jwt"],
+			"userinfo_signed_response_algs": ["RS256", "RS384", "RS512","HS512", "HS384", "HS256"],
+			"id_token_signed_response_algs": ["RS256", "RS384", "RS512","HS512", "HS384", "HS256"],
+			"default_max_age": 3600,
+			"require_auth_time": true,
+			"default_acr":["2", "1"]
+		};
+
 		console.log("Metadata:");
 		console.log(metadata);
-		
 
 		if (req.body.operation === "verify") {
 			

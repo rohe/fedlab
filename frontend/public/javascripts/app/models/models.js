@@ -278,9 +278,9 @@
 			// }
 			if (!this.metadata.client) {
 				this.metadata.client = {
-					"auth_type": "client_secret_basic",
-					"client_type": "confidential",
-					"client_id": FedLabUtils.guid().toLowerCase(),
+					// "auth_type": "client_secret_basic",
+					// "client_type": "confidential",
+					// "client_id": FedLabUtils.guid().toLowerCase(),
 					"redirect_uris": ["https://%s/authz_cb"]
 				};
 			}
@@ -326,7 +326,8 @@
 				this.metadata.features = {
 					"discovery": true,
 					"registration": true,
-					"sessionmanagement": true
+					"session_management": true,
+					"key_export": true
 				};
 			}
 			this.metadata.provider.supported_response_types = ["code", "code id_token", "token id_token"];
@@ -338,9 +339,9 @@
 			// }
 			if (!this.metadata.client) {
 				this.metadata.client = {
-					"auth_type": "client_secret_basic",
-					"client_type": "confidential",
-					"client_id": FedLabUtils.guid().toLowerCase(),
+					// "auth_type": "client_secret_basic",
+					// "client_type": "confidential",
+					// "client_id": FedLabUtils.guid().toLowerCase(),
 					"redirect_uris": ["https://%s/authz_cb"]
 				};
 			}

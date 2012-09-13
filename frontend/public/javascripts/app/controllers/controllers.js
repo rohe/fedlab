@@ -176,11 +176,11 @@
 				}
 			});
 			
-			this.item.metadata.features.discovery = !!($(cur.el).find("input#usediscovery:checkbox:checked").val());
-			this.item.metadata.features.registration = !!($(cur.el).find("input#useregistration:checkbox:checked").val());
-			this.item.metadata.features.sessionmanagement = !!($(cur.el).find("input#usesessionmanagement:checkbox:checked").val());
-			this.item.metadata.features.key_export = !!($(cur.el).find("input#usekeyexport:checkbox:checked").val());
-			this.item.metadata.features.use_nonce = !!($(cur.el).find("input#usenonce:checkbox:checked").val());
+			// this.item.metadata.features.discovery = !!($(cur.el).find("input#usediscovery:checkbox:checked").val());
+			// this.item.metadata.features.registration = !!($(cur.el).find("input#useregistration:checkbox:checked").val());
+			// this.item.metadata.features.sessionmanagement = !!($(cur.el).find("input#usesessionmanagement:checkbox:checked").val());
+			// this.item.metadata.features.key_export = !!($(cur.el).find("input#usekeyexport:checkbox:checked").val());
+			// this.item.metadata.features.use_nonce = !!($(cur.el).find("input#usenonce:checkbox:checked").val());
 
 			this.item.metadata.provider.supported_response_types = [];
 			$.each(this.item._response_types, function(key, rt) {
