@@ -369,6 +369,11 @@
 			setInterval(function() {
 				$("span.lastRunDate").prettyDate();
 			}, 30000);
+
+			if ($.browser.msie) {
+				$("div#main").prepend('<div class="alert alert-error">It seems like you are using Internet Explorer. Can we kindly ask you to use another browser? Federation Lab is work in progress, and it is currently only well tested with Chrome, it may work with other browsers as well - but it do not work with IE.</div>');
+			}
+
 		});
 
 	</script>
