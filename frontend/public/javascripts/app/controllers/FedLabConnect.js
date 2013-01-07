@@ -10,6 +10,7 @@
 			"click #configure": "configure"
 		},
 		init: function(args){
+			
 			var c, newentity;
 
 			this.definitions = null;

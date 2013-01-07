@@ -8,8 +8,8 @@ var
 	// io = require('socket.io'), // for npm, otherwise use require('./path/to/socket.io') 
 	
 	
-	
 	// Local libraries.
+	tests = require('./lib/testconnector2.js'),
 	testconnector = require('./lib/testconnector.js'),
 	testconnectorsaml = require('./lib/testconnector-samlsp.js'),
 	interaction = require('./lib/interaction.js'),
@@ -19,10 +19,12 @@ var
 	app,
 	t, ts;
 
-// Configuration
 
+
+/*
+ * Setup Express webserver
+ */
 app = express.createServer();
-
 app.configure(function(){
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'ejs');
@@ -44,7 +46,9 @@ app.configure('production', function(){
 });
 
 
-// Routes
+/*
+ * Routes for Express webserver
+ */ 
 app.get('/', function(req, res){
 	res.render('index', {
 		title: 'Federation Lab'
@@ -111,19 +115,23 @@ app.get('/test', function(req, res){
 	});
 });
 
-fs.readFile(__dirname + '/etc/config.js', function (err, data) {
-	if (err) {
-		console.log("Error reading config results");
-		return null;
-	}
-	config = JSON.parse(data);
-	console.log("Successfully read configuration.");
-	console.log(config);
+
+var configdata = fs.readFileSync(__dirname + '/etc/config.js', 'utf8');
+config = JSON.parse(configdata);
+
+// fs.readFile(__dirname + '/etc/config.js', function (err, data) {
+// 	if (err) {
+// 		console.log("Error reading config results");
+// 		return null;
+// 	}
+// 	config = JSON.parse(data);
+// 	console.log("Successfully read configuration.");
+// 	console.log(config);
 
 	t = testconnector.testconnector(config);
 	ts = testconnectorsaml.testconnectorsaml(config);
 
-});
+// });
 
 
 // t.temp("oic-verify", function (msg) {
@@ -134,10 +142,121 @@ fs.readFile(__dirname + '/etc/config.js', function (err, data) {
 // 	var u = ia.getInteractive(function(msg) {		
 // 	});
 
+
+
+/*
+ * Setup connectors to test tools
+ */
+
+var connectors = {};
+connectors.connect = new tests.OICTestconnector(config);
+
+
+/*
+ * API Version 2.0
+ */
+
+app.all('/api2/*', function(req, res, next) {
+
+	console.log("API2 Request: " + req.path);
+	console.log(req);
+	next();
+});
+
+app.all('/api2/:type/verify', function(req, res, next) {
+
+	var metadata;
+
+	try {
+
+		if (!connectors[req.params.type]) throw 'Invalid connector';
+		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+		metadata = req.body;
+
+		connectors[req.params.type].verify(metadata, function(data) {
+			req.response = data;	
+			next();
+		});
+
+	} catch (err) {
+		req.error = err;
+		next();
+	}
+	
+});
+
+app.all('/api2/:type/definitions', function(req, res, next) {
+
+	if (!connectors[req.params.type]) {
+		req.error = 'Invalid connector';
+		next();
+	}
+
+	connectors[req.params.type].definitions(function(data) {
+		req.response = data;	
+		next();
+	});
+
+});
+
+app.all('/api2/:type/runflow/:flowid', function(req, res, next) {
+
+	var metadata;
+
+	try {
+
+		if (!connectors[req.params.type]) throw 'Invalid connector';
+		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+		metadata = req.body;
+
+		connectors[req.params.type].runFlow(metadata, req.params.flowid, function(data) {
+			req.response = data;	
+			next();
+		});
+
+	} catch (err) {
+		req.error = err;
+		next();
+	}
+
+
+});
+
+app.all('/api2/:type/results', function(req, res, next) {
+
+	next();
+
+});
+
+app.all('/api2/*', function(req, res) {
+
+	if (req.response) {
+
+		res.writeHead(200, { 'Content-Type': 'application/json' });   
+		res.end(JSON.stringify(req.response));
+
+	} else if (req.error) {
+
+		res.writeHead(200, { 'Content-Type': 'application/json' });   
+		res.end(JSON.stringify({"status": "error", "message": req.error}) );
+
+	} else {
+
+		res.writeHead(200, { 'Content-Type': 'application/json' });   
+		res.end(JSON.stringify({"status": "error", "message": "invalid operation"}) );
+	}
+	console.log("RESPONSE");
+
+});
+
+
+
+/*
+ * API
+ */ 
 app.post('/api', function(req, res){
 
 	console.log('Accessing API on hostname : ' + req.headers.host);
-	console.log(req.body.type); 
 	if (req.body.type === 'saml') {
 		ts.process(req, res);
 		console.log("Called SAML")

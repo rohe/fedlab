@@ -7,7 +7,7 @@ var util  = require('util'),
 	interaction = require('./interaction.js'),
 
 
-	// To be exported
+	// To be exported+
 	testconnector;
 
 
@@ -345,7 +345,6 @@ testconnector = function (config) {
 
 						console.log(response.result);
 						var u = ia.getInteractive(function(msg, title) {
-
 
 							// result.tests[7].message = msg;
 							result.htmlbody = msg;
