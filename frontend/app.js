@@ -10,8 +10,8 @@ var
 	
 	// Local libraries.
 	tests = require('./lib/testconnector2.js'),
-	testconnector = require('./lib/testconnector.js'),
-	testconnectorsaml = require('./lib/testconnector-samlsp.js'),
+	// testconnector = require('./lib/testconnector.js'),
+	// testconnectorsaml = require('./lib/testconnector-samlsp.js'),
 	interaction = require('./lib/interaction.js'),
 	
 	// Variables
@@ -128,8 +128,8 @@ config = JSON.parse(configdata);
 // 	console.log("Successfully read configuration.");
 // 	console.log(config);
 
-	t = testconnector.testconnector(config);
-	ts = testconnectorsaml.testconnectorsaml(config);
+	// t = testconnector.testconnector(config);
+	// ts = testconnectorsaml.testconnectorsaml(config);
 
 // });
 
@@ -150,6 +150,7 @@ config = JSON.parse(configdata);
 
 var connectors = {};
 connectors.connect = new tests.OICTestconnector(config);
+connectors.saml = new tests.SAMLTestconnector(config);
 
 
 /*
@@ -158,14 +159,16 @@ connectors.connect = new tests.OICTestconnector(config);
 
 app.all('/api2/*', function(req, res, next) {
 
-	console.log("API2 Request: " + req.path);
-	console.log(req);
+	console.log("API2 Request: ");
+	// console.log(req);
 	next();
 });
 
 app.all('/api2/:type/verify', function(req, res, next) {
 
 	var metadata;
+
+	
 
 	try {
 
@@ -187,12 +190,18 @@ app.all('/api2/:type/verify', function(req, res, next) {
 
 app.all('/api2/:type/definitions', function(req, res, next) {
 
+	var metadata;
+
 	if (!connectors[req.params.type]) {
 		req.error = 'Invalid connector';
 		next();
 	}
 
-	connectors[req.params.type].definitions(function(data) {
+	if (!connectors[req.params.type]) throw 'Invalid connector';
+	if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+	metadata = req.body;
+
+	connectors[req.params.type].definitions(metadata, function(data) {
 		req.response = data;	
 		next();
 	});
@@ -205,12 +214,18 @@ app.all('/api2/:type/runflow/:flowid', function(req, res, next) {
 
 	try {
 
+		console.log("API2 Request: runflow ");
+
 		if (!connectors[req.params.type]) throw 'Invalid connector';
 		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
 		metadata = req.body;
 
+		console.log("API2 Request: runflow " + req.params.flowid);
+		console.log("Metadata: " + metadata);
+
 		connectors[req.params.type].runFlow(metadata, req.params.flowid, function(data) {
-			req.response = data;	
+			console.log("Runflow completed callback()");
+			req.response = data;
 			next();
 		});
 
@@ -218,7 +233,6 @@ app.all('/api2/:type/runflow/:flowid', function(req, res, next) {
 		req.error = err;
 		next();
 	}
-
 
 });
 
@@ -231,18 +245,18 @@ app.all('/api2/:type/results', function(req, res, next) {
 app.all('/api2/*', function(req, res) {
 
 	if (req.response) {
-
+		console.log(" => Response 200 OK");
 		res.writeHead(200, { 'Content-Type': 'application/json' });   
 		res.end(JSON.stringify(req.response));
 
 	} else if (req.error) {
-
-		res.writeHead(200, { 'Content-Type': 'application/json' });   
+		console.log(" => Response 200 Error " + req.error);
+		res.writeHead(500, { 'Content-Type': 'application/json' });   
 		res.end(JSON.stringify({"status": "error", "message": req.error}) );
 
 	} else {
-
-		res.writeHead(200, { 'Content-Type': 'application/json' });   
+		console.log(" => Response 501 No response");
+		res.writeHead(501, { 'Content-Type': 'application/json' });   
 		res.end(JSON.stringify({"status": "error", "message": "invalid operation"}) );
 	}
 	console.log("RESPONSE");

@@ -35,7 +35,7 @@
 
 			if (this.title) {
 				matchoptionsdiv.append('<p><label for="uititle"><input type="checkbox" id="uititle" name="uititle"  /> The HTML page title is <tt>' + this.title + '</tt>.</label></p>');	
-			}			
+			}
 
 			matchoptionsdiv.append('<p><label for="uicontent"><input type="checkbox" id="uicontent" name="uicontent" /> ' +
 				'The page content contains this string </label><input type="text" id="uicontentval" class="matchinput uicontentval" name="uicontentval" value="" /></p>');
@@ -52,6 +52,9 @@
 
 			$(this.el).append('<div class="uisect userinteractioninstructions" style="">Perform the needed action, and we\'ll learn what user interaction is needed to continue. ' +
 				'<input type="submit" class="btn btn-mini btn-inverse iacancel" name="iacancel" value="Cancel user interaction" /></div>');
+
+			
+
 
 			$("<iframe></iframe>")
 				.addClass('userinteraction')

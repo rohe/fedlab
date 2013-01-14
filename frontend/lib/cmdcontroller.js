@@ -21,9 +21,11 @@ cmd = function(command, parameters, data, callback, errorcallback) {
 		stderr = '',
 		stdout = '';
 
+	console.log("Executing command: " + command + " " + parameters.join(" "));
+		
 	cmd = spawn(command, parameters);
 	
-	console.log("Executing command: " + command + " " + parameters.join(" "));
+	
 
 	cmd.stdout.on('data', function (data) {
 		stdout += data;
@@ -34,6 +36,8 @@ cmd = function(command, parameters, data, callback, errorcallback) {
 	cmd.on('exit', function (code) {
 		var 
 			result;
+
+		console.log("Executing command: " + command + " " + parameters.join(" ") + "EXIT " + code);
 
 		if (code === 0) {
 			// console.log('about to parse: ' + stdout);

@@ -20,7 +20,7 @@
 				var res;
 
 				console.log("==> verify() - API Response");
-				res = new Result(response.result);
+				res = new Result(response);
 				callback(res);
 			
 			},
@@ -46,7 +46,8 @@
 				var res;
 
 				console.log("==> runTest() - API Response");
-				res = new Result(response.result);
+				console.log(response);
+				res = new Result(response);
 				callback(res);
 
 			},
@@ -83,7 +84,11 @@
 
 
 	var Result = function(obj) {
-		if (typeof obj.id === 'undefined') throw {message: "Missing ID in result object."};
+		console.log("Result()", obj);
+		if (obj === null) {
+			throw {message: 'trying to create a new Result object with an empty parameter list'};
+		}
+		if (!obj.id || typeof obj.id === 'undefined') throw {message: "Missing ID in result object."};
 		this.id = obj.id;			
 		if (typeof obj.status === 'undefined') throw {message: "Missing ID in result object."};
 		this.status = obj.status;
