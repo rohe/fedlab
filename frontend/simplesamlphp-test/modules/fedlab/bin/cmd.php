@@ -22,8 +22,10 @@ $_SERVER['SERVER_PORT'] = 80;
 
 $action = $argv[1];
 
-$inputmeta = json_decode(file_get_contents("php://stdin", "r"), TRUE);
+$raw = file_get_contents("php://stdin", "r");
+$inputmeta = json_decode($raw, TRUE);
 
+// echo "input: ";
 // print_r($inputmeta);
 
 try {
