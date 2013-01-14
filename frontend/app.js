@@ -9,7 +9,7 @@ var
 	
 	
 	// Local libraries.
-	tests = require('./lib/testconnector2.js'),
+	tests = require('./lib/testconnector.js'),
 	// testconnector = require('./lib/testconnector.js'),
 	// testconnectorsaml = require('./lib/testconnector-samlsp.js'),
 	interaction = require('./lib/interaction.js'),
