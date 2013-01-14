@@ -1,7 +1,7 @@
-(function ($, exports) {
+define(function(require, exports, module) {
+	
+	var APIconnector = require('./APIconnector');
 
-	
-	
 	var FedLabConnect = Spine.Controller.sub({
 		entityloader: null,
 		events: {
@@ -66,6 +66,8 @@
 			this.resultcontroller.startFlow("verify", "openidconnectverifytestflow");
 			
 			this.connector = new APIconnector("connect", this.editor.item.metadata);
+			this.publisher.connector = this.connector;
+
 			this.connector.verify($.proxy(this.verifyResponse, this), function(error) {
 				console.error("Error verifying: ", error);
 				$("#verifynow").removeAttr("disabled");
@@ -324,8 +326,28 @@
 
 	});
 
-	exports.FedLabConnect = FedLabConnect;
-	
-	
-})(jQuery, window);
 
+	jQuery(function($) {
+		return new FedLabConnect({
+			el: $("body"),
+			type: OICProviderEditor,
+			modelType: OICProvider
+			//type: OAuthEditor
+		});
+	});
+	$(document).ready(function() {
+		setInterval(function() {
+			$("span.lastRunDate").prettyDate();
+		}, 30000);
+
+		if ($.browser.msie) {
+			$("div#main").prepend('<div class="alert alert-error">It seems like you are using Internet Explorer. Can we kindly ask you to use another browser? Federation Lab is work in progress, and it is currently only well tested with Chrome, it may work with other browsers as well - but it do not work with IE.</div>');
+		}
+
+	});
+
+
+	return FedLabConnect;
+	
+	
+});

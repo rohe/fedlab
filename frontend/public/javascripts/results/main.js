@@ -1,8 +1,9 @@
-requirejs(['ResultController'],
-function (ResultController) {
+define(function(require, exports, module) {
+
+	var ResultController = require('./ResultController');
 
 	$(document).ready(function() {
-		var r = new ResultController($("body"));
+		var r = new ResultController($("body"), 'connect');
 	
 		$(document).ready(function() {
 			setInterval(function() {

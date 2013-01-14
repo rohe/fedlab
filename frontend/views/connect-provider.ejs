@@ -10,6 +10,8 @@
 
 		<% include inc/head %>
 	 	
+
+
 		<!-- spine.js -->
 		<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
 		<script type="text/javascript" src="/javascripts/spine/local.js"></script>
@@ -21,12 +23,16 @@
 		<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
 
 		<script type="text/javascript" src="/javascripts/app/controllers/controllers.js"></script>
-		<script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script>
+		<!-- <script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script> -->
 		<script type="text/javascript" src="/javascripts/app/controllers/ctrl.publisher.js"></script>
 		<script type="text/javascript" src="/javascripts/app/controllers/userinteraction.js"></script>
 
 
-		<script type="text/javascript" src="/javascripts/app/controllers/FedLabConnect.js"></script>
+		<!-- <script type="text/javascript" src="/javascripts/app/controllers/FedLabConnect.js"></script> -->
+
+		<script type="text/javascript" data-main="/javascripts/app/controllers/FedLabConnect" src="/javascripts/require.js"></script>
+
+
 
 		<!-- JQuery templates -->
 		<script type="text/x-jquery-tmpl" id="testFlow">
@@ -351,25 +357,6 @@
 		
 		
 		<script type="text/javascript">
-
-			jQuery(function($) {
-				return new FedLabConnect({
-					el: $("body"),
-					type: OICProviderEditor,
-					modelType: OICProvider
-					//type: OAuthEditor
-				});
-			});
-			$(document).ready(function() {
-				setInterval(function() {
-					$("span.lastRunDate").prettyDate();
-				}, 30000);
-
-				if ($.browser.msie) {
-					$("div#main").prepend('<div class="alert alert-error">It seems like you are using Internet Explorer. Can we kindly ask you to use another browser? Federation Lab is work in progress, and it is currently only well tested with Chrome, it may work with other browsers as well - but it do not work with IE.</div>');
-				}
-
-			});
 
 		</script>
 
