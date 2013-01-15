@@ -235,10 +235,10 @@ app.get('/api2/:type/results', function(req, res, next) {
 	
 });
 
-app.post('/api2/:type/results/:provider', function(req, res, next) {
+app.post('/api2/:type/results/:pin', function(req, res, next) {
 	
 	var type = req.params.type;
-	var provider = req.params.provider;
+	var pin = req.params.pin;
 
 	if (!req.body) throw 'Missing metadata in HTTP Requeset body';
 	var r = req.body;
@@ -249,7 +249,7 @@ app.post('/api2/:type/results/:provider', function(req, res, next) {
 		next();
 	}
 
-	resconnector.publish(type, provider, r, function(result) {
+	resconnector.publish(type, pin, r, function(result) {
 		if (result instanceof Error) {
 			console.log(result);
 			req.error = result;
@@ -286,34 +286,6 @@ app.all('/api2/*', function(req, res) {
 
 
 
-
-
-
-
-
-/*
- * API
- */ 
-// app.post('/api', function(req, res){
-
-// 	console.log('Accessing API on hostname : ' + req.headers.host);
-// 	if (req.body.type === 'saml') {
-// 		ts.process(req, res);
-// 		console.log("Called SAML")
-// 	} else if (req.body.type === 'connect') {
-// 		t.process(req, res);
-// 		console.log("Called Connect");
-// 	} else {
-// 		throw {message: 'invalid type at the API'};
-// 	}
-	
-// });
-// app.post('/api/results/publish', function(req, res) {
-// 	t.publish(req, res);
-// });
-// app.get('/api/results', function(req, res) {
-// 	t.getResults(req, res);
-// });
 
 app.listen(80);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

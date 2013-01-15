@@ -86,16 +86,16 @@ define(function(require, exports, module) {
 		});
 	}
 
-	APIconnector.prototype.publishResults = function(provider, pin, results, callback) {
+	APIconnector.prototype.publishResults = function(pin, results, callback) {
 		var that = this;
-		var url = '/api2/' + this.type + '/results/' + provider;
+		var url = '/api2/' + this.type + '/results/' + pin;
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			cache: false,
 			type: "POST",
 			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(this.metadata),
+			data: JSON.stringify(results),
 			success: function(response) {
 				console.log("==> getDefinitions() - API Response");
 				callback(response);
@@ -116,9 +116,7 @@ define(function(require, exports, module) {
 			url: url,
 			dataType: 'json',
 			cache: false,
-			type: "POST",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(this.metadata),
+			type: "GET",
 			success: function(response) {
 				console.log("==> getDefinitions() - API Response");
 				callback(response);

@@ -9,7 +9,7 @@ var util  = require('util'),
 
 
 
-readFileResults = function(config, available, metadata, callback) {
+readFileResults = function(config, type, available, metadata, callback) {
 
 	var 
 		resp = {},
@@ -44,7 +44,7 @@ readFileResults = function(config, available, metadata, callback) {
 	}
 
 	for(var i = 0; i < available.length; i++) {
-		file = config.path + "frontend/results/" + available[i] + ".js";
+		file = config.path + "frontend/results/" + type + '.' + available[i] + ".js";
 		console.log("About to read " + file);
 		fs.readFile(file, "utf8", function (err, data) {
 
@@ -100,32 +100,24 @@ Results = function(config) {
 	});
 }
 
-Results.prototype.publish = function(type, provider, result, callback) {
+Results.prototype.publish = function(type, pin, result, callback) {
 
 	console.log("Client is publishing results...");
-	console.log(r);
+	console.log(result);
 
-
-	if (!this.resultsconfig[req.body.pincode]) {
-		console.log("invalid pincode: " + req.body.pincode);
-		res.writeHead(200, { 'Content-Type': 'application/json' });   
-		res.end(JSON.stringify({"status": "error", "message": "Invalid pin code"}) );
-		return;
+	if (!this.resultsconfig[pin]) {
+		console.log("invalid pincode: " + pin);
+		return callback(new Error('Invalid pin code'));
 	}
 
-	var filename = config.path + 'frontend/results/' + resultsconfig[req.body.pincode].id + '.js';
+	var filename = config.path + 'frontend/results/' + type + '.' + this.resultsconfig[pin].id + '.js';
 
 	console.log("about to write to " + filename);
-	fs.writeFile(filename, JSON.stringify(req.body.data), function (err) {
+	fs.writeFile(filename, JSON.stringify(result), function (err) {
 		if (err) {
-			console.log("Error writing results file...");
-			res.writeHead(200, { 'Content-Type': 'application/json' });   
-			res.end(JSON.stringify({"status": "error", "message": stderr}) );
-			return;
+			return callback(new Error(err));
 		}
-		console.log('Results file [' + filename + '] is stored..');
-		res.writeHead(200, { 'Content-Type': 'application/json' });   
-		res.end(JSON.stringify(response) );
+		return callback({status: 'ok'});
 	});
 
 }
@@ -142,7 +134,7 @@ Results.prototype.get = function(connector, callback) {
 	 * result file.
 	 */
 	for (var key in this.resultsconfig) {
-		fname = this.config.path + "frontend/results/" + this.resultsconfig[key].id + ".js";
+		fname = this.config.path + "frontend/results/" + connector + '.' + this.resultsconfig[key].id + ".js";
 		if (fs.existsSync(fname)) {
 			// console.log("File " + fname + " found");
 			// response.results[resultsconfig[key].id] = 'ok';
@@ -158,7 +150,7 @@ Results.prototype.get = function(connector, callback) {
 		return callback(new Error("No results available"));
 	}
 
-	readFileResults(this.config, available, metadata, function(results) {
+	readFileResults(this.config, connector, available, metadata, function(results) {
 		return callback(results);
 	});
 

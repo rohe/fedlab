@@ -57,8 +57,8 @@ define(function(require, exports, module) {
 
 			this.publisher = new PublishController({el: $("div#publishbar")}, this);
 
-
 		},
+		
 		startVerify: function() {
 
 			$("#verifynow").attr("disabled", "disabled");

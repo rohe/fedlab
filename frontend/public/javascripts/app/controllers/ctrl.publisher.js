@@ -37,10 +37,10 @@
 
 			console.log("publish results");
 			console.log(this.fedlab);
-			console.log(provider, pincode, data);
-			return;
+			console.log(pincode, data);
+			// return;
 
-			this.controller.publishResult(provider, pincode, data, function(res) {
+			this.connector.publishResults(pincode, data, function(res) {
 
 				if (res instanceof Error) {
 					alert('Error occured  ' + res);
