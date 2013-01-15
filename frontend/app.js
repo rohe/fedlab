@@ -83,8 +83,13 @@ app.get('/samldebug', function(req, res){
 
 
 
-app.get('/saml-sp', function(req, res){
-	res.render('saml-sp', {
+app.get('/saml-sp-solberg', function(req, res){
+	res.render('saml-sp-solberg', {
+		title: 'SAML 2.0 Service Provider Testing'
+	});
+});
+app.get('/saml-sp-hedberg', function(req, res){
+	res.render('saml-sp-hedberg', {
 		title: 'SAML 2.0 Service Provider Testing'
 	});
 });
