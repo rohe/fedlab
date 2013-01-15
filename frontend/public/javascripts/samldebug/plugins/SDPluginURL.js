@@ -4,9 +4,9 @@ define(function(require, exports, module) {
 		Class = require('lib/resig'),
 		SDPlugin = require('./SDPlugin');
 
-	require('base64/jquery.base64');
-	require('inflate/rawinflate');
-	require('inflate/rawdeflate');
+	require('lib/base64/jquery.base64');
+	require('lib/inflate/rawinflate');
+	require('lib/inflate/rawdeflate');
 
 	var url_decompose =  function url_decompose(url){
 		if(url.indexOf('?') == -1){ return {path: url, params: {} }; }

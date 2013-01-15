@@ -1,5 +1,9 @@
-(function ($, exports) {
 
+define(function(require, exports, module) {
+
+	var 
+		$ = require('jquery'),
+		jwt = require('./JWT');
 
 	var utf8 = {}
 
@@ -153,7 +157,7 @@
 		this.cleanLog();
 		var decoded = $(this.el).find("#decoded").val();
 		options = this.getOptions();
-		var result = jwt(options).init(JSON.parse(decoded)).sign();
+		var result = jwt.jwt(options).init(JSON.parse(decoded)).sign();
 		$(this.el).find("#encoded").val(result);
 	}
 
@@ -164,7 +168,7 @@
 		encoded.replace(/\s*/g, "");
 		console.log("Decoding " + encoded + " with options", this.options);
 		options = this.getOptions();
-		var unpacked = jwt(options).init(encoded).getClaims();
+		var unpacked = jwt.jwt(options).init(encoded).getClaims();
 		$(this.el).find("#decoded").val(JSON.stringify(unpacked, null, 4));
 	}
 
@@ -178,9 +182,7 @@
 
 	}
 
-	exports.JWTToolApp = JWTToolApp;
+	return JWTToolApp;
 
 	
-	
-	
-})(jQuery, window);
+});

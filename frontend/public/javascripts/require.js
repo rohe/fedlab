@@ -47,10 +47,10 @@ requirejs.config({
 	},
 	baseUrl: "/javascripts",
 	shim: {
-		'jquery.tmpl': {deps: ['jquery'], exports: 'jQuery'},
-		'base64/jquery.base64': {deps: ['jquery'], exports: 'jQuery'},
-		'inflate/rawinflate': {deps: ['jquery'], exports: 'jQuery'},
-		'inflate/rawdeflate': {deps: ['jquery'], exports: 'jQuery'},
+		'lib/jquery.tmpl': {deps: ['jquery'], exports: 'jQuery'},
+		'lib/base64/jquery.base64': {deps: ['jquery'], exports: 'jQuery'},
+		'lib/inflate/rawinflate': {deps: ['jquery'], exports: 'jQuery'},
+		'lib/inflate/rawdeflate': {deps: ['jquery'], exports: 'jQuery'},
 
 		'google-code-prettify/prettify': {deps: ['google-code-prettify/prettify-loadcss.js']},
 
