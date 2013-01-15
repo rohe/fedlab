@@ -1,10 +1,10 @@
 define(
 	[
-		'resig',
-		'plugins/SDPluginPost',
-		'plugins/SDPluginPostBody',
-		'plugins/SDPluginRedirect',
-		'plugins/SDPluginURL'
+		'lib/resig',
+		'./plugins/SDPluginPost',
+		'./plugins/SDPluginPostBody',
+		'./plugins/SDPluginRedirect',
+		'./plugins/SDPluginURL'
 	], 
 	function(Class, SDPluginPost, SDPluginPostBody, SDPluginRedirect, SDPluginURL) {
 

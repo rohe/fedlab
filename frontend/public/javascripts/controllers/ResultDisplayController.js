@@ -1,11 +1,11 @@
 define(function(require, exports, module) {
 
 	var 
-		Class = require('../samldebug/resig'),
+		Class = require('../lib/resig'),
 		APIconnector = require('../app/controllers/APIconnector')
 		;
 
-	var ResultController = Class.extend({
+	var ResultDisplayController = Class.extend({
 		init: function(el, type) {
 			this.el = el;
 			console.log("Initing ResultController", el);
@@ -16,8 +16,6 @@ define(function(require, exports, module) {
 			this.definitions = null;
 			this.results = null;
 			this.loadDefinitions();
-
-
 
 			this.el.on('click', 'a.sortBy', $.proxy(function(e) {
 				var k = $(e.currentTarget).data("sortbykey");
@@ -177,29 +175,6 @@ define(function(require, exports, module) {
 				that.load();
 			});
 
-
-			// $.ajax({
-			// 	url: "/api",
-			// 	dataType: 'json',
-			// 	cache: false,
-			// 	type: "POST",
-			// 	data: {type: "connect", "operation": "definitions"},
-			// 	success: function(response) {
-			// 		console.log("==> Response DEFINITIONS");
-			// 		// console.log(response);
-
-			// 		if (response.status === "ok") {	
-			// 			console.log("Success");
-			// 			that.definitions = response.result;
-			// 			that.load();
-			// 		}
-
-			// 	},
-			// 	error: function(error) {
-			// 		console.log("Error: ", error);
-			// 	}
-				
-			// });
 		},
 		load: function() {
 			var that = this;
@@ -212,33 +187,9 @@ define(function(require, exports, module) {
 				that.render();
 			});
 
-			// $.ajax({
-			// 	url: "/api",
-			// 	dataType: 'json',
-			// 	cache: false,
-			// 	type: "POST",
-			// 	data: {type: "connect", "operation": "results"},
-			// 	success: function(response) {
-			// 		console.log("==> Response RESULTS");
-			// 		// console.log(response);
-
-			// 		if (response.status === "ok") {	
-			// 			// console.log("Success");
-			// 			// console.log(that);
-			// 			// console.log(response.results);
-			// 			that.results = response.results;
-			// 			that.render();
-			// 		}
-
-			// 	},
-			// 	error: function(error) {
-			// 		console.log("Error: " + error);
-			// 	}
-				
-			// });
 		}
 	});
 
-	return ResultController;
+	return ResultDisplayController;
 
 });

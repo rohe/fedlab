@@ -1,4 +1,12 @@
-define(['./SDPlugin'], function(SDPlugin) {
+define(function(require, exports, module) {
+
+	var 
+		Class = require('lib/resig'),
+		SDPlugin = require('./SDPlugin');
+
+	require('base64/jquery.base64');
+	require('inflate/rawinflate');
+	require('inflate/rawdeflate');
 
 	var url_decompose =  function url_decompose(url){
 		if(url.indexOf('?') == -1){ return {path: url, params: {} }; }

@@ -1,5 +1,9 @@
-define(['./SDPlugin'], function(SDPlugin) {
+define(function(require, exports, module) {
 
+	var 
+		Class = require('lib/resig'),
+		SDPlugin = require('./SDPlugin');
+		
 	/*
 	 * This plugin handles URLencoded SAML parameter, as well as a full url including the encoded
 	 * SAML response or request.

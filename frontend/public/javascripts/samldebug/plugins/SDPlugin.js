@@ -1,4 +1,6 @@
-define(function() {
+define(function(require, exports, module) {
+
+	var Class = require('lib/resig');
 
 	var SDPlugin = Class.extend({
 		init: function(sd, type) {

@@ -1,6 +1,10 @@
 define(function(require, exports, module) {
 
-	var ResultController = require('./ResultController');
+	require('bootstrap');
+
+	var 
+		$ = require('jquery'),
+		ResultController = require('./controllers/ResultDisplayController');
 
 	$(document).ready(function() {
 		var r = new ResultController($("body"), 'connect');

@@ -1,4 +1,8 @@
-define(['./SDPlugin'], function(SDPlugin) {
+define(function(require, exports, module) {
+
+	var 
+		Class = require('lib/resig'),
+		SDPlugin = require('./SDPlugin');
 
 	var SDPluginPost = SDPlugin.extend({
 		init: function(sd) { 

@@ -33,3 +33,51 @@ w.head=D.parentNode;l.onError=function(b){throw b;};l.load=function(b,c,d){var i
 b.onScriptLoad)):(f.addEventListener("load",b.onScriptLoad,!1),f.addEventListener("error",b.onScriptError,!1)),f.src=d,K=f,D?A.insertBefore(f,D):A.appendChild(f),K=null,f;$&&(importScripts(d),b.completeLoad(c))};z&&M(document.getElementsByTagName("script"),function(b){A||(A=b.parentNode);if(s=b.getAttribute("data-main"))return q.baseUrl||(G=s.split("/"),ba=G.pop(),ca=G.length?G.join("/")+"/":"./",q.baseUrl=ca,s=ba),s=s.replace(aa,""),q.deps=q.deps?q.deps.concat(s):[s],!0});define=function(b,c,d){var i,
 f;"string"!==typeof b&&(d=c,c=b,b=null);I(c)||(d=c,c=[]);!c.length&&H(d)&&d.length&&(d.toString().replace(ia,"").replace(ja,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c));if(O){if(!(i=K))P&&"interactive"===P.readyState||M(document.getElementsByTagName("script"),function(b){if("interactive"===b.readyState)return P=b}),i=P;i&&(b||(b=i.getAttribute("data-requiremodule")),f=B[i.getAttribute("data-requirecontext")])}(f?f.defQueue:R).push([b,c,d])};define.amd=
 {jQuery:!0};l.exec=function(b){return eval(b)};l(q)}})(this);
+
+
+requirejs.config({
+	paths: {
+		'jquery' : 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min',
+		// 'uwap-core' : 'https://core.uwap.org/_',
+		// 'bootstrap': 'https://core.uwap.org/_/bootstrap/js/bootstrap.min',
+		// 'text'		: 'https://core.uwap.org/_/js/text',
+		// 'uwap': '/_/js',
+		'bootstrap': '/bootstrap/js/bootstrap',
+		'google-code-prettify': '/google-code-prettify'
+	},
+	baseUrl: "/javascripts",
+	shim: {
+		'jquery.tmpl': {deps: ['jquery'], exports: 'jQuery'},
+		'base64/jquery.base64': {deps: ['jquery'], exports: 'jQuery'},
+		'inflate/rawinflate': {deps: ['jquery'], exports: 'jQuery'},
+		'inflate/rawdeflate': {deps: ['jquery'], exports: 'jQuery'},
+
+		'google-code-prettify/prettify': {deps: ['google-code-prettify/prettify-loadcss.js']},
+
+		'bootstrap': {
+			deps: ['jquery', '/bootstrap/js/bootstrap-loadcss.js']
+		},
+		'bootstrap-modal': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-button': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-tooltip': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-collapse': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-dropdown': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-transition': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-alert': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-scrollspy': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-tab': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-popover': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-carousel': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'},
+		'bootstrap-typeahead': {deps: ['jquery', 'bootstrap'], exports: 'jQuery'}
+	}
+});
+
+UWAP = {utils: {}};
+UWAP.utils.loadCSS = function (url) {
+	var link = document.createElement("link");
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	link.href = require.toUrl(url);
+	// console.log("CSS ››››› Loading CSS : " + link.href);
+	document.getElementsByTagName("head")[0].appendChild(link);
+}
