@@ -205,11 +205,12 @@ OICTestconnector.prototype.runFlow = function(metadata, flowid, callback, errorc
 		console.log("Command completed! ")
 
 		if (result === null) {
-			errorcallback(stderr); return;
+			if (typeof errorcallback === 'function') errorcallback(stderr); 
+			return;
 		}
 
 		result.debug = stderr;
-		callback(response);
+		callback(result);
 
 	}, function() {
 		console.log("ERROR CALLBACK ON OICTestconnector.prototype.runF")

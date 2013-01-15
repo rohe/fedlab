@@ -5,13 +5,10 @@ var
 
 	// Module dependencies.
 	express = require('express'),
-	// io = require('socket.io'), // for npm, otherwise use require('./path/to/socket.io') 
-	
 	
 	// Local libraries.
 	tests = require('./lib/testconnector.js'),
-	// testconnector = require('./lib/testconnector.js'),
-	// testconnectorsaml = require('./lib/testconnector-samlsp.js'),
+	results = require('./lib/results.js'),
 	interaction = require('./lib/interaction.js'),
 	
 	// Variables
@@ -119,29 +116,6 @@ app.get('/test', function(req, res){
 var configdata = fs.readFileSync(__dirname + '/etc/config.js', 'utf8');
 config = JSON.parse(configdata);
 
-// fs.readFile(__dirname + '/etc/config.js', function (err, data) {
-// 	if (err) {
-// 		console.log("Error reading config results");
-// 		return null;
-// 	}
-// 	config = JSON.parse(data);
-// 	console.log("Successfully read configuration.");
-// 	console.log(config);
-
-	// t = testconnector.testconnector(config);
-	// ts = testconnectorsaml.testconnectorsaml(config);
-
-// });
-
-
-// t.temp("oic-verify", function (msg) {
-// 	var url = msg.tests[7].url;
-// 	var body = msg.tests[7].message;
-// 	var ia = new interaction.InteractiveHTML(body, url);
-// 	console.log("About to getInteractive...")
-// 	var u = ia.getInteractive(function(msg) {		
-// 	});
-
 
 
 /*
@@ -151,6 +125,8 @@ config = JSON.parse(configdata);
 var connectors = {};
 connectors.connect = new tests.OICTestconnector(config);
 connectors.saml = new tests.SAMLTestconnector(config);
+
+var resconnector = new results.Results(config);
 
 
 /*
@@ -190,7 +166,7 @@ app.all('/api2/:type/verify', function(req, res, next) {
 
 app.all('/api2/:type/definitions', function(req, res, next) {
 
-	var metadata;
+	var metadata = null;
 
 	if (!connectors[req.params.type]) {
 		req.error = 'Invalid connector';
@@ -198,8 +174,10 @@ app.all('/api2/:type/definitions', function(req, res, next) {
 	}
 
 	if (!connectors[req.params.type]) throw 'Invalid connector';
-	if (!req.body) throw 'Missing metadata in HTTP Requeset body';
-	metadata = req.body;
+	if (req.body)  {
+		metadata = req.body;	
+	}
+	
 
 	connectors[req.params.type].definitions(metadata, function(data) {
 		req.response = data;	
@@ -236,11 +214,54 @@ app.all('/api2/:type/runflow/:flowid', function(req, res, next) {
 
 });
 
-app.all('/api2/:type/results', function(req, res, next) {
+app.get('/api2/:type/results', function(req, res, next) {
+	
+	var type = req.params.type;
 
-	next();
+	if (!connectors[type]) {
+		res.error = 'Invalid connector';
+		next();
+	}
 
+	resconnector.get(type, function(result) {
+		if (result instanceof Error) {
+			console.log(result);
+			req.error = result;
+			return;
+		}
+		req.response = result;
+		next();
+	});
+	
 });
+
+app.post('/api2/:type/results/:pin', function(req, res, next) {
+	
+	var type = req.params.type;
+	var pin = req.params.pin;
+
+	if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+	var r = req.body;
+
+
+	if (!connectors[type]) {
+		res.error = 'Invalid connector';
+		next();
+	}
+
+	resconnector.publish(type, pin, r, function(result) {
+		if (result instanceof Error) {
+			console.log(result);
+			req.error = result;
+			return;
+		}
+		req.response = result;
+		next();
+	});
+	
+});
+
+
 
 app.all('/api2/*', function(req, res) {
 
@@ -265,32 +286,6 @@ app.all('/api2/*', function(req, res) {
 
 
 
-/*
- * API
- */ 
-app.post('/api', function(req, res){
-
-	console.log('Accessing API on hostname : ' + req.headers.host);
-	if (req.body.type === 'saml') {
-		ts.process(req, res);
-		console.log("Called SAML")
-	} else if (req.body.type === 'connect') {
-		t.process(req, res);
-		console.log("Called Connect");
-	} else {
-		throw {message: 'invalid type at the API'};
-	}
-	
-});
-app.post('/api/results/publish', function(req, res) {
-	t.publish(req, res);
-});
-// app.get('/api/results', function(req, res) {
-// 	t.getResults(req, res);
-// });
-// app.get('/api/definitions', function(req, res) {
-// 	t.getDefinitions(req, res);
-// });
 
 app.listen(80);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
