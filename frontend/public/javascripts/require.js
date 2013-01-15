@@ -43,7 +43,8 @@ requirejs.config({
 		// 'text'		: 'https://core.uwap.org/_/js/text',
 		// 'uwap': '/_/js',
 		'bootstrap': '/bootstrap/js/bootstrap',
-		'google-code-prettify': '/google-code-prettify'
+		'google-code-prettify': '/google-code-prettify',
+		'spine': '/javascripts/lib/spine/spine'
 	},
 	baseUrl: "/javascripts",
 	shim: {
@@ -54,6 +55,13 @@ requirejs.config({
 
 		'google-code-prettify/prettify': {deps: ['google-code-prettify/prettify-loadcss.js']},
 
+		// 'spine': {
+		// 	deps: ['/javascripts/lib/spine/local.js', '/javascripts/lib/spine/relation.js'],
+		// 	exports: 'spine'
+		// },
+		'lib/spine/local': { deps: ['spine'], exports: 'Spine' },
+		'lib/spine/relation': { deps: ['spine'], exports: 'Spine' },
+		'spine': {exports: 'Spine'},
 		'bootstrap': {
 			deps: ['jquery', '/bootstrap/js/bootstrap-loadcss.js']
 		},

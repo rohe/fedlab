@@ -593,9 +593,9 @@
 	});
 
 	exports.EntityLoader = EntityLoader;
-	exports.ResultController = ResultController;
+	// exports.ResultController = ResultController;
 	// exports.OICEditor = OICEditor;
-	exports.OAuthEditor = OAuthEditor;
+	// exports.OAuthEditor = OAuthEditor;
 	exports.OICProviderEditor = OICProviderEditor;
 	
 	

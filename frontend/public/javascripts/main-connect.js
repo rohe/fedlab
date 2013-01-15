@@ -1,6 +1,17 @@
 define(function(require, exports, module) {
 	
-	var APIconnector = require('./APIconnector');
+	var 
+		APIconnector = require('./api/APIconnector'),
+		Spine = require('spine'),
+		$ = require('jquery'),
+
+		OICProviderEditor = require('controllers/editors/OICProviderEditor');
+
+	console.log(Spine);
+
+	require('lib/spine/local');
+	require('lib/spine/relation');
+	require('bootstrap');
 
 	var FedLabConnect = Spine.Controller.sub({
 		entityloader: null,
@@ -327,15 +338,18 @@ define(function(require, exports, module) {
 	});
 
 
-	jQuery(function($) {
+
+	$(document).ready(function() {
+
+		console.log("Running...");
+
 		return new FedLabConnect({
 			el: $("body"),
 			type: OICProviderEditor,
 			modelType: OICProvider
 			//type: OAuthEditor
 		});
-	});
-	$(document).ready(function() {
+
 		setInterval(function() {
 			$("span.lastRunDate").prettyDate();
 		}, 30000);
