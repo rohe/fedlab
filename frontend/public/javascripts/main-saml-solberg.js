@@ -88,6 +88,7 @@ define(function(require, exports, module) {
 			this.resultcontroller.startFlow("verify", "samlverifyflow");
 			
 			this.connector = new APIconnector("saml", this.metadata);
+			this.publisher.connector = this.connector;
 			this.connector.verify($.proxy(this.verifyResponse, this), function(error) {
 				console.error("Error verifying: ", error);
 				$("#verifynow").removeAttr("disabled");

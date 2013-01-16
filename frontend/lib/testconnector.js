@@ -56,7 +56,7 @@ SAMLTestconnector.prototype.verify = function(metadata, callback, errorcallback)
 
 SAMLTestconnector.prototype.definitions = function(metadata, callback, errorcallback) {
 	var that = this;
-	cmd(this.samlcmd, ["showList"], metadata, function(result, stderr, statuscode) {
+	cmd(this.samlcmd, ["showList"], '', function(result, stderr, statuscode) {
 
 		if (result === null) {
 			if (typeof errorcallback === 'function') errorcallback(stderr); 
@@ -213,7 +213,7 @@ OICTestconnector.prototype.runFlow = function(metadata, flowid, callback, errorc
 		callback(result);
 
 	}, function() {
-		console.log("ERROR CALLBACK ON OICTestconnector.prototype.runF")
+		console.log("ERROR CALLBACK ON OICTestconnector.prototype.runFlow")
 	});
 }
 

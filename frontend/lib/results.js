@@ -83,12 +83,18 @@ readFileResults = function(config, type, available, metadata, callback) {
 
 
 Results = function(config) {
-	var that = this;
-	var resultconfigfile = config.path + 'frontend/etc/config.results.js';
+
+	
 
 	this.config = config;
 	this.resultsconfig = {};
 
+	this.loadConfig();
+}
+
+Results.prototype.loadConfig = function() {
+	var that = this;
+	var resultconfigfile = config.path + 'frontend/etc/config.results.js';
 	fs.readFile(resultconfigfile, function (err, data) {
 		if (err) {
 			console.log("Error reading config results from " + resultconfigfile);

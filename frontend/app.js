@@ -290,6 +290,14 @@ app.all('/api2/*', function(req, res) {
 });
 
 
+app.all('/reloadconfig', function(req, res, next) {
+	resconnector.loadConfig();
+	console.log("API2 Request: reloadconfig");
+	res.writeHead(200, { 'Content-Type': 'application/json' });   
+	res.end(JSON.stringify({"status": "ok"}));
+});
+
+
 
 
 app.listen(80);

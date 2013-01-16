@@ -8,8 +8,10 @@ define(function(require, exports, module) {
 		
 		ResultController = require('./controllers/ResultDisplayController');
 
+	
+
 	$(document).ready(function() {
-		var r = new ResultController($("body"), 'connect');
+		var r = new ResultController($("body"), 'saml');
 	
 		$(document).ready(function() {
 			setInterval(function() {

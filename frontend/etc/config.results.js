@@ -4,5 +4,9 @@
 	"287344": {"id": "openid4us", "short": "oic4us", "name": "Connect.openid4.us"},
 	"172534": {"id": "oicinfo", "short": "oic.info", "name": "Openidconnect.info"},
 	"273625": {"id": "connectopheroku", "short": "heroku", "name": "connect-op.heroku.com"},
-	"273645": {"id": "test", "short": "tester", "name": "Test provider"}
+
+
+	"281999": {"id": "ssp", "short": "ssp", "name": "SimpleSAMLphp"},
+	"122635": {"id": "openam", "short": "openam", "name": "Oracle OpenAM"},
+	"227362": {"id": "shib", "short": "shib", "name": "Shibboleth"}
 }

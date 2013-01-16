@@ -1,21 +1,15 @@
 define(function(require, exports, module) {
 
 	var 
+		$ = require('jquery'),
 		Class = require('../lib/resig'),
 		APIconnector = require('../api/APIconnector')
 		;
 
 	var ResultDisplayController = Class.extend({
-		init: function(el, type) {
+		init: function(el) {
 			this.el = el;
-			console.log("Initing ResultController", el);
-
-			this.api = new APIconnector(type, null);
-
-			this.sortby = null;
-			this.definitions = null;
-			this.results = null;
-			this.loadDefinitions();
+			console.log("Initing ResultDisplayController", el);
 
 			this.el.on('click', 'a.sortBy', $.proxy(function(e) {
 				var k = $(e.currentTarget).data("sortbykey");
@@ -29,7 +23,82 @@ define(function(require, exports, module) {
 				this.sortby = k;
 				this.renderTableBody();
 
-			}, this))
+			}, this));
+
+			this.routingEnabled = true;
+			$(window).bind('hashchange', $.proxy(this.route, this));
+			this.route();
+		},
+		load: function(type) {
+			var that = this;
+			// $(this.el).empty();
+			this.type = type;
+			this.api = new APIconnector(type, null);
+
+			this.sortby = null;
+			this.definitions = null;
+			this.results = null;
+
+
+			console.log("loadDefinitions()");
+			this.api.getDefinitions(function(definitions) {
+				console.log("loadDefinitions() result ", definitions);
+				that.definitions = definitions;
+
+				that.api.getResults(function(results) {
+					console.log("load() result", results);
+					that.results = results;
+					that.render();
+				});
+			});
+
+
+			console.log("load(ed)");
+
+
+		},
+		route: function() {
+			if (!this.routingEnabled) return;
+			var hash = window.location.hash;
+			if (hash.length < 3) {
+				this.setHash('/');
+			}
+			hash = hash.substr(2);
+
+			var parameters;
+			var validTypes = ['saml', 'connect'];
+
+			console.log("Routing...", hash);
+
+			if (hash.match(/^\/$/)) {
+
+				this.el.append('');
+
+			} else if (parameters = hash.match(/^\/post$/)) {
+
+				console.log('ROUTING LOAD /')
+
+			} else if (parameters = hash.match(/^\/([0-9a-z]+)$/)) {
+
+				if (validTypes.indexOf(parameters[1]) === -1) {
+					this.setHash('/');
+					return;
+				}
+
+				console.log('ROUTING LOAD ' + parameters[1]);
+				this.load(parameters[1]);
+
+			} else {
+				console.error('No match found for router...');
+			}
+
+			// console.log("HASH Change", window.location.hash);
+		},
+		setHash: function(hash) {
+			this.routingEnabled = false;
+			window.location.hash = '#!' + hash;
+			// console.log("Setting hash to " + hash);
+			this.routingEnabled = true;
 		},
 		getStatusTag: function(status) {
 			// console.log("get statustag on [TestFlow] " + this.status);
@@ -77,9 +146,11 @@ define(function(require, exports, module) {
 			tbody = $('<tbody></tbody>');
 			table.append(tbody);
 
-
+			$(this.el).find('.results').remove();
 			$(this.el).append(table);
 			$(this.el).find('.tooltipped').tooltip();
+
+			$(this.el).find('#testtype').html(this.type);
 
 			this.renderTableBody();
 		},
@@ -172,19 +243,7 @@ define(function(require, exports, module) {
 			this.api.getDefinitions(function(definitions) {
 				console.log("loadDefinitions() result ", definitions);
 				that.definitions = definitions;
-				that.load();
-			});
-
-		},
-		load: function() {
-			var that = this;
-
-			console.log("load()");
-
-			this.api.getResults(function(results) {
-				console.log("load() result", results);
-				that.results = results;
-				that.render();
+				// that.load();
 			});
 
 		}

@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
 
 	var
+		$ = require('jquery'),
 		Spine = require('spine');
 
 	var ResultController = Spine.Controller.sub({
@@ -15,9 +16,10 @@ define(function(require, exports, module) {
 			"click div.testItem": "messageToggle"
 		},
 		init: function() {
-			
-			
+			this.routingEnabled = true;
+
 		},
+
 		getFlow: function(e) {
 			var el = $(e.target).closest("div.testFlow");
 			return el;
