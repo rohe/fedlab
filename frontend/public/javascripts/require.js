@@ -44,11 +44,11 @@ requirejs.config({
 		// 'uwap': '/_/js',
 		'bootstrap': '/bootstrap/js/bootstrap',
 		'google-code-prettify': '/google-code-prettify',
-		'spine': '/javascripts/lib/spine/spine'
+		'spine': '/javascripts/lib/spine/spine.pack'
 	},
 	baseUrl: "/javascripts",
 	shim: {
-		'lib/jquery.tmpl': {deps: ['jquery'], exports: 'jQuery'},
+		'lib/jquery.tmpl.min': ['jquery'],
 		'lib/base64/jquery.base64': {deps: ['jquery'], exports: 'jQuery'},
 		'lib/inflate/rawinflate': {deps: ['jquery'], exports: 'jQuery'},
 		'lib/inflate/rawdeflate': {deps: ['jquery'], exports: 'jQuery'},
@@ -61,7 +61,7 @@ requirejs.config({
 		// },
 		'lib/spine/local': { deps: ['spine'], exports: 'Spine' },
 		'lib/spine/relation': { deps: ['spine'], exports: 'Spine' },
-		'spine': {exports: 'Spine'},
+		// 'spine': {exports: 'Spine'},
 		'bootstrap': {
 			deps: ['jquery', '/bootstrap/js/bootstrap-loadcss.js']
 		},

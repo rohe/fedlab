@@ -2,23 +2,33 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		
 		<title>Federation Lab</title>
 
 
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Federation Lab is a testing and debugging toolkit for Identity Protocols">
+		<meta name="author" content="Andreas Åkre Solberg">
 
-		<% include inc/head %>
+
+
+	<style>
+		body {
+			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+		}
+	</style>
 
 		<!-- Local stylesheets -->
 		<link rel="stylesheet" href="/stylesheets/layout-saml.css" />
 		<link rel="stylesheet" href="/stylesheets/testresults.css" />
 
-		<!-- spine.js -->
+<!--
 		<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
 		<script type="text/javascript" src="/javascripts/spine/local.js"></script>
 		<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
 
 
-		<!-- Federation Lab -->
 		<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
 		<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
 
@@ -29,17 +39,17 @@
 		<script type="text/javascript" src="/javascripts/app/controllers/SAMLmain.js"></script>
 		<script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script>
 
+-->
 
-
-		<!-- SAMLmetaJS -->
-		<script type="text/javascript" src="/samlmetajs/mdreader.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.xml.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.info.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.saml2sp.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.certs.js"></script>
-		<link type="text/css" href="/samlmetajs/css/samlmetajs.css" rel="Stylesheet" />
-
+		<!-- SAMLmetaJS 
+			<script type="text/javascript" src="/samlmetajs/mdreader.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.xml.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.info.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.saml2sp.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.certs.js"></script>
+			<link type="text/css" href="/samlmetajs/css/samlmetajs.css" rel="Stylesheet" />
+		-->
 
 
 		<script type="text/javascript">

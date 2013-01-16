@@ -4,6 +4,8 @@ define(function(require, exports, module) {
 
 	var 
 		$ = require('jquery'),
+		prettydate = require('lib/prettydate/pretty'),
+		
 		ResultController = require('./controllers/ResultDisplayController');
 
 	$(document).ready(function() {

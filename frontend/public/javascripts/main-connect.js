@@ -1,16 +1,31 @@
 define(function(require, exports, module) {
 	
 	var 
-		APIconnector = require('./api/APIconnector'),
-		Spine = require('spine'),
 		$ = require('jquery'),
+		Spine = require('spine'),
 
-		OICProviderEditor = require('controllers/editors/OICProviderEditor');
+		APIconnector = require('./api/APIconnector'),
+
+		OICProviderEditor = require('controllers/editors/OICProviderEditor'),
+		EntityLoader = require('controllers/editors/EntityLoader'),
+
+		ResultController = require('controllers/ResultController'),
+		PublishController = require('controllers/PublishController'),
+
+		OICProvider = require('models/OICProvider'),
+		TestFlowResult = require('models/TestFlowResult'),
+		TestItemResult = require('models/TestItemResult'),
+
+		UserInteraction = require('controllers/UserInteraction'),
+
+		prettydate = require('lib/prettydate/pretty'),
+		syntaxHighlight = require('lib/syntaxhighlight');
+
+	window.syntaxHighlight = syntaxHighlight;
 
 	console.log(Spine);
 
-	require('lib/spine/local');
-	require('lib/spine/relation');
+
 	require('bootstrap');
 
 	var FedLabConnect = Spine.Controller.sub({

@@ -2,7 +2,7 @@ define(function(require, exports, module) {
 
 	var 
 		Class = require('../lib/resig'),
-		APIconnector = require('../app/controllers/APIconnector')
+		APIconnector = require('../api/APIconnector')
 		;
 
 	var ResultDisplayController = Class.extend({

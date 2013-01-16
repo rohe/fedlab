@@ -2,8 +2,12 @@ define(function(require, exports, module) {
 		
 
 	var
-		Spine = require(),
-		OICProviderEditor = require('controllers/editors/OICProviderEditor');
+		Spine = require('spine'),
+
+		EntityEditor = require('controllers/editors/EntityEditor'),
+		OICProviderEditor = require('controllers/editors/OICProviderEditor'),
+
+		OICProvider = require('models/OICProvider');
 
 	var OICProviderEditor = EntityEditor.sub({
 		events: {

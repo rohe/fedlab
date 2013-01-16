@@ -1,5 +1,8 @@
-(function ($, exports) {
-
+define(function(require, exports, module) {
+	
+	var 
+		Spine = require('spine');
+		
 	var UserInteraction = Spine.Controller.sub({
 		tag: "div",
 		events: {
@@ -52,6 +55,8 @@
 
 			$(this.el).append('<div class="uisect userinteractioninstructions" style="">Perform the needed action, and we\'ll learn what user interaction is needed to continue. ' +
 				'<input type="submit" class="btn btn-mini btn-inverse iacancel" name="iacancel" value="Cancel user interaction" /></div>');
+
+			
 
 
 			$("<iframe></iframe>")
@@ -109,8 +114,6 @@
 		}
 
 	});
-	exports.UserInteraction.include(Spine.Events);
-	
-	
-	
-})(jQuery, window);
+	UserInteraction.include(Spine.Events);
+	return UserInteraction;
+});

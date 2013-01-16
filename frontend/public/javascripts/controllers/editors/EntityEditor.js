@@ -1,8 +1,10 @@
 define(function(require, exports, module) {
 
 	var
-		Spine = require(),
-		OICProviderEditor = require('controllers/editors/OICProviderEditor');
+		Spine = require('spine'),
+		OICProviderEditor = require('controllers/editors/OICProviderEditor'),
+
+		syntaxHighlight = require('lib/syntaxhighlight');
 
 	var EntityEditor = Spine.Controller.sub({
 		init: function() {
@@ -15,6 +17,8 @@ define(function(require, exports, module) {
 		render: function() {
 			console.log("Render() with template ID " + this.templateID);
 			console.log(this.item);
+			// Hack to make synaxhightlight work with jquery templates..
+
 			var template = $("#" + this.templateID).tmpl( this.item );
 			$(this.el).html( template );
 		},
