@@ -6,17 +6,14 @@ define(function(require, exports, module) {
 
 		APIconnector = require('./api/APIconnector'),
 
-		OICProviderEditor = require('controllers/editors/OICProviderEditor'),
-		EntityLoader = require('controllers/editors/EntityLoader'),
-
 		ResultController = require('controllers/ResultController'),
 		PublishController = require('controllers/PublishController'),
 
-		OICProvider = require('models/OICProvider'),
+		// OICProvider = require('models/OICProvider'),
 		TestFlowResult = require('models/TestFlowResult'),
 		TestItemResult = require('models/TestItemResult'),
 
-		UserInteraction = require('controllers/UserInteraction'),
+		// UserInteraction = require('controllers/UserInteraction'),
 
 		prettydate = require('lib/prettydate/pretty'),
 		syntaxHighlight = require('lib/syntaxhighlight');
@@ -25,48 +22,19 @@ define(function(require, exports, module) {
 
 	require('bootstrap');
 
-	var FedLabConnect = Spine.Controller.sub({
+
+	var FedLabSAML = Spine.Controller.sub({
 		entityloader: null,
 		events: {
 			"click #verifynow": "startVerify",
-			"click #runall": "runAllFlows",
-			"click #configure": "configure"
+			"click input#runall": "runAllFlows",
+			"click input#configure": "configure"
 		},
 		init: function(args){
-			
 			var c, newentity;
 
 			this.definitions = null;
-			this.modelType = this.type.modelType; // was OAuthEntity
 			this.results = {};
-
-			
-			// console.log(typeof this.type);
-			if (!this.type || !(typeof this.type === 'function')) {
-				throw ("type parameter of FedLab() MUST be a descendant of the TestEntity model.");
-				// TODO: dont know exactly how to check the descendant thing yet. instanceof is not working.
-			}
-			
-			this.modelType.bind("edit", this.proxy(this.selectEntity));
-			
-			this.entityloader = new EntityLoader({
-				el: this.el.find("fieldset.storeconfiguration"),
-				modelType: this.modelType
-			});
-
-			this.modelType.fetch();
-
-			c = this.modelType.count();
-			if (c === 0) {
-				newentity = new this.modelType();
-				newentity.save();
-				newentity.edit();
-			} else if (c === 1) {
-				this.modelType.first().edit();
-			} else {
-				// More than one stored confiuration found, wait for user to select an configuratiom to edit..
-				// (or create a new one)
-			}
 			
 			this.stateChange("modeEdit");
 			
@@ -80,17 +48,46 @@ define(function(require, exports, module) {
 
 			this.publisher = new PublishController({el: $("div#publishbar")}, this);
 
-		},
-		
-		startVerify: function() {
 
+
+			$('ul#samlnav a').click(function (e) {
+				e.preventDefault();
+				console.log("Clicked tab", this);
+				$(this).tab('show');
+			});
+			$("button#firstcontinue").click(function(e) {
+				$('ul#samlnav a:last').tab('show');
+				e.preventDefault();
+			});
+
+
+			console.log("Fedlab SAML initiated...");
+			console.log(this.el);
+
+		},
+		startVerify: function(e) {
+			console.log("startVerify");
 			$("#verifynow").attr("disabled", "disabled");
 
-			this.resultcontroller.startFlow("verify", "openidconnectverifytestflow");
-			
-			this.connector = new APIconnector("connect", this.editor.item.metadata);
-			this.publisher.connector = this.connector;
+			if (e) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
 
+			// Get metadata from form and store to localstorage
+			this.metadata = {
+				metadata: $("form#configurationForm textarea#metadatafield").val(),
+				initsso: $("form#configurationForm input#fedlab_initsso").val(),
+				attributeurl: $("form#configurationForm input#fedlab_attributeurl").val(),
+				initslo: $("form#configurationForm input#fedlab_initslo").val()
+			};
+			localStorage.setItem('samlspMetadata', JSON.stringify(this.metadata));
+
+			console.log("Start verify...");
+
+			this.resultcontroller.startFlow("verify", "samlverifyflow");
+			
+			this.connector = new APIconnector("saml", this.metadata);
 			this.connector.verify($.proxy(this.verifyResponse, this), function(error) {
 				console.error("Error verifying: ", error);
 				$("#verifynow").removeAttr("disabled");
@@ -103,12 +100,12 @@ define(function(require, exports, module) {
 			console.log(result);
 			$("#verifynow").removeAttr("disabled");
 
-
 			testflowresult = TestFlowResult.build(result);
 			// var changes = that.editor.item.updateResults(testflow, testflowresult);
 			// testflowresult.changes = changes;
 			// that.editor.item.save();
-			this.resultcontroller.updateFlowResults("verify", "openidconnectverifytestflow", testflowresult);
+			this.resultcontroller.updateFlowResults("verify", "samlverifyflow", testflowresult);
+			$("#verifyError").empty();
 
 			if (result.verifyOK()) {
 				this.stateChange("modeTest");
@@ -119,25 +116,23 @@ define(function(require, exports, module) {
 				return;
 
 			} else if (result.status == 5) {
+				alert('NOT SUPPORTED User interactions yet.');
+				// NOT SUPPORTED User interactions yet.
+				// 
+				// var ia = new UserInteraction(result.url, result.htmlbody, result.title);
+				// ia.bind("userinteraction", this.proxy(this.userinteraction));
+				// $("body").append(ia.el);
+			} else {
+				console.log("Result object", result.debug);
+				$("#verifyError").append(result.debug);
 
-				var ia = new UserInteraction(result.url, result.htmlbody, result.title);
-				ia.bind("userinteraction", this.proxy(this.userinteraction));
-				$("body").append(ia.el);
 			}
 		},
 
-		userinteraction: function(msg) {
-			console.log("User interaction. Current editor item:");
-			console.log(this.editor.item);
-			this.editor.item.addUserinteraction(msg);
-			this.editor.item.save();
-			this.editor.item.edit();
 
-			this.startVerify();
-		},
 
 		definitionsResponse: function(def) {
-
+			console.log("defintionss", def);
 			this.definitions = def;
 
 			$("div#results").empty();
@@ -149,19 +144,15 @@ define(function(require, exports, module) {
 				$("div#results").append($("#testFlow").tmpl(item));							
 			});
 			
-			$(this.el).find("#testcontroller_name").html(this.editor.item.title);
-			
-			// console.log("Got definitions");
-			// console.log(that.definitions);
-			// that.runAllFlows();
-			// $("div#results pre").text(response);
+			$(this.el).find("#testcontroller_name").html('SAML Provider');
 
 		},
 
 
 
 		updateCounter: function() {
-			var res = this.editor.item.countResults();
+			// var res = this.editor.item.countResults();
+			res = 0;
 			var el = $(this.el).find("div#resultcounter").empty();
 
 			console.log("Update counter: ");
@@ -181,8 +172,6 @@ define(function(require, exports, module) {
 			}
 
 		},
-
-		
 		stateChange: function(newState) {
 			
 			var validClasses = ["modeEdit", "modeTest"];
@@ -278,10 +267,13 @@ define(function(require, exports, module) {
 					changes;
 					
 				testflowresult = TestFlowResult.build(result);
-				changes = that.editor.item.updateResults(testflow, testflowresult);
-				testflowresult.changes = changes;
+				console.log("Editor", that.editor);
+				// changes = that.editor.item.updateResults(testflow, testflowresult);
+				// testflowresult.changes = changes;
 
-				that.editor.item.save();
+				// that.editor.item.save();
+				// 
+				console.log("Updating resultcontroller", that.resultcontroller, testflow, sid, testflowresult);
 				that.resultcontroller.updateFlowResults(testflow, sid, testflowresult);
 				that.updateCounter();
 
@@ -313,7 +305,6 @@ define(function(require, exports, module) {
 		},
 		selectEntity: function(entity) {
 			
-			$(this.el).addClass("editorOpen");
 
 			// Save and clean up currently open 
 			if (this.editor && !this.editor.item.destroyed) {
@@ -351,29 +342,36 @@ define(function(require, exports, module) {
 
 
 
-	$(document).ready(function() {
 
-		console.log("Running...");
 
-		return new FedLabConnect({
-			el: $("body"),
-			type: OICProviderEditor,
-			modelType: OICProvider
-			//type: OAuthEditor
-		});
+
+
+
+
+    $(document).ready(function(){
 
 		setInterval(function() {
 			$("span.lastRunDate").prettyDate();
 		}, 30000);
 
-		if ($.browser.msie) {
-			$("div#main").prepend('<div class="alert alert-error">It seems like you are using Internet Explorer. Can we kindly ask you to use another browser? Federation Lab is work in progress, and it is currently only well tested with Chrome, it may work with other browsers as well - but it do not work with IE.</div>');
+		try {
+			var metadata = localStorage.getItem('samlspMetadata');
+			if (metadata) {
+				metadata = JSON.parse(metadata);
+				console.log('Loaded metadata from localstorage', metadata);
+				$("form#configurationForm textarea#metadatafield").val(metadata.metadata);
+				$("form#configurationForm input#fedlab_initsso").val(metadata.initsso);
+				$("form#configurationForm input#fedlab_attributeurl").val(metadata.attributeurl);
+				$("form#configurationForm input#fedlab_initslo").val(metadata.initslo);
+			}
+		} catch(e) {
+			console.info("An attempt was made to fetch old metadata from localStorage, but parsing the stored JSON failed.");
 		}
 
-	});
+		return new FedLabSAML({
+			el: $("body")
+		});
 
+    });
 
-	return FedLabConnect;
-	
-	
 });

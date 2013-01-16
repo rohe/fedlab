@@ -13,15 +13,17 @@
 
 
 
-	<style>
-		body {
-			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-		}
-	</style>
+		<style>
+			body {
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+		</style>
 
 		<!-- Local stylesheets -->
 		<link rel="stylesheet" href="/stylesheets/layout-saml.css" />
 		<link rel="stylesheet" href="/stylesheets/testresults.css" />
+
+		<script type="text/javascript" data-main="main-saml-solberg" src="/javascripts/require.js"></script>
 
 <!--
 		<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
@@ -52,56 +54,7 @@
 		-->
 
 
-		<script type="text/javascript">
-		    $(document).ready(function(){
-				var options = {
-					showValidation: false,
-					showValidationLevel: {
-						info: false,
-						ok: false,
-						warning: true,
-						error: true
-					}
-				};
-				$("textarea#metadatafield").SAMLmetaJS(options);
-
-				setInterval(function() {
-					$("span.lastRunDate").prettyDate();
-				}, 30000);
-
-				try {
-					var metadata = localStorage.getItem('samlspMetadata');
-					if (metadata) {
-						metadata = JSON.parse(metadata);
-						console.log('Loaded metadata from localstorage', metadata);
-						$("form#configurationForm textarea#metadatafield").val(metadata.metadata);
-						$("form#configurationForm input#fedlab_initsso").val(metadata.initsso);
-						$("form#configurationForm input#fedlab_attributeurl").val(metadata.attributeurl);
-						$("form#configurationForm input#fedlab_initslo").val(metadata.initslo);
-					}
-				} catch(e) {
-					console.info("An attempt was made to fetch old metadata from localStorage, but parsing the stored JSON failed.");
-				}
-
-
-
-		    });
-
 	
-			jQuery(function($) {
-				return new FedLabSAML({
-					el: $("body")
-				});
-			});
-
-
-		
-		
-		
-		</script>
-
-
-
 	<!-- JQuery templates -->
 	
 	<script type="text/x-jquery-tmpl" id="testFlow">

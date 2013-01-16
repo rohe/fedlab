@@ -9,3 +9,9 @@ body.modeEdit div#testcontrollerbar {
 	display: none;
 }
 
+
+
+textarea.metadata {
+	width: 100%;
+	height: 300px;
+}
