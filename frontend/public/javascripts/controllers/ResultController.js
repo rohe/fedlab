@@ -17,7 +17,6 @@ define(function(require, exports, module) {
 		},
 		init: function() {
 			this.routingEnabled = true;
-
 		},
 
 		getFlow: function(e) {

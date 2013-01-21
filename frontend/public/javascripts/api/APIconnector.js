@@ -5,6 +5,9 @@
 define(function(require, exports, module) {
 
 
+	var 
+		FlowDefinition = require('../models/FlowDefinition');
+
 	var APIconnector = function(type, metadata) {
 		this.type = type;
 		this.metadata = metadata;
@@ -75,8 +78,11 @@ define(function(require, exports, module) {
 			data: JSON.stringify(this.metadata),
 			success: function(response) {
 				console.log("==> getDefinitions() - API Response");
-
-				callback(response);
+				var tfd = [];
+				for(var i = 0; i < response.length; i++) {
+					tfd.push(new FlowDefinition(response[i]));
+				}
+				callback(tfd);
 			},
 			error: function(error) {
 				console.log("Error: " + error);
