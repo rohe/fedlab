@@ -88,8 +88,8 @@ app.get('/saml-sp-solberg', function(req, res){
 		title: 'SAML 2.0 Service Provider Testing'
 	});
 });
-app.get('/saml-sp-hedberg', function(req, res){
-	res.render('saml-sp-hedberg', {
+app.get('/saml-idp-hedberg', function(req, res){
+	res.render('saml-idp-hedberg', {
 		title: 'SAML 2.0 Service Provider Testing'
 	});
 });
