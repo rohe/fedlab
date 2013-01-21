@@ -103,7 +103,11 @@ app.get('/connect-provider', function(req, res){
 	});
 });
 
-
+app.get('/test', function(req, res){
+	res.render('test', {
+		title: 'test'
+	});
+});
 app.get('/results', function(req, res){
 	res.render('results', {
 		title: 'OpenID Connect Provider Test Results'
