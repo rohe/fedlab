@@ -130,6 +130,7 @@ config = JSON.parse(configdata);
 var connectors = {};
 connectors.connect = new tests.OICTestconnector(config);
 connectors.saml = new tests.SAMLTestconnector(config);
+connectors.samlidp = new tests.SAMLIdPTestconnector(config);
 
 var resconnector = new results.Results(config);
 
