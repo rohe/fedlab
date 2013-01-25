@@ -66,33 +66,5 @@ div#openidconnectverifytestflow div.testFlowControllerBar {
 	display: none;
 }
 
-div.testFlow.completed div.testFlowControllerBar {
-	display: block;
-}
-div.testFlowControllerBar {
-	display: none;
-	
-	float: right;
-	text-align: right;
-	
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-/*	font-weight: bold;*/
-	
-
-	margin: 2px 4px;
-	padding: 3px 1em 3px 24px;
-
-
-	background: #f7f7f7;
-	color: black;
-	border: 1px solid #ccc;
-	
-}
-div.testFlowControllerBar p { margin: 0px; padding: 0px; }
-
-
-
 
 

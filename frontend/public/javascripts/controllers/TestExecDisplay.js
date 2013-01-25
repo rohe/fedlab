@@ -2,11 +2,9 @@ define(function(require, exports, module) {
 
 	var
 		$ = require('jquery'),
-		hogan = require('lib/hogan'),
+		hogan = require('lib/hogan');
 
-		TestExecDashboard = require('./TestExecDashboard');
-
-	UWAP.utils.loadCSS("/stylesheets/textexecdisplay.css");
+	UWAP.utils.loadCSS("/stylesheets/testexecdisplay.css");
 
 	var tmpl = require('lib/text!/templates/testFlow.html');
 	var template = hogan.compile(tmpl);
@@ -22,22 +20,83 @@ define(function(require, exports, module) {
 
 		this.callbacks = {};
 
-
 		this.flowelements = {};
 
 		// this.defcontainer = $('<div class="results"></div>').appendTo(this.el);
 
-		$.each(this.definitions, function(sid, item) {
-			item.sid = sid;		
+		$.each(this.definitions, function(i, item) {
+			// item.sid = sid;		
+			// console.log("DEF:", item.getDependencies());
 			var fel = $(template.render(item)).appendTo(that.el)
+			that.flowelements[item.sid] = fel;
 		});
+		console.log("Flowelements", this.flowelements);
 
+		$(this.el).on('click', 'input.testFlowRun', this.proxy('run'));
+		$(this.el).on('click', 'input.testFlowSShow', this.proxy('sshow'));
+		$(this.el).on('click', 'input.testFlowSHide', this.proxy('shide'));
+		$(this.el).on('click', 'input.testFlowDCShow', this.proxy('dcshow'));
+		$(this.el).on('click', 'input.testFlowDCHide', this.proxy('dchide'));
+		$(this.el).on('click', 'input.testFlowOthersShow', this.proxy('othersshow'));
+		$(this.el).on('click', 'input.testFlowOthersHide', this.proxy('othershide'));
+		$(this.el).on('click', 'div.testItem', this.proxy('messageToggle'));
+	};
+
+	/*
+	 * Helper functions to get parent elements...
+	 */
+	TestExecDisplay.prototype.getFlow = function(e) {
+		var el = $(e.target).closest("div.testFlow");
+		return el;
+	};
+	TestExecDisplay.prototype.getTestItem = function(e) {
+		var el = $(e.target).closest("div.testItem");
+		return el;
+	};
+
+	/* 
+	 * Set of functions event handlers for the test flow action buttons.
+	 */
+	TestExecDisplay.prototype.messageToggle = function(e) {
+		var ti = this.getTestItem(e);
+		ti.toggleClass("showDebugMessage");
+	};
+	TestExecDisplay.prototype.run = function(e) {
+		// console.log("Run()");
+		var sid = this.getFlow(e).attr("id");
+		this.cleanup(sid);
+		this.trigger("run", sid);
+	};
+	TestExecDisplay.prototype.othersshow = function(e) {
+		this.getFlow(e).removeClass("showOnly");	
+		$(this.el).removeClass("hideOthers");	
+	};
+	TestExecDisplay.prototype.othershide = function(e) {
+		this.getFlow(e).addClass("showOnly");
+		$(this.el).addClass("hideOthers");	
+	};
+	TestExecDisplay.prototype.sshow = function(e) {
+		this.getFlow(e).addClass("successShow");
+	};
+	TestExecDisplay.prototype.shide = function(e) {
+		this.getFlow(e).removeClass("successShow");
+	};
+	TestExecDisplay.prototype.dcshow = function(e) {
+		this.getFlow(e).addClass("debugShow");
+	};
+	TestExecDisplay.prototype.dchide = function(e) {
+		this.getFlow(e).removeClass("debugShow");
 	};
 
 
-	TestExecDisplay.prototype.setFlowClean = function(sid) {
-		if (!this.flowelements[sid]) throw new Error('Not valid [sid]');
-		var l = this.flowelements[sid];
+
+	/**
+	 * Clean an presentation of a testflow, to be able to do a new testrun.
+	 * @param {[type]} sid [description]
+	 */
+	TestExecDisplay.prototype.setFlowClean = function(testflow) {
+		if (!this.flowelements[testflow.sid]) throw new Error('Not valid [sid]');
+		var l = this.flowelements[testflow.sid];
 		l.
 			removeClass("completed").
 			removeClass("success").
@@ -50,42 +109,72 @@ define(function(require, exports, module) {
 
 	}
 
-	TestExecDisplay.prototype.setFlowRunning = function(sid) {
-		this.setFlowClean(sid);
-		var l = this.flowelements[sid];
+	/**
+	 * Testflow is running
+	 * @param {[type]} sid [description]
+	 */
+	TestExecDisplay.prototype.setFlowRunning = function(testflow) {
+		this.setFlowClean(testflow);
+		var l = this.flowelements[testflow.sid];
 		l.addClass("running");
+
+		l.detach().prependTo(this.el);
 	}
 
-	TestExecDisplay.prototype.setFlowResult = function(sid, result) {
-		this.setFlowClean(sid);
-		var l = this.flowelements[sid];
+	/**
+	 * Testrun completed for the testflow.
+	 * @param {[type]} sid    [description]
+	 * @param {[type]} result [description]
+	 */
+	TestExecDisplay.prototype.setFlowResult = function(result) {
+		this.setFlowClean(result);
+		var l = this.flowelements[result.sid];
 		
 		l.removeClass('running')
 			.addClass('completed')
 			.addClass(result.getStatusTag());
 		l.find("div.lastRunInfo").html(result.getRunInfo());
 
-		var testflowresel = testflowel.find("div.testFlowResults");
-			
-		if (testresults.tests) {
-			$.each(testresults.tests, function(i, test) {
-				templateI.render(test).appendTo(testflowresel);
+		// l.detach().prependTo(l.parent());
+
+		var testflowresel = l.find("div.testFlowResults");
+		if (result.tests) {
+			$.each(result.tests, function(i, test) {
+				$(templateI.render(test)).appendTo(testflowresel);
 			});
 		} else {
 			
 		}
 
-		testflowel.append("<pre style=\"clear: both\" class=\"clearfix debugConsole\">" + this.escapeHTML(testresults.debug) + "</div>");
+		this.updateDependencies(result);
 
+
+		l.append("<pre style=\"clear: both\" class=\"clearfix debugConsole\">" + TestExecDisplay.escapeHTML(result.debug) + "</div>");
+	}
+
+
+	TestExecDisplay.prototype.updateDependencies = function(result) {
+
+		console.log("updateDependencies() on ", result);
+		var dependsOnClass = '.dependsOn-' + result.sid;
+		console.log("dependson : ", dependsOnClass);
+
+		var actUpon = $(this.el).find(dependsOnClass);
+
+		if (result.ok()) {
+			actUpon.addClass("label-success");
+		} else {
+			actUpon.addClass("label-important");
+			actUpon.find('i.iconCheck').addClass('icon-ok-sign');
+		}
 	}
 
 
 
 
 
-
-	TestExecDisplay.prototype.proxy = function(c) {
-		return $.proxy(c, this)
+	TestExecDisplay.prototype.proxy = function(f) {
+		return $.proxy(this[f], this)
 	}
 
 	TestExecDisplay.prototype.on = function(type, callback) {
@@ -105,6 +194,14 @@ define(function(require, exports, module) {
 	TestExecDisplay.prototype.appendTo = function(el) {
 		$(this.el).appendTo(el);
 	} 
+
+
+
+	TestExecDisplay.escapeHTML = function(str) {
+		if (!str) return '';
+		return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+	};
+
 
 	return TestExecDisplay;
 });
