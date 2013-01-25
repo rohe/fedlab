@@ -48,6 +48,7 @@ define(function(require, exports, module) {
 		this.results = {};
 		$(this.el).removeClass("alltestsdone");
 		// this.controllerbarEnable(false);
+		this.dashboard.enable(false);
 		this.runAllRemaining();
 	}
 
@@ -58,7 +59,7 @@ define(function(require, exports, module) {
 		
 		// console.log("runAllRemaining(" + ")");
 
-		// if (Math.random()>0.4)
+		if (Math.random()>0.4)
 		for (var i = 0; i < this.definitions.length; i++) {
 
 			// Do not start on a test flow that has already started..
@@ -77,7 +78,9 @@ define(function(require, exports, module) {
 		// Completed with running all flows.
 		// this.controllerbarEnable(true);
 		// this.publisher.enable();
+		
 		$(this.el).addClass("alltestsdone");
+		this.dashboard.enable(false);
 
 
 	};

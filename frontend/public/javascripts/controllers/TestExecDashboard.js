@@ -20,7 +20,17 @@ define(function(require, exports, module) {
 		$(this.el).on('click', '#runall', this.proxy(function() {
 			this.emit('runAll');
 		}));
-	};
+	}
+
+	TestExecDashboard.prototype.enable = function(enable) {
+		if (enable) {
+			// console.log("Enaling controller");
+			$(this.el).find("input").removeAttr('disabled');				
+		} else {
+			// console.log("Disabling controller");
+			$(this.el).find("input").attr('disabled', true);
+		}
+	}
 
 	TestExecDashboard.prototype.proxy = function(c) {
 		return $.proxy(c, this)
