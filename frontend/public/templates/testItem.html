@@ -1,0 +1,15 @@
+<div class="test testItem {{hasMessageClass}} {{getStatusTag}}">
+	
+	{{#name}}
+		<h4>{{name}}</h4>
+	{{/name}}
+	{{^name}}
+		<h4><tt>{{id}}</tt></h4>
+	{{/name}}
+
+	
+	{{#message}}
+		<pre style="clear: both" 
+			class="testItemMessage debugMessage">{{{getMessageSyntaxHighlighted}}}</pre>
+	{{/message}}
+</div>

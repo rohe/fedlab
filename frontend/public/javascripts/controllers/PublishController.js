@@ -1,65 +1,82 @@
 define(function(require, exports, module) {
 
 	var
-		Spine = require('spine');
+		$ = require('jquery'),
+		hogan = require('lib/hogan');
 
-	require('lib/jquery.tmpl.min');
+	// UWAP.utils.loadCSS("/stylesheets/textexecdisplay.css");
 
-	var PublishController = Spine.Controller.sub({
-		events: {
-			"click input#dopublish": "publish"
-		},
-		init: function(args, fedlab) {
-			this.fedlab = fedlab;
+	var tmpl = require('lib/text!/templates/publish.html');
+	var template = hogan.compile(tmpl);
 
-		},
-		enable: function() {
-			$(this.el).show()
-			$(this.el).find("input#dopublish").removeAttr("disabled");
-		},
-		disable: function() {
-			$(this.el).find("input#dopublish").attr("disabled", "disabled");
-		},
-		publish: function() {
-			var 
-				post = {}, 
-				pincode,
-				that = this,
-				data;
+	var PublishController = function(api, el) {
+		this.api = api;
+		this.el = el || $("<div></div>");
+		this.el.attr('id', 'PublishController');
 
-			if (!this.fedlab.results) return;
+		this.results = {};
+
+		$(this.el).append(template.render({type: this.api.type}));
+
+		this.el.hide();
+
+		this.el.on("click", "input#dopublish", this.proxy('publish'));
+
+	};
+
+	PublishController.prototype.enableWithResults = function(res) {
+		this.results = res;
+		$(this.el).show()
+		$(this.el).find("input#dopublish").removeAttr("disabled");
+	};
+
+	PublishController.prototype.disable = function() {
+		$(this.el).find("input#dopublish").attr("disabled", "disabled");
+	};
+
+	PublishController.prototype.publish = function() {
+		var 
+			post = {}, 
+			pincode,
+			that = this,
+			data;
+
+		if (!this.results) return;
+
+		pincode = $(this.el).find("input.pincode").attr("value");
+		data = {
+			lastRun: Math.round(new Date().getTime()),
+			results: {}
+		};
+		for(var key in this.results) {
+			data.results[key] = this.results[key].status;
+		}
+
+		console.log("publish results");
+		console.log(this.results);
+		console.log(pincode, data);
 
 
-			pincode = $(this.el).find("input.pincode").attr("value");
-			data = {
-				lastRun: Math.round(new Date().getTime()),
-				results: {}
-			};
-			for(var key in this.fedlab.results) {
-				data.results[key] = this.fedlab.results[key].status;
+		this.api.publishResults(pincode, data, function(res) {
+
+			if (res instanceof Error) {
+				alert('Error occured  ' + res);
+				return;
 			}
 
-			console.log("publish results");
-			console.log(this.fedlab);
-			console.log(pincode, data);
-			// return;
+			console.log("Success posting results");
+			that.disable();
+			alert("Successfully published testresults");
+		});
+	};
 
-			this.connector.publishResults(pincode, data, function(res) {
+	PublishController.prototype.proxy = function(c) {
+		return $.proxy(this[c], this)
+	}
 
-				if (res instanceof Error) {
-					alert('Error occured  ' + res);
-					return;
-				}
-
-				console.log("Success posting results");
-				that.disable();
-				alert("Successfully published testresults");
-			});
-
-
-			
-		}
-	});
+	PublishController.prototype.appendTo = function(el) {
+		$(this.el).appendTo(el);
+	} 
 
 	return PublishController;
 

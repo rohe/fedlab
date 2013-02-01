@@ -82,24 +82,17 @@ app.get('/samldebug', function(req, res){
 });
 
 
-
-app.get('/saml-sp-solberg', function(req, res){
-	res.render('saml-sp-solberg', {
-		title: 'SAML 2.0 Service Provider Testing'
-	});
-});
-app.get('/saml-sp-hedberg', function(req, res){
-	res.render('saml-sp-hedberg', {
-		title: 'SAML 2.0 Service Provider Testing'
-	});
-});
+// app.get('/connect-provider', function(req, res){
+// 	res.render('connect-provider', {
+// 		title: 'OpenID Connect Provider Testing'
+// 	});
+// });
 
 
 
-
-app.get('/connect-provider', function(req, res){
-	res.render('connect-provider', {
-		title: 'OpenID Connect Provider Testing'
+app.get('/test', function(req, res){
+	res.render('test', {
+		title: 'test'
 	});
 });
 
@@ -129,7 +122,8 @@ config = JSON.parse(configdata);
 
 var connectors = {};
 connectors.connect = new tests.OICTestconnector(config);
-connectors.saml = new tests.SAMLTestconnector(config);
+connectors['saml-sp-solberg'] = new tests.SAMLTestconnector(config);
+connectors['saml-idp-hedberg'] = new tests.SAMLIdPTestconnector(config);
 
 var resconnector = new results.Results(config);
 
@@ -156,6 +150,8 @@ app.all('/api2/:type/verify', function(req, res, next) {
 		if (!connectors[req.params.type]) throw 'Invalid connector';
 		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
 		metadata = req.body;
+
+		console.log(connectors[req.params.type]);
 
 		connectors[req.params.type].verify(metadata, function(data) {
 			req.response = data;	
@@ -255,9 +251,12 @@ app.post('/api2/:type/results/:pin', function(req, res, next) {
 	}
 
 	resconnector.publish(type, pin, r, function(result) {
+		console.log("RESULT callback from pubslih", result);
 		if (result instanceof Error) {
+
 			console.log(result);
-			req.error = result;
+			req.error = result.message;
+			next();
 			return;
 		}
 		req.response = result;

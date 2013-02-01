@@ -1,0 +1,43 @@
+<div class="test testFlow" id="{{sid}}">
+
+	<div class="testFlowControllerBar">
+		<div class="lastRunInfo"></div>
+
+		<input type="submit" class="btn btn-small btn-primary testFlowRun" name="testFlowRun" value="Run" />
+		<!-- <div style="display: inline; padding: 0px 5px" class="btn-group"> -->
+			<input type="submit" class="btn btn-small testFlowSShow" name="testFlowSShow" value="Show succeeded" />
+			<input type="submit" class="btn btn-small testFlowSHide" name="testFlowSHide" value="Hide succeeded" />
+			<input type="submit" class="btn btn-small testFlowDCShow" name="testFlowDCShow" value="Show debug" />
+			<input type="submit" class="btn btn-small testFlowDCHide" name="testFlowDCHide" value="Hide debug" />
+		<!-- </div> -->
+		<input type="submit" class="btn btn-small testFlowOthersShow" name="testFlowOthersShow" value="Show others" />
+		<input type="submit" class="btn btn-small testFlowOthersHide" name="testFlowOthersHide" value="Hide others" />
+
+	</div>
+
+	{{#name}}
+		<h3>{{name}}</h3>
+	{{/name}}
+
+	{{#id}}
+		<div style=""><span class="label labelFlow label-info">{{id}}</span></div>
+	{{/id}}
+	
+	{{#descr}}
+		{{{getDescr}}}
+	{{/descr}}
+
+
+
+	{{#hasDependencies}}
+		<div class="dependencies">Dependencies to other test flows:
+			<!-- <div> -->
+			{{#getDependencies}}
+				<span class="label labelFlow dependsOn-{{sid}}"><i class="iconCheck"></i> {{id}}</span>
+			{{/getDependencies}}
+			<!-- </div> -->
+		</div>
+	{{/hasDependencies}}
+
+	<div class="testFlowResults"></div>	
+</div>
