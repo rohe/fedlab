@@ -44,7 +44,11 @@ define(function(require, exports, module) {
 					// "auth_type": "client_secret_basic",
 					// "client_type": "confidential",
 					// "client_id": FedLabUtils.guid().toLowerCase(),
-					"redirect_uris": ["https://%s/authz_cb"]
+					"redirect_uris": ["https://%s/authz_cb"],
+					"client_id": "",
+					"auth_type": "client_secret_basic",
+					"client_type": "confidential",
+					"key_export_url": "http://%s:8090/"
 				};
 			}
 			this.metadata.client.redirect_uris = ["https://%s/authz_cb"];

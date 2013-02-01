@@ -6,6 +6,7 @@ define(function(require, exports, module) {
 		TestFlowResult = require('../models/TestFlowResult'),
 
 		TestExec = require('./TestExec'),
+		UserInteraction = require('./UserInteraction'),
 
 		Error = require('Error');
 
@@ -26,12 +27,21 @@ define(function(require, exports, module) {
 		var that = this;
 		this.api.verify(function(result) {
 
-			if (result.verifyOK()) {
+			if (result.ok()) {
 				that.prepare(callback);
 
 			} else if (result.status === 5) {
-				callback(new Error('Needs interaction! ;)')); 
+				
+
+				var ia = new UserInteraction(result.url, result.htmlbody, result.title);
+				// ia.bind("userinteraction", this.proxy(this.userinteraction));
+				// $("body").append(ia.el);
+
+				callback(ia);
+
+
 			} else {
+				console.log("Error:", result, result.getStatusTag());
 				callback(new Error('Error code: ' + result.status));
 			}
 
@@ -43,8 +53,7 @@ define(function(require, exports, module) {
 	}
 
 	/**
-	 * Called when metadata is verified, retrieve definitions etc.
-	 * Then call render()
+	 * Called when to verify metadata...
 	 * @return {[type]} [description]
 	 */
 	TestExecPrepare.prototype.prepare = function(callback) {

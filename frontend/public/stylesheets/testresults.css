@@ -18,30 +18,28 @@ div#TestExecDashboard {
 	
 }
 
-.alltestsdone div#publishbar{
+.alltestsdone div#PublishController{
 	display: block;
 }
-div#publishbar {
+div#PublishController {
 	display: none;
 }
 
-div#publishbar p, div#publishbar input { margin: 0px; }
-div#publishbar label { 
+div#PublishController p, div#PublishController input { margin: 0px; }
+div#PublishController label { 
 	font-weight: bold;
 	}
-div#publishbar input.pincode { 
+div#PublishController input.pincode { 
 	font-size: 130%; width: 4em;
 }
-div#publishbar {
+div#PublishController {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 /*	font-weight: bold;*/
-	
 
 	margin: 2px 4px;
 	padding: 0px 1em 20px 24px;
-
 
 	background: #ecfc71;
 	color: black;

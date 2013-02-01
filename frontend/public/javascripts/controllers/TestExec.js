@@ -5,6 +5,9 @@ define(function(require, exports, module) {
 
 		TestFlowResult = require('../models/TestFlowResult'),
 
+		Emitter = require('Emitter'),
+
+		PublishController = require('./PublishController'),
 		TestExecDisplay = require('./TestExecDisplay'),
 		TestExecDashboard = require('./TestExecDashboard');
 
@@ -17,19 +20,27 @@ define(function(require, exports, module) {
 		this.api = api;
 		this.definitions = definitions;
 
-
-
 		this.dashboard = new TestExecDashboard();
 		this.dashboard.appendTo(this.el);
  
 		this.dashboard
 			.on('runAll', this.proxy('runAll'))
+			.on('configure', this.proxy('destroy'))
 			;
+
+		this.publisher = new PublishController(this.api);
+		this.publisher.appendTo(this.el);
 
 		this.ted = new TestExecDisplay(this.definitions);
 		this.ted.appendTo(this.el);
-
 	};
+
+	TestExec.prototype.destroy = function() {
+		this.el.off();
+		this.el.remove();
+		this.emit('destroyed');
+	}
+
 
 	TestExec.prototype.appendTo = function(el) {
 		$(this.el).appendTo(el);
@@ -42,14 +53,25 @@ define(function(require, exports, module) {
 	}
 
 
-	TestExec.prototype.runAll = function() {
-		console.log("runAll()");
-		// this.cleanup();
+	TestExec.prototype.cleanup = function() {
 		this.results = {};
+		for (var i = 0; i < this.definitions.length; i++) {
+			this.definitions[i].started = false;
+		}
+		this.ted.cleanup();
 		$(this.el).removeClass("alltestsdone");
-		// this.controllerbarEnable(false);
+	}
+
+	TestExec.prototype.runAll = function() {
+		window.z = 0;
+		console.log("runAll()");
+		
+		this.cleanup();
+		
 		this.dashboard.enable(false);
+		this.publisher.disable();
 		this.runAllRemaining();
+
 	}
 
 
@@ -57,9 +79,11 @@ define(function(require, exports, module) {
 		var that = this;
 		var key;
 		
-		// console.log("runAllRemaining(" + ")");
+		console.log("runAllRemaining(" + ")");
 
-		if (Math.random()>0.4)
+
+
+		if (window.z++ < 3)
 		for (var i = 0; i < this.definitions.length; i++) {
 
 			// Do not start on a test flow that has already started..
@@ -76,14 +100,17 @@ define(function(require, exports, module) {
 		}
 		
 		// Completed with running all flows.
-		// this.controllerbarEnable(true);
-		// this.publisher.enable();
-		
-		$(this.el).addClass("alltestsdone");
-		this.dashboard.enable(false);
-
+		this.allDone();
 
 	};
+
+	TestExec.prototype.allDone = function() {
+		console.log("All tests done...")
+		$(this.el).addClass("alltestsdone");
+		this.dashboard.enable(true);
+		this.publisher.enableWithResults(this.results);
+
+	}
 
 	TestExec.prototype.isDependenciesMet = function(testflow) {
 		// console.log("Checking if dependencies is met for testflow " + testflow.id)
@@ -101,6 +128,7 @@ define(function(require, exports, module) {
 			that = this;
 
 		console.log("runTestFlow(" + testflow.id + ", ", callback, ")");
+
 
 		// if (!this.definitions[sid]) throw {message: "Could not find flow"};
 		// var testflow = this.definitions[sid].id;
@@ -131,7 +159,7 @@ define(function(require, exports, module) {
 
 
 	};
-
+	$.extend(TestExec.prototype, Emitter);
 
 
 	return TestExec;

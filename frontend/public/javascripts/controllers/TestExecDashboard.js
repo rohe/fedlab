@@ -2,7 +2,9 @@ define(function(require, exports, module) {
 
 	var
 		$ = require('jquery'),
-		hogan = require('lib/hogan');
+		hogan = require('lib/hogan'),
+
+		Emitter = require('Emitter');
 
 	// UWAP.utils.loadCSS("/stylesheets/textexecdisplay.css");
 
@@ -20,6 +22,9 @@ define(function(require, exports, module) {
 		$(this.el).on('click', '#runall', this.proxy(function() {
 			this.emit('runAll');
 		}));
+		$(this.el).on('click', '#configure', this.proxy(function() {
+			this.emit('configure');
+		}));
 	}
 
 	TestExecDashboard.prototype.enable = function(enable) {
@@ -36,25 +41,11 @@ define(function(require, exports, module) {
 		return $.proxy(c, this)
 	}
 
-	TestExecDashboard.prototype.on = function(type, callback) {
-		if (!this.callbacks[type]) this.callbacks[type] = [];
-		this.callbacks[type].push(callback);
-		return this;
-	}
-
-	TestExecDashboard.prototype.emit = function(type) {
-		var that = this;
-		if (this.callbacks[type]) {
-			$.each(this.callbacks[type], function(i, c) {
-				that.callbacks[type][i].apply(this, Array.prototype.slice.call(arguments, 1))
-			});
-		}
-		return this;
-	}
 
 	TestExecDashboard.prototype.appendTo = function(el) {
 		$(this.el).appendTo(el);
 	} 
+	$.extend(TestExecDashboard.prototype, Emitter);
 
 	return TestExecDashboard;
 });

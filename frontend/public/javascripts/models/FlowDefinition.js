@@ -18,8 +18,12 @@ define(function(require, exports, module) {
 
 	}
 
+	/**
+	 * Consider input in description to be trusted and to contain html if needed.
+	 * @return {[type]} [description]
+	 */
 	FlowDefinition.prototype.getDescr = function() {
-		if (this.descr) return '';
+		if (!this.descr) return '';
 		return this.descr.replace(/\n/g, "<br />");
 	};
 

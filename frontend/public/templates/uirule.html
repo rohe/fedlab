@@ -1,0 +1,28 @@
+<div class="userinteractionRule" style="" class="basic">
+
+	<p class="p_userinteraction" id="p_${url}_endpoint">When arriving at URL matching this:</p>
+
+	{{#matches.url}}
+		<p>URL is <tt style="color: #600">{{matches.url}}</tt></p>
+	{{/matches.url}}
+
+	{{#matches.title}}
+		<p>Title is <tt style="color: #600">{{matches.title}}</tt></p>
+	{{/matches.title}}
+
+	{{#matches.content}}
+		<p>Page contains <tt style="color: #600">{{matches.content}}</tt></p>
+	{{/matches.content}}
+
+	<p>then…</p>
+
+	{{#controlTypeLink}}
+		<p>follow the link pointing to </p>
+		<tt style="color: #600">{{interaction.control.path}}</tt>
+	{{/controlTypeLink}}
+	{{#controlTypeForm}}
+		<p class="p_userinteraction" id="">Fill in form #${{control.index}} with these properties:</p>
+		<pre style="clear: both" class="debugMessage">{{{getControlSet}}}</pre>
+	{{/controlTypeForm}}
+	
+</div>

@@ -6,7 +6,8 @@ define(function(require, exports, module) {
 
 
 	var 
-		FlowDefinition = require('../models/FlowDefinition');
+		FlowDefinition = require('../models/FlowDefinition'),
+		TestFlowResult = require('../models/TestFlowResult');
 
 	var APIconnector = function(type, metadata) {
 		this.type = type;
@@ -27,7 +28,7 @@ define(function(require, exports, module) {
 				var res;
 
 				console.log("==> verify() - API Response");
-				res = new Result(response);
+				res = new TestFlowResult(response);
 				callback(res);
 			
 			},
@@ -54,7 +55,7 @@ define(function(require, exports, module) {
 
 				console.log("==> runTest() - API Response");
 				console.log(response);
-				res = new Result(response);
+				res = new TestFlowResult(response);
 				callback(res);
 
 			},
@@ -106,9 +107,10 @@ define(function(require, exports, module) {
 				console.log("==> getDefinitions() - API Response");
 				callback(response);
 			},
-			error: function(error) {
-				console.log("Error: " + error);
-				callback(new Error(error));
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("Error: ", jqXHR, textStatus, errorThrown);
+				var e = JSON.parse(jqXHR.responseText);
+				callback(new Error(e.message));
 			}
 			
 		});
@@ -135,28 +137,28 @@ define(function(require, exports, module) {
 		});
 	}
 
-	var Result = function(obj) {
-		console.log("Result()", obj);
-		if (obj === null) {
-			throw {message: 'trying to create a new Result object with an empty parameter list'};
-		}
-		if (!obj.id || typeof obj.id === 'undefined') throw {message: "Missing ID in result object."};
-		this.id = obj.id;			
-		if (typeof obj.status === 'undefined') throw {message: "Missing ID in result object."};
-		this.status = obj.status;
+	// var Result = function(obj) {
+	// 	console.log("Result()", obj);
+	// 	if (obj === null) {
+	// 		throw {message: 'trying to create a new Result object with an empty parameter list'};
+	// 	}
+	// 	if (!obj.id || typeof obj.id === 'undefined') throw {message: "Missing ID in result object."};
+	// 	this.id = obj.id;			
+	// 	if (typeof obj.status === 'undefined') throw {message: "Missing ID in result object."};
+	// 	this.status = obj.status;
 
-		if (obj.message) this.message = obj.message;
-		if (obj.debug) this.debug = obj.debug;
-		if (obj.tests) this.tests = obj.tests;
+	// 	if (obj.message) this.message = obj.message;
+	// 	if (obj.debug) this.debug = obj.debug;
+	// 	if (obj.tests) this.tests = obj.tests;
 
-		if (obj.url) this.url = obj.url;
-		if (obj.htmlbody) this.htmlbody = obj.htmlbody;
-		if (obj.title) this.title = obj.title;
-	}
+	// 	if (obj.url) this.url = obj.url;
+	// 	if (obj.htmlbody) this.htmlbody = obj.htmlbody;
+	// 	if (obj.title) this.title = obj.title;
+	// }
 
-	Result.prototype.verifyOK = function() {
-		return (this.status < 4);
-	}
+	// Result.prototype.verifyOK = function() {
+	// 	return (this.status < 4);
+	// }
 
 
 

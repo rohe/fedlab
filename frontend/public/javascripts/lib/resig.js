@@ -56,10 +56,22 @@ define(function() {
     // Enforce the constructor to be what we expect
     Class.prototype.constructor = Class;
 
+
+
     // And make this class extendable
     Class.extend = arguments.callee;
     
     return Class;
   }
+
+  /* Andreas */
+  // Class.prototype.embrace = function(prop) {
+  //   for(var name in prop) {
+  //     if (!prop.hasOwnProperty(name)) continue;
+  //     this[name] = prop[name];
+  //   }
+  // };
+  /* ---- */
+  
   return Class;
 });

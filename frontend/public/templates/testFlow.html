@@ -18,14 +18,16 @@
 	{{#name}}
 		<h3>{{name}}</h3>
 	{{/name}}
-	
-	{{#descr}}
-		{{getDescr}}
-	{{/descr}}
 
 	{{#id}}
-		<div><span class="label labelFlow label-info">{{id}}</span></div>
+		<div style=""><span class="label labelFlow label-info">{{id}}</span></div>
 	{{/id}}
+	
+	{{#descr}}
+		{{{getDescr}}}
+	{{/descr}}
+
+
 
 	{{#hasDependencies}}
 		<div class="dependencies">Dependencies to other test flows:

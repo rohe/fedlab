@@ -90,6 +90,15 @@ define(function(require, exports, module) {
 
 
 
+	TestExecDisplay.prototype.cleanup = function() {
+		var that = this;
+		$.each(this.definitions, function(i, item) {
+			// console.log("i, item", i, item);
+			that.setFlowClean(item);
+		});
+	}
+
+
 	/**
 	 * Clean an presentation of a testflow, to be able to do a new testrun.
 	 * @param {[type]} sid [description]
