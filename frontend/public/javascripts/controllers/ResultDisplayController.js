@@ -66,13 +66,13 @@ define(function(require, exports, module) {
 			hash = hash.substr(2);
 
 			var parameters;
-			var validTypes = ['saml', 'connect'];
+			var validTypes = ['saml-idp-hedberg', 'saml-sp-solberg', 'connect'];
 
 			console.log("Routing...", hash);
 
 			if (hash.match(/^\/$/)) {
 
-				this.el.append('');
+				// this.el.append('');
 
 			} else if (parameters = hash.match(/^\/post$/)) {
 
