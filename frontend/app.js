@@ -123,7 +123,7 @@ config = JSON.parse(configdata);
 var connectors = {};
 connectors.connect = new tests.OICTestconnector(config);
 connectors['saml-sp-solberg'] = new tests.SAMLTestconnector(config);
-connectors.samlidp = new tests.SAMLIdPTestconnector(config);
+connectors['saml-idp-hedberg'] = new tests.SAMLIdPTestconnector(config);
 
 var resconnector = new results.Results(config);
 
@@ -150,6 +150,8 @@ app.all('/api2/:type/verify', function(req, res, next) {
 		if (!connectors[req.params.type]) throw 'Invalid connector';
 		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
 		metadata = req.body;
+
+		console.log(connectors[req.params.type]);
 
 		connectors[req.params.type].verify(metadata, function(data) {
 			req.response = data;	

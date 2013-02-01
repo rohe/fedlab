@@ -1,5 +1,5 @@
 var
-	tests = require('./lib/testconnector2.js'),
+	tests = require('./lib/testconnector.js'),
 	Results = require('./lib/results').Results,
 	fs = require('fs'),
 	t;
@@ -27,14 +27,14 @@ fs.readFile(__dirname + '/etc/config.js', function (err, data) {
 	console.log("Successfully read configuration.");
 	console.log(config);
 
-	t = new tests.OICTestconnector(config);
-	t.definitions(function(data) {
-		console.log("Definitions...:");
-		console.log(JSON.stringify(data, null, 4));
-	});
+	t = new tests.SAMLTestconnector(config);
+	// t.definitions(function(data) {
+	// 	console.log("Definitions...:");
+	// 	console.log(JSON.stringify(data, null, 4));
+	// });
 
 	t.verify(metadata, function(result) {
-		console.log("Results :");
+		console.log("Results from verify :");
 		console.log(JSON.stringify(data, null, 4));
 	}, function(err) {
 		console.log("ERror :" + err);

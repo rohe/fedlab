@@ -11,6 +11,7 @@ var
 	// To be exported
 	Testconnector,
 	OICTestconnector,
+	SAMLIdPTestconnector,
 	SAMLTestconnector;
 
 
@@ -32,13 +33,13 @@ Testconnector = function() {
 
 SAMLTestconnector = function(config) {
 	this.config = config;
-
 	this.samlcmd = config['path'] + 'frontend/simplesamlphp-test/modules/fedlab/bin/cmd.php';
 };
 util.inherits(SAMLTestconnector, Testconnector);
 
 SAMLTestconnector.prototype.verify = function(metadata, callback, errorcallback) {
 	var that = this;
+	console.log("Running verify...");
 	cmd(this.samlcmd, ["check"], metadata, function(result, stderr, statuscode) {
 
 		if (result === null) {
@@ -119,7 +120,7 @@ SAMLIdPTestconnector = function(config) {
 
 	this.samlcmd = '/usr/local/bin/saml2c.py';
 };
-util.inherits(SAMLTestconnector, Testconnector);
+util.inherits(SAMLIdPTestconnector, Testconnector);
 
 SAMLIdPTestconnector.prototype.verify = function(metadata, callback, errorcallback) {
 	var that = this;
