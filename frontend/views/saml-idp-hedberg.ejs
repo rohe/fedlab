@@ -2,21 +2,35 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		
 		<title>Federation Lab</title>
 
-		<% include inc/head %>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Federation Lab is a testing and debugging toolkit for Identity Protocols">
+		<meta name="author" content="Andreas Åkre Solberg">
+
+
+
+		<style>
+			body {
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+		</style>
 
 		<!-- Local stylesheets -->
 		<link rel="stylesheet" href="/stylesheets/layout-saml.css" />
 		<link rel="stylesheet" href="/stylesheets/testresults.css" />
 
-		<!-- spine.js -->
+		<script type="text/javascript" data-main="main-saml-idp-hedberg" src="/javascripts/require.js"></script>
+
+<!--
 		<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
 		<script type="text/javascript" src="/javascripts/spine/local.js"></script>
 		<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
 
 
-		<!-- Federation Lab -->
 		<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
 		<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
 
@@ -27,55 +41,20 @@
 		<script type="text/javascript" src="/javascripts/app/controllers/SAMLmain.js"></script>
 		<script type="text/javascript" src="/javascripts/app/controllers/APIconnector.js"></script>
 
+-->
 
+		<!-- SAMLmetaJS 
+			<script type="text/javascript" src="/samlmetajs/mdreader.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.xml.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.info.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.saml2sp.js"></script>
+			<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.certs.js"></script>
+			<link type="text/css" href="/samlmetajs/css/samlmetajs.css" rel="Stylesheet" />
+		-->
 
-		<!-- SAMLmetaJS -->
-		<script type="text/javascript" src="/samlmetajs/mdreader.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.xml.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.info.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.saml2sp.js"></script>
-		<script type="text/javascript" src="/samlmetajs/samlmeta.plugin.certs.js"></script>
-		<link type="text/css" href="/samlmetajs/css/samlmetajs.css" rel="Stylesheet" />
-
-
-
-		<script type="text/javascript">
-		    $(document).ready(function(){
-		
-
-
-				setInterval(function() {
-					$("span.lastRunDate").prettyDate();
-				}, 30000);
-
-				try {
-					var metadata = localStorage.getItem('samlspMetadata');
-					if (metadata) {
-						metadata = JSON.parse(metadata);
-						console.log('Loaded metadata from localstorage', metadata);
-						$("form#configurationForm textarea#metadatafield").val(metadata.metadata);
-						$("form#configurationForm input#fedlab_initsso").val(metadata.initsso);
-						$("form#configurationForm input#fedlab_attributeurl").val(metadata.attributeurl);
-						$("form#configurationForm input#fedlab_initslo").val(metadata.initslo);
-					}
-				} catch(e) {
-					console.info("An attempt was made to fetch old metadata from localStorage, but parsing the stored JSON failed.");
-				}
-
-		    });
 
 	
-			jQuery(function($) {
-				return new FedLabSAML({
-					el: $("body")
-				});
-			});
-
-		</script>
-
-
-
 	<!-- JQuery templates -->
 	
 	<script type="text/x-jquery-tmpl" id="testFlow">
@@ -165,7 +144,7 @@
 			<li>
 				<a href="/">Home</a> <span class="divider">/</span>
 			</li>
-			<li class="active">SAML SP Testing (Hedberg)</li>
+			<li class="active">SAML IdP Testing (Hedberg)</li>
 		</ul>
 
 
@@ -182,15 +161,15 @@
 				<li class="active">
 				<a href="#fedlabmeta">FedLab Metadata</a>
 				</li>
-				<li><a href="#spmeta">Register SP Metadata</a></li>
+				<li><a href="#spmeta">Register IdP Metadata</a></li>
 			</ul>
 
 			<div class="tab-content">
 				<div class="tab-pane active" id="fedlabmeta">
 
-					<h3>Add Federation Lab Metadata to your Service Provider</h3>
+					<h3>Add Federation Lab Metadata to your Identity Provider</h3>
 
-					<p>Before we continue, you need to configure your Service Provider to trust the Federation Lab as an Identity Provider. From now on, the Federation Lab will behave like a good and bad Identity Provider to test how your Service Provider behaves.</p>
+					<p>Before we continue, you need to configure your Identity Provider to trust the Federation Lab as an Service Provider. From now on, the Federation Lab will behave like a good and bad Service Provider to test how your Identity Provider behaves.</p>
 
 					<textarea style="width: 100%; height: 300px">
 	<?xml version="1.0"?>&lt;?xml version=&quot;1.0&quot;?&gt;
@@ -208,14 +187,13 @@
 				<div class="tab-pane" id="spmeta">
 
 
-					<h3>Register metadata of the SAML 2.0 Serivce Provider</h3>
+					<h3>Register metadata of the SAML 2.0 Identity Provider</h3>
 
-					<p>To test your SAML 2.0 Service Provider, please register the metadata of your provider here.</p>
+					<p>To test your SAML 2.0 Identity Provider, please register the metadata of your provider here.</p>
 					
 					<textarea style="" id="metadatafield" class="metadata" ></textarea>
 
-					<hr />
-
+					<!--
 					<p>
 						<label for="fedlab_initsso">An <b>URL that initiates login</b> at the service provider. Request to this page should also be automatically directed to the automated SP tester, and not show a discovery service.</label>
 						<br />
@@ -234,9 +212,10 @@
 						<input id="fedlab_initslo" name="fedlab_initslo"  type="text" class="input-xxlarge" placeholder="http:// (Init. SLO URL)">
 					</p>
 
+-->
 					<p>To move on to the real testing, you would need to verify the connectivity first.</p>
 					<button id="verifynow" class="btn btn-primary">Verify connectivity »</button>
-
+	
 					<!-- <input type="submit" id="verifyConnectivity" value="Verify connectivity" /> -->
 					<div  style="" id="verifyErrorDiv"><pre id="verifyError"></pre></div>
 
@@ -256,6 +235,15 @@
 			</div>
 
 
+			<div id="publishbar">
+				<h3>Publish your testresults</h3>
+				<p>Enter your PIN code to publish your test results to the server, for comparison with other implementations</p>
+				
+				<label for="pincode">PIN code</label>
+				<input id="pincode" type="text" class="pincode" name="pincode"  />
+				<input id="dopublish" class="btn" type="submit" name="subm" value="Publish results" />
+
+			</div>
 
 			<div id="results">	
 			</div>

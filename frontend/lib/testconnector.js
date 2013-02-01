@@ -112,6 +112,93 @@ SAMLTestconnector.prototype.runFlow = function(metadata, flowid, callback, error
 
 
 
+
+
+SAMLIdPTestconnector = function(config) {
+	this.config = config;
+
+	this.samlcmd = '/usr/local/bin/saml2c.py';
+};
+util.inherits(SAMLTestconnector, Testconnector);
+
+SAMLIdPTestconnector.prototype.verify = function(metadata, callback, errorcallback) {
+	var that = this;
+	cmd(this.samlcmd, ["check"], metadata, function(result, stderr, statuscode) {
+
+		if (result === null) {
+			if (typeof errorcallback === 'function') errorcallback(stderr); 
+			return;
+		}
+		result.debug = stderr;
+		// var response = {
+		// 	result: result,
+		// 	debug: stderr
+		// };
+		callback(result);
+	});
+};
+
+SAMLIdPTestconnector.prototype.definitions = function(metadata, callback, errorcallback) {
+	var that = this;
+	cmd(this.samlcmd, ["-l"], '', function(result, stderr, statuscode) {
+
+		if (result === null) {
+			if (typeof errorcallback === 'function') errorcallback(stderr); 
+			return;
+		}
+
+		// result.forEach(function(item) {
+		// 	var shasum = crypto.createHash('sha1');
+		// 	var sid = null;
+		// 	shasum.update("openid:testItem");
+		// 	shasum.update(item.id);
+		// 	sid = shasum.digest("hex");
+			
+		// 	result[sid] = item;
+		// });
+
+		callback(result);
+
+	}, function() {
+		console.log("ERROR CALLBACK ON OICTestconnector.prototype.defintions")
+	});
+
+
+};
+SAMLIdPTestconnector.prototype.runFlow = function(metadata, flowid, callback, errorcallback) {
+
+	var that = this;
+	console.log('OICTestconnector.prototype.runFlow() ' + flowid);
+
+	cmd(this.samlcmd, [flowid], metadata, function(result, stderr, statuscode) {
+
+
+		console.log("Command completed! ")
+
+		if (result === null) {
+			errorcallback(stderr); return;
+		}
+
+		result.debug = stderr;
+		// var response = {
+		// 	result: result,
+		// 	debug: stderr
+		// };
+		callback(result);
+
+	}, function() {
+		console.log("ERROR CALLBACK ON OICTestconnector.prototype.runF")
+	});
+
+};
+
+
+
+
+
+
+
+
 OICTestconnector = function(config) {
 	this.hostname = config.hostname;
 	if (!config.hostname) {
@@ -224,3 +311,4 @@ OICTestconnector.prototype.runFlow = function(metadata, flowid, callback, errorc
 exports.Testconnector = Testconnector;
 exports.OICTestconnector = OICTestconnector;
 exports.SAMLTestconnector = SAMLTestconnector;
+exports.SAMLIdPTestconnector = SAMLIdPTestconnector;
