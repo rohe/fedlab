@@ -63,7 +63,7 @@ define(function(require, exports, module) {
 	}
 
 	TestExec.prototype.runAll = function() {
-		window.z = 0;
+		// window.z = 0;
 		console.log("runAll()");
 		
 		this.cleanup();
@@ -83,7 +83,7 @@ define(function(require, exports, module) {
 
 
 
-		if (window.z++ < 3)
+		// if (window.z++ < 3)
 		for (var i = 0; i < this.definitions.length; i++) {
 
 			// Do not start on a test flow that has already started..
