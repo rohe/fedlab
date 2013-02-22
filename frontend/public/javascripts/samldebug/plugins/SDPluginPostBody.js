@@ -1,5 +1,9 @@
-define(['./SDPlugin'], function(SDPlugin) {
+define(function(require, exports, module) {
 
+	var 
+		Class = require('lib/resig'),
+		SDPlugin = require('./SDPlugin');
+		
 	var body_decompose =  function body_decompose(qs){
 		qsa = qs.split('&');
 		result = new Object();

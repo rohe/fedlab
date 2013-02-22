@@ -3,8 +3,16 @@
 	<head>
 		<title>Federation Lab</title>
 
-		<% include inc/head %>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="JWT Debugger - decode encode decrypt and encrypt JWT JSON messages">
+		<meta name="author" content="Andreas Åkre Solberg">
 
+
+
+		<script type="text/javascript" data-main="main-jwt" src="/javascripts/require.js"></script>
+
+<!--
 		<script type="text/javascript" src="/javascripts/jwt/jssha256.js"></script>
 		<script type="text/javascript" src="/javascripts/jwt/JWT.js"></script>
 		<script type="text/javascript" src="/javascripts/jwt/app/main.js"></script>
@@ -22,10 +30,9 @@
 				}
 
 			});
-
 		</script>
 
-
+-->
 		
 		<script type="text/x-jquery-tmpl" id="providerItem">
 			<a class="entityOpen" href="">{{html $data.getTitle() }}</a> ( <a class="entityDup" href="">duplicate</a> | <a class="entityDel" href="">delete</a> )
@@ -135,6 +142,5 @@
 
 		</form>
 
-	<% include inc/bottom %>
 	</body>
 </html>

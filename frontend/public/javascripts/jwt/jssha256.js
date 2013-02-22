@@ -17,6 +17,8 @@
  *  02111-1307 USA
  */
 
+define(function(require, exports, module) {
+
 /*
  * http://point-at-infinity.org/jssha256/
  *
@@ -311,3 +313,14 @@ function SHA256_Hash_Byte_Block(H, w) {
       w[4 * i + 2] << 8 | w[4 * i + 3];
   SHA256_Hash_Word_Block(H, W);
 }
+
+  return {
+    SHA256_init: SHA256_init,
+    HMAC_SHA256_init: HMAC_SHA256_init,
+    HMAC_SHA256_write: HMAC_SHA256_write,
+    HMAC_SHA256_finalize: HMAC_SHA256_finalize
+  };
+
+
+
+});

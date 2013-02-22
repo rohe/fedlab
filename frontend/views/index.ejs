@@ -4,9 +4,19 @@
 
 		<title>Federation Lab</title>
 		
-		<% include inc/head %>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="JWT Debugger - decode encode decrypt and encrypt JWT JSON messages">
+		<meta name="author" content="Andreas Åkre Solberg">
 
+		<script type="text/javascript" data-main="main-index" src="/javascripts/require.js"></script>
 
+		<style>
+			body {
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+			}
+		</style>
+		
 
 	</head>
 
@@ -16,57 +26,68 @@
 
 		<div class="container">
 
-				<!-- Main hero unit for a primary marketing message or call to action -->
-				<div class="hero-unit">
-					<h1>Federation Lab</h1>
-					<p>Federation Lab is a set of tools for testing, verification and debugging of various Identity protocols. Federation Lab is a joint collaboration effort between <a href="http://www.geant.net">GÉANT</a> and <a href="http://kantarainitiative.org">Kantara Initiative</a>.</p>
-				<p>Federation Lab uses sophisticated techniques for performing automated verification of identity protocols. The head developers involved in the Federation Lab is <a href="http://rnd.feide.no">Andreas Åkre Solberg</a>, <a href="http://uninett.no">UNINETT</a> and <a href="http://www.umu.se/sok/english/staff-directory/view-person?uid=rohe0002&guise=anst1">Roland Hedberg</a>, <a href="http://www.umu.se">University of Umeå</a>.</p>
-					<p><a href="/about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-				</div>
+			<!-- Main hero unit for a primary marketing message or call to action -->
+			<div class="hero-unit">
+				<h1>Federation Lab</h1>
+				<p>Federation Lab is a set of tools for testing, verification and debugging of various Identity protocols. Federation Lab is a joint collaboration effort between <a href="http://www.geant.net">GÉANT</a> and <a href="http://kantarainitiative.org">Kantara Initiative</a>.</p>
+			<p>Federation Lab uses sophisticated techniques for performing automated verification of identity protocols. The head developers involved in the Federation Lab is <a href="http://rnd.feide.no">Andreas Åkre Solberg</a>, <a href="http://uninett.no">UNINETT</a> and <a href="http://www.umu.se/sok/english/staff-directory/view-person?uid=rohe0002&guise=anst1">Roland Hedberg</a>, <a href="http://www.umu.se">University of Umeå</a>.</p>
+				<p><a href="/about" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+			</div>
 
-				<!-- Example row of columns -->
-				<div class="row">
-					<div class="span6">
-						<h2>SAML 2.0</h2>
-						 <p>Security Assertion Markup Language 2.0 (SAML 2.0) is a version of the SAML OASIS standard for exchanging authentication and authorization data between security domains. SAML 2.0 is an XML-based protocol that uses security tokens containing assertions to pass information about a principal (usually an end user) between an identity provider and a web service. SAML 2.0 enables web-based authentication and authorization scenarios including single sign-on (SSO).</p>
-						<p><a class="btn" href="/saml-sp">SAML Testing &raquo;</a></p>
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="span6">
+					<h2>SAML 2.0</h2>
+					 <p>Security Assertion Markup Language 2.0 (SAML 2.0) is a version of the SAML OASIS standard for exchanging authentication and authorization data between security domains. SAML 2.0 is an XML-based protocol that uses security tokens containing assertions to pass information about a principal (usually an end user) between an identity provider and a web service. SAML 2.0 enables web-based authentication and authorization scenarios including single sign-on (SSO).</p>
+					<p><a class="btn" href="/test#!/saml-sp-solberg">SAML SP Testing (Solberg engine) &raquo;</a></p>
+					<p><a class="btn btn-mini" href="/results#!/saml-sp-solberg">Test results &raquo;</a></p>
+					<p><a class="btn" href="/test#!/saml-idp-hedberg">SAML IdP Testing (Hedberg engine) &raquo;</a></p>
+					<p><a class="btn btn-mini" href="/results#!/saml-idp-hedberg">Test results &raquo;</a></p>
 
-						<div class="row">
-							<div class="span6">
-								<h3>SAML debugger</h3>
-								<p>This tool is a webbased encoder and decoder of SAML messages. It is useful for debugging a SAML setup.</p>
-								<p><a class="btn btn-mini" href="/samldebug">SAML debugger &raquo;</a></p>
-							</div>
-							<div class="span6">
-								<h3>SAML-tracer<br /><small>Firefox plugin</small></h3>
-								 <p>SAMLtrace is a Firefox plugin that allows you to trace and review all front-channel SAML messages sent as you browse web pages. The tool is intended for SAML developers or deployers for educational, research or debugging purposes.</p>
-								<p><a class="btn btn-mini" href="https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/">SAMLtracer &raquo;</a></p>
-							</div>
+					<div class="row">
+						<div class="span6">
+							<h3>SAML debugger</h3>
+							<p>This tool is a webbased encoder and decoder of SAML messages. It is useful for debugging a SAML setup.</p>
+							<p><a class="btn btn-mini" href="/samldebug">SAML debugger &raquo;</a></p>
 						</div>
-
-					</div>
-					<div class="span6">
-						<h2>OpenID Connect</h2>
-						 <p>OpenID Connect is a suite of lightweight specifications that provide a framework for identity interactions via RESTful APIs. The simplest deployment of OpenID Connect allows for clients of all types including browser-based, mobile, and javascript clients, to request and receive information about identities and currently authenticated sessions. The specification suite is extensible, allowing participants to optionally also support encryption of identity data, discovery of the OpenID Provider, and advanced session management, including logout.</p>
-						<p><a class="btn btn-mini" href="/connect-gettingstarted">Documentation: Getting started with testing &raquo;</a></p>
-						<p><a class="btn" href="/connect-provider">OpenID Connect testing &raquo;</a></p>
-						<p><a class="btn btn-mini" href="/results">Test results &raquo;</a></p>
-
-						<h3>JWT Debugger</h3>
-						<p>Online tool to encode, decode and validate JWT and JWS.</p>
-						<p><a class="btn btn-mini" href="/jwt">JWT Debugger »</a></p>
+						<div class="span6">
+							<h3>SAML-tracer<br /><small>Firefox plugin</small></h3>
+							 <p>SAMLtrace is a Firefox plugin that allows you to trace and review all front-channel SAML messages sent as you browse web pages. The tool is intended for SAML developers or deployers for educational, research or debugging purposes.</p>
+							<p><a class="btn btn-mini" href="https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/">SAMLtracer &raquo;</a></p>
+						</div>
 					</div>
 
 				</div>
+				<div class="span6">
+					<h2>OpenID Connect</h2>
+					 <p>OpenID Connect is a suite of lightweight specifications that provide a framework for identity interactions via RESTful APIs. The simplest deployment of OpenID Connect allows for clients of all types including browser-based, mobile, and javascript clients, to request and receive information about identities and currently authenticated sessions. The specification suite is extensible, allowing participants to optionally also support encryption of identity data, discovery of the OpenID Provider, and advanced session management, including logout.</p>
+					<p><a class="btn btn-mini" href="/connect-gettingstarted">Documentation: Getting started with testing &raquo;</a></p>
+					<p><a class="btn" href="/test#!/connect">OpenID Connect testing &raquo;</a></p>
+					<p><a class="btn btn-mini" href="/results#!/connect">Test results &raquo;</a></p>
 
-				<hr>
+					<h3>JWT Debugger</h3>
+					<p>Online tool to encode, decode and validate JWT and JWS.</p>
+					<p><a class="btn btn-mini" href="/jwt">JWT Debugger »</a></p>
+				</div>
 
-				<footer>
-					<p>&copy; Company 2012</p>
-				</footer>
+			</div>
+
+			<div class="hero-unit">
+				<p>Provided by </p>
+				<a href="http://kantarainitiative.org"><img style="margin: .3em" src="/images/logo-kantara.png" /></a>
+				<a href="https://www.internetsociety.org"><img style="margin: .3em" src="/images/logo-isoc.png" /></a>
+				<a href="http://kantarainitiative.org"><img style="margin: .3em" src="/images/logo-geant.png" /></a>
+				<a href="http://www.umu.se"><img style="margin: .3em" src="/images/logo-umea.png" /></a>
+				<a href="http://www.uninett.no"><img style="margin: .3em" src="/images/logo-uninett.png" /></a>				
+			</div>
+
+			<hr>
+
+			<footer>
+				<p>2011-2013 &copy; <a href="http://www.uninett.no">UNINETT</a> and <a href="http://www.umu.se">Umeå University</a> </p>
+			</footer>
 
 		</div> <!-- /container -->
 
-	<% include inc/bottom %>
 	</body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Federation Lab</title>
+
+
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<link rel="stylesheet" href="/stylesheets/testresults.css" /> 
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Federation Lab is a testing and debugging toolkit for Identity Protocols">
+		<meta name="author" content="Andreas Åkre Solberg">
+
+		<script type="text/javascript" data-main="main-test" src="/javascripts/require.js"></script>
+
+	</head>
+
+	<body>
+
+		<% include inc/navbar %>
+
+
+		<ul class="breadcrumb">
+			<li>
+				<a href="/">Home</a> <span class="divider">/</span>
+			</li>
+			<li class="active">OpenID Connect Provider Testing</li>
+		</ul>
+
+
+		<div id="main" class="container">
+
+
+		</div> <!-- /container -->
+
+
+
+
+
+			<div id="results">	
+			</div>
+
+			<form class="form-inline">
+			<div class="row editorcontainer">
+
+				<div class="span3">
+
+					<fieldset class="readyverify"><legend>Verify Connectivity</legend>
+					
+						<p>When you're done configuring your OpenID Connect Provider above, you may click the button below to perform a simple test, verifying that your most basic features are working. When this test is ran successfully, you'll be able to proceed to the rest of the test cases.</p>
+						
+						<p style="">
+							<a href="#" class="btn btn-primary" id="verifynow"><i class="icon-play icon-white"></i> Verify Connectivity</a>
+							<!-- <input class="btn btn-primary" type="submit" id="verifynow" value="Verify Connectivity" /> -->
+						</p>		
+					</fieldset>
+
+
+				</div>
+
+			</div>
+			</form>
+
+
+	</body>
+</html>

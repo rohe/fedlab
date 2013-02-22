@@ -22,15 +22,57 @@ $_SERVER['SERVER_PORT'] = 80;
 
 $action = $argv[1];
 
-$inputmeta = json_decode(file_get_contents("php://stdin", "r"), TRUE);
+$raw = file_get_contents("php://stdin", "r");
+$inputmeta = json_decode($raw, TRUE);
 
+// echo "input: ";
 // print_r($inputmeta);
 
 try {
 	
-	$initsso = $inputmeta['initsso'];
-	$initslo = $inputmeta['initslo'];
-	$attributeurl = $inputmeta['attributeurl'];
+
+	if ($action === 'showList') {
+		$initsso = 'http://';
+		$initslo = 'http://';
+		$attributeurl = 'http://';
+		$inputmeta = array(
+			'metadata' => '<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                     entityID="https://skjak.uninett.no/simplesaml/module.php/saml/sp/metadata.php/fedlab-test-sp"
+                     >
+    <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                     Location="https://skjak.uninett.no/simplesaml/module.php/saml/sp/saml2-acs.php/fedlab-test-sp"
+                                     index="0"
+                                     />
+        <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"
+                                     Location="https://skjak.uninett.no/simplesaml/module.php/saml/sp/saml1-acs.php/fedlab-test-sp"
+                                     index="1"
+                                     />
+        <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"
+                                     Location="https://skjak.uninett.no/simplesaml/module.php/saml/sp/saml2-acs.php/fedlab-test-sp"
+                                     index="2"
+                                     />
+        <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01"
+                                     Location="https://skjak.uninett.no/simplesaml/module.php/saml/sp/saml1-acs.php/fedlab-test-sp/artifact"
+                                     index="3"
+                                     />
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                Location="https://skjak.uninett.no/simplesaml/module.php/saml/sp/saml2-logout.php/fedlab-test-sp"
+                                />
+        <md:AttributeConsumingService index="0">
+            <md:RequestedAttribute Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" />
+            <md:ServiceName xml:lang="en">SimpleSAMLphp (Skjak, recent version)</md:ServiceName>
+            <md:RequestedAttribute Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" />
+        </md:AttributeConsumingService>
+    </md:SPSSODescriptor>
+</md:EntityDescriptor>'
+		);
+	} else {
+		$initsso = $inputmeta['initsso'];
+		$initslo = $inputmeta['initslo'];
+		$attributeurl = $inputmeta['attributeurl'];
+	}
+
 
 	// error_log("------- ------ ------ ----");
 	// error_log("Init SSO  URL " . $initsso);

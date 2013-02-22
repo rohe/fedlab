@@ -3,27 +3,17 @@
 <head>
 	<title><%= title %></title>
 
-	<% include inc/head %>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Federation Lab is a testing and debugging toolkit for Identity Protocols">
+	<meta name="author" content="Andreas Åkre Solberg">
 
 	<!-- <link rel="stylesheet" href="/stylesheets/style.css" /> -->
 	<link rel="stylesheet" href="/stylesheets/testresults.css" />
 
-
-	<!-- spine.js -->
-	<script type="text/javascript" src="/javascripts/spine/spine.js"></script>
-	<script type="text/javascript" src="/javascripts/spine/local.js"></script>
-	<script type="text/javascript" src="/javascripts/spine/relation.js"></script>
-
-
-	<!-- Federation Lab -->
-	<script type="text/javascript" src="/javascripts/fedlab-utils.js"></script>
-	<script type="text/javascript" src="/javascripts/app/models/models.js"></script>
-
-
-	<script type="text/javascript" data-main="javascripts/results/main" src="/javascripts/require.js"></script>
+	<script type="text/javascript" data-main="main-results" src="/javascripts/require.js"></script>
 
 	<!-- Le styles -->
-
 	<style>
 		ul.breadcrumb {
 			padding-left: 60px;
@@ -33,22 +23,22 @@
 			padding: 4px 0px !important;
 			width: auto;
 		}
-
+		body {
+			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+		}
 	</style>
 
 </head>
 
 <body>
 
-		<% include inc/navbar %>
-
-
+	<% include inc/navbar %>
 
 	<ul class="breadcrumb">
 		<li>
 			<a href="/">Home</a> <span class="divider">/</span>
 		</li>
-		<li class="active">OpenID Connect Provider Test Results</li>
+		<li class="active">Test Results</li>
 	</ul>
 
 	<form class="form">
@@ -58,7 +48,7 @@
 
 		<img src="/images/openid.png" style="float: right" />
 
-		<h1>OpenID Connect Provider Test Results</h1>
+		<h1>Test Results for <tt><span id="testtype"></span></tt></h1>
 
 		<p>Here is a summary of the implementations that are tested using Federation Lab, and an update on what tests that succeeded and not.</p>
 		
@@ -68,7 +58,7 @@
 
 	</div>
 
-	<% include inc/bottom %>
+
 
 </body>
 </html>

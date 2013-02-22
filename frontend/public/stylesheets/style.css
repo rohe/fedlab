@@ -189,6 +189,20 @@ pre.debug {
 
 
 
+div.userinteractionRule {
+	
+	border-radius: 5px;
+	margin: 5px 0px;
+	padding: 5px 1em;
+	border: 1px solid #ddd;
+
+/*	-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 3px 3px 3px 3px rgba(100, 0, 0, 0.!);
+	box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);*/
+}
+
+
+
 
 div.userinteraction {
 	background: white;

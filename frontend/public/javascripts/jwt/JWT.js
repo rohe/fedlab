@@ -5,6 +5,12 @@
  * Borrowed sniplets are outlined and credited in the comments.
  */ 
 
+define(function(require, exports, module) {
+
+	var 
+		$ = require('jquery'),
+		jssha256 = require('./jssha256');
+
 
 var 
 	// Internal node.js requirements
@@ -22,12 +28,17 @@ var
 	idtoken
 	;
 
+var jwtlog = function() {
+};
+var jwtdebug = function() {
+};
+
 isNode = !!(typeof window == 'undefined');
 if (isNode) {
 	// Internal node.js requirements
-	crypto = require("crypto");
+	// crypto = require("crypto");
 } else {
-	if (typeof SHA256_init === 'undefined') {
+	if (typeof jssha256.SHA256_init === 'undefined') {
 		jwtlog('This JWT library requires the JSSHA256 Library if used in the browser.');
 	}
 	if (typeof window.btoa === 'undefined') {
@@ -40,7 +51,7 @@ if (isNode) {
 	
 	// jQuery Plugin for serializing JSON
 	// http://tgardner.net/jquery/serialize-json-with-jquery/
-	jQuery(function($) {
+	$(function($) {
 	    $.extend({
 	        serializeJSON: function(obj) {
 	            var t = typeof(obj);
@@ -429,9 +440,9 @@ jwt = function(useroptions, additionalReservedClaims) {
 			hash2 = hmac.update(string);
 			digest = stripPadding(hmac.digest("base64"));
 		} else {
-			HMAC_SHA256_init(secret);
-			HMAC_SHA256_write(string);
-			hmac = HMAC_SHA256_finalize();
+			jssha256.HMAC_SHA256_init(secret);
+			jssha256.HMAC_SHA256_write(string);
+			hmac = jssha256.HMAC_SHA256_finalize();
 			console.log("HMAC", hmac);
 			console.log("Secret", secret);
 			digest = stripPadding(binarybase64(hmac));
@@ -539,3 +550,14 @@ if (isNode) {
 	this.jwt = jwt;	
 	this.idtoken = idtoken;	
 }
+
+
+	return {
+		jwt: jwt,
+		idtoken: idtoken,
+		jwtlog: jwtlog,
+		jwtdebug: jwtdebug
+	};
+
+
+});

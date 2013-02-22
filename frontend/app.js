@@ -5,13 +5,10 @@ var
 
 	// Module dependencies.
 	express = require('express'),
-	// io = require('socket.io'), // for npm, otherwise use require('./path/to/socket.io') 
-	
-	
 	
 	// Local libraries.
-	testconnector = require('./lib/testconnector.js'),
-	testconnectorsaml = require('./lib/testconnector-samlsp.js'),
+	tests = require('./lib/testconnector.js'),
+	results = require('./lib/results.js'),
 	interaction = require('./lib/interaction.js'),
 	
 	// Variables
@@ -19,10 +16,12 @@ var
 	app,
 	t, ts;
 
-// Configuration
 
+
+/*
+ * Setup Express webserver
+ */
 app = express.createServer();
-
 app.configure(function(){
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'ejs');
@@ -44,7 +43,9 @@ app.configure('production', function(){
 });
 
 
-// Routes
+/*
+ * Routes for Express webserver
+ */ 
 app.get('/', function(req, res){
 	res.render('index', {
 		title: 'Federation Lab'
@@ -81,19 +82,17 @@ app.get('/samldebug', function(req, res){
 });
 
 
-
-app.get('/saml-sp', function(req, res){
-	res.render('saml-sp', {
-		title: 'SAML 2.0 Service Provider Testing'
-	});
-});
-
+// app.get('/connect-provider', function(req, res){
+// 	res.render('connect-provider', {
+// 		title: 'OpenID Connect Provider Testing'
+// 	});
+// });
 
 
 
-app.get('/connect-provider', function(req, res){
-	res.render('connect-provider', {
-		title: 'OpenID Connect Provider Testing'
+app.get('/test', function(req, res){
+	res.render('test', {
+		title: 'test'
 	});
 });
 
@@ -111,53 +110,194 @@ app.get('/test', function(req, res){
 	});
 });
 
-fs.readFile(__dirname + '/etc/config.js', function (err, data) {
-	if (err) {
-		console.log("Error reading config results");
-		return null;
-	}
-	config = JSON.parse(data);
-	console.log("Successfully read configuration.");
-	console.log(config);
 
-	t = testconnector.testconnector(config);
-	ts = testconnectorsaml.testconnectorsaml(config);
+var configdata = fs.readFileSync(__dirname + '/etc/config.js', 'utf8');
+config = JSON.parse(configdata);
 
+
+
+/*
+ * Setup connectors to test tools
+ */
+
+var connectors = {};
+connectors.connect = new tests.OICTestconnector(config);
+connectors['saml-sp-solberg'] = new tests.SAMLTestconnector(config);
+connectors['saml-idp-hedberg'] = new tests.SAMLIdPTestconnector(config);
+
+var resconnector = new results.Results(config);
+
+
+/*
+ * API Version 2.0
+ */
+
+app.all('/api2/*', function(req, res, next) {
+
+	console.log("API2 Request: ");
+	// console.log(req);
+	next();
 });
 
+app.all('/api2/:type/verify', function(req, res, next) {
 
-// t.temp("oic-verify", function (msg) {
-// 	var url = msg.tests[7].url;
-// 	var body = msg.tests[7].message;
-// 	var ia = new interaction.InteractiveHTML(body, url);
-// 	console.log("About to getInteractive...")
-// 	var u = ia.getInteractive(function(msg) {		
-// 	});
+	var metadata;
 
-app.post('/api', function(req, res){
+	
 
-	console.log('Accessing API on hostname : ' + req.headers.host);
-	console.log(req.body.type); 
-	if (req.body.type === 'saml') {
-		ts.process(req, res);
-		console.log("Called SAML")
-	} else if (req.body.type === 'connect') {
-		t.process(req, res);
-		console.log("Called Connect");
-	} else {
-		throw {message: 'invalid type at the API'};
+	try {
+
+		if (!connectors[req.params.type]) throw 'Invalid connector';
+		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+		metadata = req.body;
+
+		console.log(connectors[req.params.type]);
+
+		connectors[req.params.type].verify(metadata, function(data) {
+			req.response = data;	
+			next();
+		});
+
+	} catch (err) {
+		req.error = err;
+		next();
 	}
 	
 });
-app.post('/api/results/publish', function(req, res) {
-	t.publish(req, res);
+
+app.all('/api2/:type/definitions', function(req, res, next) {
+
+	var metadata = null;
+
+	if (!connectors[req.params.type]) {
+		req.error = 'Invalid connector';
+		next();
+	}
+
+	if (!connectors[req.params.type]) throw 'Invalid connector';
+	if (req.body)  {
+		metadata = req.body;	
+	}
+	
+
+	connectors[req.params.type].definitions(metadata, function(data) {
+		req.response = data;	
+		next();
+	});
+
 });
-// app.get('/api/results', function(req, res) {
-// 	t.getResults(req, res);
-// });
-// app.get('/api/definitions', function(req, res) {
-// 	t.getDefinitions(req, res);
-// });
+
+app.all('/api2/:type/runflow/:flowid', function(req, res, next) {
+
+	var metadata;
+
+	try {
+
+		console.log("API2 Request: runflow ");
+
+		if (!connectors[req.params.type]) throw 'Invalid connector';
+		if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+		metadata = req.body;
+
+		console.log("API2 Request: runflow " + req.params.flowid);
+		console.log("Metadata: " + metadata);
+
+		connectors[req.params.type].runFlow(metadata, req.params.flowid, function(data) {
+			console.log("Runflow completed callback()");
+			req.response = data;
+			next();
+		});
+
+	} catch (err) {
+		req.error = err;
+		next();
+	}
+
+});
+
+app.get('/api2/:type/results', function(req, res, next) {
+	
+	var type = req.params.type;
+
+	if (!connectors[type]) {
+		res.error = 'Invalid connector';
+		next();
+	}
+
+	resconnector.get(type, function(result) {
+		if (result instanceof Error) {
+			console.log(result);
+			req.error = result;
+			return;
+		}
+		req.response = result;
+		next();
+	});
+	
+});
+
+app.post('/api2/:type/results/:pin', function(req, res, next) {
+	
+	var type = req.params.type;
+	var pin = req.params.pin;
+
+	if (!req.body) throw 'Missing metadata in HTTP Requeset body';
+	var r = req.body;
+
+
+	if (!connectors[type]) {
+		res.error = 'Invalid connector';
+		next();
+	}
+
+	resconnector.publish(type, pin, r, function(result) {
+		console.log("RESULT callback from pubslih", result);
+		if (result instanceof Error) {
+
+			console.log(result);
+			req.error = result.message;
+			next();
+			return;
+		}
+		req.response = result;
+		next();
+	});
+	
+});
+
+
+
+app.all('/api2/*', function(req, res) {
+
+	if (req.response) {
+		console.log(" => Response 200 OK");
+		res.writeHead(200, { 'Content-Type': 'application/json' });   
+		res.end(JSON.stringify(req.response));
+
+	} else if (req.error) {
+		console.log(" => Response 200 Error " + req.error);
+		res.writeHead(500, { 'Content-Type': 'application/json' });   
+		res.end(JSON.stringify({"status": "error", "message": req.error}) );
+
+	} else {
+		console.log(" => Response 501 No response");
+		res.writeHead(501, { 'Content-Type': 'application/json' });   
+		res.end(JSON.stringify({"status": "error", "message": "invalid operation"}) );
+	}
+	console.log("RESPONSE");
+
+});
+
+
+app.all('/reloadconfig', function(req, res, next) {
+	resconnector.loadConfig();
+	console.log("API2 Request: reloadconfig");
+	res.writeHead(200, { 'Content-Type': 'application/json' });   
+	res.end(JSON.stringify({"status": "ok"}));
+});
+
+
+
 
 app.listen(80);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
