@@ -124,7 +124,7 @@ util.inherits(SAMLIdPTestconnector, Testconnector);
 
 SAMLIdPTestconnector.prototype.verify = function(metadata, callback, errorcallback) {
 	var that = this;
-	cmd(this.samlcmd, ["check"], metadata, function(result, stderr, statuscode) {
+	cmd(this.samlcmd, ["-J", "-", "check"], metadata, function(result, stderr, statuscode) {
 
 		if (result === null) {
 			if (typeof errorcallback === 'function') errorcallback(stderr); 

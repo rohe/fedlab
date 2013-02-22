@@ -37,6 +37,9 @@ https://skjak.uninett.no/simplesaml/module.php/core/authenticate.php?as=fedlab-t
 
 
 For testing av IdP:
+
+ /usr/local/bin/saml2c.py -P /root/roland/saml2test/tests -J - check < /root/fedlab/frontend/etc/samlidp.js
+
 https://openidp.feide.no
 <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://openidp.feide.no">
   <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
