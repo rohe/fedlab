@@ -5,7 +5,7 @@ var
 //     http = require('http'),
 //     https = require('https'),
 	querystring = require('querystring'),
-
+	fs = require('fs'),
 
 	// External dependencies.
 
@@ -16,16 +16,23 @@ var
 	// Exports
 	InteractiveHTML,
 
-	
 	// Local variables
 	a;
 
 
 
-
-InteractiveHTML = function (body, url) {
+InteractiveHTML = function (config, body, url) {
+	this.config = config;
 	this.body = body;
 	this.url = url;
+
+	var filepath = this.config['path'] + 'frontend/lib/injected-javascript.js';
+
+	this.javascript = fs.readFileSync(filepath, 'utf8');
+	console.log("Successfully read javascript: " + this.javascript);
+	console.log("reading from: " + filepath);
+
+
 };
 
 
@@ -65,58 +72,11 @@ InteractiveHTML.prototype.getInteractive = function(callback) {
 		
 		$("head").append('<base href="' + that.url + '" target="_blank" />');
 		$("head").append('<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>');
-		console.log("Preparing some js");
-		var ijs = '$(document).ready(function() {' +
-				'$("a").bind("click", function(e) { ' + 
-					'e.preventDefault(); e.stopPropagation(); ' +
-					'var obj = {' +
-						'"type": "link",' +
-						'"path": $(e.currentTarget).attr("href")' +
-					'};' +
-					'window.parent.postMessage(obj, "*");' +
-					'console.log("=>Posting object to parent window");' +
-				'});' +
-				'$("form").each(function(i, formitem) {' +
-					'$(formitem).find(":input[type=submit]")' +
-					'		.add($(formitem).find(":input[type=image]"))' +
-					'		.bind("click", function(e) { ' + 
-						'var formel = $(e.target).closest("form");' +
-						'e.preventDefault(); e.stopPropagation(); ' +
-						// 'console.log("Clicking on Form #"+ i + ": ");' +
-						// 'console.log(e);' +
-						// 'console.log($(e.target).attr("id"));' +
-						'var obj = {}; ' +
-						'obj["index"] = i;' +
-						'obj["type"] = "form";' + 
-						'obj["set"] = {};' + 
-						'if ($(e.target).attr("name")) {' +
-						'	obj.set[$(e.target).attr("name")] =  $(e.target).attr("value");' + 
-						'	obj.click = $(e.target).attr("name"); ' +
-						'}' +
-						// 'console.log("OBJECT:::: ======>");' +
-						// 'console.log("Name = " + $(e.target).attr("name") + " Value=" + $(e.target).attr("value"));' +
-						// 'console.log(JSON.stringify(obj));' +
-						'$(formel).find(":input").each(function() {' +
-							'if ($(this).attr("type") === "hidden") return;' +
-							'if ($(this).attr("type") === "submit") return;' +
-							'if ($(this).attr("disabled")) return;' +
-							'if ($(this).attr("name")) {' +
-								'obj.set[$(this).attr("name")] = $(this).attr("value");' +
-							'}' +
-						'});' +
-						// 'console.log("Logging event object...");' +
-						// 'console.log(e.target);' +
-						// 'console.log("=>Posting object to parent window");' +
-						'console.log(JSON.stringify(obj));' +
-						'window.parent.postMessage(obj, "*");' +
-					'});' +
-				'});' +
-			'});';
-		console.log("Prepared some js");
+		console.log("Prepared some js" + that.javascript);
 		var script   = w.document.createElement("script");
 		script.type  = "text/javascript";
 	//	script.src   = "path/to/your/javascript.js";    // use this for linked script
-		script.text  = ijs;
+		script.text  = that.javascript;
 		w.document.body.appendChild(script);
 
 		title = $("title").html();

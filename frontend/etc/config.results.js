@@ -5,6 +5,7 @@
 	"172534": {"id": "oicinfo", "short": "oic.info", "name": "Openidconnect.info"},
 	"273625": {"id": "connectopheroku", "short": "heroku", "name": "connect-op.heroku.com"},
 
+	"111111": {"id": "test", "short": "test", "name": "test"},
 
 	"281999": {"id": "ssp", "short": "ssp", "name": "SimpleSAMLphp"},
 	"122635": {"id": "openam", "short": "openam", "name": "Oracle OpenAM"},

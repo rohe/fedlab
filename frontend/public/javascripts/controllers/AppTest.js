@@ -10,8 +10,8 @@ define(function(require, exports, module) {
 		Error = require('Error'),
 
 		EditorConnect = require('./editors/EditorConnect'),
-		EditorSAMLProvider = require('./editors/EditorSAMLProvider'),
-		EditorSAMLConsumer = require('./editors/EditorSAMLConsumer'),
+		EditorSAMLIdP = require('./editors/EditorSAMLIdP'),
+		EditorSAMLSP = require('./editors/EditorSAMLSP'),
 		ConfigurationPane = require('./editors/ConfigurationPane'),
 
 		TestExec = require('controllers/TestExec'),
@@ -27,8 +27,8 @@ define(function(require, exports, module) {
 
 		this.editormapping = {
 			'connect': EditorConnect,
-			'saml-sp-solberg': EditorSAMLProvider,
-			'saml-idp-hedberg': EditorSAMLConsumer
+			'saml-sp-solberg': EditorSAMLSP,
+			'saml-idp-hedberg': EditorSAMLIdP
 		};
 
 		this.el.on('showonly', function(e) {

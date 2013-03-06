@@ -140,7 +140,9 @@ Results.prototype.get = function(connector, callback) {
 	 * result file.
 	 */
 	for (var key in this.resultsconfig) {
+
 		fname = this.config.path + "frontend/results/" + connector + '.' + this.resultsconfig[key].id + ".js";
+		console.log("looking for file: " + fname);
 		if (fs.existsSync(fname)) {
 			// console.log("File " + fname + " found");
 			// response.results[resultsconfig[key].id] = 'ok';

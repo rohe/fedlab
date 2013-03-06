@@ -124,17 +124,47 @@ util.inherits(SAMLIdPTestconnector, Testconnector);
 
 SAMLIdPTestconnector.prototype.verify = function(metadata, callback, errorcallback) {
 	var that = this;
-	cmd(this.samlcmd, ["-J", "-", "check"], metadata, function(result, stderr, statuscode) {
+	cmd(this.samlcmd, ["-P", "/root/roland/saml2test/tests", "-J", "-", "verify"], metadata, function(result, stderr, statuscode) {
 
 		if (result === null) {
 			if (typeof errorcallback === 'function') errorcallback(stderr); 
 			return;
 		}
 		result.debug = stderr;
-		// var response = {
-		// 	result: result,
-		// 	debug: stderr
-		// };
+
+
+		if (result.status == 5) {
+			console.log("interaction needed.")
+			var url = result.url;
+			var body = result.htmlbody;
+			
+			var ia = new interaction.InteractiveHTML(this.config,body, url);
+			console.log("About to getInteractive...")
+			// delete response.result.tests;
+
+
+			console.log(result);
+			var u = ia.getInteractive(function(msg, title) {
+
+				// result.tests[7].message = msg;
+				result.htmlbody = msg;
+				result.title = title;
+
+				// res.writeHead(200, { 'Content-Type': 'application/json' });   
+				// result["debug"] = stderr;
+				// // response.write(
+				// res.end(JSON.stringify(response));
+				// result.debug = stderr;
+				// var response = {
+				// 	result: result,
+				// 	debug: stderr
+				// };
+				callback(result);
+			});
+			return;
+		}
+
+
 		callback(result);
 	});
 };
@@ -225,7 +255,7 @@ OICTestconnector.prototype.verify = function(metadata, callback, errorcallback) 
 			var url = result.url;
 			var body = result.htmlbody;
 			
-			var ia = new interaction.InteractiveHTML(body, url);
+			var ia = new interaction.InteractiveHTML(this.config,body, url);
 			console.log("About to getInteractive...")
 			// delete response.result.tests;
 

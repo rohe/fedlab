@@ -20,7 +20,7 @@ define(function(require, exports, module) {
 	var tmplui = require('lib/text!/templates/uirule.html');
 	var templateui = hogan.compile(tmplui);
 
-	var EditorSAMLProvider = Editor.extend({
+	var EditorSAMLSP = Editor.extend({
 		init: function(el) {
 			this._super(el);
 
@@ -119,6 +119,6 @@ define(function(require, exports, module) {
 
 	});
 
-	return EditorSAMLProvider;
+	return EditorSAMLSP;
 	
 });

@@ -19,7 +19,7 @@ define(function(require, exports, module) {
 	var tmplui = require('lib/text!/templates/uirule.html');
 	var templateui = hogan.compile(tmplui);
 
-	var EditorSAMLConsumer = Editor.extend({
+	var EditorSAMLIdP = Editor.extend({
 		init: function(el) {
 			this._super(el);
 
@@ -83,21 +83,20 @@ define(function(require, exports, module) {
 
 		getItem: function() {
 
-
-			this.item.metadata = {
-				metadata: $("form#configurationForm textarea#metadatafield").val(),
-				entity_id: $("form#configurationForm input#entity_id").val()
-			};
+			this.item.metadata.metadata  = $("form#configurationForm textarea#metadatafield").val();
+			this.item.metadata.entity_id = $("form#configurationForm input#entity_id").val()
 
 			return this.item;
 
 		},
+
 		addUserInteraction: function(ia) {
 			console.log("Adding user interaction to connect editor item", ia);
 			if (!this.item.metadata.interaction) this.item.metadata.interaction = [];
 			this.item.metadata.interaction.push(ia);
 			this.update();
 		},
+		
 		resetInteraction: function(e) {
 			if (e) {
 				e.stopPropagation();
@@ -113,6 +112,6 @@ define(function(require, exports, module) {
 
 	});
 
-	return EditorSAMLConsumer;
+	return EditorSAMLIdP;
 	
 });
