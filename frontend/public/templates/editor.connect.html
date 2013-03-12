@@ -6,15 +6,16 @@
 	<span class="item-description">An e-mail address or a URL endpoint for the purpose of OpenID Connect Discovery. See <a target="_blank" href="http://openid.net/specs/openid-connect-discovery-1_0.html">OpenID Connect Discovery</a> for more details.</span>
 </p>
 
-<fieldset id="userInteractionDisplay" style="margin-bottom: 1em"><legend>User interaction</legend>
-	
 
+<p style="padding: 1em 0px">
+	<button class="btn btn-large btn-primary verify" type="button">Verify connectivity</button>
+</p>
 
-	<div id="userinteractions">
+<fieldset id="userInteractionDisplay">
+	<legend>User interactions</legend>
 
-	</div>
+	<button id="userinteraction_reset" style="" class="btn btn-success">Reset all user interactions</button>
 
-		
-	<button type="submit" class="btn" id="userinteraction_reset" name="userinteraction_reset" value="" >Reset all user interaction</button>
+	<div id="userinteractions"></div>
 
 </fieldset>

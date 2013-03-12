@@ -4,7 +4,9 @@ Discovery URLS:
 https://connect-op.heroku.com/
 https://openidconnect.info/
 https://connect.openid4.us/
-https://www.kodtest.se:8088/
+https://xenosmilus2.umdc.umu.se:8088/
+
+	https://www.kodtest.se:8088/
 
 
 metadata = {

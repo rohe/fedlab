@@ -12,6 +12,14 @@ define(function(require, exports, module) {
 			$(this.el).attr('id', 'EditorContainer');
 			console.log("Initializing editor");
 
+			var storedConfig = localStorage.getItem(this.identifier +'-metadata');
+			if (storedConfig) {
+				console.log("   ====== STORED CONFIG: YES")
+				this.item.metadata = JSON.parse(storedConfig);
+				console.log(this.item.metadata);
+			}
+			console.log("   ====== STORED CONFIG: NO")
+
 			
 		},
 		appendTo: function(el) {
@@ -19,6 +27,10 @@ define(function(require, exports, module) {
 		},
 		getItem: function() {
 			return {};
+		},
+		saveMetadata: function(metadata) {
+			console.log("====== STORED CONFIG: Storing idp metadata...", metadata);
+			localStorage.setItem(this.identifier + '-metadata', JSON.stringify(metadata));
 		},
 		// addUserinteraction: function(ia) {
 		// 	console.log("Adding user interaction to connect editor item", ia);
@@ -28,6 +40,26 @@ define(function(require, exports, module) {
 		// },
 		update: function() {
 			console.log("Update() not implemented by this editor.")
+		},
+		resetInteraction: function(e) {
+			if (e) {
+				e.stopPropagation();
+				e.preventDefault();
+			}
+			
+			delete this.item.metadata.interaction;
+			this.update();
+				
+		},
+		addUserInteraction: function(ia) {
+			console.log("Adding user interaction to connect editor item", ia);
+			if (!this.item.metadata.interaction) this.item.metadata.interaction = [];
+			this.item.metadata.interaction.push(ia);
+
+			this.saveMetadata(this.item.metadata);
+			
+			this.update();
+			this.pane.verify();
 		}
 	});
 

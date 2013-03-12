@@ -22,6 +22,8 @@ define(function(require, exports, module) {
 
 	var EditorSAMLSP = Editor.extend({
 		init: function(pane, el) {
+			this.item = {metadata: {}};
+			this.identifier = 'sp';
 			this._super(pane, el);
 
 			console.log("Initializing EditorSAMLProvider");
@@ -42,8 +44,6 @@ define(function(require, exports, module) {
 			});
 
 
-
-			this.item = {metadata: {}};
 			$(this.el).empty().append(template.render(this.item));
 
 			this.update();
@@ -94,6 +94,8 @@ define(function(require, exports, module) {
 				attributeurl: $("form#configurationForm input#fedlab_attributeurl").val(),
 				initslo: $("form#configurationForm input#fedlab_initslo").val()
 			};
+
+			this.saveMetadata(this.item.metadata);
 
 			return this.item;
 

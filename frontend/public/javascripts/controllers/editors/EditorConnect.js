@@ -20,13 +20,14 @@ define(function(require, exports, module) {
 
 	var EditorConnect = Editor.extend({
 		init: function(pane, el) {
+			this.identifier = 'connect';
+			this.item = new OICProvider();
 			this._super(pane, el);
 
 			console.log("Initializing EditorConnect");
 
 			this.el.on('click', 'button#userinteraction_reset', this.proxy('resetInteraction'));
 
-			this.item = new OICProvider();
 			$(this.el).empty().append(template.render(this.item));
 
 			this.update();
@@ -73,7 +74,7 @@ define(function(require, exports, module) {
 			// console.log("endpoint", endpoint);
 			this.item.metadata.provider.dynamic = endpoint;
 
-			// console.log("getting item in EditorConnect", this.item);
+			this.saveMetadata(this.item.metadata);
 
 			return this.item;
 
