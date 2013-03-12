@@ -34,7 +34,7 @@ define(function(require, exports, module) {
 			this.el.on('click', 'ul#samlnav a', function(e) {
 				e.preventDefault(); 
 				e.stopPropagation();
-				console.log("Clicked tab", this);
+
 				$(this).tab('show');
 			});
 			this.el.on('click', "button#firstcontinue", function(e) {
@@ -54,8 +54,6 @@ define(function(require, exports, module) {
 		},
 
 		update: function() {
-			console.log("Render() with template EditorSAMLProvider ");
-			console.log(this.item);
 
 			if (this.item.metadata.metadata) $("form#configurationForm textarea#metadatafield").val(this.item.metadata.metadata);
 			if (this.item.metadata.initsso) $("form#configurationForm input#fedlab_initsso").val(this.item.metadata.initsso);
@@ -64,16 +62,13 @@ define(function(require, exports, module) {
 
 
 			this.el.find('div#userinteractions').empty();
-			console.log("LOOKING FOR UI", this.item);
 			if (this.item.metadata.interaction && this.item.metadata.interaction.length > 0) {
 				this.el.find('fieldset#userInteractionDisplay').show();
 				for(var i = 0; i < this.item.metadata.interaction.length; i++) {
 					var uir = new UserInteractionRule(this.item.metadata.interaction[i]);
-					console.log("Uir,", uir);
 					this.el.find('div#userinteractions').append(templateui.render(uir));
 				}
 			} else {
-				console.log("HIDING", this.el);
 				this.el.find('fieldset#userInteractionDisplay').hide();	
 			}
 

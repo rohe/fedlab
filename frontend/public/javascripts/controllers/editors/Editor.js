@@ -14,13 +14,10 @@ define(function(require, exports, module) {
 
 			var storedConfig = localStorage.getItem(this.identifier +'-metadata');
 			if (storedConfig) {
-				console.log("   ====== STORED CONFIG: YES")
 				this.item.metadata = JSON.parse(storedConfig);
 				console.log(this.item.metadata);
 			}
-			console.log("   ====== STORED CONFIG: NO")
 
-			
 		},
 		appendTo: function(el) {
 			this.el.appendTo(el);
@@ -29,7 +26,6 @@ define(function(require, exports, module) {
 			return {};
 		},
 		saveMetadata: function(metadata) {
-			console.log("====== STORED CONFIG: Storing idp metadata...", metadata);
 			localStorage.setItem(this.identifier + '-metadata', JSON.stringify(metadata));
 		},
 		// addUserinteraction: function(ia) {

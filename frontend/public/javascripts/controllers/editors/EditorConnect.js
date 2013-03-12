@@ -38,24 +38,19 @@ define(function(require, exports, module) {
 		},
 
 		update: function() {
-			console.log("Render() with template EditorConnect ");
-			console.log(this.item);
-
 			if (this.item.metadata.provider.dynamic) {
 				this.el.find("#discovery_endpoint").val(this.item.metadata.provider.dynamic);
 			}
 
 			this.el.find('div#userinteractions').empty();
-			console.log("LOOKING FOR UI", this.item);
 			if (this.item.metadata.interaction && this.item.metadata.interaction.length > 0) {
 				this.el.find('fieldset#userInteractionDisplay').show();
 				for(var i = 0; i < this.item.metadata.interaction.length; i++) {
 					var uir = new UserInteractionRule(this.item.metadata.interaction[i]);
-					console.log("Uir,", uir);
+
 					this.el.find('div#userinteractions').append(templateui.render(uir));
 				}
 			} else {
-				console.log("HIDING", this.el);
 				this.el.find('fieldset#userInteractionDisplay').hide();	
 			}
 			// Hack to make synaxhightlight work with jquery templates..
@@ -71,7 +66,7 @@ define(function(require, exports, module) {
 		getItem: function() {
 
 			var endpoint = this.el.find("#discovery_endpoint").val();
-			// console.log("endpoint", endpoint);
+
 			this.item.metadata.provider.dynamic = endpoint;
 
 			this.saveMetadata(this.item.metadata);

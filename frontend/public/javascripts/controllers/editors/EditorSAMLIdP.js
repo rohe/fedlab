@@ -51,11 +51,6 @@ define(function(require, exports, module) {
 		},
 
 		update: function() {
-			console.log("Render() with template EditorSAMLProvider ");
-			console.log(this.item);
-
-
-
 			if (this.item.metadata.metadata) {
 				this.el.find("form#configurationForm textarea#metadatafield").val(this.item.metadata.metadata);
 			}
@@ -66,18 +61,15 @@ define(function(require, exports, module) {
 			this.saveMetadata(this.item.metadata);
 
 			this.el.find('div#userinteractions').empty();
-			console.log("LOOKING FOR UI", this.item);
+
 			if (this.item.metadata.interaction && this.item.metadata.interaction.length > 0) {
-				console.log(" ====== USER INTERATION...");
+
 				this.el.find('fieldset#userInteractionDisplay').show();
 				for(var i = 0; i < this.item.metadata.interaction.length; i++) {
 					var uir = new UserInteractionRule(this.item.metadata.interaction[i]);
-					console.log(" --- --- --- Uir,", uir, templateui.render(uir));
-					console.log(this.el.find('div#userinteractions'), this.el);
 					this.el.find('div#userinteractions').append(templateui.render(uir));
 				}
 			} else {
-				console.log("HIDING", this.el);
 				this.el.find('fieldset#userInteractionDisplay').hide();	
 			}
 
