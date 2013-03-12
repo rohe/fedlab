@@ -201,7 +201,7 @@ SAMLIdPTestconnector.prototype.runFlow = function(metadata, flowid, callback, er
 	var that = this;
 	console.log('OICTestconnector.prototype.runFlow() ' + flowid);
 
-	cmd(this.samlcmd, [flowid], metadata, function(result, stderr, statuscode) {
+	cmd(this.samlcmd, ["-P", "/root/roland/saml2test/tests", "-J", "-", flowid], metadata, function(result, stderr, statuscode) {
 
 
 		console.log("Command completed! ")
