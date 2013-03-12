@@ -4,15 +4,15 @@
 	<li class="active">
 	<a href="#fedlabmeta">FedLab Metadata</a>
 	</li>
-	<li><a href="#spmeta">Register IdP Metadata</a></li>
+	<li><a href="#spmeta">Register SP Metadata</a></li>
 </ul>
 
 <div class="tab-content">
 	<div class="tab-pane active" id="fedlabmeta">
 
-		<h3>Add Federation Lab Metadata to your Identity Provider</h3>
+		<h3>Add Federation Lab Metadata to your Service Provider</h3>
 
-		<p>Before we continue, you need to configure your Identity Provider to trust the Federation Lab as an Service Provider. From now on, the Federation Lab will behave like a good and bad Service Provider to test how your Identity Provider behaves.</p>
+		<p>Before we continue, you need to configure your Service Provider to trust the Federation Lab as an Identity Provider. From now on, the Federation Lab will behave like a good and bad Identity Provider to test how your Service Provider behaves.</p>
 
 		<textarea style="width: 100%; height: 300px">
 <?xml version="1.0"?>&lt;?xml version=&quot;1.0&quot;?&gt;
@@ -30,18 +30,31 @@
 	<div class="tab-pane" id="spmeta">
 
 
-		<h3>Register metadata of the SAML 2.0 Identity Provider</h3>
+		<h3>Register metadata of the SAML 2.0 Serivce Provider</h3>
 
-		<p>To test your SAML 2.0 Identity Provider, please register the metadata of your provider here.</p>
+		<p>To test your SAML 2.0 Service Provider, please register the metadata of your provider here.</p>
 		
 		<textarea style="" id="metadatafield" class="metadata" ></textarea>
 
+		<hr />
+
 		<p>
-			<label for="fedlab_entity_id">Enter the entity ID of the Consumer that is about to be tested.</label>
+			<label for="fedlab_initsso">An <b>URL that initiates login</b> at the service provider. Request to this page should also be automatically directed to the automated SP tester, and not show a discovery service.</label>
 			<br />
-			<input id="fedlab_entity_id" name="fedlab_entity_id"  type="text" class="input-xxlarge" placeholder="https://idp.company.com/entityid">
+			<input id="fedlab_initsso" name="fedlab_initsso"  type="text" class="input-xxlarge" placeholder="http:// (Init. SSO URL)">
 		</p>
 
+		<p>
+			<label for="fedlab_attributeurl">An URL at the service provider that <b>presents a list of attributes</b> for the currently authenticated user.</label>
+			<br />
+			<input id="fedlab_attributeurl" name="fedlab_attributeurl"  type="text" class="input-xxlarge" placeholder="http:// (Attributes URL)">
+		</p>
+
+		<p>
+			<label for="fedlab_initslo">An <b>URL that initiates SLO</b> at the service provider.</label>
+			<br />
+			<input id="fedlab_initslo" name="fedlab_initslo"  type="text" class="input-xxlarge" placeholder="http:// (Init. SLO URL)">
+		</p>
 
 
 	</div>

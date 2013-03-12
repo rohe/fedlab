@@ -19,8 +19,8 @@ define(function(require, exports, module) {
 	var templateui = hogan.compile(tmplui);
 
 	var EditorConnect = Editor.extend({
-		init: function(el) {
-			this._super(el);
+		init: function(pane, el) {
+			this._super(pane, el);
 
 			console.log("Initializing EditorConnect");
 

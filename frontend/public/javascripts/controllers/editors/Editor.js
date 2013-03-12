@@ -6,10 +6,13 @@ define(function(require, exports, module) {
 		Class = require('../../lib/resig');
 
 	var Editor = Class.extend({
-		init: function(el) {
+		init: function(pane, el) {
+			this.pane = pane;
 			this.el = el || $("<div></div>");
 			$(this.el).attr('id', 'EditorContainer');
 			console.log("Initializing editor");
+
+			
 		},
 		appendTo: function(el) {
 			this.el.appendTo(el);

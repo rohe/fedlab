@@ -44,7 +44,7 @@ define(function(require, exports, module) {
 			'The URL starts with </label><input type="text" id="uiurlval" class="matchinput uiurlval" name="uiurlval" value="' + this.url + '" /></p>');
 
 		if (this.title) {
-			matchoptionsdiv.append('<p><label for="uititle"><input type="checkbox" id="uititle" name="uititle"  /> The HTML page title is <tt>' + this.title + '</tt>.</label></p>');	
+			matchoptionsdiv.append('<p><label for="uititle"><input type="checkbox" checked="checked" id="uititle" name="uititle"  /> The HTML page title is <tt>' + this.title + '</tt>.</label></p>');	
 		}
 
 		matchoptionsdiv.append('<p><label for="uicontent"><input type="checkbox" id="uicontent" name="uicontent" /> ' +

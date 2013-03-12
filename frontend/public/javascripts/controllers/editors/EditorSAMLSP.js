@@ -14,15 +14,15 @@ define(function(require, exports, module) {
 
 	// UWAP.utils.loadCSS("/stylesheets/saml.css");
 
-	var tmpl = require('lib/text!/templates/editor.samlprovider.html');
+	var tmpl = require('lib/text!/templates/editor.samlconsumer.html');
 	var template = hogan.compile(tmpl);
 
 	var tmplui = require('lib/text!/templates/uirule.html');
 	var templateui = hogan.compile(tmplui);
 
 	var EditorSAMLSP = Editor.extend({
-		init: function(el) {
-			this._super(el);
+		init: function(pane, el) {
+			this._super(pane, el);
 
 			console.log("Initializing EditorSAMLProvider");
 

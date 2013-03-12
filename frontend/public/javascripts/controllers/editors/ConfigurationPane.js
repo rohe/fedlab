@@ -30,7 +30,7 @@ define(function(require, exports, module) {
 			this.el.on("click", "button.verify", this.proxy("verify"));
 
 			editorel = this.el.find('div#editor');
-			this.editor = new editor(editorel);
+			this.editor = new editor(this, editorel);
 
 	    },
 		appendTo: function(el) {
