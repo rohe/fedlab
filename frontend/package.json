@@ -12,5 +12,7 @@
 		"node" : ">=0.6.3",
 		"npm"  : ">=1.0"
 	},
-	"start": "node app.js"
+	"scripts" : { 
+		"start" : "node app.js" 
+	}
 }
