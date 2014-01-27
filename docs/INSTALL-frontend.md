@@ -9,62 +9,31 @@ OpenID Connect backend is using Python.
 
 ## Installing the Federation Lab Frontend
 
+Setup a [node.js](http://nodejs.org) environment with a recent version of Node.js, such as 10.x.
+
+Enter the frontend directory.
+
+	cd frontend
+
+Install dependencies
+
+	npm install
 
 
-Setup a CNAME openidtest.uninett.no => federation-lab.uninett.no
+Then prepare the configuration file
+
+	cp etc/config.template.js etc/config.js
+
+Edit the path of the app, and the hostname in config.js.
+
+Then start the app in any of the following ways:
+
+* Start directly with `node app`
+* Start with npm, running `npm start`
+* Or start with foreman `foreman start`
 
 
-Setup language
-
-	unset LC_CTYPE LANG
-	export LC_ALL="en_US.UTF-8"
-
-
-Install some debian packages
-
-	apt-get install libssl-dev python build-essential git python-software-properties libreadline-dev
-
-
-Setup Node.js
-
-	$ git clone git://github.com/creationix/nvm.git ~/.nvm$ . ~/.nvm/nvm.sh
-	$ nvm ls
-	$ nvm install v0.6.12
-	$ nvm alias default v0.6.12
-	$ nvm ls 
-	$ nvm help
-
-
-Installing npm
-
-	curl http://npmjs.org/install.sh | sh
-
-
-	npm install forever -gnpm install jsdom
-
-
-	cd /vargit clone git://github.com/andreassolberg/fedlab.git
-
-
-Oppsett av `/etc/init.d/fedlab` som bruker forever
-
-
-Problems with jsdom was solved this way:
-
-
-	$ npm install -g node-gyp
-	$ cd
-	$ git clone https://github.com/brianmcd/contextify.git
-	$ cd contextify
-	$ node-gyp clean
-	$ node-gyp configure
-	$ node-gyp build
-	$ cd /var/fedlab/node_modules
-	$ cp -r ~/contextify .
-	$ cd ..
-	$ npm install bindings
-
-
+Notice that the frontend will not work properly until it is successfully connected to one or more backends.
 
 
 
