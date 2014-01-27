@@ -1,4 +1,5 @@
 {
 	"path": "/var/fedlab/",
-	"hostname": "openidtest.uninett.no"
+	"hostname": "openidtest.uninett.no",
+	"port": 3000
 }

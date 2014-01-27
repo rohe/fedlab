@@ -297,8 +297,8 @@ app.all('/reloadconfig', function(req, res, next) {
 });
 
 
+var port = config.port || 80;
 
-
-app.listen(80);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+app.listen(port);
+console.log("Express server listening on port %d in %s mode", port, app.settings.env);
 
