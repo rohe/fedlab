@@ -1,9 +1,16 @@
 {
-    "name": "application-name"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.4.6"
-    , "ejs": ">= 0.0.1"
-  }
+	"name": "fedlab",
+	"version": "0.1.0",
+	"description": "Federation Lab Front-end",
+	"author": "Andreas Åkre Solberg <andreas.solberg@uninett.no>",
+	"contributors": [],
+	"dependencies": {
+		"express": "*",
+		"jsdom": "*"
+	},
+	"engines" : { 
+		"node" : ">=0.6.3",
+		"npm"  : ">=1.0"
+	},
+	"start": "node app.js"
 }
