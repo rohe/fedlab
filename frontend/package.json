@@ -6,7 +6,8 @@
 	"contributors": [],
 	"dependencies": {
 		"express": "*",
-		"jsdom": "*"
+		"jsdom": "*",
+		"ejs": "*"
 	},
 	"engines" : { 
 		"node" : ">=0.6.3",
